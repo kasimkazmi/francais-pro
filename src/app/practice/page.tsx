@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Header } from '@/components/layout/header';
+import { AppShell } from '@/components/layout/app-shell';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
@@ -189,9 +189,7 @@ export default function PracticePage() {
     const isGood = percentage >= 70;
 
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        
+      <AppShell>
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
@@ -269,7 +267,7 @@ export default function PracticePage() {
             </Card>
           </div>
         </div>
-      </div>
+      </AppShell>
     );
   }
 
@@ -278,9 +276,7 @@ export default function PracticePage() {
     const progress = ((currentExercise + 1) / selectedSession.exercises.length) * 100;
 
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        
+      <AppShell>
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             {/* Progress Bar */}
@@ -456,13 +452,12 @@ export default function PracticePage() {
             </Card>
           </div>
         </div>
-      </div>
+      </AppShell>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <AppShell>
       
       <div className="container mx-auto px-4 py-4 md:py-8">
         <div className="max-w-6xl mx-auto">
@@ -570,7 +565,7 @@ export default function PracticePage() {
           </div>
         </div>
       </div>
-    </div>
+    </AppShell>
   );
 }
 

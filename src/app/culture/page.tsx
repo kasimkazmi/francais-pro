@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Header } from '@/components/layout/header';
+import { AppShell } from '@/components/layout/app-shell';
 import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { Tooltip } from '@/components/ui/tooltip';
@@ -13,11 +13,8 @@ export default function CulturePage() {
   const { traditions, cuisine, art, literature, geography } = cultureData;
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
-      {/* Main Content */}
-      <main className="container mx-auto max-w-6xl px-4 py-8">
+    <AppShell>
+      <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">French Culture & Traditions</h1>
           <div className="flex items-center space-x-2">
@@ -304,7 +301,7 @@ export default function CulturePage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </AppShell>
   );
 }

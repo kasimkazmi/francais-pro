@@ -2,17 +2,14 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Header } from '@/components/layout/header';
+import { AppShell } from '@/components/layout/app-shell';
 import { AudioButton } from '@/components/ui/audio-button';
 import { ArrowRight, Volume2, Play } from 'lucide-react';
 
 export default function PronunciationPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
-      {/* Main Content */}
-      <main className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
+    <AppShell>
+      <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
           <h1 className="text-2xl sm:text-3xl font-bold">French Pronunciation</h1>
           <div className="flex items-center space-x-2">
@@ -215,7 +212,7 @@ export default function PronunciationPage() {
             </Link>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </AppShell>
   );
 }
