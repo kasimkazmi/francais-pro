@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Header } from '@/components/layout/header';
 import { Progress } from '@/components/ui/progress';
+import { AuthGuard } from '@/components/auth/AuthGuard';
+import { useAuth } from '@/contexts/AuthContext';
 import { 
   Trophy, 
   Target, 
@@ -20,9 +22,12 @@ import {
 } from 'lucide-react';
 
 export default function ProgressPage() {
+  const { user } = useAuth();
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <AuthGuard>
+      <div className="min-h-screen bg-background">
+        <Header />
       
       <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
         {/* Header */}
@@ -35,7 +40,7 @@ export default function ProgressPage() {
           </div>
           <div className="flex items-center gap-2">
             <Trophy className="h-6 w-6 text-yellow-500" />
-            <span className="text-sm font-medium">Level: Intermediate</span>
+            <span className="text-sm font-medium">Level: {user?.level || 'Beginner'}</span>
           </div>
         </div>
 
@@ -59,15 +64,15 @@ export default function ProgressPage() {
               <Progress value={65} className="h-2" />
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">24</div>
+                  <div className="text-2xl font-bold text-blue-600">{user?.totalLessons || 0}</div>
                   <div className="text-sm text-muted-foreground">Lessons Completed</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">156</div>
+                  <div className="text-2xl font-bold text-green-600">{user?.wordsLearned || 0}</div>
                   <div className="text-sm text-muted-foreground">Words Learned</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">12</div>
+                  <div className="text-2xl font-bold text-purple-600">{user?.streak || 0}</div>
                   <div className="text-sm text-muted-foreground">Days Streak</div>
                 </div>
               </div>
@@ -211,6 +216,7 @@ export default function ProgressPage() {
           </Link>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

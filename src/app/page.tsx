@@ -7,11 +7,15 @@ import { Header } from "@/components/layout/header";
 import { AudioButton } from "@/components/ui/audio-button";
 import { LazyCardGrid } from "@/components/ui/lazy-card";
 import { CommunityChat } from "@/components/ui/community-chat";
+import { AuthModal } from "@/components/ui/auth-modal";
+import { useAuth } from "@/contexts/AuthContext";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function HomePage() {
   const [isCommunityChatOpen, setIsCommunityChatOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { isAuthenticated } = useAuth();
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -32,9 +36,18 @@ export default function HomePage() {
                 <Link href="/practice" className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   Practice
                 </Link>
-                <Link href="/progress" className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Progress
-                </Link>
+                {isAuthenticated ? (
+                  <Link href="/progress" className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                    Progress
+                  </Link>
+                ) : (
+                  <button 
+                    onClick={() => setShowAuthModal(true)}
+                    className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700 w-full text-left"
+                  >
+                    Progress
+                  </button>
+                )}
               </div>
             </div>
             
@@ -318,6 +331,12 @@ export default function HomePage() {
       <CommunityChat 
         isOpen={isCommunityChatOpen} 
         onClose={() => setIsCommunityChatOpen(false)} 
+      />
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
       />
     </div>
   );
