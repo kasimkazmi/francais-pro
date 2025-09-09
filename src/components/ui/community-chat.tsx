@@ -76,7 +76,9 @@ export function CommunityChat({ isOpen, onClose }: CommunityChatProps) {
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
           <div className="flex items-center space-x-2">
             <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900">
-              <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <Users className="h-5 w-
+              
+              5 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
               <CardTitle className="text-xl text-gray-900 dark:text-gray-100">Join Français Pro Community</CardTitle>
