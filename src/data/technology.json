@@ -1,0 +1,444 @@
+{
+  "digitalTechnology": [
+    {
+      "french": "l'ordinateur",
+      "english": "computer",
+      "pronunciation": "lor-dee-nah-tuhr",
+      "types": ["ordinateur portable", "ordinateur de bureau", "ordinateur portable"]
+    },
+    {
+      "french": "le smartphone",
+      "english": "smartphone",
+      "pronunciation": "luh smart-fohn",
+      "description": "Mobile phone with advanced features"
+    },
+    {
+      "french": "la tablette",
+      "english": "tablet",
+      "pronunciation": "lah tah-blet",
+      "description": "Portable touchscreen device"
+    },
+    {
+      "french": "l'écran",
+      "english": "screen",
+      "pronunciation": "lay-krahn",
+      "types": ["écran tactile", "écran LCD", "écran OLED"]
+    },
+    {
+      "french": "le clavier",
+      "english": "keyboard",
+      "pronunciation": "luh klah-vyay",
+      "description": "Input device with keys"
+    },
+    {
+      "french": "la souris",
+      "english": "mouse",
+      "pronunciation": "lah soo-ree",
+      "description": "Pointing device for computers"
+    },
+    {
+      "french": "l'imprimante",
+      "english": "printer",
+      "pronunciation": "lan-pree-mahnt",
+      "types": ["imprimante laser", "imprimante jet d'encre"]
+    },
+    {
+      "french": "le scanner",
+      "english": "scanner",
+      "pronunciation": "luh skah-nair",
+      "description": "Device for digitizing documents"
+    }
+  ],
+  "internet": [
+    {
+      "french": "internet",
+      "english": "internet",
+      "pronunciation": "an-tair-net",
+      "description": "Global network of computers"
+    },
+    {
+      "french": "le site web",
+      "english": "website",
+      "pronunciation": "luh seet web",
+      "description": "Collection of web pages"
+    },
+    {
+      "french": "la page web",
+      "english": "web page",
+      "pronunciation": "lah pahzh web",
+      "description": "Single document on the web"
+    },
+    {
+      "french": "le navigateur",
+      "english": "web browser",
+      "pronunciation": "luh nah-vee-gah-tuhr",
+      "examples": ["Chrome", "Firefox", "Safari", "Edge"]
+    },
+    {
+      "french": "le moteur de recherche",
+      "english": "search engine",
+      "pronunciation": "luh moh-tuhr duh ruh-shairsh",
+      "examples": ["Google", "Bing", "Yahoo"]
+    },
+    {
+      "french": "l'URL",
+      "english": "URL",
+      "pronunciation": "oor-el",
+      "description": "Web address"
+    },
+    {
+      "french": "le lien",
+      "english": "link",
+      "pronunciation": "luh lyan",
+      "description": "Clickable connection between web pages"
+    },
+    {
+      "french": "télécharger",
+      "english": "to download",
+      "pronunciation": "tay-lay-shar-zhay",
+      "description": "Transfer data from internet to device"
+    },
+    {
+      "french": "mettre en ligne",
+      "english": "to upload",
+      "pronunciation": "met-ruh ahn leen-yuh",
+      "description": "Transfer data from device to internet"
+    }
+  ],
+  "socialMedia": [
+    {
+      "french": "les réseaux sociaux",
+      "english": "social networks",
+      "pronunciation": "lay ray-zoh soh-syoh",
+      "description": "Online platforms for social interaction"
+    },
+    {
+      "french": "Facebook",
+      "english": "Facebook",
+      "pronunciation": "fayz-book",
+      "description": "Social networking platform"
+    },
+    {
+      "french": "Instagram",
+      "english": "Instagram",
+      "pronunciation": "an-stah-gram",
+      "description": "Photo and video sharing platform"
+    },
+    {
+      "french": "Twitter",
+      "english": "Twitter",
+      "pronunciation": "twee-tair",
+      "description": "Microblogging platform"
+    },
+    {
+      "french": "LinkedIn",
+      "english": "LinkedIn",
+      "pronunciation": "leen-ked-in",
+      "description": "Professional networking platform"
+    },
+    {
+      "french": "TikTok",
+      "english": "TikTok",
+      "pronunciation": "tee-kohk",
+      "description": "Short video sharing platform"
+    },
+    {
+      "french": "publier",
+      "english": "to post",
+      "pronunciation": "poo-blee-ay",
+      "description": "Share content on social media"
+    },
+    {
+      "french": "partager",
+      "english": "to share",
+      "pronunciation": "par-tah-zhay",
+      "description": "Distribute content to others"
+    },
+    {
+      "french": "aimer",
+      "english": "to like",
+      "pronunciation": "ay-may",
+      "description": "Express approval of content"
+    },
+    {
+      "french": "commenter",
+      "english": "to comment",
+      "pronunciation": "koh-mahn-tay",
+      "description": "Add written response to content"
+    }
+  ],
+  "communication": [
+    {
+      "french": "l'email",
+      "english": "email",
+      "pronunciation": "ee-mayl",
+      "description": "Electronic mail"
+    },
+    {
+      "french": "envoyer un email",
+      "english": "to send an email",
+      "pronunciation": "ahn-vwah-yay uhn ee-mayl",
+      "description": "Send electronic message"
+    },
+    {
+      "french": "recevoir un email",
+      "english": "to receive an email",
+      "pronunciation": "ruh-suh-vwar uhn ee-mayl",
+      "description": "Get electronic message"
+    },
+    {
+      "french": "la messagerie instantanée",
+      "english": "instant messaging",
+      "pronunciation": "lah may-sah-zhuh-ree an-stahn-tah-nay",
+      "description": "Real-time text communication"
+    },
+    {
+      "french": "le chat",
+      "english": "chat",
+      "pronunciation": "luh chat",
+      "description": "Online conversation"
+    },
+    {
+      "french": "la vidéoconférence",
+      "english": "video conference",
+      "pronunciation": "lah vee-day-oh-kohn-fay-rahnss",
+      "description": "Meeting via video call"
+    },
+    {
+      "french": "appeler en vidéo",
+      "english": "to video call",
+      "pronunciation": "ah-puh-lay ahn vee-day-oh",
+      "description": "Make video telephone call"
+    },
+    {
+      "french": "le message vocal",
+      "english": "voice message",
+      "pronunciation": "luh may-sahzh voh-kahl",
+      "description": "Audio recording sent as message"
+    }
+  ],
+  "software": [
+    {
+      "french": "le logiciel",
+      "english": "software",
+      "pronunciation": "luh loh-zhee-syel",
+      "description": "Computer programs and applications"
+    },
+    {
+      "french": "l'application",
+      "english": "application",
+      "pronunciation": "lah-plee-kah-syohn",
+      "description": "Software program for specific purpose"
+    },
+    {
+      "french": "l'app",
+      "english": "app",
+      "pronunciation": "lap",
+      "description": "Short for application, especially mobile"
+    },
+    {
+      "french": "installer",
+      "english": "to install",
+      "pronunciation": "an-stah-lay",
+      "description": "Set up software on device"
+    },
+    {
+      "french": "désinstaller",
+      "english": "to uninstall",
+      "pronunciation": "day-zan-stah-lay",
+      "description": "Remove software from device"
+    },
+    {
+      "french": "mettre à jour",
+      "english": "to update",
+      "pronunciation": "met-ruh ah zhoor",
+      "description": "Upgrade software to newer version"
+    },
+    {
+      "french": "le système d'exploitation",
+      "english": "operating system",
+      "pronunciation": "luh sees-tem dek-splwah-tah-syohn",
+      "examples": ["Windows", "macOS", "Linux", "Android", "iOS"]
+    },
+    {
+      "french": "le fichier",
+      "english": "file",
+      "pronunciation": "luh fee-shyay",
+      "description": "Digital document or data"
+    },
+    {
+      "french": "le dossier",
+      "english": "folder",
+      "pronunciation": "luh doh-zhay",
+      "description": "Container for organizing files"
+    }
+  ],
+  "artificialIntelligence": [
+    {
+      "french": "l'intelligence artificielle",
+      "english": "artificial intelligence",
+      "pronunciation": "lan-tay-lee-zhahnss ar-tee-fee-syel",
+      "description": "Computer systems that can perform tasks requiring human intelligence"
+    },
+    {
+      "french": "l'IA",
+      "english": "AI",
+      "pronunciation": "ee-ah",
+      "description": "Abbreviation for artificial intelligence"
+    },
+    {
+      "french": "l'apprentissage automatique",
+      "english": "machine learning",
+      "pronunciation": "lah-pren-tee-sahzh oh-toh-mah-teek",
+      "description": "AI technique where computers learn from data"
+    },
+    {
+      "french": "l'algorithme",
+      "english": "algorithm",
+      "pronunciation": "lal-goh-reet-muh",
+      "description": "Set of rules for solving problems"
+    },
+    {
+      "french": "les données",
+      "english": "data",
+      "pronunciation": "lay doh-nay",
+      "description": "Information used by computers"
+    },
+    {
+      "french": "le chatbot",
+      "english": "chatbot",
+      "pronunciation": "luh chat-bot",
+      "description": "AI program that simulates conversation"
+    },
+    {
+      "french": "la reconnaissance vocale",
+      "english": "voice recognition",
+      "pronunciation": "lah ruh-koh-nyay-sahnss voh-kahl",
+      "description": "Technology that understands spoken language"
+    },
+    {
+      "french": "la reconnaissance d'image",
+      "english": "image recognition",
+      "pronunciation": "lah ruh-koh-nyay-sahnss dee-mahzh",
+      "description": "Technology that identifies objects in images"
+    }
+  ],
+  "modernExpressions": [
+    {
+      "french": "être connecté",
+      "english": "to be connected",
+      "pronunciation": "et-ruh koh-nek-tay",
+      "description": "To have internet access"
+    },
+    {
+      "french": "être déconnecté",
+      "english": "to be disconnected",
+      "pronunciation": "et-ruh day-koh-nek-tay",
+      "description": "To not have internet access"
+    },
+    {
+      "french": "naviguer sur internet",
+      "english": "to surf the internet",
+      "pronunciation": "nah-vee-gay soor an-tair-net",
+      "description": "To browse websites"
+    },
+    {
+      "french": "faire du shopping en ligne",
+      "english": "to shop online",
+      "pronunciation": "fair doo shoh-ping ahn leen-yuh",
+      "description": "To purchase goods via internet"
+    },
+    {
+      "french": "travailler à distance",
+      "english": "to work remotely",
+      "pronunciation": "trah-vah-yay ah dee-stahnss",
+      "description": "To work from home or other location"
+    },
+    {
+      "french": "être en ligne",
+      "english": "to be online",
+      "pronunciation": "et-ruh ahn leen-yuh",
+      "description": "To be connected to internet"
+    },
+    {
+      "french": "être hors ligne",
+      "english": "to be offline",
+      "pronunciation": "et-ruh or leen-yuh",
+      "description": "To not be connected to internet"
+    },
+    {
+      "french": "le streaming",
+      "english": "streaming",
+      "pronunciation": "luh streem-ing",
+      "description": "Real-time transmission of audio/video"
+    },
+    {
+      "french": "le cloud",
+      "english": "cloud",
+      "pronunciation": "luh klowd",
+      "description": "Remote storage and computing services"
+    },
+    {
+      "french": "la cybersécurité",
+      "english": "cybersecurity",
+      "pronunciation": "lah see-bair-say-koo-ree-tay",
+      "description": "Protection of computer systems from digital attacks"
+    }
+  ],
+  "gaming": [
+    {
+      "french": "le jeu vidéo",
+      "english": "video game",
+      "pronunciation": "luh zhuh vee-day-oh",
+      "description": "Electronic game played on computer or console"
+    },
+    {
+      "french": "jouer",
+      "english": "to play",
+      "pronunciation": "zhoo-ay",
+      "description": "To engage in game or activity"
+    },
+    {
+      "french": "le joueur",
+      "english": "player",
+      "pronunciation": "luh zhoo-uhr",
+      "description": "Person who plays games"
+    },
+    {
+      "french": "la console",
+      "english": "console",
+      "pronunciation": "lah kohn-sohl",
+      "description": "Gaming device"
+    },
+    {
+      "french": "la manette",
+      "english": "controller",
+      "pronunciation": "lah mah-net",
+      "description": "Input device for gaming"
+    },
+    {
+      "french": "le niveau",
+      "english": "level",
+      "pronunciation": "luh nee-voh",
+      "description": "Stage or phase in a game"
+    },
+    {
+      "french": "le score",
+      "english": "score",
+      "pronunciation": "luh skor",
+      "description": "Points earned in game"
+    },
+    {
+      "french": "gagner",
+      "english": "to win",
+      "pronunciation": "gah-nyay",
+      "description": "To achieve victory"
+    },
+    {
+      "french": "perdre",
+      "english": "to lose",
+      "pronunciation": "pair-druh",
+      "description": "To be defeated"
+    }
+  ]
+}

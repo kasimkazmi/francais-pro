@@ -1,0 +1,203 @@
+{
+  "idioms": [
+    {
+      "french": "Il pleut des cordes",
+      "english": "It's raining cats and dogs",
+      "literal": "It's raining ropes",
+      "usage": "When it's raining very heavily",
+      "pronunciation": "eel pluh day kord"
+    },
+    {
+      "french": "Avoir un coup de foudre",
+      "english": "To have love at first sight",
+      "literal": "To have a lightning strike",
+      "usage": "When you fall in love instantly",
+      "pronunciation": "ah-vwar uhn koo duh food-ruh"
+    },
+    {
+      "french": "Mettre les points sur les i",
+      "english": "To dot the i's and cross the t's",
+      "literal": "To put dots on the i's",
+      "usage": "To be very precise and clear",
+      "pronunciation": "met-ruh lay pwan soor lay ee"
+    },
+    {
+      "french": "Avoir la main verte",
+      "english": "To have a green thumb",
+      "literal": "To have a green hand",
+      "usage": "To be good at gardening",
+      "pronunciation": "ah-vwar lah man vairt"
+    },
+    {
+      "french": "Être dans la lune",
+      "english": "To be in the clouds",
+      "literal": "To be in the moon",
+      "usage": "To be absent-minded or daydreaming",
+      "pronunciation": "et-ruh dahn lah loon"
+    }
+  ],
+  "proverbs": [
+    {
+      "french": "Qui vivra verra",
+      "english": "Time will tell",
+      "literal": "Who will live will see",
+      "usage": "To express uncertainty about the future",
+      "pronunciation": "kee vee-vrah vay-rah"
+    },
+    {
+      "french": "L'habit ne fait pas le moine",
+      "english": "Don't judge a book by its cover",
+      "literal": "The habit doesn't make the monk",
+      "usage": "Appearance can be deceiving",
+      "pronunciation": "lah-bee nuh fay pah luh mwahn"
+    },
+    {
+      "french": "Mieux vaut tard que jamais",
+      "english": "Better late than never",
+      "literal": "Better late than never",
+      "usage": "It's better to do something late than not at all",
+      "pronunciation": "myuh voh tar kuh zhah-may"
+    },
+    {
+      "french": "Qui ne risque rien n'a rien",
+      "english": "Nothing ventured, nothing gained",
+      "literal": "Who risks nothing has nothing",
+      "usage": "You have to take risks to achieve things",
+      "pronunciation": "kee nuh reesk ree-an nah ree-an"
+    }
+  ],
+  "slang": [
+    {
+      "french": "C'est chouette",
+      "english": "That's cool/nice",
+      "usage": "Informal way to say something is good",
+      "pronunciation": "say shoo-et",
+      "level": "Informal"
+    },
+    {
+      "french": "C'est génial",
+      "english": "That's awesome",
+      "usage": "Very positive expression",
+      "pronunciation": "say zhay-nyahl",
+      "level": "Informal"
+    },
+    {
+      "french": "C'est nul",
+      "english": "That's lame/bad",
+      "usage": "Negative expression, especially among young people",
+      "pronunciation": "say nool",
+      "level": "Informal"
+    },
+    {
+      "french": "J'ai la flemme",
+      "english": "I can't be bothered",
+      "usage": "To express laziness or lack of motivation",
+      "pronunciation": "zhay lah flem",
+      "level": "Very Informal"
+    }
+  ],
+  "business": [
+    {
+      "french": "Faire du business",
+      "english": "To do business",
+      "usage": "General business activity",
+      "pronunciation": "fair doo bee-zee-ness"
+    },
+    {
+      "french": "Signer un contrat",
+      "english": "To sign a contract",
+      "usage": "Formal business agreement",
+      "pronunciation": "see-nyay uhn kohn-trah"
+    },
+    {
+      "french": "Faire une réunion",
+      "english": "To have a meeting",
+      "usage": "Business meeting",
+      "pronunciation": "fair oon ray-oo-nyohn"
+    },
+    {
+      "french": "Envoyer un email",
+      "english": "To send an email",
+      "usage": "Modern business communication",
+      "pronunciation": "ahn-vwah-yay uhn ee-mayl"
+    }
+  ],
+  "technology": [
+    {
+      "french": "L'ordinateur",
+      "english": "Computer",
+      "usage": "General computer",
+      "pronunciation": "lor-dee-nah-tuhr"
+    },
+    {
+      "french": "Le smartphone",
+      "english": "Smartphone",
+      "usage": "Mobile phone",
+      "pronunciation": "luh smart-fohn"
+    },
+    {
+      "french": "Surfer sur internet",
+      "english": "To surf the internet",
+      "usage": "Browsing the web",
+      "pronunciation": "soor-fay soor an-tair-net"
+    },
+    {
+      "french": "Télécharger",
+      "english": "To download",
+      "usage": "Downloading files",
+      "pronunciation": "tay-lay-shar-zhay"
+    }
+  ],
+  "travel": [
+    {
+      "french": "Réserver un billet",
+      "english": "To book a ticket",
+      "usage": "Making travel reservations",
+      "pronunciation": "ray-zair-vay uhn bee-yay"
+    },
+    {
+      "french": "Faire ses valises",
+      "english": "To pack one's suitcases",
+      "usage": "Preparing for travel",
+      "pronunciation": "fair say vah-leez"
+    },
+    {
+      "french": "Prendre l'avion",
+      "english": "To take the plane",
+      "usage": "Flying",
+      "pronunciation": "prahn-druh lah-vyohn"
+    },
+    {
+      "french": "Louer une voiture",
+      "english": "To rent a car",
+      "usage": "Car rental",
+      "pronunciation": "loo-ay oon vwah-toor"
+    }
+  ],
+  "sports": [
+    {
+      "french": "Le football",
+      "english": "Soccer",
+      "usage": "Most popular sport in France",
+      "pronunciation": "luh foot-bahl"
+    },
+    {
+      "french": "Le tennis",
+      "english": "Tennis",
+      "usage": "Popular individual sport",
+      "pronunciation": "luh tay-nees"
+    },
+    {
+      "french": "Le cyclisme",
+      "english": "Cycling",
+      "usage": "Very popular in France (Tour de France)",
+      "pronunciation": "luh see-kleez-muh"
+    },
+    {
+      "french": "Faire du sport",
+      "english": "To do sports",
+      "usage": "General sports activity",
+      "pronunciation": "fair doo spor"
+    }
+  ]
+}

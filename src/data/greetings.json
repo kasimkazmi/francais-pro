@@ -1,0 +1,220 @@
+{
+  "basicGreetings": [
+    {
+      "french": "Bonjour",
+      "english": "Hello / Good morning",
+      "pronunciation": "bon-ZHOOR",
+      "usage": "Used from morning until evening"
+    },
+    {
+      "french": "Bonsoir",
+      "english": "Good evening",
+      "pronunciation": "bon-SWAHR",
+      "usage": "Used in the evening and night"
+    },
+    {
+      "french": "Salut",
+      "english": "Hi / Bye",
+      "pronunciation": "sah-LOO",
+      "usage": "Informal greeting, used with friends"
+    },
+    {
+      "french": "Au revoir",
+      "english": "Goodbye",
+      "pronunciation": "oh ruh-VWAHR",
+      "usage": "Formal way to say goodbye"
+    },
+    {
+      "french": "À bientôt",
+      "english": "See you soon",
+      "pronunciation": "ah bee-ahn-TOH",
+      "usage": "When you expect to see someone soon"
+    },
+    {
+      "french": "À demain",
+      "english": "See you tomorrow",
+      "pronunciation": "ah duh-MAN",
+      "usage": "When you'll see someone tomorrow"
+    },
+    {
+      "french": "Bonne nuit",
+      "english": "Good night",
+      "pronunciation": "bun NWEE",
+      "usage": "Used when going to bed"
+    },
+    {
+      "french": "Bonne journée",
+      "english": "Have a good day",
+      "pronunciation": "bun zhoor-NAY",
+      "usage": "Wishing someone a good day"
+    },
+    {
+      "french": "Bonne soirée",
+      "english": "Have a good evening",
+      "pronunciation": "bun swah-RAY",
+      "usage": "Wishing someone a good evening"
+    },
+    {
+      "french": "À plus tard",
+      "english": "See you later",
+      "pronunciation": "ah ploo TAHR",
+      "usage": "Informal way to say goodbye"
+    },
+    {
+      "french": "Coucou",
+      "english": "Hey there",
+      "pronunciation": "koo-KOO",
+      "usage": "Very informal, playful greeting"
+    },
+    {
+      "french": "Salut tout le monde",
+      "english": "Hi everyone",
+      "pronunciation": "sah-LOO too luh MOND",
+      "usage": "Greeting a group of people"
+    }
+  ],
+  "politeExpressions": [
+    {
+      "french": "Merci",
+      "english": "Thank you",
+      "pronunciation": "mer-SEE",
+      "usage": "Basic thank you"
+    },
+    {
+      "french": "Merci beaucoup",
+      "english": "Thank you very much",
+      "pronunciation": "mer-SEE boh-KOO",
+      "usage": "Emphasized thank you"
+    },
+    {
+      "french": "De rien",
+      "english": "You're welcome",
+      "pronunciation": "duh ree-AN",
+      "usage": "Response to thank you"
+    },
+    {
+      "french": "Excusez-moi",
+      "english": "Excuse me",
+      "pronunciation": "eks-koo-zay MWAH",
+      "usage": "To get attention or apologize"
+    },
+    {
+      "french": "Pardon",
+      "english": "Sorry / Pardon",
+      "pronunciation": "par-DOHN",
+      "usage": "To apologize or ask for repetition"
+    },
+    {
+      "french": "Je suis désolé(e)",
+      "english": "I'm sorry",
+      "pronunciation": "zhuh swee day-zoh-LAY",
+      "usage": "Formal apology (add 'e' if you're female)"
+    },
+    {
+      "french": "Pas de problème",
+      "english": "No problem",
+      "pronunciation": "pah duh proh-BLEM",
+      "usage": "Casual response to apology"
+    },
+    {
+      "french": "Aucun problème",
+      "english": "No problem at all",
+      "pronunciation": "oh-KUN proh-BLEM",
+      "usage": "More formal response to apology"
+    },
+    {
+      "french": "S'il vous plaît",
+      "english": "Please",
+      "pronunciation": "seel voo PLAY",
+      "usage": "Formal way to say please"
+    },
+    {
+      "french": "S'il te plaît",
+      "english": "Please",
+      "pronunciation": "seel tuh PLAY",
+      "usage": "Informal way to say please"
+    },
+    {
+      "french": "Bienvenue",
+      "english": "Welcome",
+      "pronunciation": "bee-ahn-vuh-NOO",
+      "usage": "Welcoming someone"
+    },
+    {
+      "french": "Félicitations",
+      "english": "Congratulations",
+      "pronunciation": "fay-lee-see-tah-SYOHN",
+      "usage": "Congratulating someone"
+    },
+    {
+      "french": "S'il vous plaît",
+      "english": "Please",
+      "pronunciation": "seel voo PLAY",
+      "usage": "Formal please"
+    }
+  ],
+  "introductions": [
+    {
+      "french": "Je m'appelle...",
+      "english": "My name is...",
+      "pronunciation": "zhuh ma-PELL",
+      "usage": "To introduce yourself"
+    },
+    {
+      "french": "Comment vous appelez-vous?",
+      "english": "What's your name?",
+      "pronunciation": "koh-MAHN voo za-play VOO",
+      "usage": "Formal way to ask someone's name"
+    },
+    {
+      "french": "Comment tu t'appelles?",
+      "english": "What's your name?",
+      "pronunciation": "koh-MAHN too ta-PELL",
+      "usage": "Informal way to ask someone's name"
+    },
+    {
+      "french": "Enchanté(e)",
+      "english": "Nice to meet you",
+      "pronunciation": "ahn-shahn-TAY",
+      "usage": "When meeting someone for the first time"
+    },
+    {
+      "french": "Comment allez-vous?",
+      "english": "How are you?",
+      "pronunciation": "koh-MAHN ta-lay VOO",
+      "usage": "Formal way to ask how someone is"
+    },
+    {
+      "french": "Comment ça va?",
+      "english": "How are you?",
+      "pronunciation": "koh-MAHN sah VAH",
+      "usage": "Informal way to ask how someone is"
+    }
+  ],
+  "responses": [
+    {
+      "french": "Ça va bien",
+      "english": "I'm doing well",
+      "pronunciation": "sah VAH bee-AN",
+      "usage": "Positive response to how are you"
+    },
+    {
+      "french": "Ça va mal",
+      "english": "I'm doing badly",
+      "pronunciation": "sah VAH mahl",
+      "usage": "Negative response to how are you"
+    },
+    {
+      "french": "Comme ci, comme ça",
+      "english": "So-so",
+      "pronunciation": "kohm SEE, kohm SAH",
+      "usage": "Neutral response to how are you"
+    },
+    {
+      "french": "Très bien",
+      "english": "Very well",
+      "pronunciation": "tray bee-AN",
+      "usage": "Very positive response"
+    }
+  ]
+}

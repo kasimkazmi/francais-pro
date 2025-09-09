@@ -1,0 +1,494 @@
+{
+  "cookingMethods": [
+    {
+      "french": "cuire",
+      "english": "to cook",
+      "pronunciation": "kweer",
+      "examples": ["cuire au four", "cuire à la vapeur"]
+    },
+    {
+      "french": "bouillir",
+      "english": "to boil",
+      "pronunciation": "boo-yeerr",
+      "examples": ["faire bouillir l'eau", "bouillir les légumes"]
+    },
+    {
+      "french": "frire",
+      "english": "to fry",
+      "pronunciation": "freer",
+      "examples": ["frire les pommes de terre", "frire à la poêle"]
+    },
+    {
+      "french": "griller",
+      "english": "to grill",
+      "pronunciation": "gree-yay",
+      "examples": ["griller la viande", "griller au barbecue"]
+    },
+    {
+      "french": "rôtir",
+      "english": "to roast",
+      "pronunciation": "roh-teer",
+      "examples": ["rôtir le poulet", "rôtir au four"]
+    },
+    {
+      "french": "braiser",
+      "english": "to braise",
+      "pronunciation": "bray-zay",
+      "examples": ["braiser la viande", "braiser lentement"]
+    },
+    {
+      "french": "sauter",
+      "english": "to sauté",
+      "pronunciation": "soh-tay",
+      "examples": ["sauter les légumes", "sauter à la poêle"]
+    },
+    {
+      "french": "blanchir",
+      "english": "to blanch",
+      "pronunciation": "blahn-sheer",
+      "examples": ["blanchir les légumes", "blanchir rapidement"]
+    }
+  ],
+  "ingredients": {
+    "vegetables": [
+      {
+        "french": "la carotte",
+        "english": "carrot",
+        "pronunciation": "lah kah-roht",
+        "description": "Orange root vegetable"
+      },
+      {
+        "french": "l'oignon",
+        "english": "onion",
+        "pronunciation": "loh-nyohn",
+        "description": "Bulb vegetable used as base for many dishes"
+      },
+      {
+        "french": "l'ail",
+        "english": "garlic",
+        "pronunciation": "lah-ee",
+        "description": "Aromatic bulb used for flavoring"
+      },
+      {
+        "french": "la tomate",
+        "english": "tomato",
+        "pronunciation": "lah toh-maht",
+        "description": "Red fruit used as vegetable"
+      },
+      {
+        "french": "la pomme de terre",
+        "english": "potato",
+        "pronunciation": "lah pohm duh tair",
+        "description": "Starchy tuber, staple food"
+      },
+      {
+        "french": "le champignon",
+        "english": "mushroom",
+        "pronunciation": "luh shahn-pee-nyohn",
+        "description": "Edible fungus"
+      },
+      {
+        "french": "l'aubergine",
+        "english": "eggplant",
+        "pronunciation": "loh-bair-zheen",
+        "description": "Purple vegetable"
+      },
+      {
+        "french": "la courgette",
+        "english": "zucchini",
+        "pronunciation": "lah koor-zhet",
+        "description": "Green summer squash"
+      }
+    ],
+    "meats": [
+      {
+        "french": "le bœuf",
+        "english": "beef",
+        "pronunciation": "luh buhf",
+        "description": "Meat from cattle"
+      },
+      {
+        "french": "le porc",
+        "english": "pork",
+        "pronunciation": "luh por",
+        "description": "Meat from pigs"
+      },
+      {
+        "french": "l'agneau",
+        "english": "lamb",
+        "pronunciation": "lah-nyoh",
+        "description": "Meat from young sheep"
+      },
+      {
+        "french": "le poulet",
+        "english": "chicken",
+        "pronunciation": "luh poo-lay",
+        "description": "Meat from domestic fowl"
+      },
+      {
+        "french": "le canard",
+        "english": "duck",
+        "pronunciation": "luh kah-nar",
+        "description": "Waterfowl meat"
+      },
+      {
+        "french": "le lapin",
+        "english": "rabbit",
+        "pronunciation": "luh lah-pan",
+        "description": "Small game meat"
+      }
+    ],
+    "seafood": [
+      {
+        "french": "le poisson",
+        "english": "fish",
+        "pronunciation": "luh pwah-sohn",
+        "description": "Aquatic vertebrate"
+      },
+      {
+        "french": "le saumon",
+        "english": "salmon",
+        "pronunciation": "luh soh-mohn",
+        "description": "Pink-fleshed fish"
+      },
+      {
+        "french": "la truite",
+        "english": "trout",
+        "pronunciation": "lah trweet",
+        "description": "Freshwater fish"
+      },
+      {
+        "french": "les crevettes",
+        "english": "shrimp",
+        "pronunciation": "lay kruh-vet",
+        "description": "Small crustacean"
+      },
+      {
+        "french": "les moules",
+        "english": "mussels",
+        "pronunciation": "lay mool",
+        "description": "Bivalve mollusk"
+      },
+      {
+        "french": "les huîtres",
+        "english": "oysters",
+        "pronunciation": "lay zweet-ruh",
+        "description": "Bivalve mollusk, often eaten raw"
+      }
+    ],
+    "herbs": [
+      {
+        "french": "le persil",
+        "english": "parsley",
+        "pronunciation": "luh pair-see",
+        "description": "Green herb for garnish and flavor"
+      },
+      {
+        "french": "le thym",
+        "english": "thyme",
+        "pronunciation": "luh tan",
+        "description": "Aromatic Mediterranean herb"
+      },
+      {
+        "french": "le romarin",
+        "english": "rosemary",
+        "pronunciation": "luh roh-mah-ran",
+        "description": "Woody herb with needle-like leaves"
+      },
+      {
+        "french": "la ciboulette",
+        "english": "chives",
+        "pronunciation": "lah see-boo-let",
+        "description": "Mild onion-flavored herb"
+      },
+      {
+        "french": "le basilic",
+        "english": "basil",
+        "pronunciation": "luh bah-zee-leek",
+        "description": "Aromatic herb, key ingredient in pesto"
+      },
+      {
+        "french": "l'estragon",
+        "english": "tarragon",
+        "pronunciation": "lay-strah-gohn",
+        "description": "Licorice-flavored herb"
+      }
+    ],
+    "spices": [
+      {
+        "french": "le poivre",
+        "english": "pepper",
+        "pronunciation": "luh pwah-vruh",
+        "description": "Black or white ground spice"
+      },
+      {
+        "french": "le sel",
+        "english": "salt",
+        "pronunciation": "luh sel",
+        "description": "Essential seasoning"
+      },
+      {
+        "french": "le paprika",
+        "english": "paprika",
+        "pronunciation": "luh pah-pree-kah",
+        "description": "Red pepper powder"
+      },
+      {
+        "french": "le cumin",
+        "english": "cumin",
+        "pronunciation": "luh koo-man",
+        "description": "Warm, earthy spice"
+      },
+      {
+        "french": "la cannelle",
+        "english": "cinnamon",
+        "pronunciation": "lah kah-nel",
+        "description": "Sweet, warm spice from bark"
+      },
+      {
+        "french": "le safran",
+        "english": "saffron",
+        "pronunciation": "luh sah-frahn",
+        "description": "Expensive spice from crocus flower"
+      }
+    ]
+  },
+  "dishes": {
+    "appetizers": [
+      {
+        "name": "l'escargot",
+        "english": "snails",
+        "pronunciation": "les-kar-goh",
+        "description": "Land snails cooked with garlic butter",
+        "ingredients": ["escargots", "beurre", "ail", "persil"]
+      },
+      {
+        "name": "le foie gras",
+        "english": "foie gras",
+        "pronunciation": "luh fwah grah",
+        "description": "Fatty liver of duck or goose",
+        "ingredients": ["foie gras", "sel", "poivre"]
+      },
+      {
+        "name": "la soupe à l'oignon",
+        "english": "onion soup",
+        "pronunciation": "lah soop ah loh-nyohn",
+        "description": "Traditional French onion soup with cheese",
+        "ingredients": ["oignons", "bouillon", "fromage", "pain"]
+      },
+      {
+        "name": "les crudités",
+        "english": "raw vegetables",
+        "pronunciation": "lay kroo-dee-tay",
+        "description": "Fresh vegetables served with dip",
+        "ingredients": ["carottes", "concombres", "tomates", "sauce"]
+      }
+    ],
+    "mainCourses": [
+      {
+        "name": "le coq au vin",
+        "english": "rooster in wine",
+        "pronunciation": "luh kohk oh van",
+        "description": "Chicken braised in red wine with vegetables",
+        "ingredients": ["poulet", "vin rouge", "lardons", "champignons", "oignons"]
+      },
+      {
+        "name": "la bouillabaisse",
+        "english": "fish stew",
+        "pronunciation": "lah boo-yah-bess",
+        "description": "Traditional Provençal fish stew",
+        "ingredients": ["poissons", "tomates", "safran", "fenouil", "ail"]
+      },
+      {
+        "name": "le cassoulet",
+        "english": "bean stew",
+        "pronunciation": "luh kah-soo-lay",
+        "description": "Slow-cooked bean and meat casserole",
+        "ingredients": ["haricots blancs", "saucisse", "agneau", "canard"]
+      },
+      {
+        "name": "la ratatouille",
+        "english": "vegetable stew",
+        "pronunciation": "lah rah-tah-too-ee",
+        "description": "Provençal vegetable stew",
+        "ingredients": ["tomates", "aubergines", "courgettes", "poivrons", "oignons"]
+      },
+      {
+        "name": "le bœuf bourguignon",
+        "english": "Burgundy beef",
+        "pronunciation": "luh buhf boor-gee-nyohn",
+        "description": "Beef braised in red wine with vegetables",
+        "ingredients": ["bœuf", "vin rouge", "lardons", "champignons", "oignons"]
+      }
+    ],
+    "desserts": [
+      {
+        "name": "la crème brûlée",
+        "english": "burnt cream",
+        "pronunciation": "lah krem broo-lay",
+        "description": "Custard dessert with caramelized sugar top",
+        "ingredients": ["crème", "œufs", "sucre", "vanille"]
+      },
+      {
+        "name": "le macaron",
+        "english": "macaron",
+        "pronunciation": "luh mah-kah-rohn",
+        "description": "Sweet meringue-based confection",
+        "ingredients": ["amandes", "sucre", "blancs d'œufs", "colorant"]
+      },
+      {
+        "name": "la tarte tatin",
+        "english": "upside-down apple tart",
+        "pronunciation": "lah tart tah-tan",
+        "description": "Caramelized apple tart baked upside down",
+        "ingredients": ["pommes", "sucre", "beurre", "pâte"]
+      },
+      {
+        "name": "le mille-feuille",
+        "english": "thousand leaves pastry",
+        "pronunciation": "luh meel-fuh-yuh",
+        "description": "Layered pastry with cream filling",
+        "ingredients": ["pâte feuilletée", "crème pâtissière", "glacage"]
+      },
+      {
+        "name": "la crêpe",
+        "english": "pancake",
+        "pronunciation": "lah krep",
+        "description": "Thin pancake, sweet or savory",
+        "ingredients": ["farine", "œufs", "lait", "beurre"]
+      }
+    ]
+  },
+  "beverages": [
+    {
+      "french": "le vin",
+      "english": "wine",
+      "pronunciation": "luh van",
+      "types": ["vin rouge", "vin blanc", "vin rosé", "champagne"]
+    },
+    {
+      "french": "la bière",
+      "english": "beer",
+      "pronunciation": "lah byair",
+      "types": ["bière blonde", "bière brune", "bière blanche"]
+    },
+    {
+      "french": "le café",
+      "english": "coffee",
+      "pronunciation": "luh kah-fay",
+      "types": ["espresso", "café au lait", "cappuccino"]
+    },
+    {
+      "french": "le thé",
+      "english": "tea",
+      "pronunciation": "luh tay",
+      "types": ["thé noir", "thé vert", "thé aux fruits"]
+    },
+    {
+      "french": "l'eau",
+      "english": "water",
+      "pronunciation": "loh",
+      "types": ["eau plate", "eau gazeuse", "eau minérale"]
+    }
+  ],
+  "kitchenUtensils": [
+    {
+      "french": "la casserole",
+      "english": "saucepan",
+      "pronunciation": "lah kah-suh-rohl",
+      "description": "Deep cooking pot with handle"
+    },
+    {
+      "french": "la poêle",
+      "english": "frying pan",
+      "pronunciation": "lah pwah-el",
+      "description": "Flat-bottomed pan for frying"
+    },
+    {
+      "french": "le couteau",
+      "english": "knife",
+      "pronunciation": "luh koo-toh",
+      "description": "Cutting tool with blade"
+    },
+    {
+      "french": "la fourchette",
+      "english": "fork",
+      "pronunciation": "lah foor-shet",
+      "description": "Eating utensil with prongs"
+    },
+    {
+      "french": "la cuillère",
+      "english": "spoon",
+      "pronunciation": "lah kwee-yair",
+      "description": "Eating utensil with bowl"
+    },
+    {
+      "french": "le fouet",
+      "english": "whisk",
+      "pronunciation": "luh fway",
+      "description": "Tool for mixing ingredients"
+    },
+    {
+      "french": "le mixeur",
+      "english": "blender",
+      "pronunciation": "luh meek-suhr",
+      "description": "Electric appliance for mixing"
+    },
+    {
+      "french": "le four",
+      "english": "oven",
+      "pronunciation": "luh foor",
+      "description": "Cooking appliance for baking"
+    }
+  ],
+  "cookingTerms": [
+    {
+      "french": "mélanger",
+      "english": "to mix",
+      "pronunciation": "may-lahn-zhay",
+      "description": "Combine ingredients together"
+    },
+    {
+      "french": "hacher",
+      "english": "to chop",
+      "pronunciation": "ah-shay",
+      "description": "Cut into small pieces"
+    },
+    {
+      "french": "émincer",
+      "english": "to slice thinly",
+      "pronunciation": "ay-man-say",
+      "description": "Cut into very thin slices"
+    },
+    {
+      "french": "éplucher",
+      "english": "to peel",
+      "pronunciation": "ay-ploo-shay",
+      "description": "Remove skin from fruits/vegetables"
+    },
+    {
+      "french": "assaisonner",
+      "english": "to season",
+      "pronunciation": "ah-say-zoh-nay",
+      "description": "Add salt, pepper, herbs, spices"
+    },
+    {
+      "french": "déguster",
+      "english": "to taste/savor",
+      "pronunciation": "day-goos-tay",
+      "description": "Taste and enjoy food"
+    },
+    {
+      "french": "servir",
+      "english": "to serve",
+      "pronunciation": "sair-veer",
+      "description": "Present food to eaters"
+    },
+    {
+      "french": "réchauffer",
+      "english": "to reheat",
+      "pronunciation": "ray-shoh-fay",
+      "description": "Heat up previously cooked food"
+    }
+  ]
+}

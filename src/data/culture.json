@@ -1,0 +1,145 @@
+{
+  "traditions": [
+    {
+      "name": "La Fête Nationale (Bastille Day)",
+      "date": "July 14th",
+      "description": "French National Day celebrating the storming of the Bastille",
+      "vocabulary": [
+        { "french": "le feu d'artifice", "english": "fireworks", "pronunciation": "luh fuh dar-tee-fees" },
+        { "french": "le défilé", "english": "parade", "pronunciation": "luh day-fee-lay" },
+        { "french": "la Marseillaise", "english": "French national anthem", "pronunciation": "lah mar-say-yez" },
+        { "french": "le drapeau tricolore", "english": "tricolor flag", "pronunciation": "luh drah-poh tree-koh-lor" }
+      ]
+    },
+    {
+      "name": "Noël (Christmas)",
+      "date": "December 25th",
+      "description": "Christmas celebration with unique French traditions",
+      "vocabulary": [
+        { "french": "le sapin de Noël", "english": "Christmas tree", "pronunciation": "luh sah-pan duh noh-el" },
+        { "french": "le Père Noël", "english": "Santa Claus", "pronunciation": "luh pair noh-el" },
+        { "french": "la bûche de Noël", "english": "Yule log cake", "pronunciation": "lah boosh duh noh-el" },
+        { "french": "les cadeaux", "english": "gifts", "pronunciation": "lay kah-doh" }
+      ]
+    },
+    {
+      "name": "Pâques (Easter)",
+      "date": "Variable",
+      "description": "Easter celebration with chocolate and egg traditions",
+      "vocabulary": [
+        { "french": "les œufs de Pâques", "english": "Easter eggs", "pronunciation": "layz uff duh pahk" },
+        { "french": "le chocolat", "english": "chocolate", "pronunciation": "luh shoh-koh-lah" },
+        { "french": "les cloches", "english": "bells", "pronunciation": "lay klohsh" },
+        { "french": "le lapin de Pâques", "english": "Easter bunny", "pronunciation": "luh lah-pan duh pahk" }
+      ]
+    }
+  ],
+  "cuisine": [
+    {
+      "category": "Appetizers",
+      "dishes": [
+        { "french": "l'escargot", "english": "snails", "pronunciation": "les-kar-goh" },
+        { "french": "le foie gras", "english": "foie gras", "pronunciation": "luh fwah grah" },
+        { "french": "la soupe à l'oignon", "english": "onion soup", "pronunciation": "lah soop ah loh-nyohn" },
+        { "french": "les crudités", "english": "raw vegetables", "pronunciation": "lay kroo-dee-tay" }
+      ]
+    },
+    {
+      "category": "Main Courses",
+      "dishes": [
+        { "french": "le coq au vin", "english": "rooster in wine", "pronunciation": "luh kohk oh van" },
+        { "french": "la bouillabaisse", "english": "fish stew", "pronunciation": "lah boo-yah-bess" },
+        { "french": "le cassoulet", "english": "bean stew", "pronunciation": "luh kah-soo-lay" },
+        { "french": "la ratatouille", "english": "vegetable stew", "pronunciation": "lah rah-tah-too-ee" }
+      ]
+    },
+    {
+      "category": "Desserts",
+      "dishes": [
+        { "french": "la crème brûlée", "english": "burnt cream", "pronunciation": "lah krem broo-lay" },
+        { "french": "le macaron", "english": "macaron", "pronunciation": "luh mah-kah-rohn" },
+        { "french": "la tarte tatin", "english": "upside-down apple tart", "pronunciation": "lah tart tah-tan" },
+        { "french": "le mille-feuille", "english": "thousand leaves pastry", "pronunciation": "luh meel-fuh-yuh" }
+      ]
+    }
+  ],
+  "art": [
+    {
+      "movement": "Impressionnisme",
+      "artists": [
+        { "name": "Claude Monet", "famous_work": "Les Nymphéas", "period": "1840-1926" },
+        { "name": "Pierre-Auguste Renoir", "famous_work": "Le Déjeuner des canotiers", "period": "1841-1919" },
+        { "name": "Edgar Degas", "famous_work": "La Classe de danse", "period": "1834-1917" }
+      ],
+      "vocabulary": [
+        { "french": "la peinture", "english": "painting", "pronunciation": "lah pan-toor" },
+        { "french": "le pinceau", "english": "paintbrush", "pronunciation": "luh pan-soh" },
+        { "french": "la palette", "english": "palette", "pronunciation": "lah pah-let" },
+        { "french": "le tableau", "english": "canvas/painting", "pronunciation": "luh tah-bloh" }
+      ]
+    },
+    {
+      "movement": "Cubisme",
+      "artists": [
+        { "name": "Pablo Picasso", "famous_work": "Les Demoiselles d'Avignon", "period": "1881-1973" },
+        { "name": "Georges Braque", "famous_work": "Violon et palette", "period": "1882-1963" }
+      ],
+      "vocabulary": [
+        { "french": "la sculpture", "english": "sculpture", "pronunciation": "lah skool-toor" },
+        { "french": "l'exposition", "english": "exhibition", "pronunciation": "lek-spoh-zee-syohn" },
+        { "french": "le musée", "english": "museum", "pronunciation": "luh moo-zay" },
+        { "french": "l'artiste", "english": "artist", "pronunciation": "lar-teest" }
+      ]
+    }
+  ],
+  "literature": [
+    {
+      "period": "Moyen Âge",
+      "authors": [
+        { "name": "Chrétien de Troyes", "work": "Lancelot", "century": "12th" },
+        { "name": "Marie de France", "work": "Lais", "century": "12th" }
+      ],
+      "vocabulary": [
+        { "french": "le roman", "english": "novel", "pronunciation": "luh roh-mahn" },
+        { "french": "la poésie", "english": "poetry", "pronunciation": "lah poh-ay-zee" },
+        { "french": "l'auteur", "english": "author", "pronunciation": "loh-tuhr" },
+        { "french": "l'œuvre", "english": "work", "pronunciation": "luh-vruh" }
+      ]
+    },
+    {
+      "period": "Siècle des Lumières",
+      "authors": [
+        { "name": "Voltaire", "work": "Candide", "century": "18th" },
+        { "name": "Jean-Jacques Rousseau", "work": "Le Contrat social", "century": "18th" },
+        { "name": "Denis Diderot", "work": "L'Encyclopédie", "century": "18th" }
+      ],
+      "vocabulary": [
+        { "french": "la philosophie", "english": "philosophy", "pronunciation": "lah fee-loh-soh-fee" },
+        { "french": "la raison", "english": "reason", "pronunciation": "lah ray-zohn" },
+        { "french": "la liberté", "english": "freedom", "pronunciation": "lah lee-bair-tay" },
+        { "french": "l'égalité", "english": "equality", "pronunciation": "lay-gah-lee-tay" }
+      ]
+    }
+  ],
+  "geography": [
+    {
+      "region": "Île-de-France",
+      "capital": "Paris",
+      "landmarks": [
+        { "name": "la Tour Eiffel", "description": "Iron tower", "pronunciation": "lah toor ay-fel" },
+        { "name": "le Louvre", "description": "Art museum", "pronunciation": "luh loov-ruh" },
+        { "name": "Notre-Dame", "description": "Cathedral", "pronunciation": "noh-truh dahm" },
+        { "name": "l'Arc de Triomphe", "description": "Triumphal arch", "pronunciation": "lark duh tree-ohnf" }
+      ]
+    },
+    {
+      "region": "Provence-Alpes-Côte d'Azur",
+      "capital": "Marseille",
+      "landmarks": [
+        { "name": "le Palais des Papes", "description": "Palace of the Popes", "pronunciation": "luh pah-lay day pahp" },
+        { "name": "les Calanques", "description": "Rocky inlets", "pronunciation": "lay kah-lahnk" },
+        { "name": "le Mont Ventoux", "description": "Windy mountain", "pronunciation": "luh mohn vahn-too" }
+      ]
+    }
+  ]
+}

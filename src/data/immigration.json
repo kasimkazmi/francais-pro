@@ -1,0 +1,210 @@
+{
+  "expressEntry": {
+    "overview": {
+      "title": "Express Entry for French-speaking Skilled Workers",
+      "description": "Immigrate to Canada as a French-speaking skilled worker and play an important part in Canada's economy",
+      "benefits": [
+        "Services for newcomers offered in French and English",
+        "One of the highest-quality education systems in the world",
+        "Job opportunities across the country"
+      ]
+    },
+    "howItWorks": {
+      "title": "How Express Entry Works",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Create Profile",
+          "description": "Create an online profile in the Express Entry pool",
+          "details": "You must be eligible for one of the immigration programs in Express Entry to get into the pool"
+        },
+        {
+          "step": 2,
+          "title": "Earn Points",
+          "description": "Earn points based on your skills and experience",
+          "details": "Points are awarded for factors like age, education, work experience, and language proficiency"
+        },
+        {
+          "step": 3,
+          "title": "Get Invited",
+          "description": "Receive an invitation to apply for permanent residence",
+          "details": "You need to have one of the highest-ranking scores to get an invitation"
+        },
+        {
+          "step": 4,
+          "title": "Apply",
+          "description": "Submit your permanent residence application",
+          "details": "You have 60 days to submit your application after receiving an invitation"
+        }
+      ]
+    },
+    "frenchLanguageBenefits": {
+      "title": "French Language Benefits",
+      "description": "You can earn up to 50 additional points for strong French language skills",
+      "pointsBreakdown": [
+        {
+          "condition": "NCLC level 7+ in French + CLB 4 or lower in English",
+          "points": 25,
+          "description": "25 additional points if you scored CLB 4 or lower in English"
+        },
+        {
+          "condition": "NCLC level 7+ in French + CLB 5+ in English",
+          "points": 50,
+          "description": "50 additional points if you scored CLB 5 or higher on all four English skills"
+        }
+      ],
+      "note": "Even if French is your second language, you can still earn these points"
+    },
+    "eligiblePrograms": [
+      {
+        "name": "Federal Skilled Worker Program",
+        "description": "For skilled workers with foreign work experience",
+        "requirements": [
+          "At least one year of continuous full-time work experience",
+          "Language test results",
+          "Education credentials assessment",
+          "Proof of funds"
+        ]
+      },
+      {
+        "name": "Federal Skilled Trades Program",
+        "description": "For skilled workers in specific trades",
+        "requirements": [
+          "At least two years of full-time work experience in a skilled trade",
+          "Language test results",
+          "Job offer or certificate of qualification"
+        ]
+      },
+      {
+        "name": "Canadian Experience Class",
+        "description": "For skilled workers with Canadian work experience",
+        "requirements": [
+          "At least one year of skilled work experience in Canada",
+          "Language test results",
+          "Work experience must be gained legally"
+        ]
+      }
+    ],
+    "categoryBasedRounds": {
+      "title": "Category-based Rounds",
+      "description": "Each year, we invite candidates who are eligible for specific categories to help meet economic goals",
+      "frenchCategory": {
+        "title": "French Language Proficiency Category",
+        "description": "French language proficiency is one of the chosen categories for 2025",
+        "benefits": "Additional opportunities for French-speaking candidates to receive invitations"
+      }
+    }
+  },
+  "tefCanada": {
+    "overview": {
+      "title": "TEF Canada (Test d'Évaluation de Français pour le Canada)",
+      "description": "Assesses French proficiency for immigration purposes",
+      "recognition": "Recognized by IRCC as official proof for permanent residency and Canadian citizenship applications",
+      "requirement": "No diploma is required to take the exam"
+    },
+    "testModules": [
+      {
+        "name": "Compréhension de l'écrit",
+        "english": "Reading Comprehension",
+        "duration": "60 minutes",
+        "questions": "50 questions",
+        "description": "Tests your ability to understand written French texts"
+      },
+      {
+        "name": "Compréhension de l'oral",
+        "english": "Listening Comprehension",
+        "duration": "40 minutes",
+        "questions": "60 questions",
+        "description": "Tests your ability to understand spoken French"
+      },
+      {
+        "name": "Expression écrite",
+        "english": "Written Expression",
+        "duration": "60 minutes",
+        "tasks": "2 tasks",
+        "description": "Tests your ability to write in French"
+      },
+      {
+        "name": "Expression orale",
+        "english": "Oral Expression",
+        "duration": "15 minutes",
+        "tasks": "2 tasks",
+        "description": "Tests your ability to speak French"
+      }
+    ],
+    "scoring": {
+      "scale": "0-699 points per module",
+      "clbConversion": "Scores are converted to Canadian Language Benchmarks (CLB)",
+      "minimumScores": {
+        "clb4": "Reading: 121-150, Listening: 145-180, Writing: 181-225, Speaking: 181-225",
+        "clb5": "Reading: 151-180, Listening: 181-216, Writing: 226-270, Speaking: 226-270",
+        "clb6": "Reading: 181-206, Listening: 217-248, Writing: 271-309, Speaking: 271-309",
+        "clb7": "Reading: 207-232, Listening: 249-279, Writing: 310-348, Speaking: 310-348",
+        "clb8": "Reading: 233-247, Listening: 280-297, Writing: 349-370, Speaking: 349-370",
+        "clb9": "Reading: 248-262, Listening: 298-315, Writing: 371-392, Speaking: 371-392",
+        "clb10": "Reading: 263-277, Listening: 316-333, Writing: 393-415, Speaking: 393-415"
+      }
+    },
+    "registration": {
+      "frequency": "Quarterly sessions",
+      "openingDates": {
+        "q1": "December 2, 2025 (January-March sessions)",
+        "q2": "March 3, 2025 (April-June sessions)",
+        "q3": "June 2, 2025 (July-September sessions)",
+        "q4": "September 2, 2025 (October-December sessions)"
+      },
+      "waitingPeriod": "30 days between two tests as per immigration rules"
+    }
+  },
+  "francophoneCommunities": {
+    "title": "Francophone Communities Outside Quebec",
+    "description": "Fourteen communities outside Quebec are going above and beyond to welcome and support French-speaking newcomers",
+    "benefits": [
+      "French-language services and support",
+      "Cultural integration programs",
+      "Job opportunities in French",
+      "Educational programs in French",
+      "Community events and activities"
+    ],
+    "communities": [
+      {
+        "name": "Toronto, Ontario",
+        "population": "Over 100,000 French speakers",
+        "highlights": ["Alliance Française", "French cultural events", "Bilingual job market"]
+      },
+      {
+        "name": "Vancouver, British Columbia",
+        "population": "Growing French-speaking community",
+        "highlights": ["Francophone cultural center", "French schools", "Bilingual services"]
+      },
+      {
+        "name": "Winnipeg, Manitoba",
+        "population": "Strong Francophone presence",
+        "highlights": ["French Quarter", "Francophone university", "Cultural festivals"]
+      },
+      {
+        "name": "Halifax, Nova Scotia",
+        "population": "Historic French community",
+        "highlights": ["Acadian heritage", "French language programs", "Cultural institutions"]
+      }
+    ]
+  },
+  "preparation": {
+    "studyTips": [
+      "Practice all four language skills regularly",
+      "Take practice tests to familiarize yourself with the format",
+      "Focus on your weakest areas",
+      "Use authentic French materials",
+      "Practice speaking with native speakers",
+      "Review grammar and vocabulary systematically"
+    ],
+    "resources": [
+      "Official TEF Canada preparation materials",
+      "French language courses",
+      "Online practice tests",
+      "Language exchange programs",
+      "French media (news, movies, books)",
+      "Immigration consultants"
+    ]
+  }
+}

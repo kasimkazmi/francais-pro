@@ -1,0 +1,120 @@
+{
+  "meetings": [
+    {
+      "situation": "Starting a meeting",
+      "phrases": [
+        { "french": "Bonjour tout le monde", "english": "Hello everyone", "pronunciation": "bon-zhoor too luh mohnd" },
+        { "french": "Commençons la réunion", "english": "Let's start the meeting", "pronunciation": "koh-mahn-sohn lah ray-oo-nyohn" },
+        { "french": "L'ordre du jour", "english": "The agenda", "pronunciation": "lor-druh doo zhoor" },
+        { "french": "Passons au point suivant", "english": "Let's move to the next point", "pronunciation": "pah-sohn oh pwan swee-vahn" }
+      ]
+    },
+    {
+      "situation": "Presenting ideas",
+      "phrases": [
+        { "french": "Je voudrais présenter", "english": "I would like to present", "pronunciation": "zhuh voo-dray pray-zahn-tay" },
+        { "french": "Selon moi", "english": "In my opinion", "pronunciation": "suh-lohn mwah" },
+        { "french": "Je pense que", "english": "I think that", "pronunciation": "zhuh pahns kuh" },
+        { "french": "Il faut considérer", "english": "We need to consider", "pronunciation": "eel foh kohn-see-day-ray" }
+      ]
+    },
+    {
+      "situation": "Agreeing and disagreeing",
+      "phrases": [
+        { "french": "Je suis d'accord", "english": "I agree", "pronunciation": "zhuh swee dah-kor" },
+        { "french": "Je ne suis pas d'accord", "english": "I disagree", "pronunciation": "zhuh nuh swee pah dah-kor" },
+        { "french": "C'est une excellente idée", "english": "That's an excellent idea", "pronunciation": "say toon ek-say-lahnt ee-day" },
+        { "french": "Je ne suis pas convaincu", "english": "I'm not convinced", "pronunciation": "zhuh nuh swee pah kohn-van-koo" }
+      ]
+    }
+  ],
+  "email": [
+    {
+      "situation": "Email greetings",
+      "phrases": [
+        { "french": "Madame, Monsieur", "english": "Dear Sir/Madam", "pronunciation": "mah-dahm, muh-syuh" },
+        { "french": "Cher Monsieur", "english": "Dear Sir", "pronunciation": "shair muh-syuh" },
+        { "french": "Chère Madame", "english": "Dear Madam", "pronunciation": "shair mah-dahm" },
+        { "french": "Bonjour", "english": "Hello", "pronunciation": "bon-zhoor" }
+      ]
+    },
+    {
+      "situation": "Email body",
+      "phrases": [
+        { "french": "Je vous écris pour", "english": "I'm writing to you to", "pronunciation": "zhuh voo zay-kree poor" },
+        { "french": "Suite à votre email", "english": "Following your email", "pronunciation": "sweet ah vo-truh ee-mayl" },
+        { "french": "Je vous remercie de", "english": "Thank you for", "pronunciation": "zhuh voo ruh-mair-see duh" },
+        { "french": "Pourriez-vous", "english": "Could you", "pronunciation": "poo-ree-ay voo" }
+      ]
+    },
+    {
+      "situation": "Email closings",
+      "phrases": [
+        { "french": "Cordialement", "english": "Sincerely", "pronunciation": "kor-dyah-luh-mahn" },
+        { "french": "Bien à vous", "english": "Yours sincerely", "pronunciation": "bee-an ah voo" },
+        { "french": "Meilleures salutations", "english": "Best regards", "pronunciation": "may-yuhr sah-loo-tah-syohn" },
+        { "french": "À bientôt", "english": "See you soon", "pronunciation": "ah bee-an-toh" }
+      ]
+    }
+  ],
+  "negotiations": [
+    {
+      "situation": "Making proposals",
+      "phrases": [
+        { "french": "Nous proposons", "english": "We propose", "pronunciation": "noo proh-poh-zohn" },
+        { "french": "Notre offre est", "english": "Our offer is", "pronunciation": "no-truh oh-fruh ay" },
+        { "french": "Le prix est de", "english": "The price is", "pronunciation": "luh pree ay duh" },
+        { "french": "Nous pouvons négocier", "english": "We can negotiate", "pronunciation": "noo poo-vohn nay-goh-syay" }
+      ]
+    },
+    {
+      "situation": "Discussing terms",
+      "phrases": [
+        { "french": "Les conditions sont", "english": "The conditions are", "pronunciation": "lay kohn-dee-syohn sohn" },
+        { "french": "Le délai de livraison", "english": "The delivery time", "pronunciation": "luh day-lay duh lee-vray-zohn" },
+        { "french": "La garantie inclut", "english": "The warranty includes", "pronunciation": "lah gah-rahn-tee an-kloo" },
+        { "french": "Nous acceptons", "english": "We accept", "pronunciation": "noo zak-sep-tohn" }
+      ]
+    }
+  ],
+  "presentations": [
+    {
+      "situation": "Introduction",
+      "phrases": [
+        { "french": "Aujourd'hui, je vais vous présenter", "english": "Today, I'm going to present to you", "pronunciation": "oh-zhoor-dwee, zhuh vay voo pray-zahn-tay" },
+        { "french": "Le sujet de ma présentation est", "english": "The subject of my presentation is", "pronunciation": "luh soo-zhay duh mah pray-zahn-tah-syohn ay" },
+        { "french": "Je vais diviser ma présentation en", "english": "I will divide my presentation into", "pronunciation": "zhuh vay dee-vee-zay mah pray-zahn-tah-syohn ahn" },
+        { "french": "Commençons par", "english": "Let's start with", "pronunciation": "koh-mahn-sohn par" }
+      ]
+    },
+    {
+      "situation": "Transitions",
+      "phrases": [
+        { "french": "Passons maintenant à", "english": "Let's now move to", "pronunciation": "pah-sohn man-tuh-nahn ah" },
+        { "french": "En ce qui concerne", "english": "Regarding", "pronunciation": "ahn suh kee kohn-sairn" },
+        { "french": "D'autre part", "english": "On the other hand", "pronunciation": "doh-truh par" },
+        { "french": "En conclusion", "english": "In conclusion", "pronunciation": "ahn kohn-kloo-zyohn" }
+      ]
+    }
+  ],
+  "telephone": [
+    {
+      "situation": "Answering the phone",
+      "phrases": [
+        { "french": "Allô, bonjour", "english": "Hello", "pronunciation": "ah-loh, bon-zhoor" },
+        { "french": "Société ABC, bonjour", "english": "ABC Company, hello", "pronunciation": "soh-syay-tay ah-bay-say, bon-zhoor" },
+        { "french": "Puis-je vous aider ?", "english": "Can I help you?", "pronunciation": "pwee-zhuh voo zay-day" },
+        { "french": "Qui demandez-vous ?", "english": "Who are you asking for?", "pronunciation": "kee duh-mahn-day voo" }
+      ]
+    },
+    {
+      "situation": "Making requests",
+      "phrases": [
+        { "french": "Pourrais-je parler à", "english": "Could I speak to", "pronunciation": "poo-ray-zhuh par-lay ah" },
+        { "french": "Est-ce que je peux laisser un message ?", "english": "Can I leave a message?", "pronunciation": "ess kuh zhuh puh lay-say uhn may-sahzh" },
+        { "french": "Pourriez-vous me rappeler ?", "english": "Could you call me back?", "pronunciation": "poo-ree-ay voo muh rah-puh-lay" },
+        { "french": "Quand sera-t-il disponible ?", "english": "When will he be available?", "pronunciation": "kahn suh-rah-teel dee-spoh-nee-bluh" }
+      ]
+    }
+  ]
+}

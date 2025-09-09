@@ -1,0 +1,96 @@
+{
+  "articles": {
+    "definite": [
+      { "french": "le", "english": "the (masculine)", "example": "le chat", "pronunciation": "luh" },
+      { "french": "la", "english": "the (feminine)", "example": "la maison", "pronunciation": "lah" },
+      { "french": "les", "english": "the (plural)", "example": "les enfants", "pronunciation": "lay" },
+      { "french": "l'", "english": "the (before vowel)", "example": "l'école", "pronunciation": "l" }
+    ],
+    "indefinite": [
+      { "french": "un", "english": "a/an (masculine)", "example": "un livre", "pronunciation": "uhn" },
+      { "french": "une", "english": "a/an (feminine)", "example": "une pomme", "pronunciation": "oon" },
+      { "french": "des", "english": "some (plural)", "example": "des fleurs", "pronunciation": "day" }
+    ]
+  },
+  "pronouns": {
+    "subject": [
+      { "french": "je", "english": "I", "pronunciation": "zhuh" },
+      { "french": "tu", "english": "you (informal)", "pronunciation": "too" },
+      { "french": "il", "english": "he/it", "pronunciation": "eel" },
+      { "french": "elle", "english": "she/it", "pronunciation": "ell" },
+      { "french": "nous", "english": "we", "pronunciation": "noo" },
+      { "french": "vous", "english": "you (formal/plural)", "pronunciation": "voo" },
+      { "french": "ils", "english": "they (masculine)", "pronunciation": "eel" },
+      { "french": "elles", "english": "they (feminine)", "pronunciation": "ell" }
+    ],
+    "object": [
+      { "french": "me", "english": "me", "pronunciation": "muh" },
+      { "french": "te", "english": "you", "pronunciation": "tuh" },
+      { "french": "le", "english": "him/it", "pronunciation": "luh" },
+      { "french": "la", "english": "her/it", "pronunciation": "lah" },
+      { "french": "nous", "english": "us", "pronunciation": "noo" },
+      { "french": "vous", "english": "you", "pronunciation": "voo" },
+      { "french": "les", "english": "them", "pronunciation": "lay" }
+    ]
+  },
+  "verbs": {
+    "etre": {
+      "infinitive": "être",
+      "english": "to be",
+      "conjugations": [
+        { "pronoun": "je", "french": "suis", "english": "am", "pronunciation": "swee" },
+        { "pronoun": "tu", "french": "es", "english": "are", "pronunciation": "ay" },
+        { "pronoun": "il/elle", "french": "est", "english": "is", "pronunciation": "ay" },
+        { "pronoun": "nous", "french": "sommes", "english": "are", "pronunciation": "sohm" },
+        { "pronoun": "vous", "french": "êtes", "english": "are", "pronunciation": "et" },
+        { "pronoun": "ils/elles", "french": "sont", "english": "are", "pronunciation": "sohn" }
+      ]
+    },
+    "avoir": {
+      "infinitive": "avoir",
+      "english": "to have",
+      "conjugations": [
+        { "pronoun": "je", "french": "ai", "english": "have", "pronunciation": "ay" },
+        { "pronoun": "tu", "french": "as", "english": "have", "pronunciation": "ah" },
+        { "pronoun": "il/elle", "french": "a", "english": "has", "pronunciation": "ah" },
+        { "pronoun": "nous", "french": "avons", "english": "have", "pronunciation": "ah-vohn" },
+        { "pronoun": "vous", "french": "avez", "english": "have", "pronunciation": "ah-vay" },
+        { "pronoun": "ils/elles", "french": "ont", "english": "have", "pronunciation": "ohn" }
+      ]
+    },
+    "aller": {
+      "infinitive": "aller",
+      "english": "to go",
+      "conjugations": [
+        { "pronoun": "je", "french": "vais", "english": "go", "pronunciation": "vay" },
+        { "pronoun": "tu", "french": "vas", "english": "go", "pronunciation": "vah" },
+        { "pronoun": "il/elle", "french": "va", "english": "goes", "pronunciation": "vah" },
+        { "pronoun": "nous", "french": "allons", "english": "go", "pronunciation": "ah-lohn" },
+        { "pronoun": "vous", "french": "allez", "english": "go", "pronunciation": "ah-lay" },
+        { "pronoun": "ils/elles", "french": "vont", "english": "go", "pronunciation": "vohn" }
+      ]
+    }
+  },
+  "adjectives": {
+    "common": [
+      { "french": "grand", "english": "big/tall", "feminine": "grande", "example": "un grand arbre" },
+      { "french": "petit", "english": "small", "feminine": "petite", "example": "une petite voiture" },
+      { "french": "bon", "english": "good", "feminine": "bonne", "example": "un bon livre" },
+      { "french": "mauvais", "english": "bad", "feminine": "mauvaise", "example": "une mauvaise idée" },
+      { "french": "beau", "english": "beautiful", "feminine": "belle", "example": "un beau paysage" },
+      { "french": "nouveau", "english": "new", "feminine": "nouvelle", "example": "une nouvelle maison" },
+      { "french": "vieux", "english": "old", "feminine": "vieille", "example": "un vieux chien" },
+      { "french": "jeune", "english": "young", "feminine": "jeune", "example": "une jeune fille" }
+    ]
+  },
+  "prepositions": [
+    { "french": "à", "english": "to/at", "example": "à la maison", "pronunciation": "ah" },
+    { "french": "de", "english": "of/from", "example": "de Paris", "pronunciation": "duh" },
+    { "french": "dans", "english": "in", "example": "dans la voiture", "pronunciation": "dahn" },
+    { "french": "sur", "english": "on", "example": "sur la table", "pronunciation": "soor" },
+    { "french": "avec", "english": "with", "example": "avec mes amis", "pronunciation": "ah-vek" },
+    { "french": "sans", "english": "without", "example": "sans sucre", "pronunciation": "sahn" },
+    { "french": "pour", "english": "for", "example": "pour toi", "pronunciation": "poor" },
+    { "french": "par", "english": "by/through", "example": "par la fenêtre", "pronunciation": "par" }
+  ]
+}

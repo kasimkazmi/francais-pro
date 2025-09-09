@@ -1,0 +1,109 @@
+{
+  "alphabet": [
+    { "letter": "A", "pronunciation": "ah", "example": "ami" },
+    { "letter": "B", "pronunciation": "bay", "example": "bonjour" },
+    { "letter": "C", "pronunciation": "say", "example": "chat" },
+    { "letter": "D", "pronunciation": "day", "example": "dans" },
+    { "letter": "E", "pronunciation": "uh", "example": "école" },
+    { "letter": "F", "pronunciation": "eff", "example": "fleur" },
+    { "letter": "G", "pronunciation": "zhay", "example": "garçon" },
+    { "letter": "H", "pronunciation": "ahsh", "example": "hôtel" },
+    { "letter": "I", "pronunciation": "ee", "example": "ici" },
+    { "letter": "J", "pronunciation": "zhee", "example": "jour" },
+    { "letter": "K", "pronunciation": "kah", "example": "kilo" },
+    { "letter": "L", "pronunciation": "ell", "example": "livre" },
+    { "letter": "M", "pronunciation": "emm", "example": "maison" },
+    { "letter": "N", "pronunciation": "enn", "example": "nuit" },
+    { "letter": "O", "pronunciation": "oh", "example": "orange" },
+    { "letter": "P", "pronunciation": "pay", "example": "pomme" },
+    { "letter": "Q", "pronunciation": "koo", "example": "question" },
+    { "letter": "R", "pronunciation": "air", "example": "rouge" },
+    { "letter": "S", "pronunciation": "ess", "example": "soleil" },
+    { "letter": "T", "pronunciation": "tay", "example": "table" },
+    { "letter": "U", "pronunciation": "oo", "example": "une" },
+    { "letter": "V", "pronunciation": "vay", "example": "voiture" },
+    { "letter": "W", "pronunciation": "doo-bluh-vay", "example": "wagon" },
+    { "letter": "X", "pronunciation": "eeks", "example": "xylophone" },
+    { "letter": "Y", "pronunciation": "ee-grek", "example": "yaourt" },
+    { "letter": "Z", "pronunciation": "zed", "example": "zèbre" }
+  ],
+  "specialCharacters": [
+    {
+      "name": "Accent Aigu (é)",
+      "character": "é",
+      "description": "Makes the 'e' sound like \"ay\"",
+      "examples": ["café", "été", "élève", "marché"]
+    },
+    {
+      "name": "Accent Grave (è)",
+      "character": "è",
+      "description": "Makes the 'e' sound like \"eh\"",
+      "examples": ["mère", "frère", "père", "très"]
+    },
+    {
+      "name": "Accent Circonflexe (ê)",
+      "character": "ê",
+      "description": "Makes the 'e' sound longer",
+      "examples": ["fête", "tête", "forêt", "hôtel"]
+    },
+    {
+      "name": "Cédille (ç)",
+      "character": "ç",
+      "description": "Makes 'c' sound like 's'",
+      "examples": ["français", "garçon", "leçon", "reçu"]
+    },
+    {
+      "name": "Tréma (ë)",
+      "character": "ë",
+      "description": "Separates two vowels",
+      "examples": ["naïf", "Noël", "maïs", "aiguë"]
+    },
+    {
+      "name": "Accent Grave (à)",
+      "character": "à",
+      "description": "Distinguishes words",
+      "examples": ["à", "là", "déjà", "voilà"]
+    },
+    {
+      "name": "Accent Circonflexe (â)",
+      "character": "â",
+      "description": "Historical spelling",
+      "examples": ["âge", "pâtes", "château", "hâte"]
+    },
+    {
+      "name": "Accent Circonflexe (î)",
+      "character": "î",
+      "description": "Historical spelling",
+      "examples": ["île", "naître", "connaître", "plaire"]
+    },
+    {
+      "name": "Accent Circonflexe (ô)",
+      "character": "ô",
+      "description": "Historical spelling",
+      "examples": ["hôtel", "côte", "tôt", "bientôt"]
+    },
+    {
+      "name": "Accent Circonflexe (û)",
+      "character": "û",
+      "description": "Historical spelling",
+      "examples": ["sûr", "mûr", "dû", "croûte"]
+    }
+  ],
+  "spellingWords": [
+    { "word": "bonjour", "spelling": "B-O-N-J-O-U-R" },
+    { "word": "merci", "spelling": "M-E-R-C-I" },
+    { "word": "français", "spelling": "F-R-A-N-Ç-A-I-S" },
+    { "word": "au revoir", "spelling": "A-U R-E-V-O-I-R" },
+    { "word": "s'il vous plaît", "spelling": "S-I-L V-O-U-S P-L-A-Î-T" },
+    { "word": "excusez-moi", "spelling": "E-X-C-U-S-E-Z M-O-I" },
+    { "word": "comment", "spelling": "C-O-M-M-E-N-T" },
+    { "word": "parlez-vous", "spelling": "P-A-R-L-E-Z V-O-U-S" },
+    { "word": "anglais", "spelling": "A-N-G-L-A-I-S" },
+    { "word": "français", "spelling": "F-R-A-N-Ç-A-I-S" },
+    { "word": "je ne comprends pas", "spelling": "J-E N-E C-O-M-P-R-E-N-D-S P-A-S" },
+    { "word": "pouvez-vous", "spelling": "P-O-U-V-E-Z V-O-U-S" },
+    { "word": "répétez", "spelling": "R-É-P-É-T-E-Z" },
+    { "word": "plus lentement", "spelling": "P-L-U-S L-E-N-T-E-M-E-N-T" },
+    { "word": "je m'appelle", "spelling": "J-E M-A-P-P-E-L-L-E" }
+  ]
+}

@@ -1,26 +1,161 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Custom hover effects */
+.hover-grey {
+  transition: background-color 0.2s ease-in-out;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.hover-grey:hover {
+  background-color: #404040;
 }
 
-@media (prefers-color-scheme: dark) {
+.hover-black {
+  background-color: #0A0A0A;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.hover-black:hover {
+  background-color: #404040;
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #0A0A0A;
+}
+
+.card-hover:hover {
+  background-color: #404040;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode card backgrounds */
+.light-mode-card {
+  background-color: #F8F8F8;
+  transition: all 0.3s ease-in-out;
+}
+
+.light-mode-card:hover {
+  background-color: #E8E8E8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover effects */
+.btn-hover {
+  transition: all 0.2s ease-in-out;
+  background-color: #0A0A0A;
+}
+
+.btn-hover:hover {
+  background-color: #404040;
+  transform: scale(1.05);
+}
+
+/* Link hover effects */
+.link-hover {
+  transition: all 0.2s ease-in-out;
+  color: inherit;
+}
+
+.link-hover:hover {
+  background-color: #404040;
+  color: white;
+}
+
+/* Interactive element hover effects */
+.interactive-hover {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.interactive-hover:hover {
+  background-color: #404040;
+  transform: scale(1.02);
+}
+
+/* Universal card styling for both light and dark modes */
+.universal-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* Dark mode card styling */
+.dark .universal-card {
+  background-color: #0A0A0A;
+}
+
+.dark .universal-card:hover {
+  background-color: #404040;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode card styling */
+.universal-card {
+  background-color: #F8F8F8;
+}
+
+.universal-card:hover {
+  background-color: #E8E8E8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
 }

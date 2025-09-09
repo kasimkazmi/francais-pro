@@ -1,0 +1,379 @@
+{
+  "artMovements": [
+    {
+      "name": "Gothique",
+      "period": "12th-16th century",
+      "description": "Medieval art style characterized by pointed arches and vertical emphasis",
+      "characteristics": [
+        "Pointed arches",
+        "Flying buttresses",
+        "Stained glass windows",
+        "Vertical emphasis"
+      ],
+      "famousWorks": [
+        {
+          "name": "Notre-Dame de Paris",
+          "artist": "Multiple architects",
+          "description": "Gothic cathedral in Paris",
+          "vocabulary": [
+            { "french": "la cathédrale", "english": "cathedral", "pronunciation": "lah kah-tay-drahl" },
+            { "french": "l'architecture", "english": "architecture", "pronunciation": "lar-kee-tek-toor" },
+            { "french": "le vitrail", "english": "stained glass", "pronunciation": "luh vee-try" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Renaissance",
+      "period": "15th-16th century",
+      "description": "Revival of classical art and learning",
+      "characteristics": [
+        "Classical inspiration",
+        "Perspective",
+        "Humanism",
+        "Naturalism"
+      ],
+      "famousWorks": [
+        {
+          "name": "La Joconde (Mona Lisa)",
+          "artist": "Léonard de Vinci",
+          "description": "Famous portrait painting",
+          "vocabulary": [
+            { "french": "le portrait", "english": "portrait", "pronunciation": "luh por-tray" },
+            { "french": "la peinture", "english": "painting", "pronunciation": "lah pan-toor" },
+            { "french": "le sourire", "english": "smile", "pronunciation": "luh soo-reer" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Classicisme",
+      "period": "17th century",
+      "description": "Art style emphasizing order, clarity, and restraint",
+      "characteristics": [
+        "Order and clarity",
+        "Restraint",
+        "Classical models",
+        "Moral purpose"
+      ],
+      "famousWorks": [
+        {
+          "name": "Le Château de Versailles",
+          "artist": "Louis Le Vau, Jules Hardouin-Mansart",
+          "description": "Palace of the Sun King",
+          "vocabulary": [
+            { "french": "le château", "english": "castle/palace", "pronunciation": "luh shah-toh" },
+            { "french": "le palais", "english": "palace", "pronunciation": "luh pah-lay" },
+            { "french": "les jardins", "english": "gardens", "pronunciation": "lay zhar-dan" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Romantisme",
+      "period": "19th century",
+      "description": "Artistic movement emphasizing emotion and individualism",
+      "characteristics": [
+        "Emotion and imagination",
+        "Nature themes",
+        "Individualism",
+        "Dramatic scenes"
+      ],
+      "famousWorks": [
+        {
+          "name": "La Liberté guidant le peuple",
+          "artist": "Eugène Delacroix",
+          "description": "Symbol of French Revolution",
+          "vocabulary": [
+            { "french": "la liberté", "english": "liberty", "pronunciation": "lah lee-bair-tay" },
+            { "french": "le peuple", "english": "people", "pronunciation": "luh puh-pluh" },
+            { "french": "la révolution", "english": "revolution", "pronunciation": "lah ray-voh-loo-syohn" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Impressionnisme",
+      "period": "19th century",
+      "description": "Art movement capturing light and atmosphere",
+      "characteristics": [
+        "Light and color",
+        "Outdoor scenes",
+        "Visible brushstrokes",
+        "Atmospheric effects"
+      ],
+      "famousWorks": [
+        {
+          "name": "Impression, soleil levant",
+          "artist": "Claude Monet",
+          "description": "Painting that gave name to movement",
+          "vocabulary": [
+            { "french": "l'impression", "english": "impression", "pronunciation": "lan-pray-syohn" },
+            { "french": "le soleil", "english": "sun", "pronunciation": "luh soh-lay" },
+            { "french": "se lever", "english": "to rise", "pronunciation": "suh luh-vay" }
+          ]
+        },
+        {
+          "name": "Le Déjeuner des canotiers",
+          "artist": "Pierre-Auguste Renoir",
+          "description": "Luncheon of the Boating Party",
+          "vocabulary": [
+            { "french": "le déjeuner", "english": "lunch", "pronunciation": "luh day-zhuh-nay" },
+            { "french": "le canotier", "english": "boater", "pronunciation": "luh kah-noh-tyay" },
+            { "french": "la fête", "english": "party", "pronunciation": "lah fet" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cubisme",
+      "period": "20th century",
+      "description": "Artistic movement breaking objects into geometric shapes",
+      "characteristics": [
+        "Geometric shapes",
+        "Multiple perspectives",
+        "Abstract forms",
+        "Fragmented images"
+      ],
+      "famousWorks": [
+        {
+          "name": "Les Demoiselles d'Avignon",
+          "artist": "Pablo Picasso",
+          "description": "Revolutionary cubist painting",
+          "vocabulary": [
+            { "french": "la demoiselle", "english": "young lady", "pronunciation": "lah duh-mwah-zel" },
+            { "french": "géométrique", "english": "geometric", "pronunciation": "zhay-oh-may-treek" },
+            { "french": "abstrait", "english": "abstract", "pronunciation": "ab-stray" }
+          ]
+        }
+      ]
+    }
+  ],
+  "famousArtists": [
+    {
+      "name": "Claude Monet",
+      "dates": "1840-1926",
+      "movement": "Impressionnisme",
+      "famousWorks": ["Les Nymphéas", "Impression, soleil levant", "La Gare Saint-Lazare"],
+      "vocabulary": [
+        { "french": "l'impressionniste", "english": "impressionist", "pronunciation": "lan-pray-syoh-neest" },
+        { "french": "la lumière", "english": "light", "pronunciation": "lah loo-myair" },
+        { "french": "la couleur", "english": "color", "pronunciation": "lah koo-luhr" }
+      ]
+    },
+    {
+      "name": "Pierre-Auguste Renoir",
+      "dates": "1841-1919",
+      "movement": "Impressionnisme",
+      "famousWorks": ["Le Déjeuner des canotiers", "La Balançoire", "Les Grandes Baigneuses"],
+      "vocabulary": [
+        { "french": "la balançoire", "english": "swing", "pronunciation": "lah bah-lahn-swar" },
+        { "french": "la baigneuse", "english": "bather", "pronunciation": "lah ben-yuhz" },
+        { "french": "la joie de vivre", "english": "joy of living", "pronunciation": "lah zhwah duh vee-vruh" }
+      ]
+    },
+    {
+      "name": "Edgar Degas",
+      "dates": "1834-1917",
+      "movement": "Impressionnisme",
+      "famousWorks": ["La Classe de danse", "L'Absinthe", "Les Repasseuses"],
+      "vocabulary": [
+        { "french": "la danse", "english": "dance", "pronunciation": "lah dahns" },
+        { "french": "la classe", "english": "class", "pronunciation": "lah klahs" },
+        { "french": "le mouvement", "english": "movement", "pronunciation": "luh moov-mahn" }
+      ]
+    },
+    {
+      "name": "Henri Matisse",
+      "dates": "1869-1954",
+      "movement": "Fauvisme",
+      "famousWorks": ["La Danse", "La Musique", "Les Poissons rouges"],
+      "vocabulary": [
+        { "french": "le fauvisme", "english": "fauvism", "pronunciation": "luh foh-veez-muh" },
+        { "french": "le poisson", "english": "fish", "pronunciation": "luh pwah-sohn" },
+        { "french": "rouge", "english": "red", "pronunciation": "roozh" }
+      ]
+    }
+  ],
+  "music": {
+    "classical": [
+      {
+        "composer": "Claude Debussy",
+        "dates": "1862-1918",
+        "style": "Impressionnisme musical",
+        "famousWorks": ["Clair de lune", "La Mer", "Prélude à l'après-midi d'un faune"],
+        "vocabulary": [
+          { "french": "le compositeur", "english": "composer", "pronunciation": "luh kohn-poh-zee-tuhr" },
+          { "french": "la musique classique", "english": "classical music", "pronunciation": "lah moo-zeek klah-seek" },
+          { "french": "l'impressionnisme", "english": "impressionism", "pronunciation": "lan-pray-syoh-neez-muh" }
+        ]
+      },
+      {
+        "composer": "Maurice Ravel",
+        "dates": "1875-1937",
+        "style": "Impressionnisme et néo-classicisme",
+        "famousWorks": ["Boléro", "Pavane pour une infante défunte", "Daphnis et Chloé"],
+        "vocabulary": [
+          { "french": "le boléro", "english": "bolero", "pronunciation": "luh boh-lay-roh" },
+          { "french": "la pavane", "english": "pavane", "pronunciation": "lah pah-vahn" },
+          { "french": "l'orchestration", "english": "orchestration", "pronunciation": "lor-kay-strah-syohn" }
+        ]
+      },
+      {
+        "composer": "Hector Berlioz",
+        "dates": "1803-1869",
+        "style": "Romantisme",
+        "famousWorks": ["Symphonie fantastique", "La Damnation de Faust", "Roméo et Juliette"],
+        "vocabulary": [
+          { "french": "la symphonie", "english": "symphony", "pronunciation": "lah san-foh-nee" },
+          { "french": "fantastique", "english": "fantastic", "pronunciation": "fahn-tah-steek" },
+          { "french": "le romantisme", "english": "romanticism", "pronunciation": "luh roh-mahn-teez-muh" }
+        ]
+      }
+    ],
+    "chanson": [
+      {
+        "artist": "Édith Piaf",
+        "dates": "1915-1963",
+        "style": "Chanson française",
+        "famousSongs": ["La Vie en rose", "Non, je ne regrette rien", "Hymne à l'amour"],
+        "vocabulary": [
+          { "french": "la chanson", "english": "song", "pronunciation": "lah shahn-sohn" },
+          { "french": "la vie en rose", "english": "life in pink", "pronunciation": "lah vee ahn rohz" },
+          { "french": "l'hymne", "english": "hymn", "pronunciation": "leen" }
+        ]
+      },
+      {
+        "artist": "Charles Aznavour",
+        "dates": "1924-2018",
+        "style": "Chanson française",
+        "famousSongs": ["La Bohème", "She", "Hier encore"],
+        "vocabulary": [
+          { "french": "la bohème", "english": "bohemian life", "pronunciation": "lah boh-em" },
+          { "french": "hier", "english": "yesterday", "pronunciation": "yair" },
+          { "french": "encore", "english": "still/again", "pronunciation": "ahn-kor" }
+        ]
+      },
+      {
+        "artist": "Jacques Brel",
+        "dates": "1929-1978",
+        "style": "Chanson française",
+        "famousSongs": ["Ne me quitte pas", "Amsterdam", "Le Plat pays"],
+        "vocabulary": [
+          { "french": "quitter", "english": "to leave", "pronunciation": "kee-tay" },
+          { "french": "le plat pays", "english": "flat country", "pronunciation": "luh plah pay-ee" },
+          { "french": "l'émotion", "english": "emotion", "pronunciation": "lay-moh-syohn" }
+        ]
+      }
+    ],
+    "modern": [
+      {
+        "artist": "Stromae",
+        "dates": "1985-present",
+        "style": "Hip-hop, electronic",
+        "famousSongs": ["Alors on danse", "Papaoutai", "Formidable"],
+        "vocabulary": [
+          { "french": "danser", "english": "to dance", "pronunciation": "dahn-say" },
+          { "french": "formidable", "english": "wonderful", "pronunciation": "for-mee-dah-bluh" },
+          { "french": "l'électronique", "english": "electronic", "pronunciation": "lay-lek-troh-neek" }
+        ]
+      },
+      {
+        "artist": "Christine and the Queens",
+        "dates": "1988-present",
+        "style": "Pop, synth-pop",
+        "famousSongs": ["Tilted", "Saint Claude", "5 dollars"],
+        "vocabulary": [
+          { "french": "incliné", "english": "tilted", "pronunciation": "an-klee-nay" },
+          { "french": "saint", "english": "saint", "pronunciation": "san" },
+          { "french": "le synthé", "english": "synthesizer", "pronunciation": "luh san-tay" }
+        ]
+      }
+    ]
+  },
+  "museums": [
+    {
+      "name": "Le Louvre",
+      "location": "Paris",
+      "description": "World's largest art museum",
+      "famousWorks": ["Mona Lisa", "Venus de Milo", "Winged Victory of Samothrace"],
+      "vocabulary": [
+        { "french": "le musée", "english": "museum", "pronunciation": "luh moo-zay" },
+        { "french": "la sculpture", "english": "sculpture", "pronunciation": "lah skool-toor" },
+        { "french": "la statue", "english": "statue", "pronunciation": "lah stah-too" }
+      ]
+    },
+    {
+      "name": "Musée d'Orsay",
+      "location": "Paris",
+      "description": "Museum of 19th and early 20th century art",
+      "famousWorks": ["Impressionist and Post-Impressionist collections"],
+      "vocabulary": [
+        { "french": "l'impressionnisme", "english": "impressionism", "pronunciation": "lan-pray-syoh-neez-muh" },
+        { "french": "le post-impressionnisme", "english": "post-impressionism", "pronunciation": "luh post-an-pray-syoh-neez-muh" },
+        { "french": "la collection", "english": "collection", "pronunciation": "lah koh-lek-syohn" }
+      ]
+    },
+    {
+      "name": "Centre Pompidou",
+      "location": "Paris",
+      "description": "Modern and contemporary art museum",
+      "famousWorks": ["Modern and contemporary art collections"],
+      "vocabulary": [
+        { "french": "l'art moderne", "english": "modern art", "pronunciation": "lar moh-dairn" },
+        { "french": "l'art contemporain", "english": "contemporary art", "pronunciation": "lar kohn-tahn-por-ran" },
+        { "french": "l'exposition", "english": "exhibition", "pronunciation": "lek-spoh-zee-syohn" }
+      ]
+    }
+  ],
+  "artTerms": [
+    {
+      "french": "la peinture",
+      "english": "painting",
+      "pronunciation": "lah pan-toor",
+      "description": "Art form using paint on canvas or other surfaces"
+    },
+    {
+      "french": "la sculpture",
+      "english": "sculpture",
+      "pronunciation": "lah skool-toor",
+      "description": "Three-dimensional art form"
+    },
+    {
+      "french": "le dessin",
+      "english": "drawing",
+      "pronunciation": "luh day-san",
+      "description": "Art form using lines and marks"
+    },
+    {
+      "french": "la photographie",
+      "english": "photography",
+      "pronunciation": "lah foh-toh-grah-fee",
+      "description": "Art of capturing images with camera"
+    },
+    {
+      "french": "l'exposition",
+      "english": "exhibition",
+      "pronunciation": "lek-spoh-zee-syohn",
+      "description": "Public display of artworks"
+    },
+    {
+      "french": "la galerie",
+      "english": "gallery",
+      "pronunciation": "lah gah-luh-ree",
+      "description": "Space for displaying art"
+    },
+    {
+      "french": "l'artiste",
+      "english": "artist",
+      "pronunciation": "lar-teest",
+      "description": "Person who creates art"
+    },
+    {
+      "french": "l'œuvre",
+      "english": "work of art",
+      "pronunciation": "luh-vruh",
+      "description": "Individual piece of art"
+    }
+  ]
+}

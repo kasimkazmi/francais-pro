@@ -1,0 +1,147 @@
+{
+  "scenarios": [
+    {
+      "title": "At the Restaurant",
+      "level": "Beginner",
+      "situation": "Ordering food at a French restaurant",
+      "dialogue": [
+        {
+          "speaker": "Waiter",
+          "french": "Bonsoir, avez-vous une réservation ?",
+          "english": "Good evening, do you have a reservation?",
+          "pronunciation": "bon-SWAHR, ah-vay voo oon ray-zair-vah-syohn"
+        },
+        {
+          "speaker": "Customer",
+          "french": "Non, nous n'avons pas de réservation.",
+          "english": "No, we don't have a reservation.",
+          "pronunciation": "nohn, noo nah-vohn pah duh ray-zair-vah-syohn"
+        },
+        {
+          "speaker": "Waiter",
+          "french": "Pas de problème. Suivez-moi, s'il vous plaît.",
+          "english": "No problem. Follow me, please.",
+          "pronunciation": "pah duh proh-BLEM. swee-vay MWAH, seel voo PLAY"
+        },
+        {
+          "speaker": "Customer",
+          "french": "Pouvez-vous me recommander un plat ?",
+          "english": "Can you recommend a dish to me?",
+          "pronunciation": "poo-vay voo muh ruh-koh-mahn-day uhn plah"
+        },
+        {
+          "speaker": "Waiter",
+          "french": "Je recommande le coq au vin. C'est délicieux !",
+          "english": "I recommend the coq au vin. It's delicious!",
+          "pronunciation": "zhuh ruh-koh-mahnd luh kohk oh van. say day-lee-syuh"
+        }
+      ]
+    },
+    {
+      "title": "At the Hotel",
+      "level": "Intermediate",
+      "situation": "Checking into a hotel",
+      "dialogue": [
+        {
+          "speaker": "Receptionist",
+          "french": "Bonjour, comment puis-je vous aider ?",
+          "english": "Hello, how can I help you?",
+          "pronunciation": "bon-ZHOOR, koh-MAHN pwee-zhuh voo zay-DAY"
+        },
+        {
+          "speaker": "Guest",
+          "french": "J'ai une réservation au nom de Martin.",
+          "english": "I have a reservation under the name Martin.",
+          "pronunciation": "zhay oon ray-zair-vah-syohn oh nohm duh mar-TAN"
+        },
+        {
+          "speaker": "Receptionist",
+          "french": "Parfait ! Vous avez une chambre double pour deux nuits.",
+          "english": "Perfect! You have a double room for two nights.",
+          "pronunciation": "par-FAY! voo zah-vay oon SHAHM-bruh DOO-bluh poor duh nwee"
+        },
+        {
+          "speaker": "Guest",
+          "french": "À quelle heure est le petit-déjeuner ?",
+          "english": "What time is breakfast?",
+          "pronunciation": "ah kel uhr ay luh puh-tee day-zhuh-NAY"
+        },
+        {
+          "speaker": "Receptionist",
+          "french": "Le petit-déjeuner est servi de 7h à 10h.",
+          "english": "Breakfast is served from 7am to 10am.",
+          "pronunciation": "luh puh-tee day-zhuh-NAY ay sair-VEE duh set uhr ah dee uhr"
+        }
+      ]
+    },
+    {
+      "title": "At the Doctor's",
+      "level": "Advanced",
+      "situation": "Medical consultation",
+      "dialogue": [
+        {
+          "speaker": "Doctor",
+          "french": "Bonjour, qu'est-ce qui vous amène aujourd'hui ?",
+          "english": "Hello, what brings you here today?",
+          "pronunciation": "bon-ZHOOR, kess kee voo zah-MEN oh-zhoor-DWEE"
+        },
+        {
+          "speaker": "Patient",
+          "french": "J'ai mal à la tête depuis trois jours.",
+          "english": "I have a headache for three days.",
+          "pronunciation": "zhay mahl ah lah tet duh-PWEE trwah zhoor"
+        },
+        {
+          "speaker": "Doctor",
+          "french": "Avez-vous de la fièvre ?",
+          "english": "Do you have a fever?",
+          "pronunciation": "ah-vay voo duh lah fee-EV-ruh"
+        },
+        {
+          "speaker": "Patient",
+          "french": "Oui, j'ai 38 degrés.",
+          "english": "Yes, I have 38 degrees.",
+          "pronunciation": "wee, zhay tran-tuh-ee-uit duh-GRAY"
+        },
+        {
+          "speaker": "Doctor",
+          "french": "Je vais vous prescrire des médicaments.",
+          "english": "I'm going to prescribe you some medication.",
+          "pronunciation": "zhuh vay voo pray-SKREER day may-dee-kah-MAHN"
+        }
+      ]
+    }
+  ],
+  "commonPhrases": [
+    {
+      "category": "Polite Expressions",
+      "phrases": [
+        { "french": "Excusez-moi", "english": "Excuse me", "pronunciation": "eks-koo-zay MWAH" },
+        { "french": "Pardon", "english": "Sorry/Pardon", "pronunciation": "par-DOHN" },
+        { "french": "Je vous en prie", "english": "You're welcome", "pronunciation": "zhuh voo zahn PREE" },
+        { "french": "De rien", "english": "You're welcome", "pronunciation": "duh ree-AN" },
+        { "french": "S'il vous plaît", "english": "Please", "pronunciation": "seel voo PLAY" }
+      ]
+    },
+    {
+      "category": "Asking for Help",
+      "phrases": [
+        { "french": "Pouvez-vous m'aider ?", "english": "Can you help me?", "pronunciation": "poo-vay voo may-DAY" },
+        { "french": "Je ne comprends pas", "english": "I don't understand", "pronunciation": "zhuh nuh kohm-PRAHN pah" },
+        { "french": "Parlez-vous anglais ?", "english": "Do you speak English?", "pronunciation": "par-lay voo zahn-GLAY" },
+        { "french": "Où est... ?", "english": "Where is...?", "pronunciation": "oo ay" },
+        { "french": "Comment dit-on... ?", "english": "How do you say...?", "pronunciation": "koh-MAHN dee tohn" }
+      ]
+    },
+    {
+      "category": "Emergency",
+      "phrases": [
+        { "french": "Au secours !", "english": "Help!", "pronunciation": "oh suh-KOOR" },
+        { "french": "Appelez la police !", "english": "Call the police!", "pronunciation": "ah-puh-LAY lah poh-LEES" },
+        { "french": "Appelez un médecin !", "english": "Call a doctor!", "pronunciation": "ah-puh-LAY uhn may-duh-SAN" },
+        { "french": "Je suis perdu", "english": "I'm lost", "pronunciation": "zhuh swee pair-DOO" },
+        { "french": "J'ai besoin d'aide", "english": "I need help", "pronunciation": "zhay buh-ZWAN dayd" }
+      ]
+    }
+  ]
+}

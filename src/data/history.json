@@ -1,0 +1,382 @@
+{
+  "periods": [
+    {
+      "name": "La Préhistoire",
+      "dates": "Before 52 BC",
+      "description": "Prehistoric period before Roman conquest",
+      "key_events": [
+        "Cave paintings at Lascaux",
+        "Megalithic monuments (Carnac stones)",
+        "Celtic settlements"
+      ],
+      "vocabulary": [
+        { "french": "la préhistoire", "english": "prehistory", "pronunciation": "lah pray-ees-twar" },
+        { "french": "les peintures rupestres", "english": "cave paintings", "pronunciation": "lay pan-toor roo-pess-truh" },
+        { "french": "les mégalithes", "english": "megaliths", "pronunciation": "lay may-gah-leet" },
+        { "french": "les Celtes", "english": "Celts", "pronunciation": "lay selt" }
+      ]
+    },
+    {
+      "name": "La Gaule Romaine",
+      "dates": "52 BC - 486 AD",
+      "description": "Roman Gaul period",
+      "key_events": [
+        "Conquest by Julius Caesar (52 BC)",
+        "Romanization of Gaul",
+        "Fall of Roman Empire (476 AD)"
+      ],
+      "vocabulary": [
+        { "french": "la Gaule", "english": "Gaul", "pronunciation": "lah gohl" },
+        { "french": "la romanisation", "english": "Romanization", "pronunciation": "lah roh-mah-nee-zah-syohn" },
+        { "french": "l'empire romain", "english": "Roman Empire", "pronunciation": "lahn-peer roh-man" },
+        { "french": "la conquête", "english": "conquest", "pronunciation": "lah kohn-ket" }
+      ]
+    },
+    {
+      "name": "Le Moyen Âge",
+      "dates": "486 - 1492",
+      "description": "Medieval period",
+      "key_events": [
+        "Clovis becomes first Frankish king (486)",
+        "Charlemagne's empire (800)",
+        "Hundred Years' War (1337-1453)",
+        "Joan of Arc (1412-1431)"
+      ],
+      "vocabulary": [
+        { "french": "le Moyen Âge", "english": "Middle Ages", "pronunciation": "luh mwah-yan ahzh" },
+        { "french": "le roi", "english": "king", "pronunciation": "luh rwah" },
+        { "french": "l'empire", "english": "empire", "pronunciation": "lahn-peer" },
+        { "french": "la guerre", "english": "war", "pronunciation": "lah gair" }
+      ]
+    },
+    {
+      "name": "La Renaissance",
+      "dates": "1492 - 1598",
+      "description": "Renaissance period",
+      "key_events": [
+        "Discovery of America (1492)",
+        "Reign of François I (1515-1547)",
+        "Wars of Religion (1562-1598)"
+      ],
+      "vocabulary": [
+        { "french": "la Renaissance", "english": "Renaissance", "pronunciation": "lah ruh-nay-sahnss" },
+        { "french": "la découverte", "english": "discovery", "pronunciation": "lah day-koo-vairt" },
+        { "french": "le règne", "english": "reign", "pronunciation": "luh ren-yuh" },
+        { "french": "les guerres de religion", "english": "Wars of Religion", "pronunciation": "lay gair duh ruh-lee-zhyohn" }
+      ]
+    },
+    {
+      "name": "L'Ancien Régime",
+      "dates": "1598 - 1789",
+      "description": "Old Regime period",
+      "key_events": [
+        "Edict of Nantes (1598)",
+        "Reign of Louis XIV (1643-1715)",
+        "Enlightenment period",
+        "French Revolution (1789)"
+      ],
+      "vocabulary": [
+        { "french": "l'Ancien Régime", "english": "Old Regime", "pronunciation": "lahn-syan ray-zheem" },
+        { "french": "l'édit", "english": "edict", "pronunciation": "lay-dee" },
+        { "french": "les Lumières", "english": "Enlightenment", "pronunciation": "lay loo-myair" },
+        { "french": "la Révolution", "english": "Revolution", "pronunciation": "lah ray-voh-loo-syohn" }
+      ]
+    },
+    {
+      "name": "La Révolution Française",
+      "dates": "1789 - 1799",
+      "description": "French Revolution",
+      "key_events": [
+        "Storming of the Bastille (July 14, 1789)",
+        "Declaration of the Rights of Man (1789)",
+        "Reign of Terror (1793-1794)",
+        "Rise of Napoleon"
+      ],
+      "vocabulary": [
+        { "french": "la Bastille", "english": "Bastille", "pronunciation": "lah bahs-tee-yuh" },
+        { "french": "la Déclaration des Droits de l'Homme", "english": "Declaration of the Rights of Man", "pronunciation": "lah day-klah-rah-syohn day drwah duh lohm" },
+        { "french": "la Terreur", "english": "Terror", "pronunciation": "lah tay-ruhr" },
+        { "french": "la liberté", "english": "liberty", "pronunciation": "lah lee-bair-tay" }
+      ]
+    },
+    {
+      "name": "L'Empire Napoléonien",
+      "dates": "1799 - 1815",
+      "description": "Napoleonic Empire",
+      "key_events": [
+        "Napoleon becomes First Consul (1799)",
+        "Napoleon becomes Emperor (1804)",
+        "Napoleonic Wars",
+        "Waterloo (1815)"
+      ],
+      "vocabulary": [
+        { "french": "l'Empire", "english": "Empire", "pronunciation": "lahn-peer" },
+        { "french": "l'empereur", "english": "emperor", "pronunciation": "lahn-puh-ruhr" },
+        { "french": "les guerres napoléoniennes", "english": "Napoleonic Wars", "pronunciation": "lay gair nah-poh-lay-oh-nyen" },
+        { "french": "Waterloo", "english": "Waterloo", "pronunciation": "wah-tair-loo" }
+      ]
+    },
+    {
+      "name": "Le XIXe Siècle",
+      "dates": "1815 - 1914",
+      "description": "19th century",
+      "key_events": [
+        "Restoration of the Monarchy",
+        "Industrial Revolution",
+        "Paris Commune (1871)",
+        "Third Republic (1870-1940)"
+      ],
+      "vocabulary": [
+        { "french": "la Restauration", "english": "Restoration", "pronunciation": "lah ress-tah-rah-syohn" },
+        { "french": "la Révolution industrielle", "english": "Industrial Revolution", "pronunciation": "lah ray-voh-loo-syohn an-doo-stree-el" },
+        { "french": "la Commune", "english": "Commune", "pronunciation": "lah koh-moon" },
+        { "french": "la Troisième République", "english": "Third Republic", "pronunciation": "lah trwah-zyem ray-poo-bleek" }
+      ]
+    },
+    {
+      "name": "Les Guerres Mondiales",
+      "dates": "1914 - 1945",
+      "description": "World Wars period",
+      "key_events": [
+        "World War I (1914-1918)",
+        "Treaty of Versailles (1919)",
+        "World War II (1939-1945)",
+        "Liberation of France (1944)"
+      ],
+      "vocabulary": [
+        { "french": "la Première Guerre mondiale", "english": "World War I", "pronunciation": "lah pruh-myair gair mohn-dyahl" },
+        { "french": "la Seconde Guerre mondiale", "english": "World War II", "pronunciation": "lah suh-gohnd gair mohn-dyahl" },
+        { "french": "le traité", "english": "treaty", "pronunciation": "luh tray-tay" },
+        { "french": "la libération", "english": "liberation", "pronunciation": "lah lee-bay-rah-syohn" }
+      ]
+    },
+    {
+      "name": "La France Moderne",
+      "dates": "1945 - Present",
+      "description": "Modern France",
+      "key_events": [
+        "Fourth Republic (1946-1958)",
+        "Fifth Republic (1958-Present)",
+        "European Union",
+        "Modern challenges"
+      ],
+      "vocabulary": [
+        { "french": "la Quatrième République", "english": "Fourth Republic", "pronunciation": "lah kah-tree-em ray-poo-bleek" },
+        { "french": "la Cinquième République", "english": "Fifth Republic", "pronunciation": "lah san-kyem ray-poo-bleek" },
+        { "french": "l'Union européenne", "english": "European Union", "pronunciation": "loo-nyohn uh-roh-pay-en" },
+        { "french": "les défis modernes", "english": "modern challenges", "pronunciation": "lay day-fee moh-dairn" }
+      ]
+    }
+  ],
+  "famousFigures": [
+    {
+      "name": "Clovis",
+      "dates": "466-511",
+      "title": "First King of the Franks",
+      "achievements": [
+        "Unified the Frankish tribes",
+        "Converted to Christianity",
+        "Established the Merovingian dynasty"
+      ],
+      "vocabulary": [
+        { "french": "le roi des Francs", "english": "King of the Franks", "pronunciation": "luh rwah day frahn" },
+        { "french": "la dynastie", "english": "dynasty", "pronunciation": "lah dee-nah-stee" },
+        { "french": "le christianisme", "english": "Christianity", "pronunciation": "luh krees-tyah-neez-muh" }
+      ]
+    },
+    {
+      "name": "Charlemagne",
+      "dates": "742-814",
+      "title": "Emperor of the Carolingian Empire",
+      "achievements": [
+        "Expanded the Frankish Empire",
+        "Promoted education and culture",
+        "Crowned Holy Roman Emperor (800)"
+      ],
+      "vocabulary": [
+        { "french": "l'empereur", "english": "emperor", "pronunciation": "lahn-puh-ruhr" },
+        { "french": "l'éducation", "english": "education", "pronunciation": "lay-doo-kah-syohn" },
+        { "french": "la culture", "english": "culture", "pronunciation": "lah kool-toor" }
+      ]
+    },
+    {
+      "name": "Jeanne d'Arc",
+      "dates": "1412-1431",
+      "title": "The Maid of Orléans",
+      "achievements": [
+        "Led French forces during Hundred Years' War",
+        "Helped crown Charles VII",
+        "Became national heroine"
+      ],
+      "vocabulary": [
+        { "french": "la Pucelle d'Orléans", "english": "Maid of Orléans", "pronunciation": "lah poo-sel dor-lay-ahn" },
+        { "french": "l'héroïne", "english": "heroine", "pronunciation": "lay-roh-een" },
+        { "french": "le couronnement", "english": "coronation", "pronunciation": "luh koo-rohn-mahn" }
+      ]
+    },
+    {
+      "name": "Louis XIV",
+      "dates": "1638-1715",
+      "title": "The Sun King",
+      "achievements": [
+        "Longest reign in French history (72 years)",
+        "Built Versailles",
+        "Established absolute monarchy"
+      ],
+      "vocabulary": [
+        { "french": "le Roi-Soleil", "english": "Sun King", "pronunciation": "luh rwah soh-lay" },
+        { "french": "Versailles", "english": "Versailles", "pronunciation": "vair-say" },
+        { "french": "la monarchie absolue", "english": "absolute monarchy", "pronunciation": "lah moh-nar-shee ab-soh-loo" }
+      ]
+    },
+    {
+      "name": "Napoléon Bonaparte",
+      "dates": "1769-1821",
+      "title": "Emperor of the French",
+      "achievements": [
+        "Military genius",
+        "Established Napoleonic Code",
+        "Conquered most of Europe"
+      ],
+      "vocabulary": [
+        { "french": "l'empereur des Français", "english": "Emperor of the French", "pronunciation": "lahn-puh-ruhr day frahn-say" },
+        { "french": "le génie militaire", "english": "military genius", "pronunciation": "luh zhay-nee mee-lee-tair" },
+        { "french": "le Code Napoléon", "english": "Napoleonic Code", "pronunciation": "luh kohd nah-poh-lay-ohn" }
+      ]
+    }
+  ],
+  "geography": {
+    "regions": [
+      {
+        "name": "Île-de-France",
+        "capital": "Paris",
+        "description": "The heart of France, containing the capital and most populous region",
+        "landmarks": [
+          "Eiffel Tower",
+          "Louvre Museum",
+          "Notre-Dame Cathedral",
+          "Versailles Palace"
+        ],
+        "vocabulary": [
+          { "french": "la capitale", "english": "capital", "pronunciation": "lah kah-pee-tahl" },
+          { "french": "la tour", "english": "tower", "pronunciation": "lah toor" },
+          { "french": "le musée", "english": "museum", "pronunciation": "luh moo-zay" },
+          { "french": "la cathédrale", "english": "cathedral", "pronunciation": "lah kah-tay-drahl" }
+        ]
+      },
+      {
+        "name": "Provence-Alpes-Côte d'Azur",
+        "capital": "Marseille",
+        "description": "Mediterranean region known for its climate, cuisine, and landscapes",
+        "landmarks": [
+          "Palace of the Popes (Avignon)",
+          "Calanques National Park",
+          "Mont Ventoux",
+          "French Riviera"
+        ],
+        "vocabulary": [
+          { "french": "la Méditerranée", "english": "Mediterranean", "pronunciation": "lah may-dee-tay-rah-nay" },
+          { "french": "le climat", "english": "climate", "pronunciation": "luh klee-mah" },
+          { "french": "la cuisine", "english": "cuisine", "pronunciation": "lah kwee-zeen" },
+          { "french": "le paysage", "english": "landscape", "pronunciation": "luh pay-zahzh" }
+        ]
+      },
+      {
+        "name": "Bretagne",
+        "capital": "Rennes",
+        "description": "Celtic region with strong cultural identity and maritime traditions",
+        "landmarks": [
+          "Mont-Saint-Michel",
+          "Carnac stones",
+          "Quimper Cathedral",
+          "Brittany coast"
+        ],
+        "vocabulary": [
+          { "french": "la culture celtique", "english": "Celtic culture", "pronunciation": "lah kool-toor sel-teek" },
+          { "french": "l'identité", "english": "identity", "pronunciation": "lee-dahn-tee-tay" },
+          { "french": "les traditions maritimes", "english": "maritime traditions", "pronunciation": "lay trah-dee-syohn mah-ree-teem" },
+          { "french": "la côte", "english": "coast", "pronunciation": "lah koht" }
+        ]
+      },
+      {
+        "name": "Alsace",
+        "capital": "Strasbourg",
+        "description": "Eastern region with German influences and wine production",
+        "landmarks": [
+          "Strasbourg Cathedral",
+          "Colmar old town",
+          "Vosges Mountains",
+          "Wine Route"
+        ],
+        "vocabulary": [
+          { "french": "les influences allemandes", "english": "German influences", "pronunciation": "lay zan-floo-ahnss ah-luh-mahnd" },
+          { "french": "la production de vin", "english": "wine production", "pronunciation": "lah proh-dook-syohn duh van" },
+          { "french": "la montagne", "english": "mountain", "pronunciation": "lah mohn-tah-nyuh" },
+          { "french": "la route du vin", "english": "wine route", "pronunciation": "lah root doo van" }
+        ]
+      }
+    ],
+    "rivers": [
+      {
+        "name": "La Seine",
+        "length": "777 km",
+        "description": "Flows through Paris and northern France",
+        "cities": ["Paris", "Rouen", "Le Havre"],
+        "vocabulary": [
+          { "french": "le fleuve", "english": "river", "pronunciation": "luh fluhv" },
+          { "french": "la longueur", "english": "length", "pronunciation": "lah lohn-guhr" },
+          { "french": "traverser", "english": "to cross", "pronunciation": "trah-vair-say" }
+        ]
+      },
+      {
+        "name": "La Loire",
+        "length": "1,012 km",
+        "description": "Longest river in France, known for its châteaux",
+        "cities": ["Orléans", "Tours", "Nantes"],
+        "vocabulary": [
+          { "french": "le plus long", "english": "longest", "pronunciation": "luh ploo lohn" },
+          { "french": "les châteaux", "english": "castles", "pronunciation": "lay shah-toh" }
+        ]
+      },
+      {
+        "name": "Le Rhône",
+        "length": "812 km",
+        "description": "Flows from Switzerland to the Mediterranean",
+        "cities": ["Lyon", "Avignon", "Arles"],
+        "vocabulary": [
+          { "french": "la Suisse", "english": "Switzerland", "pronunciation": "lah sweess" },
+          { "french": "jusqu'à", "english": "until", "pronunciation": "zhoos-kah" }
+        ]
+      }
+    ],
+    "mountains": [
+      {
+        "name": "Les Alpes",
+        "highest_peak": "Mont Blanc (4,808 m)",
+        "description": "Mountain range forming border with Italy and Switzerland",
+        "vocabulary": [
+          { "french": "la chaîne de montagnes", "english": "mountain range", "pronunciation": "lah shen duh mohn-tah-nyuh" },
+          { "french": "le sommet", "english": "peak", "pronunciation": "luh soh-may" },
+          { "french": "la frontière", "english": "border", "pronunciation": "lah frohn-tyair" }
+        ]
+      },
+      {
+        "name": "Les Pyrénées",
+        "highest_peak": "Aneto (3,404 m)",
+        "description": "Mountain range forming border with Spain",
+        "vocabulary": [
+          { "french": "l'Espagne", "english": "Spain", "pronunciation": "lay-spah-nyuh" }
+        ]
+      },
+      {
+        "name": "Le Massif Central",
+        "highest_peak": "Puy de Sancy (1,886 m)",
+        "description": "Volcanic mountain range in central France",
+        "vocabulary": [
+          { "french": "volcanique", "english": "volcanic", "pronunciation": "vohl-kah-neek" },
+          { "french": "central", "english": "central", "pronunciation": "sahn-trahl" }
+        ]
+      }
+    ]
+  }
+}

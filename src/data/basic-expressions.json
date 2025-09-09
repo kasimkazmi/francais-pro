@@ -1,0 +1,110 @@
+{
+  "emotions": [
+    { "french": "Je suis content(e)", "english": "I am happy", "pronunciation": "zhuh swee kohn-TAHN(T)" },
+    { "french": "Je suis triste", "english": "I am sad", "pronunciation": "zhuh swee treest" },
+    { "french": "Je suis en colère", "english": "I am angry", "pronunciation": "zhuh swee ahn koh-LAIR" },
+    { "french": "Je suis surpris(e)", "english": "I am surprised", "pronunciation": "zhuh swee soor-PREE(Z)" },
+    { "french": "Je suis fatigué(e)", "english": "I am tired", "pronunciation": "zhuh swee fah-tee-GAY" },
+    { "french": "Je suis excité(e)", "english": "I am excited", "pronunciation": "zhuh swee ek-see-TAY" },
+    { "french": "Je suis nerveux/nerveuse", "english": "I am nervous", "pronunciation": "zhuh swee nair-VUH/nair-VUHZ" },
+    { "french": "Je suis calme", "english": "I am calm", "pronunciation": "zhuh swee kahlm" },
+    { "french": "Je suis inquiet/inquiète", "english": "I am worried", "pronunciation": "zhuh swee an-kee-AY/an-kee-ET" },
+    { "french": "Je suis fier/fière", "english": "I am proud", "pronunciation": "zhuh swee fee-AIR/fee-AIR" }
+  ],
+  "opinions": [
+    { "french": "Je pense que...", "english": "I think that...", "pronunciation": "zhuh pahns kuh" },
+    { "french": "Je crois que...", "english": "I believe that...", "pronunciation": "zhuh krwah kuh" },
+    { "french": "Je trouve que...", "english": "I find that...", "pronunciation": "zhuh troov kuh" },
+    { "french": "Je suis d'accord", "english": "I agree", "pronunciation": "zhuh swee dah-KOR" },
+    { "french": "Je ne suis pas d'accord", "english": "I disagree", "pronunciation": "zhuh nuh swee pah dah-KOR" },
+    { "french": "C'est vrai", "english": "That's true", "pronunciation": "say vray" },
+    { "french": "C'est faux", "english": "That's false", "pronunciation": "say foh" },
+    { "french": "Je ne sais pas", "english": "I don't know", "pronunciation": "zhuh nuh say pah" },
+    { "french": "Peut-être", "english": "Maybe", "pronunciation": "puh-TET-ruh" },
+    { "french": "Bien sûr", "english": "Of course", "pronunciation": "bee-ahn soor" }
+  ],
+  "likesAndDislikes": [
+    { "french": "J'aime", "english": "I like", "pronunciation": "zhem" },
+    { "french": "J'adore", "english": "I love", "pronunciation": "zhah-DOR" },
+    { "french": "Je n'aime pas", "english": "I don't like", "pronunciation": "zhuh nem pah" },
+    { "french": "Je déteste", "english": "I hate", "pronunciation": "zhuh day-TEST" },
+    { "french": "Je préfère", "english": "I prefer", "pronunciation": "zhuh pray-FAIR" },
+    { "french": "Ça me plaît", "english": "I like it", "pronunciation": "sah muh play" },
+    { "french": "Ça ne me plaît pas", "english": "I don't like it", "pronunciation": "sah nuh muh play pah" },
+    { "french": "C'est bon", "english": "It's good", "pronunciation": "say bohn" },
+    { "french": "C'est mauvais", "english": "It's bad", "pronunciation": "say moh-VAY" },
+    { "french": "C'est délicieux", "english": "It's delicious", "pronunciation": "say day-lee-SYUH" }
+  ],
+  "needsAndWants": [
+    { "french": "J'ai besoin de...", "english": "I need...", "pronunciation": "zhay buh-ZWAN duh" },
+    { "french": "Je veux...", "english": "I want...", "pronunciation": "zhuh vuh" },
+    { "french": "Je voudrais...", "english": "I would like...", "pronunciation": "zhuh voo-DRAY" },
+    { "french": "J'ai envie de...", "english": "I feel like...", "pronunciation": "zhay ahn-VEE duh" },
+    { "french": "J'ai faim", "english": "I'm hungry", "pronunciation": "zhay fan" },
+    { "french": "J'ai soif", "english": "I'm thirsty", "pronunciation": "zhay swahf" },
+    { "french": "J'ai sommeil", "english": "I'm sleepy", "pronunciation": "zhay soh-MAY" },
+    { "french": "J'ai chaud", "english": "I'm hot", "pronunciation": "zhay shoh" },
+    { "french": "J'ai froid", "english": "I'm cold", "pronunciation": "zhay frwah" },
+    { "french": "J'ai mal", "english": "I'm in pain", "pronunciation": "zhay mahl" }
+  ],
+  "timeExpressions": [
+    { "french": "Maintenant", "english": "Now", "pronunciation": "man-tuh-NAHN" },
+    { "french": "Tout de suite", "english": "Right away", "pronunciation": "too duh sweet" },
+    { "french": "Plus tard", "english": "Later", "pronunciation": "ploo tahr" },
+    { "french": "Bientôt", "english": "Soon", "pronunciation": "bee-ahn-TOH" },
+    { "french": "Hier", "english": "Yesterday", "pronunciation": "ee-AIR" },
+    { "french": "Aujourd'hui", "english": "Today", "pronunciation": "oh-zhoor-DWEE" },
+    { "french": "Demain", "english": "Tomorrow", "pronunciation": "duh-MAN" },
+    { "french": "Cette semaine", "english": "This week", "pronunciation": "set suh-MEN" },
+    { "french": "La semaine prochaine", "english": "Next week", "pronunciation": "lah suh-MEN proh-SHEN" },
+    { "french": "Le week-end", "english": "The weekend", "pronunciation": "luh week-END" }
+  ],
+  "frequency": [
+    { "french": "Toujours", "english": "Always", "pronunciation": "too-ZHOOR" },
+    { "french": "Souvent", "english": "Often", "pronunciation": "soo-VAHN" },
+    { "french": "Parfois", "english": "Sometimes", "pronunciation": "par-FWAH" },
+    { "french": "Rarement", "english": "Rarely", "pronunciation": "rair-MAHN" },
+    { "french": "Jamais", "english": "Never", "pronunciation": "zhah-MAY" },
+    { "french": "Tous les jours", "english": "Every day", "pronunciation": "too lay zhoor" },
+    { "french": "Une fois par semaine", "english": "Once a week", "pronunciation": "oon fwah par suh-MEN" },
+    { "french": "Deux fois par mois", "english": "Twice a month", "pronunciation": "duh fwah par mwah" },
+    { "french": "Tous les matins", "english": "Every morning", "pronunciation": "too lay mah-TAN" },
+    { "french": "Le soir", "english": "In the evening", "pronunciation": "luh swahr" }
+  ],
+  "location": [
+    { "french": "Où est... ?", "english": "Where is... ?", "pronunciation": "oo ay" },
+    { "french": "Où sont... ?", "english": "Where are... ?", "pronunciation": "oo sohn" },
+    { "french": "Je suis ici", "english": "I am here", "pronunciation": "zhuh swee ee-SEE" },
+    { "french": "Je suis là", "english": "I am there", "pronunciation": "zhuh swee lah" },
+    { "french": "Je vais à...", "english": "I'm going to...", "pronunciation": "zhuh vay ah" },
+    { "french": "Je viens de...", "english": "I come from...", "pronunciation": "zhuh vee-ahn duh" },
+    { "french": "Je habite à...", "english": "I live in...", "pronunciation": "zhuh ah-BEET ah" },
+    { "french": "Je travaille à...", "english": "I work at...", "pronunciation": "zhuh trah-VAY ah" },
+    { "french": "Je suis en vacances", "english": "I'm on vacation", "pronunciation": "zhuh swee ahn vah-KAHNS" },
+    { "french": "Je suis à la maison", "english": "I'm at home", "pronunciation": "zhuh swee ah lah may-ZOHN" }
+  ],
+  "quantity": [
+    { "french": "Beaucoup", "english": "A lot", "pronunciation": "boh-KOO" },
+    { "french": "Peu", "english": "A little", "pronunciation": "puh" },
+    { "french": "Assez", "english": "Enough", "pronunciation": "ah-SAY" },
+    { "french": "Trop", "english": "Too much", "pronunciation": "troh" },
+    { "french": "Pas assez", "english": "Not enough", "pronunciation": "pah zah-SAY" },
+    { "french": "Plus", "english": "More", "pronunciation": "ploo" },
+    { "french": "Moins", "english": "Less", "pronunciation": "mwan" },
+    { "french": "Tout", "english": "All", "pronunciation": "too" },
+    { "french": "Rien", "english": "Nothing", "pronunciation": "ree-ahn" },
+    { "french": "Quelque chose", "english": "Something", "pronunciation": "kel-kuh shohz" }
+  ],
+  "commonPhrases": [
+    { "french": "Comment ça va ?", "english": "How are you?", "pronunciation": "koh-MAHN sah vah" },
+    { "french": "Ça va bien", "english": "I'm fine", "pronunciation": "sah vah bee-ahn" },
+    { "french": "Ça va mal", "english": "I'm not well", "pronunciation": "sah vah mahl" },
+    { "french": "Comme ci, comme ça", "english": "So-so", "pronunciation": "kohm see, kohm sah" },
+    { "french": "Qu'est-ce que c'est ?", "english": "What is it?", "pronunciation": "kes kuh say" },
+    { "french": "C'est quoi ?", "english": "What is it?", "pronunciation": "say kwah" },
+    { "french": "Je ne comprends pas", "english": "I don't understand", "pronunciation": "zhuh nuh kohn-PRAHN pah" },
+    { "french": "Pouvez-vous répéter ?", "english": "Can you repeat?", "pronunciation": "poo-VAY voo ray-pay-TAY" },
+    { "french": "Plus lentement, s'il vous plaît", "english": "More slowly, please", "pronunciation": "ploo lahn-tuh-MAHN, seel voo play" },
+    { "french": "Parlez-vous anglais ?", "english": "Do you speak English?", "pronunciation": "par-LAY voo ahn-GLAY" }
+  ]
+}

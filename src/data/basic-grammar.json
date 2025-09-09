@@ -1,0 +1,116 @@
+{
+  "articles": {
+    "definite": [
+      { "french": "le", "english": "the (masculine)", "example": "le chat (the cat)" },
+      { "french": "la", "english": "the (feminine)", "example": "la maison (the house)" },
+      { "french": "les", "english": "the (plural)", "example": "les enfants (the children)" },
+      { "french": "l'", "english": "the (before vowel)", "example": "l'école (the school)" }
+    ],
+    "indefinite": [
+      { "french": "un", "english": "a/an (masculine)", "example": "un livre (a book)" },
+      { "french": "une", "english": "a/an (feminine)", "example": "une pomme (an apple)" },
+      { "french": "des", "english": "some (plural)", "example": "des fleurs (some flowers)" }
+    ]
+  },
+  "pronouns": {
+    "subject": [
+      { "french": "je", "english": "I", "pronunciation": "zhuh" },
+      { "french": "tu", "english": "you (informal)", "pronunciation": "too" },
+      { "french": "il", "english": "he/it", "pronunciation": "eel" },
+      { "french": "elle", "english": "she/it", "pronunciation": "el" },
+      { "french": "nous", "english": "we", "pronunciation": "noo" },
+      { "french": "vous", "english": "you (formal/plural)", "pronunciation": "voo" },
+      { "french": "ils", "english": "they (masculine)", "pronunciation": "eel" },
+      { "french": "elles", "english": "they (feminine)", "pronunciation": "el" }
+    ],
+    "object": [
+      { "french": "me", "english": "me", "pronunciation": "muh" },
+      { "french": "te", "english": "you (informal)", "pronunciation": "tuh" },
+      { "french": "le", "english": "him/it", "pronunciation": "luh" },
+      { "french": "la", "english": "her/it", "pronunciation": "lah" },
+      { "french": "nous", "english": "us", "pronunciation": "noo" },
+      { "french": "vous", "english": "you (formal/plural)", "pronunciation": "voo" },
+      { "french": "les", "english": "them", "pronunciation": "lay" }
+    ]
+  },
+  "verbs": {
+    "être": [
+      { "form": "je suis", "english": "I am", "pronunciation": "zhuh swee" },
+      { "form": "tu es", "english": "you are", "pronunciation": "too ay" },
+      { "form": "il/elle est", "english": "he/she is", "pronunciation": "eel/el ay" },
+      { "form": "nous sommes", "english": "we are", "pronunciation": "noo sohm" },
+      { "form": "vous êtes", "english": "you are", "pronunciation": "voo zet" },
+      { "form": "ils/elles sont", "english": "they are", "pronunciation": "eel/el sohn" }
+    ],
+    "avoir": [
+      { "form": "j'ai", "english": "I have", "pronunciation": "zhay" },
+      { "form": "tu as", "english": "you have", "pronunciation": "too ah" },
+      { "form": "il/elle a", "english": "he/she has", "pronunciation": "eel/el ah" },
+      { "form": "nous avons", "english": "we have", "pronunciation": "noo zah-VOHN" },
+      { "form": "vous avez", "english": "you have", "pronunciation": "voo zah-VAY" },
+      { "form": "ils/elles ont", "english": "they have", "pronunciation": "eel/el ohn" }
+    ],
+    "aller": [
+      { "form": "je vais", "english": "I go", "pronunciation": "zhuh vay" },
+      { "form": "tu vas", "english": "you go", "pronunciation": "too vah" },
+      { "form": "il/elle va", "english": "he/she goes", "pronunciation": "eel/el vah" },
+      { "form": "nous allons", "english": "we go", "pronunciation": "noo zah-LOHN" },
+      { "form": "vous allez", "english": "you go", "pronunciation": "voo zah-LAY" },
+      { "form": "ils/elles vont", "english": "they go", "pronunciation": "eel/el vohn" }
+    ],
+    "faire": [
+      { "form": "je fais", "english": "I do/make", "pronunciation": "zhuh fay" },
+      { "form": "tu fais", "english": "you do/make", "pronunciation": "too fay" },
+      { "form": "il/elle fait", "english": "he/she does/makes", "pronunciation": "eel/el fay" },
+      { "form": "nous faisons", "english": "we do/make", "pronunciation": "noo fuh-ZOHN" },
+      { "form": "vous faites", "english": "you do/make", "pronunciation": "voo fet" },
+      { "form": "ils/elles font", "english": "they do/make", "pronunciation": "eel/el fohn" }
+    ]
+  },
+  "adjectives": {
+    "common": [
+      { "french": "grand", "english": "big/tall", "feminine": "grande", "example": "un grand arbre" },
+      { "french": "petit", "english": "small", "feminine": "petite", "example": "une petite fille" },
+      { "french": "bon", "english": "good", "feminine": "bonne", "example": "un bon livre" },
+      { "french": "mauvais", "english": "bad", "feminine": "mauvaise", "example": "une mauvaise idée" },
+      { "french": "beau", "english": "beautiful", "feminine": "belle", "example": "un beau jour" },
+      { "french": "laid", "english": "ugly", "feminine": "laide", "example": "une laide maison" },
+      { "french": "nouveau", "english": "new", "feminine": "nouvelle", "example": "un nouveau livre" },
+      { "french": "vieux", "english": "old", "feminine": "vieille", "example": "une vieille voiture" },
+      { "french": "jeune", "english": "young", "feminine": "jeune", "example": "un jeune homme" },
+      { "french": "riche", "english": "rich", "feminine": "riche", "example": "un riche homme" },
+      { "french": "pauvre", "english": "poor", "feminine": "pauvre", "example": "une pauvre femme" },
+      { "french": "intelligent", "english": "intelligent", "feminine": "intelligente", "example": "un intelligent garçon" }
+    ]
+  },
+  "prepositions": [
+    { "french": "à", "english": "to/at", "example": "à la maison (at home)" },
+    { "french": "de", "english": "from/of", "example": "de Paris (from Paris)" },
+    { "french": "dans", "english": "in", "example": "dans la voiture (in the car)" },
+    { "french": "sur", "english": "on", "example": "sur la table (on the table)" },
+    { "french": "sous", "english": "under", "example": "sous le lit (under the bed)" },
+    { "french": "avec", "english": "with", "example": "avec mes amis (with my friends)" },
+    { "french": "sans", "english": "without", "example": "sans sucre (without sugar)" },
+    { "french": "pour", "english": "for", "example": "pour toi (for you)" },
+    { "french": "par", "english": "by", "example": "par avion (by plane)" },
+    { "french": "entre", "english": "between", "example": "entre deux arbres (between two trees)" }
+  ],
+  "conjunctions": [
+    { "french": "et", "english": "and", "example": "le chat et le chien" },
+    { "french": "ou", "english": "or", "example": "café ou thé" },
+    { "french": "mais", "english": "but", "example": "je suis fatigué mais content" },
+    { "french": "donc", "english": "so/therefore", "example": "il pleut, donc je reste" },
+    { "french": "car", "english": "because", "example": "je reste car il pleut" },
+    { "french": "si", "english": "if", "example": "si tu veux, on peut partir" }
+  ],
+  "questionWords": [
+    { "french": "qui", "english": "who", "example": "Qui est-ce ?" },
+    { "french": "quoi", "english": "what", "example": "Quoi de neuf ?" },
+    { "french": "où", "english": "where", "example": "Où vas-tu ?" },
+    { "french": "quand", "english": "when", "example": "Quand arrives-tu ?" },
+    { "french": "comment", "english": "how", "example": "Comment allez-vous ?" },
+    { "french": "pourquoi", "english": "why", "example": "Pourquoi pleures-tu ?" },
+    { "french": "combien", "english": "how much/many", "example": "Combien ça coûte ?" },
+    { "french": "quel", "english": "which/what", "example": "Quel est ton nom ?" }
+  ]
+}

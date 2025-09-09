@@ -1,0 +1,68 @@
+{
+  "family": [
+    { "french": "la famille", "english": "family", "pronunciation": "lah fah-mee", "example": "Ma famille est grande" },
+    { "french": "le père", "english": "father", "pronunciation": "luh pair", "example": "Mon père travaille" },
+    { "french": "la mère", "english": "mother", "pronunciation": "lah mair", "example": "Ma mère cuisine bien" },
+    { "french": "le fils", "english": "son", "pronunciation": "luh fees", "example": "Il a un fils" },
+    { "french": "la fille", "english": "daughter", "pronunciation": "lah fee", "example": "Elle a une fille" },
+    { "french": "le frère", "english": "brother", "pronunciation": "luh frair", "example": "Mon frère est plus âgé" },
+    { "french": "la sœur", "english": "sister", "pronunciation": "lah suhr", "example": "Ma sœur est médecin" },
+    { "french": "le grand-père", "english": "grandfather", "pronunciation": "luh grahn-pair", "example": "Mon grand-père raconte des histoires" },
+    { "french": "la grand-mère", "english": "grandmother", "pronunciation": "lah grahn-mair", "example": "Ma grand-mère fait de bons gâteaux" },
+    { "french": "l'oncle", "english": "uncle", "pronunciation": "lohn-kluh", "example": "Mon oncle habite à Lyon" },
+    { "french": "la tante", "english": "aunt", "pronunciation": "lah tahnt", "example": "Ma tante est très gentille" },
+    { "french": "le cousin", "english": "cousin (male)", "pronunciation": "luh koo-zan", "example": "Mon cousin joue au football" },
+    { "french": "la cousine", "english": "cousin (female)", "pronunciation": "lah koo-zeen", "example": "Ma cousine étudie la médecine" }
+  ],
+  "food": [
+    { "french": "la nourriture", "english": "food", "pronunciation": "lah noo-ree-toor", "example": "La nourriture française est délicieuse" },
+    { "french": "le pain", "english": "bread", "pronunciation": "luh pan", "example": "Je mange du pain tous les jours" },
+    { "french": "le fromage", "english": "cheese", "pronunciation": "luh froh-mahzh", "example": "J'aime le fromage français" },
+    { "french": "la viande", "english": "meat", "pronunciation": "lah vee-ahnd", "example": "Je ne mange pas de viande" },
+    { "french": "le poisson", "english": "fish", "pronunciation": "luh pwah-sohn", "example": "Le poisson est frais" },
+    { "french": "les légumes", "english": "vegetables", "pronunciation": "lay lay-goom", "example": "Les légumes sont bons pour la santé" },
+    { "french": "les fruits", "english": "fruits", "pronunciation": "lay frwee", "example": "Je mange des fruits tous les matins" },
+    { "french": "l'eau", "english": "water", "pronunciation": "loh", "example": "Je bois de l'eau" },
+    { "french": "le vin", "english": "wine", "pronunciation": "luh van", "example": "Le vin français est célèbre" },
+    { "french": "le café", "english": "coffee", "pronunciation": "luh kah-fay", "example": "Je prends un café le matin" },
+    { "french": "le thé", "english": "tea", "pronunciation": "luh tay", "example": "Elle préfère le thé" },
+    { "french": "le dessert", "english": "dessert", "pronunciation": "luh day-sair", "example": "Le dessert était excellent" }
+  ],
+  "colors": [
+    { "french": "rouge", "english": "red", "pronunciation": "roozh", "example": "La pomme est rouge" },
+    { "french": "bleu", "english": "blue", "pronunciation": "bluh", "example": "Le ciel est bleu" },
+    { "french": "vert", "english": "green", "pronunciation": "vair", "example": "L'herbe est verte" },
+    { "french": "jaune", "english": "yellow", "pronunciation": "zhohn", "example": "Le soleil est jaune" },
+    { "french": "noir", "english": "black", "pronunciation": "nwahr", "example": "La nuit est noire" },
+    { "french": "blanc", "english": "white", "pronunciation": "blahn", "example": "La neige est blanche" },
+    { "french": "orange", "english": "orange", "pronunciation": "oh-rahnzh", "example": "L'orange est orange" },
+    { "french": "violet", "english": "purple", "pronunciation": "vee-oh-lay", "example": "La fleur est violette" },
+    { "french": "rose", "english": "pink", "pronunciation": "rohz", "example": "La rose est rose" },
+    { "french": "gris", "english": "gray", "pronunciation": "gree", "example": "Le nuage est gris" },
+    { "french": "marron", "english": "brown", "pronunciation": "mah-rohn", "example": "L'arbre est marron" }
+  ],
+  "professions": [
+    { "french": "le médecin", "english": "doctor", "pronunciation": "luh may-duh-san", "example": "Le médecin examine le patient" },
+    { "french": "l'enseignant", "english": "teacher", "pronunciation": "lahn-say-nyahn", "example": "L'enseignant explique la leçon" },
+    { "french": "l'ingénieur", "english": "engineer", "pronunciation": "lan-zhay-nyuhr", "example": "L'ingénieur conçoit des ponts" },
+    { "french": "l'avocat", "english": "lawyer", "pronunciation": "lah-voh-kah", "example": "L'avocat défend son client" },
+    { "french": "le cuisinier", "english": "chef", "pronunciation": "luh kwee-zee-nyay", "example": "Le cuisinier prépare le repas" },
+    { "french": "l'artiste", "english": "artist", "pronunciation": "lar-teest", "example": "L'artiste peint un tableau" },
+    { "french": "le musicien", "english": "musician", "pronunciation": "luh moo-zee-syan", "example": "Le musicien joue du piano" },
+    { "french": "l'écrivain", "english": "writer", "pronunciation": "lay-kree-van", "example": "L'écrivain écrit un roman" },
+    { "french": "le journaliste", "english": "journalist", "pronunciation": "luh zhoor-nah-leest", "example": "Le journaliste interviewe le maire" },
+    { "french": "l'architecte", "english": "architect", "pronunciation": "lar-shee-tekt", "example": "L'architecte dessine les plans" }
+  ],
+  "emotions": [
+    { "french": "heureux", "english": "happy", "pronunciation": "uh-ruh", "example": "Je suis heureux de te voir" },
+    { "french": "triste", "english": "sad", "pronunciation": "treest", "example": "Elle est triste aujourd'hui" },
+    { "french": "en colère", "english": "angry", "pronunciation": "ahn koh-lair", "example": "Il est en colère contre moi" },
+    { "french": "fatigué", "english": "tired", "pronunciation": "fah-tee-gay", "example": "Je suis fatigué ce soir" },
+    { "french": "excité", "english": "excited", "pronunciation": "ek-see-tay", "example": "Les enfants sont excités" },
+    { "french": "nerveux", "english": "nervous", "pronunciation": "nair-vuh", "example": "Elle est nerveuse avant l'examen" },
+    { "french": "calme", "english": "calm", "pronunciation": "kahlm", "example": "Il reste calme en toute situation" },
+    { "french": "surpris", "english": "surprised", "pronunciation": "soor-pree", "example": "Je suis surpris par cette nouvelle" },
+    { "french": "inquiet", "english": "worried", "pronunciation": "an-kee-ay", "example": "Ma mère est inquiète pour moi" },
+    { "french": "fier", "english": "proud", "pronunciation": "fee-ay", "example": "Je suis fier de mon travail" }
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "sports": [
+    {
+      "french": "le football",
+      "english": "soccer",
+      "pronunciation": "luh foot-bahl",
+      "description": "Most popular sport in France",
+      "vocabulary": [
+        { "french": "le ballon", "english": "ball", "pronunciation": "luh bah-lohn" },
+        { "french": "le but", "english": "goal", "pronunciation": "luh boot" },
+        { "french": "le joueur", "english": "player", "pronunciation": "luh zhoo-uhr" },
+        { "french": "l'équipe", "english": "team", "pronunciation": "lay-keep" },
+        { "french": "le match", "english": "match", "pronunciation": "luh match" }
+      ]
+    },
+    {
+      "french": "le tennis",
+      "english": "tennis",
+      "pronunciation": "luh tay-nees",
+      "description": "Popular individual sport",
+      "vocabulary": [
+        { "french": "la raquette", "english": "racket", "pronunciation": "lah rah-ket" },
+        { "french": "le court", "english": "court", "pronunciation": "luh koor" },
+        { "french": "le service", "english": "serve", "pronunciation": "luh sair-vees" },
+        { "french": "le point", "english": "point", "pronunciation": "luh pwan" },
+        { "french": "le set", "english": "set", "pronunciation": "luh set" }
+      ]
+    },
+    {
+      "french": "le cyclisme",
+      "english": "cycling",
+      "pronunciation": "luh see-kleez-muh",
+      "description": "Very popular in France (Tour de France)",
+      "vocabulary": [
+        { "french": "le vélo", "english": "bicycle", "pronunciation": "luh vay-loh" },
+        { "french": "le cycliste", "english": "cyclist", "pronunciation": "luh see-kleest" },
+        { "french": "la course", "english": "race", "pronunciation": "lah koors" },
+        { "french": "le Tour de France", "english": "Tour de France", "pronunciation": "luh toor duh frahnss" },
+        { "french": "le maillot jaune", "english": "yellow jersey", "pronunciation": "luh mah-yoh zhohn" }
+      ]
+    },
+    {
+      "french": "le rugby",
+      "english": "rugby",
+      "pronunciation": "luh roog-bee",
+      "description": "Popular team sport",
+      "vocabulary": [
+        { "french": "le ballon ovale", "english": "oval ball", "pronunciation": "luh bah-lohn oh-vahl" },
+        { "french": "l'essai", "english": "try", "pronunciation": "lay-say" },
+        { "french": "la transformation", "english": "conversion", "pronunciation": "lah trahnz-for-mah-syohn" },
+        { "french": "le drop", "english": "drop goal", "pronunciation": "luh drop" },
+        { "french": "la mêlée", "english": "scrum", "pronunciation": "lah may-lay" }
+      ]
+    },
+    {
+      "french": "la natation",
+      "english": "swimming",
+      "pronunciation": "lah nah-tah-syohn",
+      "description": "Water sport",
+      "vocabulary": [
+        { "french": "nager", "english": "to swim", "pronunciation": "nah-zhay" },
+        { "french": "la piscine", "english": "swimming pool", "pronunciation": "lah pee-seen" },
+        { "french": "le nageur", "english": "swimmer", "pronunciation": "luh nah-zhuhr" },
+        { "french": "la brasse", "english": "breaststroke", "pronunciation": "lah brahs" },
+        { "french": "le crawl", "english": "freestyle", "pronunciation": "luh krawl" }
+      ]
+    },
+    {
+      "french": "le ski",
+      "english": "skiing",
+      "pronunciation": "luh skee",
+      "description": "Winter sport",
+      "vocabulary": [
+        { "french": "les skis", "english": "skis", "pronunciation": "lay skee" },
+        { "french": "les bâtons", "english": "ski poles", "pronunciation": "lay bah-tohn" },
+        { "french": "la piste", "english": "slope", "pronunciation": "lah peest" },
+        { "french": "le télésiège", "english": "chairlift", "pronunciation": "luh tay-lay-syayzh" },
+        { "french": "la station de ski", "english": "ski resort", "pronunciation": "lah stah-syohn duh skee" }
+      ]
+    }
+  ],
+  "entertainment": {
+    "cinema": [
+      {
+        "french": "le cinéma",
+        "english": "cinema",
+        "pronunciation": "luh see-nay-mah",
+        "description": "Movie theater"
+      },
+      {
+        "french": "le film",
+        "english": "movie",
+        "pronunciation": "luh feelm",
+        "description": "Motion picture"
+      },
+      {
+        "french": "l'acteur",
+        "english": "actor",
+        "pronunciation": "lak-tuhr",
+        "description": "Male performer"
+      },
+      {
+        "french": "l'actrice",
+        "english": "actress",
+        "pronunciation": "lak-trees",
+        "description": "Female performer"
+      },
+      {
+        "french": "le réalisateur",
+        "english": "director",
+        "pronunciation": "luh ray-ah-lee-zah-tuhr",
+        "description": "Film director"
+      },
+      {
+        "french": "le scénario",
+        "english": "script",
+        "pronunciation": "luh say-nah-ryoh",
+        "description": "Written text of film"
+      }
+    ],
+    "theater": [
+      {
+        "french": "le théâtre",
+        "english": "theater",
+        "pronunciation": "luh tay-ah-truh",
+        "description": "Building for dramatic performances"
+      },
+      {
+        "french": "la pièce",
+        "english": "play",
+        "pronunciation": "lah pyess",
+        "description": "Dramatic work"
+      },
+      {
+        "french": "la scène",
+        "english": "stage",
+        "pronunciation": "lah sen",
+        "description": "Performance area"
+      },
+      {
+        "french": "le spectacle",
+        "english": "show",
+        "pronunciation": "luh spek-tah-kluh",
+        "description": "Theatrical performance"
+      },
+      {
+        "french": "l'entracte",
+        "english": "intermission",
+        "pronunciation": "lahn-trakt",
+        "description": "Break between acts"
+      }
+    ],
+    "music": [
+      {
+        "french": "la musique",
+        "english": "music",
+        "pronunciation": "lah moo-zeek",
+        "description": "Art form using sound"
+      },
+      {
+        "french": "le concert",
+        "english": "concert",
+        "pronunciation": "luh kohn-sair",
+        "description": "Musical performance"
+      },
+      {
+        "french": "le musicien",
+        "english": "musician",
+        "pronunciation": "luh moo-zee-syan",
+        "description": "Person who plays music"
+      },
+      {
+        "french": "le chanteur",
+        "english": "singer",
+        "pronunciation": "luh shahn-tuhr",
+        "description": "Person who sings"
+      },
+      {
+        "french": "la chanson",
+        "english": "song",
+        "pronunciation": "lah shahn-sohn",
+        "description": "Musical composition with lyrics"
+      },
+      {
+        "french": "l'instrument",
+        "english": "instrument",
+        "pronunciation": "lan-stroo-mahn",
+        "description": "Musical device"
+      }
+    ],
+    "dance": [
+      {
+        "french": "la danse",
+        "english": "dance",
+        "pronunciation": "lah dahns",
+        "description": "Art of movement to music"
+      },
+      {
+        "french": "danser",
+        "english": "to dance",
+        "pronunciation": "dahn-say",
+        "description": "To move rhythmically to music"
+      },
+      {
+        "french": "le danseur",
+        "english": "dancer",
+        "pronunciation": "luh dahn-suhr",
+        "description": "Person who dances"
+      },
+      {
+        "french": "la danseuse",
+        "english": "dancer (female)",
+        "pronunciation": "lah dahn-suhz",
+        "description": "Female person who dances"
+      },
+      {
+        "french": "le ballet",
+        "english": "ballet",
+        "pronunciation": "luh bah-lay",
+        "description": "Classical dance form"
+      }
+    ]
+  },
+  "games": [
+    {
+      "french": "jouer",
+      "english": "to play",
+      "pronunciation": "zhoo-ay",
+      "description": "To engage in game or sport"
+    },
+    {
+      "french": "le jeu",
+      "english": "game",
+      "pronunciation": "luh zhuh",
+      "description": "Activity for entertainment"
+    },
+    {
+      "french": "le joueur",
+      "english": "player",
+      "pronunciation": "luh zhoo-uhr",
+      "description": "Person who plays games"
+    },
+    {
+      "french": "gagner",
+      "english": "to win",
+      "pronunciation": "gah-nyay",
+      "description": "To achieve victory"
+    },
+    {
+      "french": "perdre",
+      "english": "to lose",
+      "pronunciation": "pair-druh",
+      "description": "To be defeated"
+    },
+    {
+      "french": "le score",
+      "english": "score",
+      "pronunciation": "luh skor",
+      "description": "Points or goals earned"
+    },
+    {
+      "french": "la compétition",
+      "english": "competition",
+      "pronunciation": "lah kohn-pay-tee-syohn",
+      "description": "Contest between players"
+    }
+  ],
+  "fitness": [
+    {
+      "french": "faire du sport",
+      "english": "to do sports",
+      "pronunciation": "fair doo spor",
+      "description": "To engage in physical activity"
+    },
+    {
+      "french": "l'exercice",
+      "english": "exercise",
+      "pronunciation": "lek-sair-sees",
+      "description": "Physical activity for health"
+    },
+    {
+      "french": "la salle de sport",
+      "english": "gym",
+      "pronunciation": "lah sahl duh spor",
+      "description": "Fitness facility"
+    },
+    {
+      "french": "l'entraînement",
+      "english": "training",
+      "pronunciation": "lahn-tray-nuh-mahn",
+      "description": "Practice for improvement"
+    },
+    {
+      "french": "la forme",
+      "english": "fitness",
+      "pronunciation": "lah form",
+      "description": "Physical condition"
+    },
+    {
+      "french": "être en forme",
+      "english": "to be in shape",
+      "pronunciation": "et-ruh ahn form",
+      "description": "To be physically fit"
+    }
+  ],
+  "olympics": [
+    {
+      "french": "les Jeux Olympiques",
+      "english": "Olympic Games",
+      "pronunciation": "lay zhuh zoh-lan-peek",
+      "description": "International sporting event"
+    },
+    {
+      "french": "la médaille d'or",
+      "english": "gold medal",
+      "pronunciation": "lah may-dah-yuh dor",
+      "description": "First place award"
+    },
+    {
+      "french": "la médaille d'argent",
+      "english": "silver medal",
+      "pronunciation": "lah may-dah-yuh dar-zhan",
+      "description": "Second place award"
+    },
+    {
+      "french": "la médaille de bronze",
+      "english": "bronze medal",
+      "pronunciation": "lah may-dah-yuh duh brohnz",
+      "description": "Third place award"
+    },
+    {
+      "french": "le podium",
+      "english": "podium",
+      "pronunciation": "luh poh-dyum",
+      "description": "Platform for medal winners"
+    }
+  ],
+  "frenchSports": [
+    {
+      "name": "Pétanque",
+      "description": "Traditional French boules game",
+      "vocabulary": [
+        { "french": "les boules", "english": "boules", "pronunciation": "lay bool" },
+        { "french": "le cochonnet", "english": "jack", "pronunciation": "luh koh-shoh-nay" },
+        { "french": "pointer", "english": "to point", "pronunciation": "pwan-tay" },
+        { "french": "tirer", "english": "to shoot", "pronunciation": "tee-ray" }
+      ]
+    },
+    {
+      "name": "Escrime",
+      "description": "Fencing",
+      "vocabulary": [
+        { "french": "l'épée", "english": "sword", "pronunciation": "lay-pay" },
+        { "french": "le fleuret", "english": "foil", "pronunciation": "luh fluh-ray" },
+        { "french": "le sabre", "english": "sabre", "pronunciation": "luh sah-bruh" },
+        { "french": "la touche", "english": "touch", "pronunciation": "lah toosh" }
+      ]
+    },
+    {
+      "name": "Rugby à XV",
+      "description": "15-a-side rugby",
+      "vocabulary": [
+        { "french": "le pack", "english": "pack", "pronunciation": "luh pak" },
+        { "french": "la ligne", "english": "line", "pronunciation": "lah leen-yuh" },
+        { "french": "le talonneur", "english": "hooker", "pronunciation": "luh tah-loh-nuhr" },
+        { "french": "le pilier", "english": "prop", "pronunciation": "luh pee-lyay" }
+      ]
+    }
+  ]
+}

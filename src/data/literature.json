@@ -1,0 +1,347 @@
+{
+  "poetry": [
+    {
+      "period": "Moyen Âge (Medieval Period)",
+      "poets": [
+        {
+          "name": "Marie de France",
+          "dates": "12th century",
+          "famous_works": ["Lais", "Fables"],
+          "style": "Narrative poetry with Celtic influences",
+          "sample_poem": {
+            "title": "Le Laüstic",
+            "french": "Le rossignol chante la nuit\nQuand tout le monde dort,\nIl dit son amour sans bruit\nDans l'ombre de la mort.",
+            "english": "The nightingale sings at night\nWhen everyone sleeps,\nHe tells his love without sound\nIn the shadow of death.",
+            "pronunciation": "luh roh-see-nyol shahnt lah nwee\nkahn too luh mohnd dor,\neel dee sohn ah-moor sahn bwee\ndahn lohn-bruh duh lah mor"
+          }
+        },
+        {
+          "name": "Chrétien de Troyes",
+          "dates": "1135-1185",
+          "famous_works": ["Lancelot", "Perceval"],
+          "style": "Arthurian romance poetry",
+          "sample_poem": {
+            "title": "Extrait de Lancelot",
+            "french": "L'amour est une fleur délicate\nQui fleurit dans le cœur,\nMais peut se faner si l'on tarde\nÀ la protéger de la peur.",
+            "english": "Love is a delicate flower\nThat blooms in the heart,\nBut can wither if one delays\nTo protect it from fear.",
+            "pronunciation": "lah-moor ay oon fluhr day-lee-kaht\nkee fluh-ree dahn luh kuhr,\nmay puh suh fah-nay see lohn tard\nah lah proh-tay-zhay duh lah puhr"
+          }
+        }
+      ]
+    },
+    {
+      "period": "Renaissance",
+      "poets": [
+        {
+          "name": "Pierre de Ronsard",
+          "dates": "1524-1585",
+          "famous_works": ["Odes", "Amours"],
+          "style": "Pléiade movement, classical inspiration",
+          "sample_poem": {
+            "title": "Mignonne, allons voir si la rose",
+            "french": "Mignonne, allons voir si la rose\nQui ce matin avait déclose\nSa robe de pourpre au soleil,\nA point perdu cette vesprée\nLes plis de sa robe pourprée,\nEt son teint au vôtre pareil.",
+            "english": "Sweetheart, let's go see if the rose\nThat this morning had unfolded\nHer purple dress in the sun,\nHas lost this evening\nThe folds of her purple dress,\nAnd her complexion like yours.",
+            "pronunciation": "mee-nyohn, ah-lohn vwar see lah rohz\nkee suh mah-tan ah-vay day-klohz\nsah rohb duh poor-pruh oh soh-lay,\nah pwan pair-doo set-uh vay-spray\nlay plee duh sah rohb poor-pray,\nay sohn tan oh vo-truh pah-ray"
+          }
+        },
+        {
+          "name": "Joachim du Bellay",
+          "dates": "1522-1560",
+          "famous_works": ["Les Regrets", "Défense et illustration"],
+          "style": "Sonnet form, melancholy themes",
+          "sample_poem": {
+            "title": "Heureux qui, comme Ulysse",
+            "french": "Heureux qui, comme Ulysse, a fait un beau voyage,\nOu comme celui-là qui conquit la toison,\nEt puis est retourné, plein d'usage et raison,\nVivre entre ses parents le reste de son âge !",
+            "english": "Happy he who, like Ulysses, has made a beautiful journey,\nOr like that one who conquered the fleece,\nAnd then returned, full of experience and reason,\nTo live among his parents the rest of his age!",
+            "pronunciation": "uh-ruh kee, kohm oo-lees, ah fay uhn boh vah-yahzh,\noo kohm suh-lwee-lah kee kohn-kee lah twah-zohn,\nay pwee ay ruh-toor-nay, plan doo-zahzh ay ray-zohn,\nvee-vruh ahn-truh say pah-rahn luh ress-tuh duh sohn ahzh"
+          }
+        }
+      ]
+    },
+    {
+      "period": "Classicisme",
+      "poets": [
+        {
+          "name": "Jean de La Fontaine",
+          "dates": "1621-1695",
+          "famous_works": ["Fables", "Contes"],
+          "style": "Fables with moral lessons",
+          "sample_poem": {
+            "title": "Le Corbeau et le Renard",
+            "french": "Maître Corbeau, sur un arbre perché,\nTenait en son bec un fromage.\nMaître Renard, par l'odeur alléché,\nLui tint à peu près ce langage :",
+            "english": "Master Crow, perched on a tree,\nHeld in his beak a cheese.\nMaster Fox, attracted by the smell,\nSpoke to him in this way:",
+            "pronunciation": "may-truh kor-boh, soor uhn ar-bruh pair-shay,\ntuh-nay ahn sohn bek uhn froh-mahzh.\nmay-truh ruh-nar, par loh-duhr ah-lay-shay,\nlwee tan ah puh pray suh lah-gahzh"
+          }
+        }
+      ]
+    },
+    {
+      "period": "Romantisme",
+      "poets": [
+        {
+          "name": "Victor Hugo",
+          "dates": "1802-1885",
+          "famous_works": ["Les Contemplations", "La Légende des siècles"],
+          "style": "Romantic poetry, social themes",
+          "sample_poem": {
+            "title": "Demain, dès l'aube",
+            "french": "Demain, dès l'aube, à l'heure où blanchit la campagne,\nJe partirai. Vois-tu, je sais que tu m'attends.\nJ'irai par la forêt, j'irai par la montagne.\nJe ne puis demeurer loin de toi plus longtemps.",
+            "english": "Tomorrow, at dawn, at the hour when the countryside whitens,\nI will leave. You see, I know that you are waiting for me.\nI will go through the forest, I will go through the mountain.\nI cannot stay far from you any longer.",
+            "pronunciation": "duh-man, day lohb, ah luhr oo blahn-shee lah kahn-pah-nyuh,\nzhuh par-tee-ray. vwah too, zhuh say kuh too mah-tahn.\nzhuh-ree-ay par lah foh-ray, zhuh-ree-ay par lah mohn-tah-nyuh.\nzhuh nuh pwee duh-muh-ray lwan duh twah ploo lohn-tahn"
+          }
+        },
+        {
+          "name": "Alphonse de Lamartine",
+          "dates": "1790-1869",
+          "famous_works": ["Méditations poétiques", "Harmonies poétiques"],
+          "style": "Lyrical poetry, nature themes",
+          "sample_poem": {
+            "title": "Le Lac",
+            "french": "Ainsi, toujours poussés vers de nouveaux rivages,\nDans la nuit éternelle emportés sans retour,\nNe pourrons-nous jamais sur l'océan des âges\nJeter l'ancre un seul jour ?",
+            "english": "Thus, always pushed towards new shores,\nIn eternal night carried away without return,\nWill we never be able on the ocean of ages\nTo cast anchor for a single day?",
+            "pronunciation": "an-see, too-zhoor poo-say vair duh noo-voh ree-vahzh,\ndahn lah nwee ay-tair-nel ahn-por-tay sahn too-roor,\nnuh poo-rohn-noo zhah-may soor loh-say-ahn day zahzh\nzhuh-tay lahn-kruh uhn suhl zhoor"
+          }
+        }
+      ]
+    },
+    {
+      "period": "Symbolisme",
+      "poets": [
+        {
+          "name": "Charles Baudelaire",
+          "dates": "1821-1867",
+          "famous_works": ["Les Fleurs du mal", "Le Spleen de Paris"],
+          "style": "Symbolist poetry, urban themes",
+          "sample_poem": {
+            "title": "L'Albatros",
+            "french": "Souvent, pour s'amuser, les hommes d'équipage\nPrennent des albatros, vastes oiseaux des mers,\nQui suivent, indolents compagnons de voyage,\nLe navire glissant sur les gouffres amers.",
+            "english": "Often, to amuse themselves, the crewmen\nTake albatrosses, vast seabirds,\nWho follow, indolent traveling companions,\nThe ship gliding over bitter abysses.",
+            "pronunciation": "soo-vahn, poor sah-moo-zay, lay zohm day-kee-pahzh\npren duh zal-bah-tros, vahst wah-zoh day mair,\nkee swee-vahn, an-doh-lahn kohn-pah-nyohn duh vah-yahzh,\nluh nah-veer glee-sahn soor lay goof-ruh zah-mair"
+          }
+        },
+        {
+          "name": "Paul Verlaine",
+          "dates": "1844-1896",
+          "famous_works": ["Poèmes saturniens", "Fêtes galantes"],
+          "style": "Musical poetry, impressionist themes",
+          "sample_poem": {
+            "title": "Chanson d'automne",
+            "french": "Les sanglots longs\nDes violons\nDe l'automne\nBlessent mon cœur\nD'une langueur\nMonotone.",
+            "english": "The long sobs\nOf the violins\nOf autumn\nWound my heart\nWith a languor\nMonotonous.",
+            "pronunciation": "lay sahn-gloh lohn\nday vee-oh-lohn\nduh loh-tohn\nblay-sahn mohn kuhr\ndoon lahng-guhr\nmoh-noh-tohn"
+          }
+        }
+      ]
+    }
+  ],
+  "novels": [
+    {
+      "period": "17th Century",
+      "novels": [
+        {
+          "title": "La Princesse de Clèves",
+          "author": "Madame de La Fayette",
+          "year": "1678",
+          "genre": "Psychological novel",
+          "summary": "First French psychological novel about forbidden love and moral dilemmas",
+          "key_themes": ["Love", "Duty", "Honor", "Self-control"],
+          "vocabulary": [
+            { "french": "la vertu", "english": "virtue", "pronunciation": "lah vair-too" },
+            { "french": "la passion", "english": "passion", "pronunciation": "lah pah-syohn" },
+            { "french": "le devoir", "english": "duty", "pronunciation": "luh duh-vwar" },
+            { "french": "l'honneur", "english": "honor", "pronunciation": "loh-nuhr" }
+          ]
+        }
+      ]
+    },
+    {
+      "period": "18th Century",
+      "novels": [
+        {
+          "title": "Candide",
+          "author": "Voltaire",
+          "year": "1759",
+          "genre": "Philosophical tale",
+          "summary": "Satirical work questioning optimism and exploring human nature",
+          "key_themes": ["Optimism", "Philosophy", "Satire", "Human nature"],
+          "vocabulary": [
+            { "french": "l'optimisme", "english": "optimism", "pronunciation": "lop-tee-meez-muh" },
+            { "french": "la philosophie", "english": "philosophy", "pronunciation": "lah fee-loh-soh-fee" },
+            { "french": "la satire", "english": "satire", "pronunciation": "lah sah-teer" },
+            { "french": "la nature humaine", "english": "human nature", "pronunciation": "lah nah-toor oo-men" }
+          ]
+        }
+      ]
+    },
+    {
+      "period": "19th Century",
+      "novels": [
+        {
+          "title": "Les Misérables",
+          "author": "Victor Hugo",
+          "year": "1862",
+          "genre": "Historical novel",
+          "summary": "Epic tale of redemption, justice, and social inequality in 19th century France",
+          "key_themes": ["Redemption", "Justice", "Social inequality", "Love"],
+          "vocabulary": [
+            { "french": "la rédemption", "english": "redemption", "pronunciation": "lah ray-dahmp-syohn" },
+            { "french": "la justice", "english": "justice", "pronunciation": "lah zhoos-tees" },
+            { "french": "l'inégalité", "english": "inequality", "pronunciation": "lee-nay-gah-lee-tay" },
+            { "french": "la misère", "english": "misery", "pronunciation": "lah mee-zair" }
+          ]
+        },
+        {
+          "title": "Madame Bovary",
+          "author": "Gustave Flaubert",
+          "year": "1857",
+          "genre": "Realist novel",
+          "summary": "Story of a provincial woman's romantic illusions and tragic downfall",
+          "key_themes": ["Romanticism", "Reality", "Bourgeoisie", "Tragedy"],
+          "vocabulary": [
+            { "french": "l'illusion", "english": "illusion", "pronunciation": "lee-loo-zyohn" },
+            { "french": "la bourgeoisie", "english": "bourgeoisie", "pronunciation": "lah boor-zhwah-zee" },
+            { "french": "la tragédie", "english": "tragedy", "pronunciation": "lah trah-zhay-dee" },
+            { "french": "la province", "english": "province", "pronunciation": "lah proh-vans" }
+          ]
+        }
+      ]
+    },
+    {
+      "period": "20th Century",
+      "novels": [
+        {
+          "title": "À la recherche du temps perdu",
+          "author": "Marcel Proust",
+          "year": "1913-1927",
+          "genre": "Modernist novel",
+          "summary": "Seven-volume exploration of memory, time, and consciousness",
+          "key_themes": ["Memory", "Time", "Consciousness", "Art"],
+          "vocabulary": [
+            { "french": "la mémoire", "english": "memory", "pronunciation": "lah may-mwar" },
+            { "french": "le temps", "english": "time", "pronunciation": "luh tahn" },
+            { "french": "la conscience", "english": "consciousness", "pronunciation": "lah kohn-syahnss" },
+            { "french": "l'art", "english": "art", "pronunciation": "lar" }
+          ]
+        },
+        {
+          "title": "L'Étranger",
+          "author": "Albert Camus",
+          "year": "1942",
+          "genre": "Existentialist novel",
+          "summary": "Story of an indifferent man who commits murder and faces the absurdity of existence",
+          "key_themes": ["Absurdity", "Existentialism", "Indifference", "Death"],
+          "vocabulary": [
+            { "french": "l'absurdité", "english": "absurdity", "pronunciation": "lab-soor-dee-tay" },
+            { "french": "l'existentialisme", "english": "existentialism", "pronunciation": "lek-sees-tahn-syah-leez-muh" },
+            { "french": "l'indifférence", "english": "indifference", "pronunciation": "lan-dee-fay-rahnss" },
+            { "french": "la mort", "english": "death", "pronunciation": "lah mor" }
+          ]
+        }
+      ]
+    }
+  ],
+  "theater": [
+    {
+      "period": "17th Century",
+      "plays": [
+        {
+          "title": "Le Cid",
+          "author": "Pierre Corneille",
+          "year": "1637",
+          "genre": "Tragedy",
+          "summary": "Tragic conflict between love and honor in medieval Spain",
+          "key_themes": ["Honor", "Love", "Duty", "Conflict"],
+          "famous_quote": {
+            "french": "À vaincre sans péril, on triomphe sans gloire.",
+            "english": "To conquer without peril is to triumph without glory.",
+            "pronunciation": "ah van-kruh sahn pay-reel, ohn tree-ohnf sahn glwar"
+          }
+        },
+        {
+          "title": "Phèdre",
+          "author": "Jean Racine",
+          "year": "1677",
+          "genre": "Tragedy",
+          "summary": "Tragic story of forbidden love and divine punishment",
+          "key_themes": ["Forbidden love", "Divine punishment", "Fate", "Passion"],
+          "famous_quote": {
+            "french": "C'est Vénus tout entière à sa proie attachée.",
+            "english": "It's Venus entirely attached to her prey.",
+            "pronunciation": "say vay-noos too tahn-tyair ah sah prwah ah-tah-shay"
+          }
+        }
+      ]
+    },
+    {
+      "period": "18th Century",
+      "plays": [
+        {
+          "title": "Le Mariage de Figaro",
+          "author": "Pierre-Augustin Caron de Beaumarchais",
+          "year": "1784",
+          "genre": "Comedy",
+          "summary": "Satirical comedy about social classes and marriage",
+          "key_themes": ["Social classes", "Marriage", "Satire", "Revolution"],
+          "famous_quote": {
+            "french": "Sans la liberté de blâmer, il n'est point d'éloge flatteur.",
+            "english": "Without the freedom to criticize, there is no flattering praise.",
+            "pronunciation": "sahn lah lee-bair-tay duh blah-may, eel nay pwan day-lohzh flah-tuhr"
+          }
+        }
+      ]
+    }
+  ],
+  "literaryMovements": [
+    {
+      "name": "Classicisme",
+      "period": "17th century",
+      "characteristics": [
+        "Respect for classical models",
+        "Clarity and order",
+        "Moral purpose",
+        "Restraint and decorum"
+      ],
+      "key_authors": ["Molière", "Racine", "Corneille", "La Fontaine"],
+      "vocabulary": [
+        { "french": "la clarté", "english": "clarity", "pronunciation": "lah klah-ray" },
+        { "french": "l'ordre", "english": "order", "pronunciation": "lor-druh" },
+        { "french": "la mesure", "english": "measure/restraint", "pronunciation": "lah muh-zoor" },
+        { "french": "la bienséance", "english": "decorum", "pronunciation": "lah bee-an-say-ahnss" }
+      ]
+    },
+    {
+      "name": "Romantisme",
+      "period": "19th century",
+      "characteristics": [
+        "Emphasis on emotion and imagination",
+        "Nature as inspiration",
+        "Individualism",
+        "Rejection of classical rules"
+      ],
+      "key_authors": ["Victor Hugo", "Lamartine", "Vigny", "Musset"],
+      "vocabulary": [
+        { "french": "l'émotion", "english": "emotion", "pronunciation": "lay-moh-syohn" },
+        { "french": "l'imagination", "english": "imagination", "pronunciation": "lee-mah-zhee-nah-syohn" },
+        { "french": "l'individualisme", "english": "individualism", "pronunciation": "lan-dee-vee-doo-ah-leez-muh" },
+        { "french": "la nature", "english": "nature", "pronunciation": "lah nah-toor" }
+      ]
+    },
+    {
+      "name": "Réalisme",
+      "period": "19th century",
+      "characteristics": [
+        "Objective representation of reality",
+        "Focus on ordinary people",
+        "Social criticism",
+        "Detailed descriptions"
+      ],
+      "key_authors": ["Flaubert", "Balzac", "Zola", "Maupassant"],
+      "vocabulary": [
+        { "french": "la réalité", "english": "reality", "pronunciation": "lah ray-ah-lee-tay" },
+        { "french": "l'objectivité", "english": "objectivity", "pronunciation": "lob-zhayk-tee-vee-tay" },
+        { "french": "la critique sociale", "english": "social criticism", "pronunciation": "lah kree-teek soh-syahl" },
+        { "french": "la description", "english": "description", "pronunciation": "lah day-skreep-syohn" }
+      ]
+    }
+  ]
+}

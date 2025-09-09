@@ -1,0 +1,150 @@
+{
+  "introductions": [
+    {
+      "situation": "Meeting someone for the first time",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Bonjour, je m'appelle Marie.", "english": "Hello, my name is Marie." },
+        { "speaker": "Person B", "french": "Bonjour Marie, je m'appelle Pierre. Enchanté.", "english": "Hello Marie, my name is Pierre. Nice to meet you." },
+        { "speaker": "Person A", "french": "Enchantée, Pierre. Comment allez-vous ?", "english": "Nice to meet you, Pierre. How are you?" },
+        { "speaker": "Person B", "french": "Très bien, merci. Et vous ?", "english": "Very well, thank you. And you?" },
+        { "speaker": "Person A", "french": "Moi aussi, merci.", "english": "Me too, thank you." }
+      ]
+    },
+    {
+      "situation": "Asking for someone's name",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Excusez-moi, comment vous appelez-vous ?", "english": "Excuse me, what's your name?" },
+        { "speaker": "Person B", "french": "Je m'appelle Sophie. Et vous ?", "english": "My name is Sophie. And you?" },
+        { "speaker": "Person A", "french": "Je m'appelle Jean. Ravi de vous rencontrer.", "english": "My name is Jean. Pleased to meet you." },
+        { "speaker": "Person B", "french": "Ravi de vous rencontrer aussi.", "english": "Pleased to meet you too." }
+      ]
+    }
+  ],
+  "greetings": [
+    {
+      "situation": "Morning greeting",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Bonjour ! Comment allez-vous ce matin ?", "english": "Good morning! How are you this morning?" },
+        { "speaker": "Person B", "french": "Bonjour ! Très bien, merci. Et vous ?", "english": "Good morning! Very well, thank you. And you?" },
+        { "speaker": "Person A", "french": "Ça va bien, merci. Belle journée !", "english": "I'm fine, thank you. Have a nice day!" },
+        { "speaker": "Person B", "french": "Merci, vous aussi !", "english": "Thank you, you too!" }
+      ]
+    },
+    {
+      "situation": "Evening greeting",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Bonsoir ! Comment s'est passée votre journée ?", "english": "Good evening! How was your day?" },
+        { "speaker": "Person B", "french": "Bonsoir ! Très bien, merci. Et la vôtre ?", "english": "Good evening! Very well, thank you. And yours?" },
+        { "speaker": "Person A", "french": "Pas mal, merci. Bonne soirée !", "english": "Not bad, thank you. Have a good evening!" },
+        { "speaker": "Person B", "french": "Merci, bonne soirée à vous aussi !", "english": "Thank you, have a good evening too!" }
+      ]
+    }
+  ],
+  "askingForHelp": [
+    {
+      "situation": "Asking for directions",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Excusez-moi, où est la gare, s'il vous plaît ?", "english": "Excuse me, where is the train station, please?" },
+        { "speaker": "Person B", "french": "La gare est tout droit, à 200 mètres.", "english": "The train station is straight ahead, 200 meters away." },
+        { "speaker": "Person A", "french": "Merci beaucoup !", "english": "Thank you very much!" },
+        { "speaker": "Person B", "french": "De rien, bonne journée !", "english": "You're welcome, have a good day!" }
+      ]
+    },
+    {
+      "situation": "Asking for help with language",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Excusez-moi, parlez-vous anglais ?", "english": "Excuse me, do you speak English?" },
+        { "speaker": "Person B", "french": "Oui, un peu. Comment puis-je vous aider ?", "english": "Yes, a little. How can I help you?" },
+        { "speaker": "Person A", "french": "Je ne comprends pas. Pouvez-vous répéter ?", "english": "I don't understand. Can you repeat?" },
+        { "speaker": "Person B", "french": "Bien sûr, plus lentement.", "english": "Of course, more slowly." }
+      ]
+    }
+  ],
+  "shopping": [
+    {
+      "situation": "Buying something in a store",
+      "dialogue": [
+        { "speaker": "Customer", "french": "Bonjour, je voudrais acheter ce livre.", "english": "Hello, I would like to buy this book." },
+        { "speaker": "Shopkeeper", "french": "Très bien, c'est 15 euros.", "english": "Very well, that's 15 euros." },
+        { "speaker": "Customer", "french": "Voici 20 euros.", "english": "Here's 20 euros." },
+        { "speaker": "Shopkeeper", "french": "Merci, voici votre monnaie : 5 euros.", "english": "Thank you, here's your change: 5 euros." },
+        { "speaker": "Customer", "french": "Merci, bonne journée !", "english": "Thank you, have a good day!" },
+        { "speaker": "Shopkeeper", "french": "Merci, à bientôt !", "english": "Thank you, see you soon!" }
+      ]
+    },
+    {
+      "situation": "Asking for price",
+      "dialogue": [
+        { "speaker": "Customer", "french": "Combien coûte cette pomme ?", "english": "How much does this apple cost?" },
+        { "speaker": "Shopkeeper", "french": "C'est 2 euros le kilo.", "english": "It's 2 euros per kilo." },
+        { "speaker": "Customer", "french": "Parfait, je prends un kilo.", "english": "Perfect, I'll take one kilo." },
+        { "speaker": "Shopkeeper", "french": "Très bien, c'est 2 euros.", "english": "Very well, that's 2 euros." }
+      ]
+    }
+  ],
+  "restaurant": [
+    {
+      "situation": "Ordering food",
+      "dialogue": [
+        { "speaker": "Waiter", "french": "Bonjour, avez-vous choisi ?", "english": "Hello, have you decided?" },
+        { "speaker": "Customer", "french": "Oui, je voudrais le menu du jour.", "english": "Yes, I would like the daily menu." },
+        { "speaker": "Waiter", "french": "Très bien, et comme boisson ?", "english": "Very well, and what to drink?" },
+        { "speaker": "Customer", "french": "Un verre d'eau, s'il vous plaît.", "english": "A glass of water, please." },
+        { "speaker": "Waiter", "french": "Parfait, je reviens dans un instant.", "english": "Perfect, I'll be back in a moment." }
+      ]
+    },
+    {
+      "situation": "Asking for the bill",
+      "dialogue": [
+        { "speaker": "Customer", "french": "L'addition, s'il vous plaît.", "english": "The bill, please." },
+        { "speaker": "Waiter", "french": "Voici l'addition : 25 euros.", "english": "Here's the bill: 25 euros." },
+        { "speaker": "Customer", "french": "Voici 30 euros.", "english": "Here's 30 euros." },
+        { "speaker": "Waiter", "french": "Merci, voici votre monnaie.", "english": "Thank you, here's your change." },
+        { "speaker": "Customer", "french": "Merci, c'était délicieux !", "english": "Thank you, it was delicious!" }
+      ]
+    }
+  ],
+  "weather": [
+    {
+      "situation": "Talking about the weather",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Quel temps fait-il aujourd'hui ?", "english": "What's the weather like today?" },
+        { "speaker": "Person B", "french": "Il fait beau et chaud.", "english": "It's beautiful and hot." },
+        { "speaker": "Person A", "french": "Parfait pour une promenade !", "english": "Perfect for a walk!" },
+        { "speaker": "Person B", "french": "Exactement, c'est une belle journée.", "english": "Exactly, it's a beautiful day." }
+      ]
+    },
+    {
+      "situation": "Complaining about weather",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Il pleut encore !", "english": "It's raining again!" },
+        { "speaker": "Person B", "french": "Oui, c'est triste. J'espère que ça va s'arrêter.", "english": "Yes, it's sad. I hope it will stop." },
+        { "speaker": "Person A", "french": "Moi aussi, j'ai envie de sortir.", "english": "Me too, I want to go out." },
+        { "speaker": "Person B", "french": "Demain sera peut-être mieux.", "english": "Tomorrow might be better." }
+      ]
+    }
+  ],
+  "family": [
+    {
+      "situation": "Talking about family",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Vous avez des enfants ?", "english": "Do you have children?" },
+        { "speaker": "Person B", "french": "Oui, j'ai deux enfants : un fils et une fille.", "english": "Yes, I have two children: a son and a daughter." },
+        { "speaker": "Person A", "french": "Quel âge ont-ils ?", "english": "How old are they?" },
+        { "speaker": "Person B", "french": "Mon fils a 8 ans et ma fille a 5 ans.", "english": "My son is 8 years old and my daughter is 5 years old." },
+        { "speaker": "Person A", "french": "Ils sont adorables !", "english": "They are adorable!" }
+      ]
+    }
+  ],
+  "work": [
+    {
+      "situation": "Talking about work",
+      "dialogue": [
+        { "speaker": "Person A", "french": "Que faites-vous comme travail ?", "english": "What do you do for work?" },
+        { "speaker": "Person B", "french": "Je suis professeur. Et vous ?", "english": "I am a teacher. And you?" },
+        { "speaker": "Person A", "french": "Je travaille dans un bureau.", "english": "I work in an office." },
+        { "speaker": "Person B", "french": "C'est intéressant !", "english": "That's interesting!" }
+      ]
+    }
+  ]
+}

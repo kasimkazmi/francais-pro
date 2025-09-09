@@ -1,0 +1,518 @@
+{
+  "transportation": [
+    {
+      "french": "l'avion",
+      "english": "airplane",
+      "pronunciation": "lah-vyohn",
+      "description": "Aircraft for air travel"
+    },
+    {
+      "french": "prendre l'avion",
+      "english": "to take the plane",
+      "pronunciation": "prahn-druh lah-vyohn",
+      "description": "To travel by airplane"
+    },
+    {
+      "french": "l'aéroport",
+      "english": "airport",
+      "pronunciation": "lay-roh-por",
+      "description": "Facility for aircraft operations"
+    },
+    {
+      "french": "l'embarquement",
+      "english": "boarding",
+      "pronunciation": "lahn-bar-kuh-mahn",
+      "description": "Process of getting on aircraft"
+    },
+    {
+      "french": "le train",
+      "english": "train",
+      "pronunciation": "luh tran",
+      "description": "Railway vehicle"
+    },
+    {
+      "french": "la gare",
+      "english": "train station",
+      "pronunciation": "lah gar",
+      "description": "Railway station"
+    },
+    {
+      "french": "le métro",
+      "english": "subway/metro",
+      "pronunciation": "luh may-troh",
+      "description": "Underground railway system"
+    },
+    {
+      "french": "le bus",
+      "english": "bus",
+      "pronunciation": "luh boos",
+      "description": "Public road vehicle"
+    },
+    {
+      "french": "le taxi",
+      "english": "taxi",
+      "pronunciation": "luh tahk-see",
+      "description": "Hired car with driver"
+    },
+    {
+      "french": "la voiture",
+      "english": "car",
+      "pronunciation": "lah vwah-toor",
+      "description": "Automobile"
+    },
+    {
+      "french": "louer une voiture",
+      "english": "to rent a car",
+      "pronunciation": "loo-ay oon vwah-toor",
+      "description": "To hire a car temporarily"
+    },
+    {
+      "french": "le vélo",
+      "english": "bicycle",
+      "pronunciation": "luh vay-loh",
+      "description": "Two-wheeled vehicle"
+    }
+  ],
+  "accommodation": [
+    {
+      "french": "l'hôtel",
+      "english": "hotel",
+      "pronunciation": "loh-tel",
+      "description": "Commercial accommodation establishment"
+    },
+    {
+      "french": "réserver une chambre",
+      "english": "to book a room",
+      "pronunciation": "ray-zair-vay oon shahn-bruh",
+      "description": "To make accommodation reservation"
+    },
+    {
+      "french": "la chambre",
+      "english": "room",
+      "pronunciation": "lah shahn-bruh",
+      "description": "Sleeping accommodation"
+    },
+    {
+      "french": "la réception",
+      "english": "reception",
+      "pronunciation": "lah ray-sep-syohn",
+      "description": "Hotel front desk"
+    },
+    {
+      "french": "la clé",
+      "english": "key",
+      "pronunciation": "lah klay",
+      "description": "Device for opening locks"
+    },
+    {
+      "french": "le petit-déjeuner",
+      "english": "breakfast",
+      "pronunciation": "luh puh-tee day-zhuh-nay",
+      "description": "Morning meal"
+    },
+    {
+      "french": "l'auberge",
+      "english": "inn",
+      "pronunciation": "loh-bairzh",
+      "description": "Small hotel or lodging"
+    },
+    {
+      "french": "le camping",
+      "english": "camping",
+      "pronunciation": "luh kahn-ping",
+      "description": "Outdoor accommodation"
+    },
+    {
+      "french": "la tente",
+      "english": "tent",
+      "pronunciation": "lah tahnt",
+      "description": "Portable shelter"
+    }
+  ],
+  "destinations": [
+    {
+      "name": "Paris",
+      "description": "Capital city of France",
+      "attractions": [
+        "Tour Eiffel",
+        "Louvre Museum",
+        "Notre-Dame Cathedral",
+        "Champs-Élysées"
+      ],
+      "vocabulary": [
+        { "french": "la capitale", "english": "capital", "pronunciation": "lah kah-pee-tahl" },
+        { "french": "la ville", "english": "city", "pronunciation": "lah veel" },
+        { "french": "l'attraction", "english": "attraction", "pronunciation": "lah-trak-syohn" }
+      ]
+    },
+    {
+      "name": "Nice",
+      "description": "Mediterranean coastal city",
+      "attractions": [
+        "Promenade des Anglais",
+        "Old Town",
+        "Castle Hill",
+        "Russian Orthodox Cathedral"
+      ],
+      "vocabulary": [
+        { "french": "la côte", "english": "coast", "pronunciation": "lah koht" },
+        { "french": "la mer", "english": "sea", "pronunciation": "lah mair" },
+        { "french": "la plage", "english": "beach", "pronunciation": "lah plahzh" }
+      ]
+    },
+    {
+      "name": "Lyon",
+      "description": "Gastronomic capital of France",
+      "attractions": [
+        "Vieux Lyon",
+        "Basilica of Notre-Dame de Fourvière",
+        "Lyon Cathedral",
+        "Traboules"
+      ],
+      "vocabulary": [
+        { "french": "la gastronomie", "english": "gastronomy", "pronunciation": "lah gah-stroh-noh-mee" },
+        { "french": "la cuisine", "english": "cuisine", "pronunciation": "lah kwee-zeen" },
+        { "french": "le vieux quartier", "english": "old quarter", "pronunciation": "luh vyuh kar-tyay" }
+      ]
+    },
+    {
+      "name": "Marseille",
+      "description": "Oldest city in France",
+      "attractions": [
+        "Vieux-Port",
+        "Notre-Dame de la Garde",
+        "Calanques National Park",
+        "Le Panier"
+      ],
+      "vocabulary": [
+        { "french": "le port", "english": "port", "pronunciation": "luh por" },
+        { "french": "la basilique", "english": "basilica", "pronunciation": "lah bah-zee-leek" },
+        { "french": "le parc national", "english": "national park", "pronunciation": "luh park nah-syoh-nahl" }
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "french": "visiter",
+      "english": "to visit",
+      "pronunciation": "vee-zee-tay",
+      "description": "To go to see a place"
+    },
+    {
+      "french": "faire du tourisme",
+      "english": "to do tourism",
+      "pronunciation": "fair doo too-reez-muh",
+      "description": "To engage in tourist activities"
+    },
+    {
+      "french": "prendre des photos",
+      "english": "to take photos",
+      "pronunciation": "prahn-druh day foh-toh",
+      "description": "To capture images with camera"
+    },
+    {
+      "french": "faire des achats",
+      "english": "to go shopping",
+      "pronunciation": "fair day zah-shah",
+      "description": "To buy goods"
+    },
+    {
+      "french": "manger au restaurant",
+      "english": "to eat at a restaurant",
+      "pronunciation": "mahn-zhay oh ress-toh-rahn",
+      "description": "To dine at eating establishment"
+    },
+    {
+      "french": "se promener",
+      "english": "to take a walk",
+      "pronunciation": "suh proh-muh-nay",
+      "description": "To walk for pleasure"
+    },
+    {
+      "french": "faire de la randonnée",
+      "english": "to go hiking",
+      "pronunciation": "fair duh lah rahn-doh-nay",
+      "description": "To walk in nature for recreation"
+    },
+    {
+      "french": "nager",
+      "english": "to swim",
+      "pronunciation": "nah-zhay",
+      "description": "To move through water"
+    },
+    {
+      "french": "bronzer",
+      "english": "to sunbathe",
+      "pronunciation": "brohn-zay",
+      "description": "To expose skin to sun"
+    }
+  ],
+  "directions": [
+    {
+      "french": "où est...",
+      "english": "where is...",
+      "pronunciation": "oo ay",
+      "description": "Question asking for location"
+    },
+    {
+      "french": "comment aller à...",
+      "english": "how to get to...",
+      "pronunciation": "koh-mahn tah-lay ah",
+      "description": "Question asking for directions"
+    },
+    {
+      "french": "tout droit",
+      "english": "straight ahead",
+      "pronunciation": "too drwah",
+      "description": "Direction instruction"
+    },
+    {
+      "french": "à gauche",
+      "english": "to the left",
+      "pronunciation": "ah gohsh",
+      "description": "Direction instruction"
+    },
+    {
+      "french": "à droite",
+      "english": "to the right",
+      "pronunciation": "ah drwaht",
+      "description": "Direction instruction"
+    },
+    {
+      "french": "tourner",
+      "english": "to turn",
+      "pronunciation": "toor-nay",
+      "description": "To change direction"
+    },
+    {
+      "french": "continuer",
+      "english": "to continue",
+      "pronunciation": "kohn-tee-noo-ay",
+      "description": "To keep going"
+    },
+    {
+      "french": "s'arrêter",
+      "english": "to stop",
+      "pronunciation": "sah-ray-tay",
+      "description": "To cease movement"
+    }
+  ],
+  "emergencies": [
+    {
+      "french": "l'aide",
+      "english": "help",
+      "pronunciation": "led",
+      "description": "Assistance or support"
+    },
+    {
+      "french": "au secours",
+      "english": "help",
+      "pronunciation": "oh suh-koor",
+      "description": "Emergency call for help"
+    },
+    {
+      "french": "la police",
+      "english": "police",
+      "pronunciation": "lah poh-leess",
+      "description": "Law enforcement"
+    },
+    {
+      "french": "l'ambulance",
+      "english": "ambulance",
+      "pronunciation": "lahn-boo-lahnss",
+      "description": "Emergency medical vehicle"
+    },
+    {
+      "french": "l'hôpital",
+      "english": "hospital",
+      "pronunciation": "loh-pee-tahl",
+      "description": "Medical facility"
+    },
+    {
+      "french": "le médecin",
+      "english": "doctor",
+      "pronunciation": "luh may-san",
+      "description": "Medical professional"
+    },
+    {
+      "french": "j'ai mal",
+      "english": "I'm in pain",
+      "pronunciation": "zhay mahl",
+      "description": "Expression of physical discomfort"
+    },
+    {
+      "french": "je suis perdu",
+      "english": "I'm lost",
+      "pronunciation": "zhuh swee pair-doo",
+      "description": "Expression of being lost"
+    }
+  ],
+  "shopping": [
+    {
+      "french": "faire du shopping",
+      "english": "to go shopping",
+      "pronunciation": "fair doo shoh-ping",
+      "description": "To buy goods"
+    },
+    {
+      "french": "le magasin",
+      "english": "store",
+      "pronunciation": "luh mah-gah-zan",
+      "description": "Commercial establishment"
+    },
+    {
+      "french": "le centre commercial",
+      "english": "shopping center",
+      "pronunciation": "luh sahn-truh koh-mair-syahl",
+      "description": "Large retail complex"
+    },
+    {
+      "french": "le prix",
+      "english": "price",
+      "pronunciation": "luh pree",
+      "description": "Cost of goods"
+    },
+    {
+      "french": "acheter",
+      "english": "to buy",
+      "pronunciation": "ah-shuh-tay",
+      "description": "To purchase goods"
+    },
+    {
+      "french": "vendre",
+      "english": "to sell",
+      "pronunciation": "vahn-druh",
+      "description": "To offer goods for purchase"
+    },
+    {
+      "french": "payer",
+      "english": "to pay",
+      "pronunciation": "pay-yay",
+      "description": "To give money for goods"
+    },
+    {
+      "french": "la carte de crédit",
+      "english": "credit card",
+      "pronunciation": "lah kart duh kray-dee",
+      "description": "Payment card"
+    },
+    {
+      "french": "l'argent liquide",
+      "english": "cash",
+      "pronunciation": "lar-zhan lee-keed",
+      "description": "Physical money"
+    }
+  ],
+  "weather": [
+    {
+      "french": "le temps",
+      "english": "weather",
+      "pronunciation": "luh tahn",
+      "description": "Atmospheric conditions"
+    },
+    {
+      "french": "il fait beau",
+      "english": "it's nice weather",
+      "pronunciation": "eel fay boh",
+      "description": "Expression for good weather"
+    },
+    {
+      "french": "il pleut",
+      "english": "it's raining",
+      "pronunciation": "eel pluh",
+      "description": "Expression for rain"
+    },
+    {
+      "french": "il neige",
+      "english": "it's snowing",
+      "pronunciation": "eel nezh",
+      "description": "Expression for snow"
+    },
+    {
+      "french": "il fait chaud",
+      "english": "it's hot",
+      "pronunciation": "eel fay shoh",
+      "description": "Expression for hot weather"
+    },
+    {
+      "french": "il fait froid",
+      "english": "it's cold",
+      "pronunciation": "eel fay frwah",
+      "description": "Expression for cold weather"
+    },
+    {
+      "french": "le soleil",
+      "english": "sun",
+      "pronunciation": "luh soh-lay",
+      "description": "Star that provides light and heat"
+    },
+    {
+      "french": "les nuages",
+      "english": "clouds",
+      "pronunciation": "lay noo-ahzh",
+      "description": "Visible water vapor in sky"
+    }
+  ],
+  "usefulPhrases": [
+    {
+      "french": "Excusez-moi",
+      "english": "Excuse me",
+      "pronunciation": "ek-skoo-zay mwah",
+      "description": "Polite way to get attention"
+    },
+    {
+      "french": "Parlez-vous anglais ?",
+      "english": "Do you speak English?",
+      "pronunciation": "par-lay voo ahn-glay",
+      "description": "Question about language ability"
+    },
+    {
+      "french": "Je ne comprends pas",
+      "english": "I don't understand",
+      "pronunciation": "zhuh nuh kohn-prahn pah",
+      "description": "Expression of confusion"
+    },
+    {
+      "french": "Pouvez-vous m'aider ?",
+      "english": "Can you help me?",
+      "pronunciation": "poo-vay voo may-day",
+      "description": "Request for assistance"
+    },
+    {
+      "french": "Merci beaucoup",
+      "english": "Thank you very much",
+      "pronunciation": "mair-see boh-koo",
+      "description": "Expression of gratitude"
+    },
+    {
+      "french": "De rien",
+      "english": "You're welcome",
+      "pronunciation": "duh ryan",
+      "description": "Response to thanks"
+    },
+    {
+      "french": "S'il vous plaît",
+      "english": "Please",
+      "pronunciation": "seel voo play",
+      "description": "Polite request"
+    },
+    {
+      "french": "Bonjour",
+      "english": "Hello/Good morning",
+      "pronunciation": "bon-zhoor",
+      "description": "Greeting"
+    },
+    {
+      "french": "Bonsoir",
+      "english": "Good evening",
+      "pronunciation": "bon-swar",
+      "description": "Evening greeting"
+    },
+    {
+      "french": "Au revoir",
+      "english": "Goodbye",
+      "pronunciation": "oh ruh-vwar",
+      "description": "Farewell"
+    }
+  ]
+}
