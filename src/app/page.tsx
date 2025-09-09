@@ -38,14 +38,14 @@ export default function HomePage() {
                 </Link>
                 {isAuthenticated ? (
                   <Link href="/progress" className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                    Progress
+                    Learning Path
                   </Link>
                 ) : (
                   <button 
                     onClick={() => setShowAuthModal(true)}
                     className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700 w-full text-left"
                   >
-                    Progress
+                    Learning Path
                   </button>
                 )}
               </div>
@@ -54,9 +54,7 @@ export default function HomePage() {
             <div className="px-3 py-2">
               <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Get Started</h3>
               <div className="space-y-1">
-                <Link href="/welcome" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Welcome
-                </Link>
+              
                 <Link href="/basics" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   French Basics
                 </Link>
@@ -114,16 +112,15 @@ export default function HomePage() {
         <main className="flex-1">
           <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
-              <h1 className="text-2xl sm:text-3xl font-bold">French Basics</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold">Welcome</h1>
               <div className="flex items-center space-x-2">
-                <Button variant="outline" size="sm" className="text-xs sm:text-sm">
-                  Start Lesson
-                </Button>
-                <Button variant="ghost" size="sm">
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-          </div>
-        </div>
+                <Link href="/welcome">
+                  <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                    Go to Welcome
+                  </Button>
+                </Link>
+              </div>
+            </div>
 
             <div className="prose prose-slate dark:prose-invert max-w-none">
               <p className="text-muted-foreground">

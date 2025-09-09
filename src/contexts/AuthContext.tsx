@@ -1,12 +1,13 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import type { User } from 'firebase/auth';
+import { observeAuth, emailSignIn, emailSignUp, signOutUser, resetPassword, googleSignIn } from '@/lib/firebase/auth';
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar?: string;
+interface AppUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
   level: 'beginner' | 'intermediate' | 'advanced';
   streak: number;
   totalLessons: number;
@@ -14,108 +15,91 @@ interface User {
 }
 
 interface AuthContextType {
-  user: User | null;
+  user: AppUser | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   signup: (name: string, email: string, password: string) => Promise<boolean>;
+  loginWithGoogle: () => Promise<boolean>;
+  sendReset: (email: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function mapUser(u: User): AppUser {
+  return {
+    uid: u.uid,
+    email: u.email,
+    displayName: u.displayName,
+    level: 'beginner',
+    streak: 0,
+    totalLessons: 0,
+    wordsLearned: 0,
+  };
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AppUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on app start
-    const savedUser = localStorage.getItem('francais-pro-user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        localStorage.removeItem('francais-pro-user');
-      }
-    }
-    setIsLoading(false);
+    const unsub = observeAuth((u) => {
+      setUser(u ? mapUser(u) : null);
+      setIsLoading(false);
+    });
+    return () => unsub();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Simulate API call - in real app, this would be an actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock user data - in real app, this would come from your backend
-      const mockUser: User = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        level: 'intermediate',
-        streak: 12,
-        totalLessons: 24,
-        wordsLearned: 156
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('francais-pro-user', JSON.stringify(mockUser));
+      const u = await emailSignIn(email, password);
+      setUser(mapUser(u));
       return true;
-    } catch (error) {
-      console.error('Login failed:', error);
+    } catch {
       return false;
     }
   };
 
   const signup = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock user data for new user
-      const mockUser: User = {
-        id: Date.now().toString(),
-        email,
-        name,
-        level: 'beginner',
-        streak: 0,
-        totalLessons: 0,
-        wordsLearned: 0
-      };
-      
-      setUser(mockUser);
-      localStorage.setItem('francais-pro-user', JSON.stringify(mockUser));
+      const u = await emailSignUp(email, password);
+      setUser(mapUser(u));
       return true;
-    } catch (error) {
-      console.error('Signup failed:', error);
+    } catch {
       return false;
     }
   };
 
+  const loginWithGoogle = async (): Promise<boolean> => {
+    try {
+      const u = await googleSignIn();
+      setUser(mapUser(u));
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const sendReset = async (email: string) => {
+    await resetPassword(email);
+  };
+
   const logout = () => {
+    signOutUser();
     setUser(null);
-    localStorage.removeItem('francais-pro-user');
   };
 
-  const value: AuthContextType = {
-    user,
-    isLoading,
-    login,
-    signup,
-    logout,
-    isAuthenticated: !!user
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo<AuthContextType>(
+    () => ({ user, isLoading, login, signup, loginWithGoogle, sendReset, logout, isAuthenticated: !!user }),
+    [user, isLoading]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
+  return ctx;
 }

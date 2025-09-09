@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { X, Mail, Lock, User, Loader2 } from 'lucide-react';
+import { X, Mail, Lock, User, Loader2, Shield } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface AuthModalProps {
@@ -22,7 +22,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { login, signup } = useAuth();
+  const { login, signup, loginWithGoogle, sendReset } = useAuth();
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -45,11 +45,8 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
     try {
       let success = false;
       
-      if (mode === 'login') {
-        success = await login(email, password);
-      } else {
-        success = await signup(name, email, password);
-      }
+      if (mode === 'login') success = await login(email, password);
+      else success = await signup(name, email, password);
 
       if (success) {
         onClose();
@@ -221,11 +218,35 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
           {mode === 'login' && (
             <div className="mt-4 text-center">
-              <Button variant="link" className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+              <Button
+                variant="link"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                onClick={async () => {
+                  if (!email) {
+                    setError('Enter your email above to reset password.');
+                    return;
+                  }
+                  setIsLoading(true);
+                  try { await sendReset(email); setError('Check your email for reset link.'); }
+                  catch { setError('Could not send reset email.'); }
+                  finally { setIsLoading(false); }
+                }}
+              >
                 Forgot your password?
               </Button>
             </div>
           )}
+
+          <div className="mt-4">
+            <Button
+              type="button"
+              onClick={async () => { setIsLoading(true); setError(''); try { await loginWithGoogle(); onClose(); } catch { setError('Google login failed'); } finally { setIsLoading(false); } }}
+              className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"
+              variant="outline"
+            >
+              <Shield className="h-4 w-4 mr-2" /> Continue with Google
+            </Button>
+          </div>
         </CardContent>
       </Card>
       </div>

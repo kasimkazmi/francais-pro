@@ -161,8 +161,23 @@ export default function WelcomePage() {
               <div className="space-y-4">
                 <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100">Intermediate Level</h3>
                 <div className="space-y-3">
-                  <Link href="/grammar">
-                    <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                  {isAuthenticated ? (
+                    <Link href="/grammar">
+                      <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
+                            <BookOpen className="h-4 w-4 text-orange-600" />
+                          </div>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">Grammar Fundamentals</span>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setShowAuthModal(true)}
+                      className="w-full flex items-center justify-between p-3 rounded-lg border text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-orange-100 dark:bg-orange-900/20 rounded-lg">
                           <BookOpen className="h-4 w-4 text-orange-600" />
@@ -170,10 +185,25 @@ export default function WelcomePage() {
                         <span className="font-medium text-gray-900 dark:text-gray-100">Grammar Fundamentals</span>
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </Link>
-                  <Link href="/conversations">
-                    <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    </button>
+                  )}
+                  {isAuthenticated ? (
+                    <Link href="/conversations">
+                      <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-pink-100 dark:bg-pink-900/20 rounded-lg">
+                            <Users className="h-4 w-4 text-pink-600" />
+                          </div>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">Conversation Practice</span>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setShowAuthModal(true)}
+                      className="w-full flex items-center justify-between p-3 rounded-lg border text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-pink-100 dark:bg-pink-900/20 rounded-lg">
                           <Users className="h-4 w-4 text-pink-600" />
@@ -181,10 +211,25 @@ export default function WelcomePage() {
                         <span className="font-medium text-gray-900 dark:text-gray-100">Conversation Practice</span>
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </Link>
-                  <Link href="/culture">
-                    <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                    </button>
+                  )}
+                  {isAuthenticated ? (
+                    <Link href="/culture">
+                      <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 bg-indigo-100 dark:bg-indigo-900/20 rounded-lg">
+                            <Globe className="h-4 w-4 text-indigo-600" />
+                          </div>
+                          <span className="font-medium text-gray-900 dark:text-gray-100">French Culture</span>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-gray-400" />
+                      </div>
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setShowAuthModal(true)}
+                      className="w-full flex items-center justify-between p-3 rounded-lg border text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
                       <div className="flex items-center gap-3">
                         <div className="p-2 bg-indigo-100 dark:bg-indigo-900/20 rounded-lg">
                           <Globe className="h-4 w-4 text-indigo-600" />
@@ -192,8 +237,8 @@ export default function WelcomePage() {
                         <span className="font-medium text-gray-900 dark:text-gray-100">French Culture</span>
                       </div>
                       <ArrowRight className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </Link>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
