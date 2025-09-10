@@ -3,19 +3,58 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Header } from "@/components/layout/header";
-import { Trophy, Medal, Award, Crown, Star, BookOpen, Target, TrendingUp } from "lucide-react";
+import { Trophy, Medal, Award, Crown, Star, BookOpen, Target, TrendingUp, FileText, Hash } from "lucide-react";
 import { Leaderboard } from "@/components/ui/leaderboard";
 import { useAuth } from '@/contexts/AuthContext';
 import { AuthModal } from '@/components/ui/auth-modal';
 
 const modules = [
-  { id: 'foundations', name: 'Foundations', icon: BookOpen, color: 'bg-blue-500' },
-  { id: 'grammar', name: 'Grammar', icon: BookOpen, color: 'bg-green-500' },
-  { id: 'vocabulary', name: 'Vocabulary', icon: BookOpen, color: 'bg-purple-500' },
-  { id: 'practice', name: 'Practice', icon: Target, color: 'bg-orange-500' }
+  { 
+    id: 'foundations', 
+    name: 'Foundations', 
+    icon: BookOpen, 
+    color: 'bg-blue-500',
+    gradient: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600',
+    hoverColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-800 dark:hover:text-blue-200',
+    activeColor: 'data-[state=active]:text-white data-[state=active]:shadow-lg',
+    borderColor: 'data-[state=active]:border-blue-500',
+    iconColor: 'text-blue-600 dark:text-blue-400'
+  },
+  { 
+    id: 'grammar', 
+    name: 'Grammar', 
+    icon: FileText, 
+    color: 'bg-green-500',
+    gradient: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600',
+    hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/30 hover:text-green-800 dark:hover:text-green-200',
+    activeColor: 'data-[state=active]:text-white data-[state=active]:shadow-lg',
+    borderColor: 'data-[state=active]:border-green-500',
+    iconColor: 'text-green-600 dark:text-green-400'
+  },
+  { 
+    id: 'vocabulary', 
+    name: 'Vocabulary', 
+    icon: Hash, 
+    color: 'bg-purple-500',
+    gradient: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600',
+    hoverColor: 'hover:bg-purple-50 dark:hover:bg-purple-900/30 hover:text-purple-800 dark:hover:text-purple-200',
+    activeColor: 'data-[state=active]:text-white data-[state=active]:shadow-lg',
+    borderColor: 'data-[state=active]:border-purple-500',
+    iconColor: 'text-purple-600 dark:text-purple-400'
+  },
+  { 
+    id: 'practice', 
+    name: 'Practice', 
+    icon: Target, 
+    color: 'bg-orange-500',
+    gradient: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-orange-600',
+    hoverColor: 'hover:bg-orange-50 dark:hover:bg-orange-900/30 hover:text-orange-800 dark:hover:text-orange-200',
+    activeColor: 'data-[state=active]:text-white data-[state=active]:shadow-lg',
+    borderColor: 'data-[state=active]:border-orange-500',
+    iconColor: 'text-orange-600 dark:text-orange-400'
+  }
 ];
 
 export default function LeaderboardPage() {
@@ -51,24 +90,33 @@ export default function LeaderboardPage() {
         </div>
 
         {/* Module Tabs */}
-        <Tabs value={selectedModule} onValueChange={setSelectedModule} className="mb-8">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="overall" className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              Overall
-            </TabsTrigger>
-            {modules.map((module) => (
+        <div className="mb-8">
+         
+          <Tabs value={selectedModule} onValueChange={setSelectedModule}>
+            <TabsList className="grid w-full grid-cols-5 gap-2 p-2 rounded-xl">
               <TabsTrigger 
-                key={module.id} 
-                value={module.id}
-                className="flex items-center gap-2"
+                value="overall" 
+                className="flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/30 hover:text-yellow-800 dark:hover:text-yellow-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-orange-500 data-[state=active]:text-white data-[state=active]:shadow-lg hover:shadow-md active:scale-95 font-medium group"
               >
-                <module.icon className="h-4 w-4" />
-                {module.name}
+                <TrendingUp className="h-4 w-4 transition-transform duration-300 group-hover:scale-110 text-yellow-600 dark:text-yellow-400" />
+                Overall
               </TabsTrigger>
-            ))}
-          </TabsList>
+              {modules.map((module) => (
+                <TabsTrigger 
+                  key={module.id} 
+                  value={module.id}
+                  className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300 ${module.hoverColor} ${module.gradient} ${module.activeColor} hover:shadow-md active:scale-95 border-2 border-transparent ${module.borderColor} font-medium group`}
+                >
+                  <module.icon className={`h-4 w-4 transition-all duration-300 group-hover:scale-110 ${selectedModule === module.id ? 'text-white' : module.iconColor}`} />
+                  {module.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
 
+        {/* Tab Content */}
+        <Tabs value={selectedModule} onValueChange={setSelectedModule}>
           {/* Overall Leaderboard */}
           <TabsContent value="overall" className="mt-6">
             <Leaderboard showStats={true} limit={20} />
@@ -187,6 +235,14 @@ export default function LeaderboardPage() {
           </Card>
         )}
       </div>
+      
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal 
+          isOpen={showAuthModal} 
+          onClose={() => setShowAuthModal(false)} 
+        />
+      )}
     </div>
   );
 }
