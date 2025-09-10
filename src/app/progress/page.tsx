@@ -8,6 +8,7 @@ import { Header } from '@/components/layout/header';
 import { Progress } from '@/components/ui/progress';
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { useAuth } from '@/contexts/AuthContext';
+import { useProgress } from '@/hooks/useProgress';
 import { 
   Trophy, 
   Target, 
@@ -23,6 +24,7 @@ import {
 
 export default function ProgressPage() {
   const { user } = useAuth();
+  const { progress, loading, error } = useProgress();
 
   return (
     <AuthGuard>
@@ -40,7 +42,7 @@ export default function ProgressPage() {
           </div>
           <div className="flex items-center gap-2">
             <Trophy className="h-6 w-6 text-yellow-500" />
-            <span className="text-sm font-medium">Level: {user?.level || 'Beginner'}</span>
+            <span className="text-sm font-medium">Level: {progress?.level || 'Beginner'}</span>
           </div>
         </div>
 
@@ -57,25 +59,48 @@ export default function ProgressPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium">French Mastery</span>
-                <span className="text-sm text-muted-foreground">65%</span>
-              </div>
-              <Progress value={65} className="h-2" />
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{user?.totalLessons || 0}</div>
-                  <div className="text-sm text-muted-foreground">Lessons Completed</div>
+              {loading ? (
+                <div className="flex items-center justify-center py-8">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{user?.wordsLearned || 0}</div>
-                  <div className="text-sm text-muted-foreground">Words Learned</div>
+              ) : error ? (
+                <div className="text-center py-8 text-red-500">
+                  <p>Error loading progress: {error}</p>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{user?.streak || 0}</div>
-                  <div className="text-sm text-muted-foreground">Days Streak</div>
-                </div>
-              </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">French Mastery</span>
+                    <span className="text-sm text-muted-foreground">
+                      {progress ? Math.round((progress.totalLessonsCompleted / 13) * 100) : 0}%
+                    </span>
+                  </div>
+                  <Progress 
+                    value={progress ? Math.round((progress.totalLessonsCompleted / 13) * 100) : 0} 
+                    className="h-2" 
+                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-blue-600">
+                        {progress?.totalLessonsCompleted || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Lessons Completed</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-green-600">
+                        {progress?.wordsLearned || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Words Learned</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-purple-600">
+                        {progress?.currentStreak || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Days Streak</div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -91,41 +116,46 @@ export default function ProgressPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">French Basics</span>
+                {loading ? (
+                  <div className="flex items-center justify-center py-4">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                   </div>
-                  <Badge variant="secondary">Completed</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">Alphabet & Numbers</span>
-                  </div>
-                  <Badge variant="secondary">Completed</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                    <span className="text-sm">Greetings</span>
-                  </div>
-                  <Badge variant="secondary">Completed</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Target className="h-4 w-4 text-blue-500" />
-                    <span className="text-sm">Grammar Fundamentals</span>
-                  </div>
-                  <Badge variant="outline">In Progress</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4 text-gray-400" />
-                    <span className="text-sm">Conversation Practice</span>
-                  </div>
-                  <Badge variant="outline">Not Started</Badge>
-                </div>
+                ) : (
+                  <>
+                    {progress?.modules ? Object.entries(progress.modules).map(([moduleId, moduleData]) => {
+                      const isCompleted = moduleData.completed;
+                      const isInProgress = moduleData.progress > 0 && !isCompleted;
+                      
+                      return (
+                        <div key={moduleId} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            {isCompleted ? (
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                            ) : isInProgress ? (
+                              <Target className="h-4 w-4 text-blue-500" />
+                            ) : (
+                              <Clock className="h-4 w-4 text-gray-400" />
+                            )}
+                            <span className="text-sm capitalize">{moduleId.replace('_', ' ')}</span>
+                            <span className="text-xs text-muted-foreground">
+                              ({moduleData.lessonsCompleted}/{moduleData.totalLessons})
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Progress value={moduleData.progress} className="w-16 h-2" />
+                            <Badge variant={isCompleted ? "default" : isInProgress ? "secondary" : "outline"}>
+                              {isCompleted ? "Completed" : isInProgress ? "In Progress" : "Not Started"}
+                            </Badge>
+                          </div>
+                        </div>
+                      );
+                    }) : (
+                      <div className="text-center py-4 text-muted-foreground">
+                        No module progress data available
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -182,19 +212,27 @@ export default function ProgressPage() {
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">2.5h</div>
-                <div className="text-sm text-muted-foreground">This Week</div>
+                <div className="text-2xl font-bold text-blue-600">
+                  {progress ? Math.round(progress.totalTimeSpent) : 0}m
+                </div>
+                <div className="text-sm text-muted-foreground">Total Time</div>
               </div>
               <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-green-600">12</div>
+                <div className="text-2xl font-bold text-green-600">
+                  {progress?.currentStreak || 0}
+                </div>
                 <div className="text-sm text-muted-foreground">Day Streak</div>
               </div>
               <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-purple-600">85%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
+                <div className="text-2xl font-bold text-purple-600">
+                  {progress?.longestStreak || 0}
+                </div>
+                <div className="text-sm text-muted-foreground">Best Streak</div>
               </div>
               <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-                <div className="text-2xl font-bold text-orange-600">A2</div>
+                <div className="text-2xl font-bold text-orange-600">
+                  {progress?.level?.charAt(0).toUpperCase() || 'B'}
+                </div>
                 <div className="text-sm text-muted-foreground">Current Level</div>
               </div>
             </div>

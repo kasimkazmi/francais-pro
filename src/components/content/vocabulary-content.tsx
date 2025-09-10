@@ -8,9 +8,11 @@ import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { SimpleTooltip } from '@/components/ui/simple-tooltip';
 import { ArrowRight, Users, Heart, Palette, Briefcase, Smile, BookOpen } from 'lucide-react';
 import vocabularyData from '@/data/vocabulary.json';
+import { useFavorites } from '@/contexts/FavoritesContext';
 
 export function VocabularyContent() {
   const { family, food, colors, professions, emotions } = vocabularyData;
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const categories = [
     { name: 'Family', data: family, icon: Users, color: 'text-blue-500' },
@@ -95,13 +97,23 @@ export function VocabularyContent() {
                       </div>
 
                       <div className="mt-3 flex items-center justify-between">
-                        <SimpleTooltip content="Add to favorites">
+                        <SimpleTooltip content={isFavorite('vocabulary', word.french) ? "Remove from favorites" : "Add to favorites"}>
                           <EnhancedButton 
                             variant="ghost" 
                             size="sm"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity"
+                            className={`opacity-0 group-hover:opacity-100 transition-opacity ${
+                              isFavorite('vocabulary', word.french) ? 'text-red-500' : ''
+                            }`}
+                            onClick={() => toggleFavorite({
+                              type: 'vocabulary',
+                              french: word.french,
+                              english: word.english,
+                              category: category.name,
+                              pronunciation: word.pronunciation,
+                              example: word.example
+                            })}
                           >
-                            <Heart className="h-4 w-4" />
+                            <Heart className={`h-4 w-4 ${isFavorite('vocabulary', word.french) ? 'fill-current' : ''}`} />
                           </EnhancedButton>
                         </SimpleTooltip>
                         

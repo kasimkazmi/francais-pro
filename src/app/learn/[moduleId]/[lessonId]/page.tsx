@@ -497,7 +497,7 @@ export default function LessonPage() {
                                     newAnswers[pairIndex] = parseInt(e.target.value);
                                     handleExerciseAnswer(index, newAnswers);
                                   }}
-                                  className="border rounded px-2 py-1"
+                                  className="border border-input rounded px-2 py-1 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring hover:bg-muted/50 transition-colors dark:bg-background dark:text-foreground"
                                 >
                                   <option value="">Select pronunciation</option>
                                   {pair.pronunciations.map((pronunciation, pronIndex) => (

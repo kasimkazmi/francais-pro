@@ -8,9 +8,11 @@ import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { Tooltip } from '@/components/ui/tooltip';
 import { ArrowRight, MessageCircle, Users, Star, Play, Pause, RotateCcw } from 'lucide-react';
 import conversationsData from '@/data/conversations.json';
+import { useFavorites } from '@/contexts/FavoritesContext';
 
 export function ConversationsContent() {
   const { scenarios, commonPhrases } = conversationsData;
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
@@ -178,13 +180,23 @@ export function ConversationsContent() {
                           size="sm"
                           tooltipContent={`Listen to: ${phrase.french}`}
                         />
-                        <Tooltip content="Add to favorites">
+                        <Tooltip content={isFavorite('conversation', phrase.french) ? "Remove from favorites" : "Add to favorites"}>
                           <EnhancedButton 
                             variant="ghost" 
                             size="sm"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity"
+                            className={`opacity-0 group-hover:opacity-100 transition-opacity ${
+                              isFavorite('conversation', phrase.french) ? 'text-yellow-500' : ''
+                            }`}
+                            onClick={() => toggleFavorite({
+                              type: 'conversation',
+                              french: phrase.french,
+                              english: phrase.english,
+                              category: 'Common Phrases',
+                              pronunciation: phrase.pronunciation,
+                              example: phrase.context || undefined
+                            })}
                           >
-                            <Star className="h-4 w-4" />
+                            <Star className={`h-4 w-4 ${isFavorite('conversation', phrase.french) ? 'fill-current' : ''}`} />
                           </EnhancedButton>
                         </Tooltip>
                       </div>

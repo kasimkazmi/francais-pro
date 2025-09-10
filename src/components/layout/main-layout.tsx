@@ -35,128 +35,171 @@ export function MainLayout({ children }: MainLayoutProps) {
         {/* Left Sidebar */}
         <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:left-0 lg:top-16 lg:h-[calc(100vh-4rem)] lg:overflow-y-auto lg:bg-background lg:border-r lg:border-border scrollbar-hide">
           <div className="flex flex-col gap-2 p-4">
+            {/* LEARNING PATH - AUTHENTICATED CONTENT */}
             <div className="px-3 py-2">
-              <h2 className="mb-2 px-4 py-2 text-lg font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Learning Path</h2>
+              <h2 className="mb-2 px-4 py-2 text-lg font-semibold bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg">
+                Learning Path
+              </h2>
               <div className="space-y-1">
-                <Link href="/learn" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/learn') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Get Started
-                </Link>
-                <Link href="/vocabulary" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/vocabulary') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Vocabulary
-                </Link>
-                <Link href="/practice" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/practice') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Practice
-                </Link>
                 {isAuthenticated ? (
-                  <Link href="/progress" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                    isActiveRoute('/progress') 
-                      ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                      : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                  }`}>
-                    Learning Path
-                  </Link>
+                  <>
+                    <Link href="/learn" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                      isActiveRoute('/learn') 
+                        ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                        : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                    }`}>
+                      Dashboard
+                    </Link>
+                    <Link href="/progress" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                      isActiveRoute('/progress') 
+                        ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                        : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                    }`}>
+                      My Progress
+                    </Link>
+                    <Link href="/leaderboard" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                      isActiveRoute('/leaderboard') 
+                        ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                        : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                    }`}>
+                      Leaderboard
+                    </Link>
+                    <Link href="/favorites" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                      isActiveRoute('/favorites') 
+                        ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                        : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                    }`}>
+                      My Favorites
+                    </Link>
+                  </>
                 ) : (
                   <button 
                     onClick={() => setShowAuthModal(true)}
                     className="flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700 w-full text-left"
                   >
-                    Learning Path
+                    Sign In to Access Learning Path
                   </button>
                 )}
               </div>
             </div>
-            
+
+            {/* FRENCH FUNDAMENTALS - PUBLIC CONTENT */}
             <div className="px-3 py-2">
-              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">French Basics</h3>
+              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100 rounded-lg">
+                French Fundamentals
+              </h3>
               <div className="space-y-1">
-                <Link href="/pronunciation" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/pronunciation') 
+                <Link href="/welcome" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/welcome') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
-                  Pronunciation
+                  Get Started
                 </Link>
-                <Link href="/alphabet" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                <Link href="/alphabet" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/alphabet') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
                   Alphabet
                 </Link>
-                <Link href="/numbers" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                <Link href="/numbers" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/numbers') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
                   Numbers
                 </Link>
-              </div>
-            </div>
-
-            <div className="px-3 py-2">
-              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Advanced Lessons</h3>
-              <div className="space-y-1">
-                <Link href="/grammar" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/grammar') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Grammar
-                </Link>
-                <Link href="/conversations" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/conversations') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Conversations
-                </Link>
-                <Link href="/greetings" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                <Link href="/greetings" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/greetings') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
                   Greetings
                 </Link>
-              </div>
-            </div>
-
-            <div className="px-3 py-2">
-              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Culture & Advanced</h3>
-              <div className="space-y-1">
-                <Link href="/culture" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/culture') 
+                <Link href="/pronunciation" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/pronunciation') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
-                  French Culture
+                  Pronunciation
+                </Link>
+              </div>
+            </div>
+            
+            {/* VOCABULARY & EXPRESSIONS */}
+            <div className="px-3 py-2">
+              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100 rounded-lg">
+                Vocabulary & Expressions
+              </h3>
+              <div className="space-y-1">
+                <Link href="/vocabulary" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/vocabulary') 
+                    ? 'bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100' 
+                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                }`}>
+                  Vocabulary
                 </Link>
                 <Link href="/expressions" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/expressions') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                    ? 'bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
                   Expressions & Idioms
                 </Link>
+                <Link href="/practice" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/practice') 
+                    ? 'bg-green-100 text-green-900 dark:bg-green-900 dark:text-green-100' 
+                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                }`}>
+                  Practice
+                </Link>
+              </div>
+            </div>
+
+            {/* CONVERSATION & GRAMMAR */}
+            <div className="px-3 py-2">
+              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100 rounded-lg">
+                Conversation & Grammar
+              </h3>
+              <div className="space-y-1">
+                <Link href="/conversations" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/conversations') 
+                    ? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100' 
+                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                }`}>
+                  Conversations
+                </Link>
+                <Link href="/grammar" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/grammar') 
+                    ? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100' 
+                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                }`}>
+                  Grammar
+                </Link>
+                <Link href="/culture" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                  isActiveRoute('/culture') 
+                    ? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100' 
+                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
+                }`}>
+                  French Culture
+                </Link>
+              </div>
+            </div>
+
+            {/* SPECIALIZED CONTENT */}
+            <div className="px-3 py-2">
+              <h3 className="mb-2 px-4 py-2 text-sm font-semibold bg-orange-100 text-orange-900 dark:bg-orange-900 dark:text-orange-100 rounded-lg">
+                Specialized Content
+              </h3>
+              <div className="space-y-1">
                 <Link href="/immigration" className={`flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/immigration') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
+                    ? 'bg-orange-100 text-orange-900 dark:bg-orange-900 dark:text-orange-100' 
                     : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
                 }`}>
                   Immigration to Canada
                 </Link>
-                
               </div>
             </div>
           </div>
@@ -173,35 +216,63 @@ export function MainLayout({ children }: MainLayoutProps) {
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Quick Access</h2>
               <div className="space-y-1">
-                <Link href="/grammar" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Grammar Lessons
-                </Link>
-                <Link href="/vocabulary" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Vocabulary Builder
-                </Link>
-                <Link href="/conversations" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Conversation Practice
-                </Link>
-                <Link href="/pronunciation" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Pronunciation Guide
+                <Link href="/welcome" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Get Started
                 </Link>
                 <Link href="/alphabet" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   French Alphabet
                 </Link>
+                <Link href="/numbers" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Numbers
+                </Link>
+                <Link href="/greetings" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Greetings
+                </Link>
+                <Link href="/vocabulary" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Vocabulary
+                </Link>
+                <Link href="/expressions" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Expressions
+                </Link>
+                <Link href="/practice" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Practice
+                </Link>
+                <Link href="/conversations" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Conversations
+                </Link>
+                <Link href="/grammar" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Grammar
+                </Link>
                 <Link href="/culture" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   French Culture
                 </Link>
-                <Link href="/expressions" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Expressions & Idioms
-                </Link>
                 <Link href="/immigration" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Immigration to Canada
+                  Immigration
                 </Link>
-               
               </div>
             </div>
 
             <div className="px-3 py-2 mt-8">
+              <Card className="p-4">
+                <CardHeader className="p-0 mb-3">
+                  <CardTitle className="text-sm">⭐ My Favorites</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <p className="text-xs text-muted-foreground mb-3">View and manage your saved expressions, vocabulary, and conversations.</p>
+                  <Link href="/favorites">
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="w-full hover:shadow-lg active:scale-95 transition-all duration-200"
+                    >
+                      View Favorites
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="px-3 py-2 mt-4">
               <Card className="p-4">
                 <CardHeader className="p-0 mb-3">
                   <CardTitle className="text-sm">Join Français Pro Community</CardTitle>

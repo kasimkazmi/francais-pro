@@ -198,7 +198,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="age">Age</Label>
                 <Select value={form.age} onValueChange={(value) => setForm(prev => ({ ...prev, age: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select your age" />
                   </SelectTrigger>
                   <SelectContent>
@@ -212,7 +212,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="education">Education</Label>
                 <Select value={form.education} onValueChange={(value) => setForm(prev => ({ ...prev, education: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select education level" />
                   </SelectTrigger>
                   <SelectContent>
@@ -232,7 +232,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="workExperience">Foreign Work Experience</Label>
                 <Select value={form.workExperience} onValueChange={(value) => setForm(prev => ({ ...prev, workExperience: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select work experience" />
                   </SelectTrigger>
                   <SelectContent>
@@ -249,7 +249,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="canadianWorkExperience">Canadian Work Experience</Label>
                 <Select value={form.canadianWorkExperience} onValueChange={(value) => setForm(prev => ({ ...prev, canadianWorkExperience: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select Canadian work experience" />
                   </SelectTrigger>
                   <SelectContent>
@@ -272,7 +272,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="frenchCLB">French CLB Level</Label>
                 <Select value={form.frenchCLB} onValueChange={(value) => setForm(prev => ({ ...prev, frenchCLB: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select French CLB level" />
                   </SelectTrigger>
                   <SelectContent>
@@ -290,7 +290,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="englishCLB">English CLB Level</Label>
                 <Select value={form.englishCLB} onValueChange={(value) => setForm(prev => ({ ...prev, englishCLB: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select English CLB level" />
                   </SelectTrigger>
                   <SelectContent>
@@ -314,7 +314,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="canadianEducation">Canadian Education</Label>
                 <Select value={form.canadianEducation} onValueChange={(value) => setForm(prev => ({ ...prev, canadianEducation: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Canadian education" />
                   </SelectTrigger>
                   <SelectContent>
@@ -327,7 +327,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="jobOffer">Valid Job Offer</Label>
                 <Select value={form.jobOffer} onValueChange={(value) => setForm(prev => ({ ...prev, jobOffer: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Job offer" />
                   </SelectTrigger>
                   <SelectContent>
@@ -340,7 +340,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="provincialNomination">Provincial Nomination</Label>
                 <Select value={form.provincialNomination} onValueChange={(value) => setForm(prev => ({ ...prev, provincialNomination: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Provincial nomination" />
                   </SelectTrigger>
                   <SelectContent>
@@ -353,7 +353,7 @@ export function ExpressEntryCalculator() {
               <div className="space-y-2">
                 <Label htmlFor="siblingInCanada">Sibling in Canada</Label>
                 <Select value={form.siblingInCanada} onValueChange={(value) => setForm(prev => ({ ...prev, siblingInCanada: value }))}>
-                  <SelectTrigger className="universal-card">
+                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Sibling in Canada" />
                   </SelectTrigger>
                   <SelectContent>

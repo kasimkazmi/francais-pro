@@ -8,9 +8,11 @@ import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { SimpleTooltip } from '@/components/ui/simple-tooltip';
 import { ArrowRight, MessageCircle, Lightbulb, Briefcase, Laptop, Plane, Trophy, Star } from 'lucide-react';
 import expressionsData from '@/data/expressions.json';
+import { useFavorites } from '@/contexts/FavoritesContext';
 
 export function ExpressionsContent() {
   const { idioms, proverbs, slang, business, technology, travel, sports } = expressionsData;
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const categories = [
     { name: 'Idioms', data: idioms, icon: MessageCircle, color: 'text-blue-500' },
@@ -84,10 +86,10 @@ export function ExpressionsContent() {
                           </h3>
                           <p className="text-sm text-muted-foreground mb-2">{expression.english}</p>
                           
-                          {expression.literal && (
+                          {(expression as any).literal && (
                             <div className="mb-2">
                               <Badge variant="outline" className="text-xs">
-                                Literal: {expression.literal}
+                                Literal: {(expression as any).literal}
                               </Badge>
                             </div>
                           )}
@@ -100,9 +102,9 @@ export function ExpressionsContent() {
                             {expression.pronunciation}
                           </Badge>
                           
-                          {expression.level && (
+                          {(expression as any).level && (
                             <Badge variant="destructive" className="text-xs ml-2">
-                              {expression.level}
+                              {(expression as any).level}
                             </Badge>
                           )}
                         </div>
@@ -114,13 +116,23 @@ export function ExpressionsContent() {
                       </div>
                       
                       <div className="mt-3 flex items-center justify-between">
-                        <SimpleTooltip content="Add to favorites">
+                        <SimpleTooltip content={isFavorite('expression', expression.french) ? "Remove from favorites" : "Add to favorites"}>
                           <EnhancedButton 
                             variant="ghost" 
                             size="sm"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity"
+                            className={`opacity-0 group-hover:opacity-100 transition-opacity ${
+                              isFavorite('expression', expression.french) ? 'text-yellow-500' : ''
+                            }`}
+                            onClick={() => toggleFavorite({
+                              type: 'expression',
+                              french: expression.french,
+                              english: expression.english,
+                              category: category.name,
+                              pronunciation: expression.pronunciation,
+                              example: (expression as any).usage || (expression as any).literal
+                            })}
                           >
-                            <Star className="h-4 w-4" />
+                            <Star className={`h-4 w-4 ${isFavorite('expression', expression.french) ? 'fill-current' : ''}`} />
                           </EnhancedButton>
                         </SimpleTooltip>
                         

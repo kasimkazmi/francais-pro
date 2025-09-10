@@ -173,7 +173,7 @@ export default function LessonsPage() {
               <select
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value)}
-                className="px-3 py-2 border rounded-md bg-background"
+                className="px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring hover:bg-muted/50 transition-colors dark:bg-background dark:text-foreground"
               >
                 <option value="all">All Difficulties</option>
                 <option value="Beginner">Beginner</option>
@@ -184,7 +184,7 @@ export default function LessonsPage() {
               <select
                 value={selectedModule}
                 onChange={(e) => setSelectedModule(e.target.value)}
-                className="px-3 py-2 border rounded-md bg-background"
+                className="px-3 py-2 border border-input rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring hover:bg-muted/50 transition-colors dark:bg-background dark:text-foreground"
               >
                 <option value="all">All Modules</option>
                 {learningModules.map(module => (

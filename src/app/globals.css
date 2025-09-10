@@ -169,3 +169,56 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
+
+/* Native select element theme support */
+select {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+select:focus {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+select option {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Dark mode select styling */
+.dark select {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+.dark select option {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Additional browser-specific select styling */
+select option:checked {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+select option:hover {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+
+/* Firefox specific */
+@-moz-document url-prefix() {
+  select option {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  
+  .dark select option {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}

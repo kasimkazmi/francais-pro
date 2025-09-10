@@ -1,10 +1,5 @@
-import { MainLayout } from '@/components/layout/main-layout';
-import { HomeContent } from '@/components/content/home-content';
+import { redirect } from 'next/navigation';
 
 export default function HomePage() {
-  return (
-    <MainLayout>
-      <HomeContent />
-    </MainLayout>
-  );
+  redirect('/welcome');
 }

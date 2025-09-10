@@ -47,7 +47,7 @@ export default function WelcomePage() {
             practice with real conversations, and join a community of French learners.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/basics">
+            <Link href="/home">
               <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200">
                 Start Learning
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -309,7 +309,7 @@ export default function WelcomePage() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/basics">
+              <Link href="/home">
                 <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200">
                   Start Learning Now
                   <ArrowRight className="ml-2 h-5 w-5" />

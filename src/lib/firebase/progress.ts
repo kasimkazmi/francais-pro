@@ -6,6 +6,7 @@ import {
   Timestamp 
 } from 'firebase/firestore';
 import { db, auth } from './config';
+import { syncUserToLeaderboard } from './leaderboard-public';
 
 export interface LessonProgress {
   lessonId: string;
@@ -173,6 +174,20 @@ export async function updateLessonProgress(
     };
 
     await updateDoc(userProgressRef, updatedProgress);
+    
+    // Sync to public leaderboard
+    try {
+      const userProfile = auth.currentUser;
+      if (userProfile) {
+        await syncUserToLeaderboard(uid, {
+          displayName: userProfile.displayName || 'Anonymous',
+          ...updatedProgress
+        });
+      }
+    } catch (syncError) {
+      console.error('Error syncing to leaderboard:', syncError);
+      // Don't throw - this is not critical
+    }
   } catch (error) {
     console.error('Error updating lesson progress:', error);
     throw error;

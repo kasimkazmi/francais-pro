@@ -40,7 +40,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 max-w-screen-2xl items-center">
         <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center">
+          <Link href="/welcome" className="mr-6 flex items-center">
             <span className="font-bold">Français Pro</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -73,7 +73,7 @@ export function Header() {
             <span className="sr-only">Toggle Menu</span>
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
-          <Link href="/" className="flex items-center">
+          <Link href="/welcome" className="flex items-center">
             <span className="font-bold">Français Pro</span>
           </Link>
         </div>

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Trophy, Medal, Award, Crown, Star, Clock, BookOpen, Target, TrendingUp } from "lucide-react";
-import { getOverallLeaderboard, getModuleLeaderboard, getLeaderboardStats, type LeaderboardEntry, type ModuleLeaderboard } from '@/lib/firebase/leaderboard';
+import { getPublicOverallLeaderboard, getPublicModuleLeaderboard, getPublicLeaderboardStats, type PublicLeaderboardEntry, type ModuleLeaderboard } from '@/lib/firebase/leaderboard-public';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface LeaderboardProps {
@@ -17,7 +17,7 @@ interface LeaderboardProps {
 
 export function Leaderboard({ moduleId, showStats = true, limit = 10 }: LeaderboardProps) {
   const { user, isAuthenticated } = useAuth();
-  const [overallData, setOverallData] = useState<LeaderboardEntry[]>([]);
+  const [overallData, setOverallData] = useState<PublicLeaderboardEntry[]>([]);
   const [moduleData, setModuleData] = useState<ModuleLeaderboard | null>(null);
   const [stats, setStats] = useState<{
     totalUsers: number;
@@ -38,9 +38,9 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
       setError(null);
 
       const [overall, module, statsData] = await Promise.all([
-        getOverallLeaderboard(limit),
-        moduleId ? getModuleLeaderboard(moduleId, limit) : null,
-        showStats ? getLeaderboardStats() : null
+        getPublicOverallLeaderboard(limit),
+        moduleId ? getPublicModuleLeaderboard(moduleId, limit) : null,
+        showStats ? getPublicLeaderboardStats() : null
       ]);
 
       setOverallData(overall);
@@ -165,9 +165,13 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
               ? `Top performers in ${moduleData?.moduleName} module`
               : 'Top learners by total progress'
             }
-            {!isAuthenticated && (
+            {!isAuthenticated ? (
               <span className="block mt-1 text-xs text-muted-foreground">
-                Sign in to see your personal ranking and progress
+                Sign in to see your personal ranking and compete with others!
+              </span>
+            ) : (
+              <span className="block mt-1 text-xs text-green-600 dark:text-green-400">
+                You're logged in! Your ranking will be highlighted below.
               </span>
             )}
           </CardDescription>
@@ -186,10 +190,10 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                 return (
                   <div
                     key={entry.uid}
-                    className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
+                    className={`flex items-center justify-between p-4 rounded-lg border transition-all duration-200 ${
                       isCurrentUser 
-                        ? 'bg-muted/50 border-primary/20' 
-                        : 'hover:bg-muted/50'
+                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-300 dark:border-blue-600 shadow-md' 
+                        : 'hover:bg-muted/50 hover:shadow-sm'
                     }`}
                   >
                     <div className="flex items-center gap-4">
@@ -202,7 +206,7 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                           <span className="font-medium">
                             {entry.displayName}
                             {isCurrentUser && (
-                              <Badge variant="outline" className="ml-2 text-xs">
+                              <Badge variant="default" className="ml-2 text-xs bg-blue-500 text-white">
                                 You
                               </Badge>
                             )}

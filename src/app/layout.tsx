@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SearchProvider } from "@/contexts/search-context";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { FavoritesProvider } from "@/contexts/FavoritesContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -51,9 +52,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <AuthProvider>
-          <SearchProvider>
-            {children}
-          </SearchProvider>
+          <FavoritesProvider>
+            <SearchProvider>
+              {children}
+            </SearchProvider>
+          </FavoritesProvider>
         </AuthProvider>
       </body>
     </html>
