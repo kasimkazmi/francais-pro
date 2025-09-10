@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AppShell } from '@/components/layout/app-shell';
+import { Header } from '@/components/layout/header';
 import { AudioButton } from '@/components/ui/audio-button';
 import { ArrowRight, Volume2 } from 'lucide-react';
 import greetingsData from '@/data/greetings.json';
@@ -11,8 +11,11 @@ export default function GreetingsPage() {
   const { basicGreetings, politeExpressions, introductions, responses } = greetingsData;
 
   return (
-    <AppShell>
-      <div className="container mx-auto max-w-4xl px-4 py-8">
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      {/* Main Content */}
+      <main className="container mx-auto max-w-4xl px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">French Greetings</h1>
           <div className="flex items-center space-x-2">
@@ -158,7 +161,7 @@ export default function GreetingsPage() {
             </Link>
           </div>
         </div>
-      </div>
-    </AppShell>
+      </main>
+    </div>
   );
 }

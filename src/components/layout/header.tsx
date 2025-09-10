@@ -5,6 +5,7 @@ import { SearchBar } from '@/components/ui/search-bar';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { AuthModal } from '@/components/ui/auth-modal';
+import { ConfirmModal } from '@/components/ui/confirm-modal';
 import { Portal } from '@/components/ui/portal';
 import { Menu, X, User, LogOut } from 'lucide-react';
 import { useState } from 'react';
@@ -14,11 +15,25 @@ import { useAuth } from '@/contexts/AuthContext';
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const { performSearch } = useSearch();
   const { user, isAuthenticated, logout } = useAuth();
 
   const handleSearch = (query: string) => {
     performSearch(query);
+  };
+
+  const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const handleMobileLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    logout();
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -29,11 +44,8 @@ export function Header() {
             <span className="font-bold">Français Pro</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link href="/welcome" className="transition-colors hover:text-foreground/80 text-foreground/60">
+            <Link href="/learn" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Learn
-            </Link>
-            <Link href="/demo" className="transition-colors hover:text-foreground/80 text-foreground/60">
-              Demo
             </Link>
             <Link href="/lessons" className="transition-colors hover:text-foreground/80 text-foreground/60">
               Lessons
@@ -46,6 +58,9 @@ export function Header() {
                 Progress
               </Link>
             )}
+            <Link href="/leaderboard" className="transition-colors hover:text-foreground/80 text-foreground/60">
+              Leaderboard
+            </Link>
           </nav>
         </div>
         {/* Mobile Layout */}
@@ -73,12 +88,12 @@ export function Header() {
               <div className="flex items-center space-x-2">
                 <div className="hidden sm:flex items-center space-x-2 text-sm">
                   <User className="h-4 w-4" />
-                  <span className="text-muted-foreground">{user?.name}</span>
+                  <span className="text-muted-foreground">{user?.displayName || user?.email || 'User'}</span>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="text-muted-foreground hover:text-foreground"
                 >
                   <LogOut className="h-4 w-4" />
@@ -106,18 +121,11 @@ export function Header() {
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
               <Link 
-                href="/welcome" 
+                href="/learn" 
                 className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Learn
-              </Link>
-              <Link 
-                href="/demo" 
-                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Demo
               </Link>
               <Link 
                 href="/lessons" 
@@ -142,20 +150,24 @@ export function Header() {
                   Progress
                 </Link>
               )}
+              <Link 
+                href="/leaderboard" 
+                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Leaderboard
+              </Link>
               <div className="pt-4 border-t">
                 {isAuthenticated ? (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 text-sm">
                       <User className="h-4 w-4" />
-                      <span className="text-muted-foreground">{user?.name}</span>
+                      <span className="text-muted-foreground">{user?.displayName || user?.email || 'User'}</span>
                     </div>
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      onClick={() => {
-                        logout();
-                        setIsMobileMenuOpen(false);
-                      }}
+                      onClick={handleMobileLogout}
                       className="text-muted-foreground hover:text-foreground"
                     >
                       <LogOut className="h-4 w-4" />
@@ -184,6 +196,16 @@ export function Header() {
         <AuthModal 
           isOpen={showAuthModal} 
           onClose={() => setShowAuthModal(false)} 
+        />
+        <ConfirmModal
+          isOpen={showLogoutConfirm}
+          onClose={() => setShowLogoutConfirm(false)}
+          onConfirm={handleLogoutConfirm}
+          title="Confirm Logout"
+          message="Are you sure you want to logout? You'll need to sign in again to access your progress and personalized content."
+          confirmText="Logout"
+          cancelText="Cancel"
+          variant="destructive"
         />
       </Portal>
     </header>
