@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { ArrowRight, Volume2, Play } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 
 export function PronunciationContent() {
   return (
@@ -46,7 +46,11 @@ export function PronunciationContent() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Volume2 className="h-5 w-5" />
+                <AudioButton 
+                  text="Basic vowel sounds in French: a, e, i, o, u"
+                  size="sm"
+                  variant="ghost"
+                />
                 Basic Vowel Sounds
               </CardTitle>
               <CardDescription>Essential French vowel pronunciations</CardDescription>

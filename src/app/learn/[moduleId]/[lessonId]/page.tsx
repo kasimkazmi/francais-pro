@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Header } from "@/components/layout/header";
-import { ArrowLeft, CheckCircle, Clock, Star, Volume2, Play } from "lucide-react";
+import { ArrowLeft, CheckCircle, Clock, Star, Play } from "lucide-react";
+import { AudioButton } from "@/components/ui/audio-button";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
@@ -421,9 +422,11 @@ export default function LessonPage() {
                             <div className="text-sm text-muted-foreground mt-1">{example.description}</div>
                           )}
                         </div>
-                        <Button variant="ghost" size="sm">
-                          <Volume2 className="h-4 w-4" />
-                        </Button>
+                        <AudioButton 
+                          text={`${example.french}, ${example.english}`}
+                          size="sm"
+                          variant="ghost"
+                        />
                       </div>
                     ))}
                   </div>
@@ -461,7 +464,7 @@ export default function LessonPage() {
                                     e.preventDefault();
                                     playAudio(option);
                                   }}
-                                  className="h-6 w-6 p-0 hover:bg-blue-100 dark:hover:bg-blue-900"
+                                  className="h-6 w-6 p-0 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-200 hover:scale-105 active:scale-95"
                                 >
                                   <Volume2 className="h-3 w-3" />
                                 </Button>
@@ -486,7 +489,7 @@ export default function LessonPage() {
                                       e.preventDefault();
                                       playAudio(pair.french);
                                     }}
-                                    className="h-6 w-6 p-0 hover:bg-blue-100 dark:hover:bg-blue-900"
+                                    className="h-6 w-6 p-0 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-200 hover:scale-105 active:scale-95"
                                   >
                                     <Volume2 className="h-3 w-3" />
                                   </Button>

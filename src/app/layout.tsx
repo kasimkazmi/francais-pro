@@ -4,6 +4,8 @@ import "./globals.css";
 import { SearchProvider } from "@/contexts/search-context";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { AdminProvider } from "@/contexts/AdminContext";
+import { UserStorageProvider } from "@/contexts/UserStorageContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -14,8 +16,8 @@ export const metadata: Metadata = {
   title: "Français Pro - Learn French from Zero to Hero",
   description: "A modern, documentation-style French learning platform. Master French with interactive lessons, AI-powered tutoring, and comprehensive progress tracking.",
   keywords: ["french", "language learning", "education", "nextjs", "tailwindcss"],
-  authors: [{ name: "Raja Kazmi" }],
-  creator: "Raja Kazmi",
+  authors: [{ name: "Kasim Kazmi" }],
+  creator: "Kasim Kazmi",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Français Pro - Learn French from Zero to Hero",
     description: "Master French with our modern, interactive learning platform",
-    creator: "@rajakazmi",
+    creator: "@kasimkazmi",
   },
   robots: {
     index: true,
@@ -52,11 +54,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         <AuthProvider>
-          <FavoritesProvider>
-            <SearchProvider>
-              {children}
-            </SearchProvider>
-          </FavoritesProvider>
+          <UserStorageProvider>
+            <AdminProvider>
+              <FavoritesProvider>
+                <SearchProvider>
+                  {children}
+                </SearchProvider>
+              </FavoritesProvider>
+            </AdminProvider>
+          </UserStorageProvider>
         </AuthProvider>
       </body>
     </html>

@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { SearchBar } from '@/components/ui/search-bar';
+import { SearchPageLoader } from '@/components/ui/page-loader';
 import { useSearch } from '@/contexts/search-context';
 import { 
   BookOpen, 
@@ -89,12 +90,7 @@ export default function SearchPage() {
           </div>
 
           {/* Search Status */}
-          {isSearching && (
-            <div className="flex items-center justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <span className="ml-2 text-muted-foreground">Searching...</span>
-            </div>
-          )}
+          {isSearching && <SearchPageLoader />}
 
           {/* No Results */}
           {!isSearching && query && searchResults.length === 0 && (

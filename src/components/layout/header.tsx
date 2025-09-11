@@ -108,7 +108,12 @@ export function Header() {
                 Sign In
               </Button>
             )}
-            <Button variant="ghost" size="sm" asChild>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              asChild
+              className="hover:bg-accent hover:text-accent-foreground transition-colors duration-200 hover:scale-105 active:scale-95"
+            >
               <Link href="https://github.com">GitHub</Link>
             </Button>
           </div>

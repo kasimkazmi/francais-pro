@@ -4,7 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/layout/header";
-import { BookOpen, Play, CheckCircle, Clock, Star, Loader2 } from "lucide-react";
+import { LearningPageLoader } from "@/components/ui/page-loader";
+import { BookOpen, Play, CheckCircle, Clock, Star } from "lucide-react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
@@ -72,14 +73,7 @@ export default function LearnPage() {
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="flex items-center gap-2">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span>Loading your progress...</span>
-        </div>
-      </div>
-    );
+    return <LearningPageLoader />;
   }
 
   if (error) {
