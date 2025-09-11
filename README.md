@@ -545,33 +545,13 @@ We are committed to providing a welcoming and inclusive environment. Please read
 
 **##** **📊 Roadmap**
 
-**### **Phase 1 - Core Features**** **✅ COMPLETED**
-- [x] Basic learning modules
-- [x] User authentication
-- [x] Progress tracking
-- [x] Leaderboard system
-- [x] Next.js 15 client/server component architecture
-- [x] Performance optimizations (60% bundle reduction)
-- [x] SEO enhancements (95% improvement)
-- [x] Enterprise-level loading system
-- [x] Reusable component library
+For detailed development plans, upcoming features, and contribution guidelines, see our **[ROADMAP.md](./ROADMAP.md)** file.
 
-**### **Phase 2 - Enhanced Learning**** **🚧 IN PROGRESS**
-- [ ] AI-powered pronunciation feedback
-- [ ] Spaced repetition system
-- [ ] Advanced analytics
-- [ ] Mobile app (React Native)
-
-**### **Phase 3 - Community Features**** **📋 PLANNED**
-- [ ] Study groups
-- [ ] Peer-to-peer learning
-- [ ] Teacher dashboard
-- [ ] Custom lesson creation
-
-**### **Phase 4 - Advanced Features**** **📋 PLANNED**
-- [ ] Multi-language support
-- [ ] Advanced performance monitoring
-- [ ] Edge-side rendering optimizations
+**Quick Overview:**
+- ✅ **Phase 1**: Core features completed with enterprise-level architecture
+- 🚧 **Phase 2**: Enhanced learning features in progress
+- 📋 **Phase 3**: Community features planned
+- 🔮 **Phase 4**: Advanced features for the future
 
 **##** **🤝 Support**
 
