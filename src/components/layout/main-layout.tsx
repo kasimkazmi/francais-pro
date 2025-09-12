@@ -284,7 +284,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               </Card>
             </div> */}
 
-            <div className="px-3 py-2 mt-4">
+            {/* <div className="px-3 py-2 mt-4">
               <Card className="p-4">
                 <CardHeader className="p-0 mb-3">
                   <CardTitle className="text-sm">Join Français Pro Community</CardTitle>
@@ -300,7 +300,7 @@ export function MainLayout({ children }: MainLayoutProps) {
                   </Button>
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
 
             <div className="px-3 py-2 mt-4">
               <Card className="p-4">
