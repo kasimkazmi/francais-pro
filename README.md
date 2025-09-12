@@ -20,6 +20,10 @@ Français Pro helps immigrants learn French efficiently for Canadian Express Ent
 - **🏆 Community Features**: Leaderboards and peer learning
 - **📱 Mobile Optimized**: Works perfectly on all devices
 
+## 🌐 **Live Demo**
+
+**👉 [View Live Project](https://frenchpro.ca) - Experience Français Pro in action!**
+
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
@@ -39,7 +43,7 @@ npm install
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the application.
+Visit [http://localhost:3000](http://localhost:3000) to see the application locally.
 
 ## 🏗️ **Architecture Highlights**
 
@@ -142,10 +146,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Project Lead**: Kasim Kazmi
 - **Email**: kasimdev07@gmail.com
 - **GitHub**: [@kasimkazmi](https://github.com/kasimkazmi)
-- **LinkedIn**: https://www.linkedin.com/in/kasimkazmi/
+- **LinkedIn**: [@KasimKazmi](https://www.linkedin.com/in/kasimkazmi/)
 
 ---
 
-**Ready to start your French learning journey?** [Get Started Now](#-quick-start) 🚀
+**Ready to start your French learning journey?** 
+
+🌐 **[Try Français Pro Live](https://frenchpro.ca)** | 📖 **[Get Started Locally](#-quick-start)** 🚀
 
 *Last updated: January 2025*
