@@ -139,10 +139,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 **Contact**
 
-- **Project Lead**: [Your Name]
-- **Email**: contact@francais-pro.com
+- **Project Lead**: Kasim Kazmi
+- **Email**: kasimdev07@gmail.com
 - **GitHub**: [@kasimkazmi](https://github.com/kasimkazmi)
-- **LinkedIn**: [Your LinkedIn Profile]
+- **LinkedIn**: https://www.linkedin.com/in/kasimkazmi/
 
 ---
 
