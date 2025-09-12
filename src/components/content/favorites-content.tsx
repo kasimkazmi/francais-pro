@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { AudioButton } from '@/components/ui/audio-button';
@@ -14,7 +14,6 @@ import {
   Hash, 
   FileText,
   Trash2,
-  Filter,
   Search,
   Calendar,
   Book
@@ -236,7 +235,7 @@ export function FavoritesContent() {
                   {favorite.example && (
                     <div className="text-sm">
                       <span className="text-muted-foreground">Example: </span>
-                      <em className="text-foreground">"{favorite.example}"</em>
+                      <em className="text-foreground">&ldquo;{favorite.example}&rdquo;</em>
                     </div>
                   )}
                   

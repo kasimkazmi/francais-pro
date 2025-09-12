@@ -63,8 +63,8 @@ export async function getUserProgress(uid: string): Promise<UserProgress | null>
   } catch (error) {
     console.error('❌ Error getting user progress:', error);
     console.error('🔍 Error details:', {
-      code: (error as any)?.code,
-      message: (error as any)?.message,
+      code: (error as Error)?.message,
+      message: (error as Error)?.message,
       uid: uid,
       currentUser: auth.currentUser?.uid
     });

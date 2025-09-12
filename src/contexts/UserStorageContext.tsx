@@ -185,7 +185,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
       const session: UserSession = {
         uid: user.uid,
         sessionId,
-        startTime: new Date() as any,
+        startTime: new Date(),
         deviceInfo,
         ipAddress: 'unknown',
         userAgent: navigator.userAgent,

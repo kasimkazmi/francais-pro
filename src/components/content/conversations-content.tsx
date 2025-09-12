@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { Tooltip } from '@/components/ui/tooltip';
-import { ArrowRight, MessageCircle, Users, Star, Play, Pause, RotateCcw } from 'lucide-react';
+import { ArrowRight, MessageCircle, Users, Star, Play, RotateCcw } from 'lucide-react';
 import conversationsData from '@/data/conversations.json';
 import { useFavorites } from '@/contexts/FavoritesContext';
 

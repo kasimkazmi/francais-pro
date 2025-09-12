@@ -293,12 +293,12 @@ export function useSearch() {
 }
 
 // Helper function to calculate relevance score
-function calculateRelevance(item: any, query: string): number {
+function calculateRelevance(item: Record<string, unknown>, query: string): number {
   let score = 0;
   const lowerQuery = query.toLowerCase();
 
   // Check each field and assign scores
-  Object.values(item).forEach((value: any) => {
+  Object.values(item).forEach((value: unknown) => {
     if (typeof value === 'string') {
       const lowerValue = value.toLowerCase();
       if (lowerValue === lowerQuery) {

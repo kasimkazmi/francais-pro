@@ -16,7 +16,6 @@ import {
   TrendingUp,
   HardDrive,
   Cpu,
-  Wifi,
   Shield
 } from 'lucide-react';
 
@@ -65,21 +64,6 @@ export function SystemMonitoring() {
     }, 1000);
   }, []);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'online':
-      case 'connected':
-        return 'text-green-600';
-      case 'offline':
-      case 'disconnected':
-        return 'text-red-600';
-      case 'maintenance':
-      case 'slow':
-        return 'text-yellow-600';
-      default:
-        return 'text-gray-600';
-    }
-  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {

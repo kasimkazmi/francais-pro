@@ -28,7 +28,7 @@ interface ContentItem {
   id: string;
   type: 'alphabet' | 'numbers' | 'greetings' | 'vocabulary' | 'expressions' | 'grammar' | 'conversations';
   title: string;
-  content: any;
+  content: Record<string, unknown>;
   lastModified: Date;
   usage: number;
 }
@@ -420,7 +420,7 @@ export function ContentManagement() {
                 <label className="text-sm font-medium mb-2 block">Type</label>
                 <Select
                   value={editingItem.type}
-                  onValueChange={(value: any) => setEditingItem({
+                  onValueChange={(value: string) => setEditingItem({
                     ...editingItem,
                     type: value
                   })}

@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { LazyCardGrid } from '@/components/ui/lazy-card';
-import { ArrowRight, Volume2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import alphabetData from '@/data/alphabet.json';
 
 export function AlphabetContent() {

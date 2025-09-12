@@ -171,7 +171,7 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
               </span>
             ) : (
               <span className="block mt-1 text-xs text-green-600 dark:text-green-400">
-                You're logged in! Your ranking will be highlighted below.
+                You&apos;re logged in! Your ranking will be highlighted below.
               </span>
             )}
           </CardDescription>

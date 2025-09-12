@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export function PronunciationContent() {
   return (
@@ -39,7 +38,7 @@ export function PronunciationContent() {
 
         <h2 className="text-2xl font-bold mt-8 mb-4">French Vowel Sounds</h2>
         <p className="text-muted-foreground mb-6">
-          French has unique vowel sounds that don't exist in English:
+          French has unique vowel sounds that don&apos;t exist in English:
         </p>
 
         <div className="my-6">
@@ -228,7 +227,7 @@ export function PronunciationContent() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Many French letters are silent, especially at the end of words. For example, in "parler" (to speak), the final "r" is silent.
+                  Many French letters are silent, especially at the end of words. For example, in &ldquo;parler&rdquo; (to speak), the final &ldquo;r&rdquo; is silent.
                 </p>
               </CardContent>
             </Card>
@@ -238,7 +237,7 @@ export function PronunciationContent() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  When a word ending in a consonant is followed by a word beginning with a vowel, the consonant is pronounced. For example, "les amis" sounds like "lez ami".
+                  When a word ending in a consonant is followed by a word beginning with a vowel, the consonant is pronounced. For example, &ldquo;les amis&rdquo; sounds like &ldquo;lez ami&rdquo;.
                 </p>
               </CardContent>
             </Card>
@@ -248,7 +247,7 @@ export function PronunciationContent() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Accent marks change pronunciation. For example, "é" is pronounced like "ay" in "say", while "è" is pronounced like "eh" in "bed".
+                  Accent marks change pronunciation. For example, &ldquo;é&rdquo; is pronounced like &ldquo;ay&rdquo; in &ldquo;say&rdquo;, while &ldquo;è&rdquo; is pronounced like &ldquo;eh&rdquo; in &ldquo;bed&rdquo;.
                 </p>
               </CardContent>
             </Card>

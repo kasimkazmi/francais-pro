@@ -17,7 +17,6 @@ import {
   Activity,
   Clock,
   Target,
-  Database
 } from 'lucide-react';
 
 export function AdminDashboard() {

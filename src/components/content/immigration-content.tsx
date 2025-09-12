@@ -1,14 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
-import { Tooltip } from '@/components/ui/tooltip';
 import { CLBCalculator } from '@/components/calculators/clb-calculator';
 import { ExpressEntryCalculator } from '@/components/calculators/express-entry-calculator';
-import { ArrowRight, MapPin, Calculator, Star, CheckCircle, Info, Users, BookOpen, Briefcase, Globe } from 'lucide-react';
+import { ArrowRight, MapPin, Calculator, Star, CheckCircle, Users, BookOpen, Briefcase } from 'lucide-react';
 import immigrationData from '@/data/immigration.json';
 
 export function ImmigrationContent() {

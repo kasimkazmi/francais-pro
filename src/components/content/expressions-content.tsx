@@ -86,10 +86,10 @@ export function ExpressionsContent() {
                           </h3>
                           <p className="text-sm text-muted-foreground mb-2">{expression.english}</p>
                           
-                          {(expression as any).literal && (
+                          {'literal' in expression && expression.literal && (
                             <div className="mb-2">
                               <Badge variant="outline" className="text-xs">
-                                Literal: {(expression as any).literal}
+                                Literal: {expression.literal as string}
                               </Badge>
                             </div>
                           )}
@@ -102,9 +102,9 @@ export function ExpressionsContent() {
                             {expression.pronunciation}
                           </Badge>
                           
-                          {(expression as any).level && (
+                          {'level' in expression && expression.level && (
                             <Badge variant="destructive" className="text-xs ml-2">
-                              {(expression as any).level}
+                              {expression.level as string}
                             </Badge>
                           )}
                         </div>
@@ -129,7 +129,7 @@ export function ExpressionsContent() {
                               english: expression.english,
                               category: category.name,
                               pronunciation: expression.pronunciation,
-                              example: (expression as any).usage || (expression as any).literal
+                              example: ('usage' in expression ? expression.usage : 'literal' in expression ? expression.literal as string : '') as string
                             })}
                           >
                             <Star className={`h-4 w-4 ${isFavorite('expression', expression.french) ? 'fill-current' : ''}`} />

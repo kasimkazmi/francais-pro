@@ -20,9 +20,8 @@ import {
   Calendar,
   BookOpen,
   TrendingUp,
-  MoreHorizontal
 } from 'lucide-react';
-import { collection, query, getDocs, orderBy, where, limit, doc, getDoc } from 'firebase/firestore';
+import { collection, query, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
 
 interface UserData {

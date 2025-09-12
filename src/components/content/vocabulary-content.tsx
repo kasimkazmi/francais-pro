@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
@@ -92,7 +91,7 @@ export function VocabularyContent() {
                       
                       <div className="bg-muted/50 p-3 rounded-lg">
                         <p className="text-sm italic text-muted-foreground">
-                          "{word.example}"
+                          &ldquo;{word.example}&rdquo;
                         </p>
                       </div>
 

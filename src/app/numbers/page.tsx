@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Header } from '@/components/layout/header';
 import { InteractiveAudioGrid } from '@/components/shared/interactive-audio-grid';
 import { InteractivePracticeSection } from '@/components/shared/interactive-practice-section';
@@ -8,7 +7,7 @@ import { ArrowRight, Calculator } from 'lucide-react';
 import numbersData from '@/data/numbers.json';
 
 export default function NumbersPage() {
-  const { numbers, tens, hundreds, thousands } = numbersData;
+  const { numbers, tens } = numbersData;
 
   // Transform data for the audio grid
   const basicNumbers = numbers.slice(0, 10).map(num => ({
@@ -108,7 +107,7 @@ export default function NumbersPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
-                    French teen numbers are formed by combining "dix" (ten) with the unit number.
+                    French teen numbers are formed by combining &ldquo;dix&rdquo; (ten) with the unit number.
                   </p>
                   <div className="space-y-2">
                     <div className="flex justify-between">
@@ -141,7 +140,7 @@ export default function NumbersPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Numbers 21-99 use "et" (and) for 21, 31, 41, etc., and hyphens for others.
+                    Numbers 21-99 use &ldquo;et&rdquo; (and) for 21, 31, 41, etc., and hyphens for others.
                   </p>
                   <div className="space-y-2">
                     <div className="flex justify-between">

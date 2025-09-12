@@ -1,12 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { EnhancedButton } from '@/components/ui/enhanced-button';
-import { Tooltip } from '@/components/ui/tooltip';
-import { ArrowRight, Calendar, Utensils, Palette, BookOpen, MapPin, Star, Heart } from 'lucide-react';
+import { Calendar, Utensils, Palette, BookOpen, MapPin, Star, Heart } from 'lucide-react';
 import cultureData from '@/data/culture.json';
 
 export function CultureContent() {

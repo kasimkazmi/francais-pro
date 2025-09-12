@@ -7,7 +7,6 @@ import { Badge } from '@/components/ui/badge';
 import { Header } from '@/components/layout/header';
 import { Progress } from '@/components/ui/progress';
 import { AuthGuard } from '@/components/auth/AuthGuard';
-import { useAuth } from '@/contexts/AuthContext';
 import { useProgress } from '@/hooks/useProgress';
 import { 
   Trophy, 
@@ -23,7 +22,6 @@ import {
 } from 'lucide-react';
 
 export default function ProgressPage() {
-  const { user } = useAuth();
   const { progress, loading, error } = useProgress();
 
   return (

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { ArrowRight, Volume2, Calculator } from 'lucide-react';
+import { ArrowRight, Calculator } from 'lucide-react';
 import numbersData from '@/data/numbers.json';
 
 export function NumbersContent() {
@@ -111,7 +111,7 @@ export function NumbersContent() {
 
         <h2 className="text-2xl font-bold mt-8 mb-4">Compound Numbers (21-99)</h2>
         <p className="text-muted-foreground mb-6">
-          French compound numbers use "et" (and) for 21, 31, 41, etc., but not for others:
+          French compound numbers use &ldquo;et&rdquo; (and) for 21, 31, 41, etc., but not for others:
         </p>
 
         <div className="my-6">

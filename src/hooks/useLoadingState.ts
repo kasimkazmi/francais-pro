@@ -42,7 +42,7 @@ export function useLoadingState(initialLoading = false): LoadingState {
 // Hook for async operations with loading state
 export function useAsyncOperation<T>(
   operation: () => Promise<T>,
-  dependencies: any[] = []
+  dependencies: unknown[] = []
 ) {
   const { isLoading, error, startLoading, stopLoading, setError } = useLoadingState();
 

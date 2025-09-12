@@ -3,8 +3,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { EnhancedButton } from '@/components/ui/enhanced-button';
-import { Tooltip } from '@/components/ui/tooltip';
 import { ArrowRight, BookOpen, Lightbulb, Target } from 'lucide-react';
 import grammarData from '@/data/grammar.json';
 

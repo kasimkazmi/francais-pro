@@ -221,7 +221,7 @@ export async function getPublicLeaderboardStats(): Promise<{
 }
 
 // Sync user progress to public leaderboard (called when user progress updates)
-export async function syncUserToLeaderboard(uid: string, userData: any): Promise<void> {
+export async function syncUserToLeaderboard(uid: string, userData: Record<string, unknown>): Promise<void> {
   try {
     const leaderboardRef = doc(db, 'leaderboard', uid);
     

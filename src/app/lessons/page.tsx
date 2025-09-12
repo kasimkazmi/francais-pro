@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -12,20 +12,13 @@ import {
   Play, 
   CheckCircle, 
   Clock, 
-  Star, 
   Search, 
-  Filter,
   ArrowRight,
-  Lock,
-  Unlock,
-  Target,
-  Award,
   TrendingUp
 } from "lucide-react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
-import Link from "next/link";
 
 const learningModules = [
   {
@@ -316,7 +309,7 @@ export default function LessonsPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {filteredLessons.map((lesson, index) => {
+                {filteredLessons.map((lesson) => {
                   const lessonCompleted = isLessonCompleted(lesson.moduleId, lesson.id.toString());
                   
                   return (

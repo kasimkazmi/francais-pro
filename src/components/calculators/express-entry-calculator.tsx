@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Calculator, CheckCircle, AlertCircle, Info, Star } from 'lucide-react';
+import { Calculator, Info, Star } from 'lucide-react';
 
 interface ExpressEntryForm {
   age: string;
@@ -85,12 +84,12 @@ export function ExpressEntryCalculator() {
   });
 
   const [totalPoints, setTotalPoints] = useState(0);
-  const [breakdown, setBreakdown] = useState<any>({});
+  const [breakdown, setBreakdown] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
 
   const calculatePoints = () => {
     let points = 0;
-    const breakdown: any = {};
+    const breakdown: Record<string, number> = {};
 
     // Age points
     const agePoints = POINTS_TABLES.age[form.age as keyof typeof POINTS_TABLES.age] || 0;
@@ -221,9 +220,9 @@ export function ExpressEntryCalculator() {
                     <SelectItem value="one-year">One-year program</SelectItem>
                     <SelectItem value="two-year">Two-year program</SelectItem>
                     <SelectItem value="three-year">Three-year program</SelectItem>
-                    <SelectItem value="bachelor">Bachelor's degree</SelectItem>
-                    <SelectItem value="two-bachelor">Two or more bachelor's degrees</SelectItem>
-                    <SelectItem value="master">Master's degree</SelectItem>
+                    <SelectItem value="bachelor">Bachelor&apos;s degree</SelectItem>
+                    <SelectItem value="two-bachelor">Two or more bachelor&apos;s degrees</SelectItem>
+                    <SelectItem value="master">Master&apos;s degree</SelectItem>
                     <SelectItem value="phd">PhD</SelectItem>
                   </SelectContent>
                 </Select>
@@ -447,7 +446,7 @@ export function ExpressEntryCalculator() {
                 <Alert>
                   <Star className="h-4 w-4" />
                   <AlertDescription>
-                    Great! You're earning {breakdown.frenchBonus} bonus points for your French language skills. 
+                    Great! You&apos;re earning {breakdown.frenchBonus} bonus points for your French language skills. 
                     This gives you a significant advantage in the Express Entry pool.
                   </AlertDescription>
                 </Alert>

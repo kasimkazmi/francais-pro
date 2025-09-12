@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Header } from "@/components/layout/header";
-import { ArrowLeft, CheckCircle, Clock, Star, Play } from "lucide-react";
+import { ArrowLeft, CheckCircle, Clock, Volume2, Star } from "lucide-react";
 import { AudioButton } from "@/components/ui/audio-button";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
@@ -154,19 +154,17 @@ export default function LessonPage() {
   const router = useRouter();
   const { moduleId, lessonId } = params as { moduleId: string; lessonId: string };
   const { isAuthenticated, isLoading } = useAuth();
-  const { updateLesson, getLesson, isLessonCompleted } = useProgress();
+  const { updateLesson, isLessonCompleted } = useProgress();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [currentSection, setCurrentSection] = useState(0);
   const [exerciseAnswers, setExerciseAnswers] = useState<Record<number, number | number[]>>({});
   const [showResults, setShowResults] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
-  const [sectionStartTime, setSectionStartTime] = useState<Date | null>(null);
   const [sectionTimeSpent, setSectionTimeSpent] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
 
-  const lesson = lessonContent[moduleId as keyof typeof lessonContent]?.[lessonId as keyof any];
+  const lesson = lessonContent[moduleId as keyof typeof lessonContent]?.[lessonId as string];
   const isLessonDone = isLessonCompleted(moduleId, lessonId);
   const currentSectionData = lesson?.sections?.[currentSection];
 
@@ -241,10 +239,6 @@ export default function LessonPage() {
     }
   };
 
-  const startLesson = () => {
-    setIsSessionActive(true);
-    setSessionStartTime(new Date());
-  };
 
   const pauseLesson = () => {
     setIsSessionActive(false);

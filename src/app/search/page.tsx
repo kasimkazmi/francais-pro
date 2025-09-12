@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/layout/header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -50,7 +50,6 @@ export default function SearchPage() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const { searchResults, isSearching, performSearch } = useSearch();
-  const [localQuery, setLocalQuery] = useState(query);
 
   useEffect(() => {
     if (query) {
@@ -98,7 +97,7 @@ export default function SearchPage() {
               <SearchIcon className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No results found</h3>
               <p className="text-muted-foreground mb-4">
-                We couldn't find any results for "{query}". Try different keywords or check your spelling.
+                We couldn&apos;t find any results for &ldquo;{query}&rdquo;. Try different keywords or check your spelling.
               </p>
               <div className="text-sm text-muted-foreground">
                 <p>Try searching for:</p>
@@ -116,7 +115,7 @@ export default function SearchPage() {
           {!isSearching && searchResults.length > 0 && (
             <div className="space-y-8">
               <div className="text-sm text-muted-foreground">
-                Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for "{query}"
+                Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
               </div>
 
               {Object.entries(groupedResults).map(([type, results]) => {
