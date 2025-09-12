@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Header } from '@/components/layout/header';
 import { CommunityChat } from '@/components/ui/community-chat';
 import { AuthModal } from '@/components/ui/auth-modal';
+import { SearchModal } from '@/components/ui/search-modal';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface MainLayoutProps {
@@ -17,8 +18,22 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   const [isCommunityChatOpen, setIsCommunityChatOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { isAuthenticated } = useAuth();
   const pathname = usePathname();
+
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchModalOpen(true);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Helper function to check if a route is active
   const isActiveRoute = (route: string) => {
@@ -318,6 +333,12 @@ export function MainLayout({ children }: MainLayoutProps) {
       <AuthModal 
         isOpen={showAuthModal} 
         onClose={() => setShowAuthModal(false)} 
+      />
+
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchModalOpen} 
+        onClose={() => setIsSearchModalOpen(false)} 
       />
     </div>
   );

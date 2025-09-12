@@ -1,27 +1,25 @@
 'use client';
 
 import Link from 'next/link';
-import { SearchBar } from '@/components/ui/search-bar';
+import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { AuthModal } from '@/components/ui/auth-modal';
 import { ConfirmModal } from '@/components/ui/confirm-modal';
 import { Portal } from '@/components/ui/portal';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut, Search, Github } from 'lucide-react';
 import { useState } from 'react';
-import { useSearch } from '@/contexts/search-context';
 import { useAuth } from '@/contexts/AuthContext';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const { performSearch } = useSearch();
   const { user, isAuthenticated, logout } = useAuth();
-
-  const handleSearch = (query: string) => {
-    performSearch(query);
-  };
+  const pathname = usePathname();
+  
+  // Hide search button on welcome page since it doesn't use MainLayout
+  const shouldShowSearch = pathname !== '/welcome';
 
   const handleLogout = () => {
     setShowLogoutConfirm(true);
@@ -80,9 +78,36 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-end space-x-2">
           <div className="flex items-center space-x-2">
-            <div className="relative hidden lg:block">
-              <SearchBar onSearch={handleSearch} />
-            </div>
+            {shouldShowSearch && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="hidden lg:flex items-center gap-2 text-muted-foreground"
+                onClick={() => {
+                  // This will be handled by the keyboard shortcut in MainLayout
+                  const event = new KeyboardEvent('keydown', {
+                    key: 'k',
+                    ctrlKey: true,
+                  });
+                  document.dispatchEvent(event);
+                }}
+              >
+                <Search className="h-4 w-4" />
+                <span className="hidden xl:inline">Search...</span>
+                <kbd className="hidden xl:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <span className="text-xs">⌘</span>K
+                </kbd>
+              </Button>
+            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-9 w-9 p-0"
+              onClick={() => window.open('https://github.com/kasimkazmi/francais-pro', '_blank')}
+              title="View on GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </Button>
             <ThemeToggle />
             {isAuthenticated ? (
               <div className="flex items-center space-x-2">
@@ -162,6 +187,16 @@ export function Header() {
               >
                 Leaderboard
               </Link>
+              <button
+                onClick={() => {
+                  window.open('https://github.com/kasimkazmi/francais-pro', '_blank');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+              >
+                <Github className="h-4 w-4" />
+                View on GitHub
+              </button>
               <div className="pt-4 border-t">
                 {isAuthenticated ? (
                   <div className="flex items-center justify-between">

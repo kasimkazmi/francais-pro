@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 
 // Import all data files
 import alphabetData from '@/data/alphabet.json';
@@ -45,7 +44,6 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const router = useRouter();
 
   const performSearch = useCallback((query: string) => {
     if (!query.trim()) {
@@ -63,9 +61,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search alphabet data
     (alphabetData as AlphabetData).alphabet.forEach((letter, index) => {
       if (
-        letter.letter.toLowerCase().includes(lowerQuery) ||
-        letter.pronunciation.toLowerCase().includes(lowerQuery) ||
-        letter.example.toLowerCase().includes(lowerQuery)
+        (letter.letter?.toLowerCase() || '').includes(lowerQuery) ||
+        (letter.pronunciation?.toLowerCase() || '').includes(lowerQuery) ||
+        (letter.example?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `alphabet-${index}`,
@@ -81,9 +79,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search numbers data
     (numbersData as NumbersData).numbers1to20.forEach((number, index) => {
       if (
-        number.french.toLowerCase().includes(lowerQuery) ||
+        (number.french?.toLowerCase() || '').includes(lowerQuery) ||
         number.num.toString().includes(lowerQuery) ||
-        number.pronunciation.toLowerCase().includes(lowerQuery)
+        (number.pronunciation?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `numbers-${index}`,
@@ -99,9 +97,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search greetings data
     greetingsData.basicGreetings.forEach((greeting, index) => {
       if (
-        greeting.french.toLowerCase().includes(lowerQuery) ||
-        greeting.english.toLowerCase().includes(lowerQuery) ||
-        greeting.pronunciation.toLowerCase().includes(lowerQuery)
+        (greeting.french?.toLowerCase() || '').includes(lowerQuery) ||
+        (greeting.english?.toLowerCase() || '').includes(lowerQuery) ||
+        (greeting.pronunciation?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `greetings-${index}`,
@@ -120,9 +118,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search articles
     [...grammarTyped.articles.definite, ...grammarTyped.articles.indefinite].forEach((article, index) => {
       if (
-        article.french.toLowerCase().includes(lowerQuery) ||
-        article.english.toLowerCase().includes(lowerQuery) ||
-        (article.example && article.example.toLowerCase().includes(lowerQuery))
+        (article.french?.toLowerCase() || '').includes(lowerQuery) ||
+        (article.english?.toLowerCase() || '').includes(lowerQuery) ||
+        (article.example?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `grammar-article-${index}`,
@@ -139,8 +137,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search pronouns
     [...grammarTyped.pronouns.subject, ...grammarTyped.pronouns.object].forEach((pronoun, index) => {
       if (
-        pronoun.french.toLowerCase().includes(lowerQuery) ||
-        pronoun.english.toLowerCase().includes(lowerQuery)
+        (pronoun.french?.toLowerCase() || '').includes(lowerQuery) ||
+        (pronoun.english?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `grammar-pronoun-${index}`,
@@ -157,8 +155,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search verbs
     Object.values(grammarTyped.verbs).forEach((verb, index) => {
       if (
-        verb.infinitive.toLowerCase().includes(lowerQuery) ||
-        verb.english.toLowerCase().includes(lowerQuery)
+        (verb.infinitive?.toLowerCase() || '').includes(lowerQuery) ||
+        (verb.english?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `grammar-verb-${index}`,
@@ -177,10 +175,10 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       if (Array.isArray(words)) {
         words.forEach((word, index) => {
           if (
-            word.french.toLowerCase().includes(lowerQuery) ||
-            word.english.toLowerCase().includes(lowerQuery) ||
-            word.pronunciation.toLowerCase().includes(lowerQuery) ||
-            word.example.toLowerCase().includes(lowerQuery)
+            (word.french?.toLowerCase() || '').includes(lowerQuery) ||
+            (word.english?.toLowerCase() || '').includes(lowerQuery) ||
+            (word.pronunciation?.toLowerCase() || '').includes(lowerQuery) ||
+            (word.example?.toLowerCase() || '').includes(lowerQuery)
           ) {
             results.push({
               id: `vocabulary-${category}-${index}`,
@@ -199,8 +197,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     // Search conversations data
     (conversationsData as ConversationsData).scenarios.forEach((scenario, index) => {
       if (
-        scenario.title.toLowerCase().includes(lowerQuery) ||
-        scenario.situation.toLowerCase().includes(lowerQuery)
+        (scenario.title?.toLowerCase() || '').includes(lowerQuery) ||
+        (scenario.situation?.toLowerCase() || '').includes(lowerQuery)
       ) {
         results.push({
           id: `conversation-${index}`,
@@ -214,8 +212,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
       scenario.dialogue.forEach((line, lineIndex) => {
         if (
-          line.french.toLowerCase().includes(lowerQuery) ||
-          line.english.toLowerCase().includes(lowerQuery)
+          (line.french?.toLowerCase() || '').includes(lowerQuery) ||
+          (line.english?.toLowerCase() || '').includes(lowerQuery)
         ) {
           results.push({
             id: `conversation-line-${index}-${lineIndex}`,
@@ -235,8 +233,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         items.forEach((item, index) => {
           const itemRecord = item as Record<string, unknown>;
           if (
-            ((itemRecord.title || itemRecord.name) as string).toLowerCase().includes(lowerQuery) ||
-            (itemRecord.description && (itemRecord.description as string).toLowerCase().includes(lowerQuery))
+            (((itemRecord.title || itemRecord.name) as string)?.toLowerCase() || '').includes(lowerQuery) ||
+            (((itemRecord.description as string)?.toLowerCase() || '').includes(lowerQuery))
           ) {
             results.push({
               id: `culture-${category}-${index}`,
@@ -257,9 +255,9 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       if (Array.isArray(expressions)) {
         expressions.forEach((expression, index) => {
           if (
-            expression.french.toLowerCase().includes(lowerQuery) ||
-            expression.english.toLowerCase().includes(lowerQuery) ||
-            expression.pronunciation.toLowerCase().includes(lowerQuery)
+            (expression.french?.toLowerCase() || '').includes(lowerQuery) ||
+            (expression.english?.toLowerCase() || '').includes(lowerQuery) ||
+            (expression.pronunciation?.toLowerCase() || '').includes(lowerQuery)
           ) {
             results.push({
               id: `expression-${category}-${index}`,
@@ -276,7 +274,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     });
 
     // Search immigration data
-    if (immigrationData.expressEntry?.overview?.title.toLowerCase().includes(lowerQuery)) {
+    if ((immigrationData.expressEntry?.overview?.title?.toLowerCase() || '').includes(lowerQuery)) {
       results.push({
         id: 'immigration-title',
         title: immigrationData.expressEntry.overview.title,
@@ -294,10 +292,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 
     setSearchResults(sortedResults);
     setIsSearching(false);
-
-    // Navigate to search results page
-    router.push(`/search?q=${encodeURIComponent(query)}`);
-  }, [router]);
+  }, []);
 
   const clearSearch = useCallback(() => {
     setSearchQuery('');
