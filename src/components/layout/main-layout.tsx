@@ -216,7 +216,6 @@ export function MainLayout({ children }: MainLayoutProps) {
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">Quick Access</h2>
               <div className="space-y-1">
-               
                 <Link href="/alphabet" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   French Alphabet
                 </Link>
@@ -232,8 +231,8 @@ export function MainLayout({ children }: MainLayoutProps) {
                 <Link href="/expressions" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   Expressions
                 </Link>
-                <Link href="/practice" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
-                  Practice
+                <Link href="/favorites" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
+                  Favorites
                 </Link>
                 <Link href="/conversations" className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700">
                   Conversations
@@ -250,7 +249,7 @@ export function MainLayout({ children }: MainLayoutProps) {
               </div>
             </div>
 
-            <div className="px-3 py-2 mt-8">
+            {/* <div className="px-3 py-2 mt-8">
               <Card className="p-4">
                 <CardHeader className="p-0 mb-3">
                   <CardTitle className="text-sm">⭐ My Favorites</CardTitle>
@@ -268,7 +267,7 @@ export function MainLayout({ children }: MainLayoutProps) {
                   </Link>
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
 
             <div className="px-3 py-2 mt-4">
               <Card className="p-4">
