@@ -1,332 +1,224 @@
-# Contributing to Français Pro
+# 🤝 Contributing to Français Pro
 
-Thank you for your interest in contributing to Français Pro! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to Français Pro! We welcome contributions from developers, designers, content creators, and anyone passionate about helping people learn French for Canadian immigration.
 
-## 🤝 How to Contribute
-
-### **Ways to Contribute**
-- 🐛 **Bug Reports**: Found a bug? Let us know!
-- 💡 **Feature Requests**: Have an idea? Share it!
-- 🔧 **Code Contributions**: Submit pull requests
-- 📚 **Documentation**: Help improve our docs
-- 🌍 **Translations**: Add support for more languages
-- 🎨 **UI/UX**: Improve the user experience
-- 🧪 **Testing**: Help us test new features
-
-## 🚀 Getting Started
+## 🚀 **Getting Started**
 
 ### **Prerequisites**
-- Node.js 18+
-- npm or yarn
+- Node.js 18+ and npm
 - Git
-- Basic knowledge of React/Next.js
+- Basic knowledge of React/Next.js (for code contributions)
+- French language knowledge (for content contributions)
 
-### **Setup Development Environment**
-
-1. **Fork the repository**
-   ```bash
-   # Click the "Fork" button on GitHub
-   ```
-
-2. **Clone your fork**
+### **Quick Start**
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
    ```bash
    git clone https://github.com/YOUR_USERNAME/francais-pro.git
    cd francais-pro
    ```
-
-3. **Add upstream remote**
-   ```bash
-   git remote add upstream https://github.com/ORIGINAL_OWNER/francais-pro.git
-   ```
-
-4. **Install dependencies**
+3. **Install dependencies**:
    ```bash
    npm install
    ```
-
-5. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   # Add your Firebase configuration
-   ```
-
-6. **Start development server**
+4. **Start development server**:
    ```bash
    npm run dev
    ```
+5. **Create a feature branch**:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
 
-## 📝 Development Workflow
+## 🎯 **How to Contribute**
 
-### **1. Create a Branch**
-```bash
-git checkout -b feature/your-feature-name
-# or
-git checkout -b fix/your-bug-fix
-```
+### **🐛 Bug Reports**
+- Use the GitHub issue template
+- Provide clear reproduction steps
+- Include screenshots if applicable
+- Specify your environment (OS, browser, etc.)
 
-### **2. Make Changes**
-- Write clean, readable code
-- Follow the existing code style
-- Add comments for complex logic
-- Update documentation if needed
+### **✨ Feature Requests**
+- Check existing issues first
+- Use the "enhancement" label
+- Describe the feature and its benefits
+- Provide mockups or examples if possible
 
-### **3. Test Your Changes**
-```bash
-# Run linting
-npm run lint
+### **💻 Code Contributions**
+1. **Pick an issue** or create a new one
+2. **Assign yourself** to the issue
+3. **Create a feature branch** from `master`
+4. **Write your code** following our style guide
+5. **Test your changes** thoroughly
+6. **Submit a pull request**
 
-# Run type checking
-npm run type-check
+### **📝 Content Contributions**
+- **French lessons**: Add new vocabulary, grammar, or cultural content
+- **Translations**: Help translate the platform to other languages
+- **Documentation**: Improve guides and tutorials
+- **Audio content**: Record pronunciation examples
 
-# Test your changes manually
-npm run dev
-```
-
-### **4. Commit Your Changes**
-```bash
-git add .
-git commit -m "feat: add new feature description"
-```
-
-**Commit Message Format:**
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `docs:` - Documentation changes
-- `style:` - Code style changes
-- `refactor:` - Code refactoring
-- `test:` - Adding tests
-- `chore:` - Maintenance tasks
-
-### **5. Push and Create Pull Request**
-```bash
-git push origin feature/your-feature-name
-```
-
-Then create a Pull Request on GitHub.
-
-## 🎯 Contribution Guidelines
+## 📋 **Development Guidelines**
 
 ### **Code Style**
-- Use TypeScript for type safety
+- Use TypeScript for all new code
 - Follow ESLint and Prettier configurations
 - Use meaningful variable and function names
-- Add JSDoc comments for complex functions
-- Keep components small and focused
+- Add comments for complex logic
+- Write tests for new features
 
-### **Component Guidelines**
-- Use functional components with hooks
-- Follow the existing component structure
-- Use Shadcn/ui components when possible
-- Implement proper error boundaries
-- Add loading states for async operations
-
-### **File Organization**
-- Place components in appropriate directories
-- Use descriptive file names
-- Group related files together
-- Follow the existing folder structure
-
-### **Testing**
-- Test your changes thoroughly
-- Add unit tests for new functions
-- Test on different screen sizes
-- Verify accessibility features
-
-## 🐛 Bug Reports
-
-### **Before Reporting**
-1. Check if the bug has already been reported
-2. Try to reproduce the bug
-3. Check the latest version
-
-### **Bug Report Template**
-```markdown
-**Bug Description**
-A clear description of what the bug is.
-
-**Steps to Reproduce**
-1. Go to '...'
-2. Click on '...'
-3. See error
-
-**Expected Behavior**
-What you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots.
-
-**Environment**
-- OS: [e.g., Windows, macOS, Linux]
-- Browser: [e.g., Chrome, Firefox, Safari]
-- Version: [e.g., 22]
-
-**Additional Context**
-Any other context about the problem.
+### **Commit Messages**
+Use clear, descriptive commit messages:
+```
+feat: add dynamic stats system
+fix: resolve audio button serialization error
+docs: update README with new features
+style: improve button hover animations
 ```
 
-## 💡 Feature Requests
+### **Pull Request Process**
+1. **Update documentation** if needed
+2. **Add tests** for new functionality
+3. **Ensure all tests pass**
+4. **Request review** from maintainers
+5. **Address feedback** promptly
 
-### **Before Requesting**
-1. Check if the feature has already been requested
-2. Consider if it aligns with the project goals
-3. Think about implementation complexity
+## 🏗️ **Project Structure**
 
-### **Feature Request Template**
-```markdown
-**Feature Description**
-A clear description of the feature.
-
-**Problem it Solves**
-What problem does this feature solve?
-
-**Proposed Solution**
-How would you like to see this implemented?
-
-**Alternatives Considered**
-Any alternative solutions you've considered.
-
-**Additional Context**
-Any other context about the feature request.
+```
+src/
+├── app/                 # Next.js 15 App Router pages
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components
+│   ├── layout/         # Layout components
+│   ├── content/        # Content-specific components
+│   └── auth/           # Authentication components
+├── contexts/           # React contexts for state management
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions and services
+├── data/               # Static data and content
+└── types/              # TypeScript type definitions
 ```
 
-## 🔧 Pull Request Process
+## 🧪 **Testing**
 
-### **Before Submitting**
-- [ ] Code follows the project's style guidelines
-- [ ] Self-review of your code
-- [ ] Tests pass locally
-- [ ] Documentation updated if needed
-- [ ] No merge conflicts
+### **Running Tests**
+```bash
+# Run all tests
+npm test
 
-### **Pull Request Template**
-```markdown
-## Description
-Brief description of changes.
+# Run tests in watch mode
+npm run test:watch
 
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-- [ ] Tests pass locally
-- [ ] Manual testing completed
-- [ ] Cross-browser testing (if applicable)
-
-## Screenshots
-If applicable, add screenshots.
-
-## Checklist
-- [ ] Code follows style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated
-- [ ] No merge conflicts
+# Run tests with coverage
+npm run test:coverage
 ```
 
-## 🌍 Translation Guidelines
+### **Testing Guidelines**
+- Write unit tests for utility functions
+- Write integration tests for components
+- Test error cases and edge cases
+- Aim for 80%+ code coverage
 
-### **Adding New Languages**
-1. Create language file in `src/data/locales/`
-2. Follow the existing structure
-3. Use proper French translations
-4. Test with different content lengths
-
-### **Translation Files**
-- Keep consistent terminology
-- Use formal language for educational content
-- Include pronunciation guides
-- Add cultural context where appropriate
-
-## 🎨 UI/UX Guidelines
-
-### **Design Principles**
-- Keep it simple and clean
-- Use consistent spacing and typography
-- Ensure accessibility compliance
-- Mobile-first responsive design
-
-### **Component Guidelines**
-- Use Shadcn/ui components
-- Follow the existing color scheme
-- Implement proper hover states
-- Add loading and error states
-
-## 📚 Documentation
+## 📚 **Documentation**
 
 ### **Code Documentation**
-- Add JSDoc comments for functions
+- Use JSDoc comments for functions
 - Document complex algorithms
-- Include usage examples
-- Keep comments up to date
+- Explain business logic
+- Keep README files updated
 
 ### **User Documentation**
-- Write clear, concise descriptions
-- Include screenshots when helpful
-- Use simple language
-- Keep it up to date
+- Write clear user guides
+- Provide screenshots for UI changes
+- Update API documentation
+- Translate documentation when possible
 
-## 🏷️ Labels
+## 🎨 **Design Guidelines**
 
-We use labels to categorize issues and PRs:
+### **UI/UX Principles**
+- **Accessibility first**: Follow WCAG guidelines
+- **Mobile responsive**: Test on various screen sizes
+- **Consistent styling**: Use design system components
+- **Performance**: Optimize for Core Web Vitals
 
-- `bug` - Something isn't working
-- `enhancement` - New feature or request
-- `documentation` - Improvements to documentation
-- `good first issue` - Good for newcomers
-- `help wanted` - Extra attention is needed
-- `question` - Further information is requested
+### **Component Design**
+- Use shadcn/ui components as base
+- Follow compound component patterns
+- Implement proper loading states
+- Add error boundaries
 
-## 🎉 Recognition
+## 🌍 **Internationalization**
 
-Contributors will be recognized in:
-- README.md contributors section
-- Release notes
-- Project documentation
-- Community highlights
+### **Adding New Languages**
+1. Create language files in `public/locales/`
+2. Update language switcher component
+3. Test with RTL languages if applicable
+4. Update documentation
 
-## 📞 Getting Help
+### **Content Localization**
+- Use proper French formatting
+- Consider cultural differences
+- Test with native speakers
+- Maintain consistency across languages
 
-### **Questions?**
-- Open a GitHub Discussion
-- Join our Discord server
-- Email: contributors@francais-pro.com
+## 🔒 **Security**
 
-### **Need Help Getting Started?**
-- Check out our [Getting Started Guide](README.md)
-- Look at existing issues labeled `good first issue`
-- Ask questions in GitHub Discussions
+### **Security Guidelines**
+- Never commit API keys or secrets
+- Validate all user inputs
+- Use HTTPS for all external requests
+- Follow OWASP security practices
 
-## 📋 Code of Conduct
+### **Reporting Security Issues**
+- Email security issues to: security@francais-pro.com
+- Don't create public issues for security vulnerabilities
+- We'll respond within 48 hours
 
-### **Our Pledge**
-We are committed to providing a welcoming and inclusive environment for all contributors.
+## 📞 **Getting Help**
 
-### **Expected Behavior**
-- Use welcoming and inclusive language
-- Be respectful of differing viewpoints
-- Accept constructive criticism gracefully
-- Focus on what's best for the community
+### **Community Support**
+- **GitHub Discussions**: Ask questions and share ideas
+- **Discord**: Join our community server
+- **Issues**: Report bugs and request features
+- **Email**: contributors@francais-pro.com
 
-### **Unacceptable Behavior**
-- Harassment or discrimination
-- Trolling or inflammatory comments
-- Personal attacks or political discussions
-- Spam or off-topic discussions
+### **Maintainer Contact**
+- **Project Lead**: [Your Name]
+- **Technical Lead**: [Technical Lead Name]
+- **Content Lead**: [Content Lead Name]
 
-## 🚀 Release Process
+## 🏆 **Recognition**
 
-### **Version Numbering**
-We use [Semantic Versioning](https://semver.org/):
-- `MAJOR` - Breaking changes
-- `MINOR` - New features (backward compatible)
-- `PATCH` - Bug fixes (backward compatible)
+### **Contributor Recognition**
+- All contributors are listed in CONTRIBUTORS.md
+- Significant contributors get maintainer status
+- Top contributors receive special recognition
+- We celebrate contributions in our community
 
-### **Release Schedule**
-- **Major releases**: Quarterly
-- **Minor releases**: Monthly
-- **Patch releases**: As needed
+### **Types of Contributions**
+- **Code**: Bug fixes, features, optimizations
+- **Content**: Lessons, translations, documentation
+- **Design**: UI/UX improvements, graphics
+- **Testing**: Bug reports, test cases
+- **Community**: Help others, moderation
+
+## 📋 **Issue Labels**
+
+We use labels to categorize issues:
+- `bug`: Something isn't working
+- `enhancement`: New feature or request
+- `documentation`: Improvements to documentation
+- `good first issue`: Good for newcomers
+- `help wanted`: Extra attention is needed
+- `question`: Further information is requested
+
+## 🎉 **Thank You**
+
+Thank you for contributing to Français Pro! Your efforts help make French learning accessible to immigrants worldwide. Together, we're building a platform that changes lives.
 
 ---
 
-Thank you for contributing to Français Pro! Together, we can make French learning accessible to everyone. 🇫🇷
+**Happy Contributing!** 🚀
+
+*Last updated: January 2025*
