@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/layout/header';
@@ -46,7 +47,7 @@ const typeColors = {
   immigration: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200'
 };
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const { searchResults, isSearching, performSearch } = useSearch();
@@ -212,5 +213,13 @@ export default function SearchPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchContent />
+    </Suspense>
   );
 }

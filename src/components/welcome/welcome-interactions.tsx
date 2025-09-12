@@ -44,7 +44,7 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
           <Button 
             size="lg" 
             className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200"
-            onClick={gate('/home')}
+            onClick={gate()}
           >
             Start Learning Now
             <ArrowRight className="ml-2 h-4 w-4" />

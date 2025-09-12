@@ -20,8 +20,8 @@ export async function createAdminUser(uid: string, email: string, displayName: s
   } catch (error) {
     console.error('Error creating admin user:', error);
     console.error('Error details:', {
-      code: error.code,
-      message: error.message,
+      code: (error as { code?: string })?.code,
+      message: (error as { message?: string })?.message,
       uid,
       email
     });
@@ -48,8 +48,8 @@ export async function createModeratorUser(uid: string, email: string, displayNam
   } catch (error) {
     console.error('Error creating moderator user:', error);
     console.error('Error details:', {
-      code: error.code,
-      message: error.message,
+      code: (error as { code?: string })?.code,
+      message: (error as { message?: string })?.message,
       uid,
       email
     });

@@ -80,7 +80,7 @@ export function useProgress() {
       setError(err instanceof Error ? err.message : 'Failed to get module progress');
       return null;
     }
-  }, [isAuthenticated, user]); // Remove getModuleProgress from dependencies to avoid circular reference
+  }, [isAuthenticated, user]);
 
   // Get lesson progress
   const getLesson = useCallback(async (moduleId: string, lessonId: string): Promise<LessonProgress | null> => {
@@ -102,7 +102,7 @@ export function useProgress() {
   }, [progress]);
 
   // Get module completion percentage
-  const getModuleProgress = useCallback((moduleId: string): number => {
+  const getModuleProgressPercentage = useCallback((moduleId: string): number => {
     if (!progress) return 0;
     return progress.modules[moduleId]?.progress || 0;
   }, [progress]);
@@ -120,7 +120,7 @@ export function useProgress() {
     getModule,
     getLesson,
     isLessonCompleted,
-    getModuleProgress,
+    getModuleProgress: getModuleProgressPercentage,
     refreshProgress: loadProgress
   };
 }

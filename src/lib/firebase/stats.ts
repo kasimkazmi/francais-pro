@@ -53,7 +53,7 @@ export async function getAppStats(): Promise<AppStats> {
       
       // Count completed lessons
       if (data.lessons) {
-        const completedLessons = Object.values(data.lessons).filter((lesson: any) => lesson.completed);
+        const completedLessons = Object.values(data.lessons).filter((lesson: unknown) => (lesson as { completed?: boolean })?.completed === true);
         lessonsCompleted += completedLessons.length;
       }
       
@@ -115,7 +115,7 @@ export async function getUserStats(userId: string) {
 
     // Count completed lessons from the lessons object
     const completedLessons = data.lessons ? 
-      Object.values(data.lessons).filter((lesson: any) => lesson.completed).length : 0;
+      Object.values(data.lessons).filter((lesson: unknown) => (lesson as { completed?: boolean })?.completed === true).length : 0;
 
     return {
       lessonsCompleted: completedLessons,
@@ -131,19 +131,19 @@ export async function getUserStats(userId: string) {
   }
 }
 
-export async function getLeaderboardStats(limit: number = 10) {
+export async function getLeaderboardStats(limitCount: number = 10) {
   try {
     const leaderboardQuery = query(
       collection(db, 'userProgress'),
       orderBy('totalLessonsCompleted', 'desc'),
-      limit(limit)
+      limit(limitCount)
     );
     const snapshot = await getDocs(leaderboardQuery);
     
     return snapshot.docs.map(doc => {
       const data = doc.data();
       const completedLessons = data.lessons ? 
-        Object.values(data.lessons).filter((lesson: any) => lesson.completed).length : 0;
+        Object.values(data.lessons).filter((lesson: unknown) => (lesson as { completed?: boolean })?.completed === true).length : 0;
       
       return {
         id: doc.id,

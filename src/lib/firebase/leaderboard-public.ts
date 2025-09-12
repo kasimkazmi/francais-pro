@@ -62,7 +62,7 @@ export async function getPublicOverallLeaderboard(limitCount: number = 10): Prom
     const querySnapshot = await getDocs(q);
     const leaderboard: PublicLeaderboardEntry[] = [];
     
-    querySnapshot.forEach((docSnap, index) => {
+    querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
       
       // Calculate overall progress percentage
@@ -80,7 +80,7 @@ export async function getPublicOverallLeaderboard(limitCount: number = 10): Prom
         overallProgress: overallProgress,
         lastActiveDate: data.lastActiveDate || Timestamp.now(),
         modules: data.modules || {},
-        rank: index + 1
+        rank: leaderboard.length + 1
       });
     });
     
@@ -242,7 +242,7 @@ export async function syncUserToLeaderboard(uid: string, userData: Record<string
       longestStreak: userData.longestStreak || 0,
       level: userData.level || 'beginner',
       wordsLearned: userData.wordsLearned || 0,
-      overallProgress: userData.totalLessonsCompleted ? Math.round((userData.totalLessonsCompleted / 13) * 100) : 0,
+      overallProgress: userData.totalLessonsCompleted ? Math.round((Number(userData.totalLessonsCompleted) / 13) * 100) : 0,
       lastActiveDate: userData.lastActiveDate || Timestamp.now(),
       modules: userData.modules || {}
     };

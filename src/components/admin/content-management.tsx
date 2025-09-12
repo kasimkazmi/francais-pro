@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ export function ContentManagement() {
   const [activeTab, setActiveTab] = useState('overview');
 
   // Mock data - in real app, this would come from your content files
-  const mockContent: ContentItem[] = [
+  const mockContent: ContentItem[] = useMemo(() => [
     {
       id: 'alphabet-1',
       type: 'alphabet',
@@ -81,7 +81,7 @@ export function ContentManagement() {
       lastModified: new Date(),
       usage: 1800
     }
-  ];
+  ], []);
 
   useEffect(() => {
     // Simulate loading content

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +40,7 @@ export function SystemMonitoring() {
   const [loading, setLoading] = useState(true);
 
   // Mock system stats - in real app, this would come from your monitoring system
-  const mockStats: SystemStats = {
+  const mockStats: SystemStats = useMemo(() => ({
     serverStatus: 'online',
     databaseStatus: 'connected',
     activeUsers: 42,
@@ -54,7 +54,7 @@ export function SystemMonitoring() {
     uptime: '15 days, 3 hours',
     lastBackup: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
     securityAlerts: 0
-  };
+  }), []);
 
   useEffect(() => {
     // Simulate loading system stats

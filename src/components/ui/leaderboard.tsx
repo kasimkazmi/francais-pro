@@ -223,13 +223,13 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                             <>
                               <div className="flex items-center gap-1">
                                 <BookOpen className="h-3 w-3" />
-                                {entry.lessonsCompleted}/{entry.totalLessons} lessons
+                                {'lessonsCompleted' in entry ? `${entry.lessonsCompleted}/${entry.totalLessons}` : '0/0'} lessons
                               </div>
                               <div className="flex items-center gap-1">
                                 <Target className="h-3 w-3" />
-                                {entry.progress}% complete
+                                {'progress' in entry ? `${entry.progress}%` : '0%'} complete
                               </div>
-                              {entry.completed && (
+                              {'completed' in entry && entry.completed && (
                                 <Badge variant="default" className="text-xs">
                                   Completed
                                 </Badge>
@@ -239,15 +239,15 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                             <>
                               <div className="flex items-center gap-1">
                                 <BookOpen className="h-3 w-3" />
-                                {entry.totalLessonsCompleted} lessons
+                                {'totalLessonsCompleted' in entry ? entry.totalLessonsCompleted : 0} lessons
                               </div>
                               <div className="flex items-center gap-1">
                                 <Star className="h-3 w-3" />
-                                {entry.currentStreak} day streak
+                                {'currentStreak' in entry ? entry.currentStreak : 0} day streak
                               </div>
                               <div className="flex items-center gap-1">
                                 <Clock className="h-3 w-3" />
-                                {Math.round(entry.totalTimeSpent)} min
+                                {'totalTimeSpent' in entry ? Math.round(entry.totalTimeSpent) : 0} min
                               </div>
                             </>
                           )}
@@ -258,14 +258,14 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                     <div className="text-right">
                       {isModuleView ? (
                         <div className="space-y-1">
-                          <div className="text-lg font-bold">{entry.progress}%</div>
-                          <Progress value={entry.progress} className="w-20 h-2" />
+                          <div className="text-lg font-bold">{'progress' in entry ? `${entry.progress}%` : '0%'}</div>
+                          <Progress value={'progress' in entry ? entry.progress : 0} className="w-20 h-2" />
                         </div>
                       ) : (
                         <div className="space-y-1">
-                          <div className="text-lg font-bold">{entry.overallProgress}%</div>
+                          <div className="text-lg font-bold">{'overallProgress' in entry ? `${entry.overallProgress}%` : '0%'}</div>
                           <div className="text-xs text-muted-foreground">
-                            Level: {entry.level}
+                            Level: {'level' in entry ? entry.level : 'beginner'}
                           </div>
                         </div>
                       )}
