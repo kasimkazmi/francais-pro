@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/contexts/search-context';
 import { 
@@ -101,6 +101,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, searchResults, selectedIndex, onClose]);
 
+  const handleResultClick = useCallback((result: { url: string }) => {
+    router.push(result.url);
+    onClose();
+    setQuery('');
+    clearSearch();
+  }, [router, onClose, clearSearch]);
+
   // Reset selected index when query changes
   useEffect(() => {
     setSelectedIndex(0);
@@ -119,13 +126,6 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     return () => clearTimeout(timeoutId);
   }, [query, performSearch, clearSearch]);
-
-  const handleResultClick = (result: any) => {
-    router.push(result.url);
-    onClose();
-    setQuery('');
-    clearSearch();
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -173,7 +173,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           ) : query && searchResults.length === 0 ? (
             <div className="p-8 text-center text-gray-600 dark:text-gray-400">
               <Search className="h-8 w-8 mx-auto mb-2 opacity-50 text-gray-500 dark:text-gray-400" />
-              <p>No results found for "{query}"</p>
+              <p>No results found for &ldquo;{query}&rdquo;</p>
               <p className="text-sm mt-1">Try different keywords</p>
             </div>
           ) : query && searchResults.length > 0 ? (
