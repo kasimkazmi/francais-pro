@@ -62,7 +62,7 @@ export function SystemMonitoring() {
       setSystemStats(mockStats);
       setLoading(false);
     }, 1000);
-  }, []);
+  }, [mockStats]);
 
 
   const getStatusIcon = (status: string) => {

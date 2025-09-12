@@ -5,12 +5,13 @@ import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { ArrowRight, BookOpen, Lightbulb, Target } from 'lucide-react';
 import grammarData from '@/data/grammar.json';
+import { GrammarData, Verb } from '@/types/data-types';
 
 export function GrammarContent() {
-  const { articles, pronouns, verbs, adjectives, prepositions } = grammarData;
+  const { articles, pronouns, verbs, adjectives, prepositions } = grammarData as GrammarData;
   
   // Convert verbs object to array for easier mapping
-  const verbsArray = Object.values(verbs);
+  const verbsArray = Object.values(verbs) as Verb[];
   
   // Convert adjectives object to array for easier mapping
   const adjectivesArray = adjectives.common;
@@ -155,7 +156,7 @@ export function GrammarContent() {
                   <CardTitle className="flex items-center justify-between">
                     <span>{verb.infinitive}</span>
                     <div className="flex items-center gap-2">
-                      <Badge variant="secondary">{verb.meaning}</Badge>
+                      <Badge variant="secondary">{verb.english}</Badge>
                       <AudioButton 
                         text={verb.infinitive} 
                         size="sm" 
@@ -169,7 +170,7 @@ export function GrammarContent() {
                     {verb.conjugations.map((conjugation, conjIndex) => (
                       <div key={conjIndex} className="flex items-center justify-between p-2 rounded bg-muted/30">
                         <span className="text-sm font-medium">{conjugation.pronoun}</span>
-                        <span className="text-sm">{conjugation.form}</span>
+                        <span className="text-sm">{conjugation.french}</span>
                       </div>
                     ))}
                   </div>

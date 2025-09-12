@@ -19,6 +19,7 @@ import {
   getUserSessions,
   updateUserLastActive,
 } from '@/lib/firebase/user-storage';
+import { Timestamp } from 'firebase/firestore';
 
 interface UserStorageContextType {
   // Profile
@@ -59,7 +60,6 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
   const [userSessions, setUserSessions] = useState<UserSession[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   // Generate session ID
   const generateSessionId = useCallback(() => {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -67,7 +67,6 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
 
   // Get device info
   const getDeviceInfo = useCallback(() => {
-    const userAgent = navigator.userAgent;
     const platform = navigator.platform;
     const language = navigator.language;
     return `${platform} - ${language}`;
@@ -95,7 +94,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
     } finally {
       setLoading(false);
     }
-  }, [user, getDeviceInfo]);
+  }, [user, getDeviceInfo]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Refresh user profile
   const refreshProfile = useCallback(async () => {
@@ -125,7 +124,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
     } finally {
       setLoading(false);
     }
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Refresh user preferences
   const refreshPreferences = useCallback(async () => {
@@ -152,7 +151,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
     } catch (err) {
       console.error('Error logging activity:', err);
     }
-  }, [user, currentSession]);
+  }, [user, currentSession]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Refresh user activities
   const refreshActivities = useCallback(async () => {
@@ -185,7 +184,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
       const session: UserSession = {
         uid: user.uid,
         sessionId,
-        startTime: new Date(),
+        startTime:  Timestamp.now(),
         deviceInfo,
         ipAddress: 'unknown',
         userAgent: navigator.userAgent,
@@ -247,13 +246,37 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
         try {
           setLoading(true);
           
+          // Check if Firebase is properly configured
+          const firebaseConfig = {
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+          };
+          
+          if (!firebaseConfig.apiKey || !firebaseConfig.projectId || 
+              firebaseConfig.apiKey === 'your_api_key_here' || 
+              firebaseConfig.projectId === 'your_project_id') {
+            console.warn('Firebase not configured - skipping user data initialization');
+            setError('Firebase not configured. Please set up your environment variables.');
+            return;
+          }
+          
           // Create or update user profile with Firebase Auth data
           await createOrUpdateUserProfile(user.uid, {
             email: user.email || '',
             displayName: user.displayName || '',
-            photoURL: user.photoURL || null,
-            isEmailVerified: user.emailVerified,
+            photoURL: null,
+            isEmailVerified: false,
           });
+          
+          // Update display name in user progress if available
+          if (user.displayName) {
+            try {
+              const { updateUserDisplayName } = await import('@/lib/firebase/progress');
+              await updateUserDisplayName(user.uid, user.displayName);
+            } catch (error) {
+              console.error('Error updating display name in progress:', error);
+            }
+          }
           
           // Load all user data
           await Promise.all([

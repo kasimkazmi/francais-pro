@@ -24,6 +24,19 @@ export function DynamicStats() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
+        // Check if Firebase is properly configured
+        const firebaseConfig = {
+          apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+          projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+        };
+        
+        if (!firebaseConfig.apiKey || !firebaseConfig.projectId || 
+            firebaseConfig.apiKey === 'your_api_key_here' || 
+            firebaseConfig.projectId === 'your_project_id') {
+          console.warn('Firebase not configured - using fallback stats');
+          throw new Error('Firebase not configured');
+        }
+        
         const appStats = await getAppStats();
         setStats({
           activeUsers: appStats.activeUsers,

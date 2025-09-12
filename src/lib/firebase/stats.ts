@@ -27,14 +27,14 @@ export async function getAppStats(): Promise<AppStats> {
 
     // Get active users (logged in within last 30 days)
     const activeUsersQuery = query(
-      collection(db, 'users'),
-      where('lastLogin', '>=', Timestamp.fromDate(thirtyDaysAgo))
+      collection(db, 'userProfiles'),
+      where('lastActiveAt', '>=', Timestamp.fromDate(thirtyDaysAgo))
     );
     const activeUsersSnapshot = await getDocs(activeUsersQuery);
     const activeUsers = activeUsersSnapshot.size;
 
     // Get total users
-    const totalUsersQuery = query(collection(db, 'users'));
+    const totalUsersQuery = query(collection(db, 'userProfiles'));
     const totalUsersSnapshot = await getDocs(totalUsersQuery);
     const totalUsers = totalUsersSnapshot.size;
 
@@ -52,24 +52,23 @@ export async function getAppStats(): Promise<AppStats> {
       const data = doc.data();
       
       // Count completed lessons
-      if (data.completedLessons) {
-        lessonsCompleted += Object.keys(data.completedLessons).length;
+      if (data.lessons) {
+        const completedLessons = Object.values(data.lessons).filter((lesson: any) => lesson.completed);
+        lessonsCompleted += completedLessons.length;
       }
       
       // Count started lessons (any lesson with progress > 0)
-      if (data.lessonsProgress) {
-        totalLessonsStarted += Object.keys(data.lessonsProgress).length;
+      if (data.lessons) {
+        totalLessonsStarted += Object.keys(data.lessons).length;
       }
       
-      // Collect countries
-      if (data.country) {
-        uniqueCountries.add(data.country);
-      }
+      // Collect countries - this field might not exist in current structure
+      // We'll skip this for now since it's not in the UserProgress interface
       
       // Calculate average session time
-      if (data.totalStudyTime && data.sessionCount) {
-        totalSessionTime += data.totalStudyTime;
-        sessionCount += data.sessionCount;
+      if (data.totalTimeSpent) {
+        totalSessionTime += data.totalTimeSpent;
+        sessionCount += 1; // Each user progress doc represents one user
       }
     });
 
@@ -103,7 +102,7 @@ export async function getUserStats(userId: string) {
   try {
     const userProgressQuery = query(
       collection(db, 'userProgress'),
-      where('userId', '==', userId)
+      where('uid', '==', userId)
     );
     const snapshot = await getDocs(userProgressQuery);
     
@@ -114,13 +113,17 @@ export async function getUserStats(userId: string) {
     const doc = snapshot.docs[0];
     const data = doc.data();
 
+    // Count completed lessons from the lessons object
+    const completedLessons = data.lessons ? 
+      Object.values(data.lessons).filter((lesson: any) => lesson.completed).length : 0;
+
     return {
-      lessonsCompleted: data.completedLessons ? Object.keys(data.completedLessons).length : 0,
-      totalStudyTime: data.totalStudyTime || 0,
+      lessonsCompleted: completedLessons,
+      totalStudyTime: data.totalTimeSpent || 0,
       currentStreak: data.currentStreak || 0,
       longestStreak: data.longestStreak || 0,
-      level: data.level || 'Beginner',
-      country: data.country || 'Unknown'
+      level: data.level || 'beginner',
+      country: 'Unknown' // This field doesn't exist in current structure
     };
   } catch (error) {
     console.error('Error fetching user stats:', error);
@@ -132,18 +135,22 @@ export async function getLeaderboardStats(limit: number = 10) {
   try {
     const leaderboardQuery = query(
       collection(db, 'userProgress'),
-      orderBy('lessonsCompleted', 'desc'),
+      orderBy('totalLessonsCompleted', 'desc'),
       limit(limit)
     );
     const snapshot = await getDocs(leaderboardQuery);
     
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      lessonsCompleted: doc.data().completedLessons 
-        ? Object.keys(doc.data().completedLessons).length 
-        : 0
-    }));
+    return snapshot.docs.map(doc => {
+      const data = doc.data();
+      const completedLessons = data.lessons ? 
+        Object.values(data.lessons).filter((lesson: any) => lesson.completed).length : 0;
+      
+      return {
+        id: doc.id,
+        ...data,
+        lessonsCompleted: completedLessons
+      };
+    });
   } catch (error) {
     console.error('Error fetching leaderboard stats:', error);
     throw error;

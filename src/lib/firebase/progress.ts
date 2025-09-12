@@ -29,6 +29,7 @@ export interface ModuleProgress {
 
 export interface UserProgress {
   uid: string;
+  displayName?: string;
   totalLessonsCompleted: number;
   totalTimeSpent: number; // in minutes
   currentStreak: number;
@@ -73,9 +74,10 @@ export async function getUserProgress(uid: string): Promise<UserProgress | null>
 }
 
 // Initialize user progress
-export async function initializeUserProgress(uid: string): Promise<UserProgress> {
+export async function initializeUserProgress(uid: string, displayName?: string): Promise<UserProgress> {
   const initialProgress: UserProgress = {
     uid,
+    displayName: displayName || 'Anonymous',
     totalLessonsCompleted: 0,
     totalTimeSpent: 0,
     currentStreak: 0,
@@ -175,9 +177,17 @@ export async function updateLessonProgress(
 
     await updateDoc(userProgressRef, updatedProgress);
     
+    // Update display name in user progress if available
+    const userProfile = auth.currentUser;
+    if (userProfile && userProfile.displayName) {
+      await updateDoc(userProgressRef, {
+        displayName: userProfile.displayName
+      });
+      updatedProgress.displayName = userProfile.displayName;
+    }
+    
     // Sync to public leaderboard
     try {
-      const userProfile = auth.currentUser;
       if (userProfile) {
         await syncUserToLeaderboard(uid, {
           displayName: userProfile.displayName || 'Anonymous',
@@ -214,5 +224,18 @@ export async function getLessonProgress(uid: string, moduleId: string, lessonId:
   } catch (error) {
     console.error('Error getting lesson progress:', error);
     return null;
+  }
+}
+
+// Update user display name in progress
+export async function updateUserDisplayName(uid: string, displayName: string): Promise<void> {
+  try {
+    const userProgressRef = doc(db, 'userProgress', uid);
+    await updateDoc(userProgressRef, {
+      displayName: displayName
+    });
+  } catch (error) {
+    console.error('Error updating user display name:', error);
+    throw error;
   }
 }

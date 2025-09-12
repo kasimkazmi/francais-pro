@@ -77,10 +77,10 @@ export function CLBCalculator() {
     
     for (const threshold of thresholds) {
       if (score >= threshold) {
-        return conversion[threshold];
+        return conversion[threshold as keyof typeof conversion];
       }
     }
-    return conversion[0];
+    return conversion[0 as keyof typeof conversion];
   };
 
   const handleCalculate = () => {

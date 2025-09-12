@@ -192,7 +192,7 @@ export function ConversationsContent() {
                               english: phrase.english,
                               category: 'Common Phrases',
                               pronunciation: phrase.pronunciation,
-                              example: phrase.context || undefined
+                              example: undefined
                             })}
                           >
                             <Star className={`h-4 w-4 ${isFavorite('conversation', phrase.french) ? 'fill-current' : ''}`} />

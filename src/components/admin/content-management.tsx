@@ -89,7 +89,7 @@ export function ContentManagement() {
       setContentItems(mockContent);
       setLoading(false);
     }, 1000);
-  }, []);
+  }, [mockContent]);
 
   const getContentIcon = (type: string) => {
     switch (type) {
@@ -422,7 +422,7 @@ export function ContentManagement() {
                   value={editingItem.type}
                   onValueChange={(value: string) => setEditingItem({
                     ...editingItem,
-                    type: value
+                    type: value as ContentItem['type']
                   })}
                 >
                   <SelectTrigger>
@@ -451,7 +451,7 @@ export function ContentManagement() {
                         ...editingItem,
                         content
                       });
-                    } catch (error) {
+                    } catch {
                       // Invalid JSON, keep the text as is
                     }
                   }}

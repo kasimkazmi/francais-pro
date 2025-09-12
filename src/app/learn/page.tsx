@@ -1,15 +1,16 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { Badge } from "@/components/ui/badge";
 import { Header } from "@/components/layout/header";
 import { LearningPageLoader } from "@/components/ui/page-loader";
-import { BookOpen, Play, CheckCircle, Clock, Star } from "lucide-react";
+import { BookOpen, Play, CheckCircle, Clock, Star, ArrowRight } from "lucide-react";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const learningModules = [
   {
@@ -179,7 +180,9 @@ export default function LearnPage() {
                               </div>
                             </div>
                           </div>
-                          <button
+                          <EnhancedButton
+                            variant={lessonCompleted ? "outline" : "default"}
+                            size="sm"
                             onClick={() => {
                               if (!isAuthenticated) {
                                 setShowAuthModal(true);
@@ -188,45 +191,11 @@ export default function LearnPage() {
                               // Navigate to lesson
                               window.location.href = `/learn/${module.id}/${lesson.id}`;
                             }}
-                            style={{
-                              padding: '8px 16px',
-                              borderRadius: '8px',
-                              fontWeight: '500',
-                              fontSize: '14px',
-                              border: '2px solid',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s ease',
-                              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-                              backgroundColor: lessonCompleted ? (document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff') : '#2563eb',
-                              borderColor: lessonCompleted ? (document.documentElement.classList.contains('dark') ? '#4b5563' : '#d1d5db') : '#2563eb',
-                              color: lessonCompleted ? (document.documentElement.classList.contains('dark') ? '#d1d5db' : '#374151') : '#ffffff'
-                            }}
-                            className="hover:shadow-md active:scale-95"
-                            onMouseEnter={(e) => {
-                              if (lessonCompleted) {
-                                const isDark = document.documentElement.classList.contains('dark');
-                                e.currentTarget.style.backgroundColor = isDark ? '#374151' : '#f9fafb';
-                                e.currentTarget.style.borderColor = isDark ? '#6b7280' : '#9ca3af';
-                                e.currentTarget.style.color = isDark ? '#f3f4f6' : '#111827';
-                              } else {
-                                e.currentTarget.style.backgroundColor = '#1d4ed8';
-                                e.currentTarget.style.borderColor = '#1d4ed8';
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (lessonCompleted) {
-                                const isDark = document.documentElement.classList.contains('dark');
-                                e.currentTarget.style.backgroundColor = isDark ? '#1f2937' : '#ffffff';
-                                e.currentTarget.style.borderColor = isDark ? '#4b5563' : '#d1d5db';
-                                e.currentTarget.style.color = isDark ? '#d1d5db' : '#374151';
-                              } else {
-                                e.currentTarget.style.backgroundColor = '#2563eb';
-                                e.currentTarget.style.borderColor = '#2563eb';
-                              }
-                            }}
+                            className="ml-4"
                           >
                             {lessonCompleted ? "Review" : "Start"}
-                          </button>
+                            <ArrowRight className="h-4 w-4 ml-1" />
+                          </EnhancedButton>
                         </div>
                       );
                     })}

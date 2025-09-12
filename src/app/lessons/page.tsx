@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
@@ -279,7 +279,7 @@ export default function LessonsPage() {
                               </div>
                             </div>
                           </div>
-                          <Button
+                          <EnhancedButton
                             variant={lessonCompleted ? "outline" : "default"}
                             size="sm"
                             onClick={() => handleLessonClick(module.id, lesson.id)}
@@ -287,7 +287,7 @@ export default function LessonsPage() {
                           >
                             {lessonCompleted ? "Review" : "Start"}
                             <ArrowRight className="h-4 w-4 ml-1" />
-                          </Button>
+                          </EnhancedButton>
                         </div>
                       );
                     })}
@@ -340,7 +340,7 @@ export default function LessonsPage() {
                           </div>
                         </div>
                       </div>
-                      <Button
+                      <EnhancedButton
                         variant={lessonCompleted ? "outline" : "default"}
                         size="sm"
                         onClick={() => handleLessonClick(lesson.moduleId, lesson.id)}
@@ -348,7 +348,7 @@ export default function LessonsPage() {
                       >
                         {lessonCompleted ? "Review" : "Start"}
                         <ArrowRight className="h-4 w-4 ml-1" />
-                      </Button>
+                      </EnhancedButton>
                     </div>
                   );
                 })}

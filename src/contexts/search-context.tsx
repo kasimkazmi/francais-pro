@@ -13,6 +13,13 @@ import conversationsData from '@/data/conversations.json';
 import cultureData from '@/data/culture.json';
 import expressionsData from '@/data/expressions.json';
 import immigrationData from '@/data/immigration.json';
+import { 
+  AlphabetData, 
+  NumbersData, 
+  GrammarData, 
+  ConversationsData, 
+  ExpressionsData 
+} from '@/types/data-types';
 
 export interface SearchResult {
   id: string;
@@ -54,7 +61,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     const lowerQuery = query.toLowerCase();
 
     // Search alphabet data
-    alphabetData.letters.forEach((letter, index) => {
+    (alphabetData as AlphabetData).alphabet.forEach((letter, index) => {
       if (
         letter.letter.toLowerCase().includes(lowerQuery) ||
         letter.pronunciation.toLowerCase().includes(lowerQuery) ||
@@ -66,31 +73,31 @@ export function SearchProvider({ children }: { children: ReactNode }) {
           content: `${letter.letter} - ${letter.pronunciation} (${letter.example})`,
           type: 'alphabet',
           url: '/alphabet',
-          relevance: calculateRelevance(letter, lowerQuery)
+          relevance: calculateRelevance(letter as unknown as Record<string, unknown>, lowerQuery)
         });
       }
     });
 
     // Search numbers data
-    numbersData.numbers1to20.forEach((number, index) => {
+    (numbersData as NumbersData).numbers1to20.forEach((number, index) => {
       if (
         number.french.toLowerCase().includes(lowerQuery) ||
-        number.english.toLowerCase().includes(lowerQuery) ||
+        number.num.toString().includes(lowerQuery) ||
         number.pronunciation.toLowerCase().includes(lowerQuery)
       ) {
         results.push({
           id: `numbers-${index}`,
-          title: `Number ${number.english}`,
-          content: `${number.french} - ${number.pronunciation} (${number.english})`,
+          title: `Number ${number.num}`,
+          content: `${number.french} - ${number.pronunciation} (${number.num})`,
           type: 'numbers',
           url: '/numbers',
-          relevance: calculateRelevance(number, lowerQuery)
+          relevance: calculateRelevance(number as unknown as Record<string, unknown>, lowerQuery)
         });
       }
     });
 
     // Search greetings data
-    greetingsData.greetings.forEach((greeting, index) => {
+    greetingsData.basicGreetings.forEach((greeting, index) => {
       if (
         greeting.french.toLowerCase().includes(lowerQuery) ||
         greeting.english.toLowerCase().includes(lowerQuery) ||
@@ -102,41 +109,67 @@ export function SearchProvider({ children }: { children: ReactNode }) {
           content: `${greeting.french} - ${greeting.pronunciation}`,
           type: 'greetings',
           url: '/greetings',
-          relevance: calculateRelevance(greeting, lowerQuery)
+          relevance: calculateRelevance(greeting as unknown as Record<string, unknown>, lowerQuery)
         });
       }
     });
 
     // Search grammar data
-    grammarData.sections.forEach((section, sectionIndex) => {
-      if (section.title.toLowerCase().includes(lowerQuery)) {
+    const grammarTyped = grammarData as GrammarData;
+    
+    // Search articles
+    [...grammarTyped.articles.definite, ...grammarTyped.articles.indefinite].forEach((article, index) => {
+      if (
+        article.french.toLowerCase().includes(lowerQuery) ||
+        article.english.toLowerCase().includes(lowerQuery) ||
+        (article.example && article.example.toLowerCase().includes(lowerQuery))
+      ) {
         results.push({
-          id: `grammar-section-${sectionIndex}`,
-          title: section.title,
-          content: section.description,
+          id: `grammar-article-${index}`,
+          title: article.french,
+          content: `${article.english} - ${article.example || ''}`,
           type: 'grammar',
-          category: section.title,
+          category: 'Articles',
           url: '/grammar',
-          relevance: calculateRelevance(section, lowerQuery)
+          relevance: calculateRelevance(article as unknown as Record<string, unknown>, lowerQuery)
         });
       }
+    });
 
-      section.rules.forEach((rule, ruleIndex) => {
-        if (
-          rule.rule.toLowerCase().includes(lowerQuery) ||
-          rule.example.toLowerCase().includes(lowerQuery)
-        ) {
-          results.push({
-            id: `grammar-rule-${sectionIndex}-${ruleIndex}`,
-            title: rule.rule,
-            content: rule.example,
-            type: 'grammar',
-            category: section.title,
-            url: '/grammar',
-            relevance: calculateRelevance(rule, lowerQuery)
-          });
-        }
-      });
+    // Search pronouns
+    [...grammarTyped.pronouns.subject, ...grammarTyped.pronouns.object].forEach((pronoun, index) => {
+      if (
+        pronoun.french.toLowerCase().includes(lowerQuery) ||
+        pronoun.english.toLowerCase().includes(lowerQuery)
+      ) {
+        results.push({
+          id: `grammar-pronoun-${index}`,
+          title: pronoun.french,
+          content: pronoun.english,
+          type: 'grammar',
+          category: 'Pronouns',
+          url: '/grammar',
+          relevance: calculateRelevance(pronoun as unknown as Record<string, unknown>, lowerQuery)
+        });
+      }
+    });
+
+    // Search verbs
+    Object.values(grammarTyped.verbs).forEach((verb, index) => {
+      if (
+        verb.infinitive.toLowerCase().includes(lowerQuery) ||
+        verb.english.toLowerCase().includes(lowerQuery)
+      ) {
+        results.push({
+          id: `grammar-verb-${index}`,
+          title: verb.infinitive,
+          content: verb.english,
+          type: 'grammar',
+          category: 'Verbs',
+          url: '/grammar',
+          relevance: calculateRelevance(verb as unknown as Record<string, unknown>, lowerQuery)
+        });
+      }
     });
 
     // Search vocabulary data
@@ -156,7 +189,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
               type: 'vocabulary',
               category: category.charAt(0).toUpperCase() + category.slice(1),
               url: '/vocabulary',
-              relevance: calculateRelevance(word, lowerQuery)
+              relevance: calculateRelevance(word as unknown as Record<string, unknown>, lowerQuery)
             });
           }
         });
@@ -164,18 +197,18 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     });
 
     // Search conversations data
-    conversationsData.scenarios.forEach((scenario, index) => {
+    (conversationsData as ConversationsData).scenarios.forEach((scenario, index) => {
       if (
         scenario.title.toLowerCase().includes(lowerQuery) ||
-        scenario.description.toLowerCase().includes(lowerQuery)
+        scenario.situation.toLowerCase().includes(lowerQuery)
       ) {
         results.push({
           id: `conversation-${index}`,
           title: scenario.title,
-          content: scenario.description,
+          content: scenario.situation,
           type: 'conversations',
           url: '/conversations',
-          relevance: calculateRelevance(scenario, lowerQuery)
+          relevance: calculateRelevance(scenario as unknown as Record<string, unknown>, lowerQuery)
         });
       }
 
@@ -190,7 +223,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
             content: `${line.french} - ${line.english}`,
             type: 'conversations',
             url: '/conversations',
-            relevance: calculateRelevance(line, lowerQuery)
+            relevance: calculateRelevance(line as unknown as Record<string, unknown>, lowerQuery)
           });
         }
       });
@@ -200,18 +233,19 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     Object.entries(cultureData).forEach(([category, items]) => {
       if (Array.isArray(items)) {
         items.forEach((item, index) => {
+          const itemRecord = item as Record<string, unknown>;
           if (
-            item.title.toLowerCase().includes(lowerQuery) ||
-            item.description.toLowerCase().includes(lowerQuery)
+            ((itemRecord.title || itemRecord.name) as string).toLowerCase().includes(lowerQuery) ||
+            (itemRecord.description && (itemRecord.description as string).toLowerCase().includes(lowerQuery))
           ) {
             results.push({
               id: `culture-${category}-${index}`,
-              title: item.title,
-              content: item.description,
+              title: (itemRecord.title || itemRecord.name) as string,
+              content: (itemRecord.description as string) || '',
               type: 'culture',
               category: category.charAt(0).toUpperCase() + category.slice(1),
               url: '/culture',
-              relevance: calculateRelevance(item, lowerQuery)
+              relevance: calculateRelevance(item as unknown as Record<string, unknown>, lowerQuery)
             });
           }
         });
@@ -219,7 +253,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     });
 
     // Search expressions data
-    Object.entries(expressionsData).forEach(([category, expressions]) => {
+    Object.entries(expressionsData as ExpressionsData).forEach(([category, expressions]) => {
       if (Array.isArray(expressions)) {
         expressions.forEach((expression, index) => {
           if (
@@ -234,7 +268,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
               type: 'expressions',
               category: category.charAt(0).toUpperCase() + category.slice(1),
               url: '/expressions',
-              relevance: calculateRelevance(expression, lowerQuery)
+              relevance: calculateRelevance(expression as unknown as Record<string, unknown>, lowerQuery)
             });
           }
         });
@@ -242,11 +276,11 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     });
 
     // Search immigration data
-    if (immigrationData.title.toLowerCase().includes(lowerQuery)) {
+    if (immigrationData.expressEntry?.overview?.title.toLowerCase().includes(lowerQuery)) {
       results.push({
         id: 'immigration-title',
-        title: immigrationData.title,
-        content: immigrationData.description,
+        title: immigrationData.expressEntry.overview.title,
+        content: immigrationData.expressEntry.overview.description,
         type: 'immigration',
         url: '/immigration',
         relevance: 10

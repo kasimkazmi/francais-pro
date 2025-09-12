@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, Medal, Award, Crown, Star, Clock, BookOpen, Target, TrendingUp } from "lucide-react";
+import { Trophy, Medal, Award, Crown, Star, Clock, BookOpen, Target } from "lucide-react";
 import { getPublicOverallLeaderboard, getPublicModuleLeaderboard, getPublicLeaderboardStats, type PublicLeaderboardEntry, type ModuleLeaderboard } from '@/lib/firebase/leaderboard-public';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -28,11 +28,7 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadLeaderboardData();
-  }, [moduleId]);
-
-  const loadLeaderboardData = async () => {
+  const loadLeaderboardData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -51,7 +47,11 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
     } finally {
       setLoading(false);
     }
-  };
+  }, [moduleId, limit, showStats]);
+
+  useEffect(() => {
+    loadLeaderboardData();
+  }, [loadLeaderboardData]);
 
   const getRankIcon = (rank: number) => {
     switch (rank) {

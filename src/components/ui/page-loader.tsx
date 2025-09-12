@@ -1,5 +1,5 @@
 import { LoadingSpinner } from './loading-spinner';
-import { Skeleton, SkeletonCard } from './skeleton-loader';
+import { SkeletonCard } from './skeleton-loader';
 
 interface PageLoaderProps {
   variant?: 'spinner' | 'skeleton' | 'minimal';

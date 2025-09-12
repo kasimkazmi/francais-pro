@@ -163,8 +163,47 @@ export default function LessonPage() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [sectionTimeSpent, setSectionTimeSpent] = useState(0);
   const [isSessionActive, setIsSessionActive] = useState(false);
+  const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
+  const [sectionStartTime, setSectionStartTime] = useState<Date | null>(null);
 
-  const lesson = lessonContent[moduleId as keyof typeof lessonContent]?.[lessonId as string];
+  // Define proper types for lesson content
+  interface ExercisePair {
+    french: string;
+    pronunciations: string[];
+  }
+
+  interface Exercise {
+    type: string;
+    question: string;
+    options?: string[];
+    correct?: number | number[];
+    pairs?: ExercisePair[];
+    explanation?: string;
+  }
+
+  interface Example {
+    french: string;
+    english: string;
+    audio: string;
+    description: string;
+  }
+
+  interface LessonSection {
+    title: string;
+    duration: number;
+    content: string;
+    type: string;
+    examples?: Example[];
+    exercises?: Exercise[];
+  }
+
+  interface Lesson {
+    title: string;
+    duration: number;
+    sections: LessonSection[];
+  }
+
+  const lesson = (lessonContent as Record<string, Record<string, Lesson>>)[moduleId]?.[lessonId] as Lesson | undefined;
   const isLessonDone = isLessonCompleted(moduleId, lessonId);
   const currentSectionData = lesson?.sections?.[currentSection];
 
@@ -178,17 +217,20 @@ export default function LessonPage() {
     const startTime = new Date();
     setSessionStartTime(startTime);
     setIsSessionActive(true);
+  }, [isAuthenticated, isLoading]);
+
+  // Separate effect for timer
+  useEffect(() => {
+    if (!isSessionActive || !sessionStartTime) return;
 
     const timer = setInterval(() => {
-      if (isSessionActive) {
-        const now = new Date();
-        const totalTime = Math.floor((now.getTime() - startTime.getTime()) / 1000 / 60); // minutes
-        setTimeSpent(totalTime);
-      }
+      const now = new Date();
+      const totalTime = Math.floor((now.getTime() - sessionStartTime.getTime()) / 1000 / 60); // minutes
+      setTimeSpent(totalTime);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isAuthenticated, isLoading, isSessionActive]);
+  }, [isSessionActive, sessionStartTime]);
 
   // Section timer
   useEffect(() => {
@@ -196,16 +238,21 @@ export default function LessonPage() {
       const startTime = new Date();
       setSectionStartTime(startTime);
       setSectionTimeSpent(0);
-
-      const sectionTimer = setInterval(() => {
-        const now = new Date();
-        const sectionTime = Math.floor((now.getTime() - startTime.getTime()) / 1000); // seconds
-        setSectionTimeSpent(sectionTime);
-      }, 1000);
-
-      return () => clearInterval(sectionTimer);
     }
   }, [currentSection, currentSectionData, isSessionActive]);
+
+  // Separate effect for section timer
+  useEffect(() => {
+    if (!sectionStartTime) return;
+
+    const sectionTimer = setInterval(() => {
+      const now = new Date();
+      const sectionTime = Math.floor((now.getTime() - sectionStartTime.getTime()) / 1000); // seconds
+      setSectionTimeSpent(sectionTime);
+    }, 1000);
+
+    return () => clearInterval(sectionTimer);
+  }, [sectionStartTime]);
 
   const handleExerciseAnswer = (exerciseIndex: number, answer: number | number[]) => {
     setExerciseAnswers(prev => ({
@@ -249,23 +296,24 @@ export default function LessonPage() {
   };
 
   const calculateScore = () => {
-    if (!lesson) return 0;
+    if (!lesson?.sections) return 0;
     
     let correct = 0;
     let total = 0;
 
     // Calculate score from all sections
-    lesson.sections.forEach(section => {
+    lesson.sections.forEach((section: LessonSection) => {
       if (section.exercises) {
-        section.exercises.forEach((exercise, index) => {
+        section.exercises.forEach((exercise: Exercise, index: number) => {
           total++;
           const userAnswer = exerciseAnswers[index];
           if (exercise.type === "pronunciation" || exercise.type === "translation" || exercise.type === "scenario") {
             if (userAnswer === exercise.correct) correct++;
-          } else if (exercise.type === "matching") {
+          } else if (exercise.type === "matching" && exercise.correct && Array.isArray(exercise.correct)) {
+            const correctArray = exercise.correct as number[];
             const isCorrect = Array.isArray(userAnswer) && 
-              userAnswer.length === exercise.correct.length &&
-              userAnswer.every((ans, i) => ans === exercise.correct[i]);
+              userAnswer.length === correctArray.length &&
+              userAnswer.every((ans, i) => ans === correctArray[i]);
             if (isCorrect) correct++;
           }
         });
@@ -407,7 +455,7 @@ export default function LessonPage() {
                 {currentSectionData.examples && (
                   <div className="space-y-3">
                     <h4 className="font-medium">Examples:</h4>
-                    {currentSectionData.examples.map((example, exampleIndex) => (
+                    {currentSectionData.examples.map((example: Example, exampleIndex: number) => (
                       <div key={exampleIndex} className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50">
                         <div className="flex-1">
                           <div className="font-medium text-lg">{example.french}</div>
@@ -430,13 +478,13 @@ export default function LessonPage() {
                 {currentSectionData.exercises && (
                   <div className="space-y-4 mt-6">
                     <h4 className="font-medium">Practice:</h4>
-                    {currentSectionData.exercises.map((exercise, index) => (
+                    {currentSectionData.exercises.map((exercise: Exercise, index: number) => (
                       <div key={index} className="p-4 border rounded-lg">
                         <h5 className="font-medium mb-3">{exercise.question}</h5>
                         
                         {exercise.type === "pronunciation" || exercise.type === "translation" || exercise.type === "scenario" ? (
                           <div className="space-y-2">
-                            {exercise.options.map((option, optionIndex) => (
+                            {exercise.options?.map((option: string, optionIndex: number) => (
                               <label key={optionIndex} className="flex items-center space-x-2 cursor-pointer p-2 rounded hover:bg-muted/50">
                                 <input
                                   type="radio"
@@ -467,7 +515,7 @@ export default function LessonPage() {
                           </div>
                         ) : exercise.type === "matching" ? (
                           <div className="space-y-3">
-                            {exercise.pairs.map((pair, pairIndex) => (
+                            {exercise.pairs?.map((pair: ExercisePair, pairIndex: number) => (
                               <div key={pairIndex} className="flex items-center gap-4">
                                 <div className="flex items-center gap-2">
                                   <span 
@@ -497,7 +545,7 @@ export default function LessonPage() {
                                   className="border border-input rounded px-2 py-1 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring hover:bg-muted/50 transition-colors dark:bg-background dark:text-foreground"
                                 >
                                   <option value="">Select pronunciation</option>
-                                  {pair.pronunciations.map((pronunciation, pronIndex) => (
+                                  {pair.pronunciations.map((pronunciation: string, pronIndex: number) => (
                                     <option key={pronIndex} value={pronIndex}>
                                       {pronunciation}
                                     </option>

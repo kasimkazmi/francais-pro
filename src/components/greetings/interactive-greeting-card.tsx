@@ -15,7 +15,7 @@ interface InteractiveGreetingCardProps {
   index: number;
 }
 
-export function InteractiveGreetingCard({ greeting, index }: InteractiveGreetingCardProps) {
+export function InteractiveGreetingCard({ greeting }: InteractiveGreetingCardProps) {
   return (
     <Card className="universal-card">
       <CardContent className="p-4">

@@ -6,7 +6,6 @@ import {
   getDocs,
   doc,
   getDoc,
-  where,
   Timestamp 
 } from 'firebase/firestore';
 import { db } from './config';

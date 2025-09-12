@@ -2,13 +2,10 @@ import {
   collection, 
   query, 
   orderBy, 
-  limit, 
+  limit,
   getDocs,
   doc,
-  getDoc,
   setDoc,
-  updateDoc,
-  where,
   Timestamp 
 } from 'firebase/firestore';
 import { db } from './config';
@@ -54,9 +51,10 @@ export interface ModuleLeaderboard {
 // Get overall leaderboard from public collection
 export async function getPublicOverallLeaderboard(limitCount: number = 10): Promise<PublicLeaderboardEntry[]> {
   try {
-    const leaderboardRef = collection(db, 'leaderboard');
+    // Read from userProgress collection instead of leaderboard collection
+    const progressRef = collection(db, 'userProgress');
     const q = query(
-      leaderboardRef,
+      progressRef,
       orderBy('totalLessonsCompleted', 'desc'),
       limit(limitCount)
     );
@@ -66,6 +64,10 @@ export async function getPublicOverallLeaderboard(limitCount: number = 10): Prom
     
     querySnapshot.forEach((docSnap, index) => {
       const data = docSnap.data();
+      
+      // Calculate overall progress percentage
+      const overallProgress = data.totalLessonsCompleted ? Math.round((data.totalLessonsCompleted / 13) * 100) : 0;
+      
       leaderboard.push({
         uid: docSnap.id,
         displayName: data.displayName || 'Anonymous',
@@ -75,7 +77,7 @@ export async function getPublicOverallLeaderboard(limitCount: number = 10): Prom
         longestStreak: data.longestStreak || 0,
         level: data.level || 'beginner',
         wordsLearned: data.wordsLearned || 0,
-        overallProgress: data.overallProgress || 0,
+        overallProgress: overallProgress,
         lastActiveDate: data.lastActiveDate || Timestamp.now(),
         modules: data.modules || {},
         rank: index + 1
@@ -92,8 +94,9 @@ export async function getPublicOverallLeaderboard(limitCount: number = 10): Prom
 // Get module-specific leaderboard from public collection
 export async function getPublicModuleLeaderboard(moduleId: string, limitCount: number = 10): Promise<ModuleLeaderboard | null> {
   try {
-    const leaderboardRef = collection(db, 'leaderboard');
-    const q = query(leaderboardRef);
+    // Read from userProgress collection instead of leaderboard collection
+    const progressRef = collection(db, 'userProgress');
+    const q = query(progressRef);
     
     const querySnapshot = await getDocs(q);
     const moduleRankings: ModuleLeaderboardEntry[] = [];
@@ -187,8 +190,9 @@ export async function getPublicLeaderboardStats(): Promise<{
   topStreak: number;
 }> {
   try {
-    const leaderboardRef = collection(db, 'leaderboard');
-    const querySnapshot = await getDocs(leaderboardRef);
+    // Read from userProgress collection instead of leaderboard collection
+    const progressRef = collection(db, 'userProgress');
+    const querySnapshot = await getDocs(progressRef);
     
     let totalUsers = 0;
     let totalLessonsCompleted = 0;
@@ -199,7 +203,11 @@ export async function getPublicLeaderboardStats(): Promise<{
       const data = doc.data();
       totalUsers++;
       totalLessonsCompleted += data.totalLessonsCompleted || 0;
-      totalProgress += data.overallProgress || 0;
+      
+      // Calculate progress percentage based on lessons completed
+      const progressPercentage = data.totalLessonsCompleted ? Math.round((data.totalLessonsCompleted / 13) * 100) : 0;
+      totalProgress += progressPercentage;
+      
       topStreak = Math.max(topStreak, data.longestStreak || 0);
     });
     

@@ -30,9 +30,6 @@ export function EnhancedButton({
   onClick,
   disabled = false,
   asChild = false,
-  href,
-  target,
-  rel,
   ...props
 }: EnhancedButtonProps) {
   const [isClicked, setIsClicked] = useState(false);
@@ -53,13 +50,14 @@ export function EnhancedButton({
       variant={variant}
       size={size}
       className={cn(
-        "relative overflow-hidden transition-all duration-200 ease-in-out",
+        "relative overflow-hidden transition-all duration-200 ease-in-out group",
         "hover:scale-105 hover:shadow-lg",
         "active:scale-95 active:shadow-md",
         "focus:ring-2 focus:ring-primary/20 focus:ring-offset-2",
         "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100",
-        "hover:bg-blue-600 hover:text-white",
-        "active:bg-blue-700",
+        // Enhanced hover background effects
+        "hover:bg-primary/90 hover:text-primary-foreground",
+        "hover:border-primary/20",
         isClicked && "animate-pulse",
         className
       )}
@@ -68,7 +66,9 @@ export function EnhancedButton({
       asChild={asChild}
       {...props}
     >
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 flex items-center justify-center gap-1">
+        {children}
+      </span>
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
     </Button>
   );

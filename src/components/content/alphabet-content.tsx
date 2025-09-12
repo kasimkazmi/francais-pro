@@ -5,9 +5,10 @@ import { AudioButton } from '@/components/ui/audio-button';
 import { LazyCardGrid } from '@/components/ui/lazy-card';
 import { ArrowRight } from 'lucide-react';
 import alphabetData from '@/data/alphabet.json';
+import { AlphabetData } from '@/types/data-types';
 
 export function AlphabetContent() {
-  const { alphabet, specialCharacters, spellingWords } = alphabetData;
+  const { alphabet, specialCharacters, spellingWords } = alphabetData as AlphabetData;
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
@@ -58,7 +59,6 @@ export function AlphabetContent() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">{letter.pronunciation}</p>
-                <p className="text-xs text-muted-foreground mt-1">{letter.description}</p>
               </div>
             ))}
           </LazyCardGrid>
@@ -76,12 +76,12 @@ export function AlphabetContent() {
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-bold text-2xl">{char.character}</h3>
                   <AudioButton 
-                    text={char.pronunciation} 
+                    text={char.character} 
                     size="sm" 
                     tooltipContent="Click to hear pronunciation"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground">{char.pronunciation}</p>
+                <p className="text-sm text-muted-foreground">{char.name}</p>
                 <p className="text-xs text-muted-foreground mt-1">{char.description}</p>
                 <Badge variant="secondary" className="mt-2 text-xs">
                   {char.name}

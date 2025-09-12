@@ -11,6 +11,7 @@ import {
   Timestamp
 } from 'firebase/firestore';
 import { db } from './config';
+import { syncUserToLeaderboard } from './leaderboard-public';
 
 // User profile interface
 export interface UserProfile {
@@ -145,13 +146,47 @@ export async function createOrUpdateUserProfile(
       
       await setDoc(userRef, newProfile);
       console.log('User profile created:', uid);
+      
+      // Sync to leaderboard
+      try {
+        await syncUserToLeaderboard(uid, {
+          displayName: newProfile.displayName,
+          totalLessonsCompleted: 0,
+          totalTimeSpent: 0,
+          currentStreak: 0,
+          longestStreak: 0,
+          level: 'beginner',
+          wordsLearned: 0,
+          lastActiveDate: newProfile.lastActiveAt,
+          modules: {}
+        });
+      } catch (syncError) {
+        console.error('Error syncing new user to leaderboard:', syncError);
+      }
     } else {
       // Update existing profile - filter out undefined values
       const cleanProfileData = Object.fromEntries(
-        Object.entries(profileData).filter(([_, value]) => value !== undefined)
+        Object.entries(profileData).filter(([, value]) => value !== undefined)
       );
       await updateDoc(userRef, cleanProfileData);
       console.log('User profile updated:', uid);
+      
+      // Sync to leaderboard
+      try {
+        await syncUserToLeaderboard(uid, {
+          displayName: cleanProfileData.displayName || userData.displayName,
+          totalLessonsCompleted: cleanProfileData.totalLessonsCompleted || 0,
+          totalTimeSpent: cleanProfileData.totalTimeSpent || 0,
+          currentStreak: cleanProfileData.currentStreak || 0,
+          longestStreak: cleanProfileData.longestStreak || 0,
+          level: cleanProfileData.level || 'beginner',
+          wordsLearned: cleanProfileData.wordsLearned || 0,
+          lastActiveDate: cleanProfileData.lastActiveAt || Timestamp.now(),
+          modules: cleanProfileData.modules || {}
+        });
+      } catch (syncError) {
+        console.error('Error syncing updated user to leaderboard:', syncError);
+      }
     }
   } catch (error) {
     console.error('Error creating/updating user profile:', error);

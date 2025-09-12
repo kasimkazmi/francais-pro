@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAdmin } from '@/contexts/AdminContext';
+import { db } from '@/lib/firebase/config';
+import { collection, getDocs, doc, getDoc, query, orderBy } from 'firebase/firestore';
 import { 
   Users, 
   Search, 
@@ -21,8 +23,6 @@ import {
   BookOpen,
   TrendingUp,
 } from 'lucide-react';
-import { collection, query, getDocs, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
 
 interface UserData {
   uid: string;
@@ -57,19 +57,19 @@ export function UserManagement() {
       
       const usersData: UserData[] = [];
       
-      for (const doc of progressSnapshot.docs) {
-        const data = doc.data();
+      for (const docSnapshot of progressSnapshot.docs) {
+        const data = docSnapshot.data();
         
         // Check if user is admin
-        const adminDoc = await getDoc(doc(db, 'adminUsers', doc.id));
+        const adminDoc = await getDoc(doc(db, 'adminUsers', docSnapshot.id));
         const adminData = adminDoc.exists() ? adminDoc.data() : null;
         
         // Check if user is banned
-        const bannedDoc = await getDoc(doc(db, 'bannedUsers', doc.id));
+        const bannedDoc = await getDoc(doc(db, 'bannedUsers', docSnapshot.id));
         const isBanned = bannedDoc.exists() && bannedDoc.data()?.status === 'banned';
         
         usersData.push({
-          uid: doc.id,
+          uid: docSnapshot.id,
           email: data.email || 'No email',
           displayName: data.displayName || 'Anonymous',
           totalLessonsCompleted: data.totalLessonsCompleted || 0,

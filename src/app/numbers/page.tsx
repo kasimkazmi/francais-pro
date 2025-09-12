@@ -5,25 +5,26 @@ import { InteractiveAudioGrid } from '@/components/shared/interactive-audio-grid
 import { InteractivePracticeSection } from '@/components/shared/interactive-practice-section';
 import { ArrowRight, Calculator } from 'lucide-react';
 import numbersData from '@/data/numbers.json';
+import { NumbersData } from '@/types/data-types';
 
 export default function NumbersPage() {
-  const { numbers, tens } = numbersData;
+  const { numbers1to20: numbers, tens } = numbersData as NumbersData;
 
   // Transform data for the audio grid
   const basicNumbers = numbers.slice(0, 10).map(num => ({
-    title: num.number.toString(),
+    title: num.num.toString(),
     subtitle: num.french,
     pronunciation: num.pronunciation,
-    audioText: `${num.french}, ${num.english}`,
-    description: num.usage
+    audioText: `${num.french}`,
+    description: `Number ${num.num} in French`
   }));
 
   const tensNumbers = tens.slice(0, 10).map(num => ({
-    title: num.number.toString(),
+    title: num.num.toString(),
     subtitle: num.french,
     pronunciation: num.pronunciation,
-    audioText: `${num.french}, ${num.english}`,
-    description: num.usage
+    audioText: `${num.french}`,
+    description: `Number ${num.num} in French`
   }));
 
   return (

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { SimpleTooltip } from '@/components/ui/simple-tooltip';
 import { NoSSR } from '@/components/ui/no-ssr';
-import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface AudioButtonProps {

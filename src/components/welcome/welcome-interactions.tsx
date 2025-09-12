@@ -10,13 +10,10 @@ import {
   BookOpen, 
   Users, 
   Trophy, 
-  Star, 
   ArrowRight,
   Play,
   Target,
-  Globe,
-  Heart,
-  Zap
+  Globe
 } from 'lucide-react';
 
 interface WelcomeInteractionsProps {
@@ -32,7 +29,7 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
   const { isAuthenticated } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const gate = (href: string) => (e: React.MouseEvent) => {
+  const gate = () => (e: React.MouseEvent) => {
     if (!isAuthenticated) {
       e.preventDefault();
       setShowAuthModal(true);
@@ -67,8 +64,8 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
 
       {/* Interactive Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
-        {features.map((feature, index) => (
-          <Link key={index} href={feature.href} onClick={gate(feature.href)}>
+              {features.map((feature, index) => (
+                <Link key={index} href={feature.href} onClick={gate()}>
             <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer">
               <CardHeader>
                 <div className="flex items-center space-x-2">

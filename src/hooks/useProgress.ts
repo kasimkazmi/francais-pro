@@ -5,8 +5,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { 
   getUserProgress, 
   updateLessonProgress, 
-  getModuleProgress, 
   getLessonProgress,
+  getModuleProgress,
   type UserProgress,
   type ModuleProgress,
   type LessonProgress
@@ -80,7 +80,7 @@ export function useProgress() {
       setError(err instanceof Error ? err.message : 'Failed to get module progress');
       return null;
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user]); // Remove getModuleProgress from dependencies to avoid circular reference
 
   // Get lesson progress
   const getLesson = useCallback(async (moduleId: string, lessonId: string): Promise<LessonProgress | null> => {

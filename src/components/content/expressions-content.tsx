@@ -9,9 +9,10 @@ import { SimpleTooltip } from '@/components/ui/simple-tooltip';
 import { ArrowRight, MessageCircle, Lightbulb, Briefcase, Laptop, Plane, Trophy, Star } from 'lucide-react';
 import expressionsData from '@/data/expressions.json';
 import { useFavorites } from '@/contexts/FavoritesContext';
+import { ExpressionsData } from '@/types/data-types';
 
 export function ExpressionsContent() {
-  const { idioms, proverbs, slang, business, technology, travel, sports } = expressionsData;
+  const { idioms, proverbs, slang, business, technology, travel, sports } = expressionsData as ExpressionsData;
   const { toggleFavorite, isFavorite } = useFavorites();
 
   const categories = [
@@ -86,10 +87,10 @@ export function ExpressionsContent() {
                           </h3>
                           <p className="text-sm text-muted-foreground mb-2">{expression.english}</p>
                           
-                          {'literal' in expression && expression.literal && (
+                          {Boolean(expression.literal) && (
                             <div className="mb-2">
                               <Badge variant="outline" className="text-xs">
-                                Literal: {expression.literal as string}
+                                Literal: {expression.literal}
                               </Badge>
                             </div>
                           )}
@@ -102,9 +103,9 @@ export function ExpressionsContent() {
                             {expression.pronunciation}
                           </Badge>
                           
-                          {'level' in expression && expression.level && (
+                          {Boolean(expression.level) && (
                             <Badge variant="destructive" className="text-xs ml-2">
-                              {expression.level as string}
+                              {expression.level}
                             </Badge>
                           )}
                         </div>
@@ -129,7 +130,7 @@ export function ExpressionsContent() {
                               english: expression.english,
                               category: category.name,
                               pronunciation: expression.pronunciation,
-                              example: ('usage' in expression ? expression.usage : 'literal' in expression ? expression.literal as string : '') as string
+                              example: expression.literal || expression.usage
                             })}
                           >
                             <Star className={`h-4 w-4 ${isFavorite('expression', expression.french) ? 'fill-current' : ''}`} />

@@ -58,7 +58,6 @@ export default function SearchPage() {
   }, [query, performSearch]);
 
   const handleSearch = (searchQuery: string) => {
-    setLocalQuery(searchQuery);
     performSearch(searchQuery);
   };
 
