@@ -190,18 +190,21 @@ export async function getPublicLeaderboardStats(): Promise<{
   topStreak: number;
 }> {
   try {
-    // Read from userProgress collection instead of leaderboard collection
-    const progressRef = collection(db, 'userProgress');
-    const querySnapshot = await getDocs(progressRef);
+    // Get total users from userProfiles collection
+    const usersRef = collection(db, 'userProfiles');
+    const usersSnapshot = await getDocs(usersRef);
+    const totalUsers = usersSnapshot.size;
     
-    let totalUsers = 0;
+    // Get progress data from userProgress collection
+    const progressRef = collection(db, 'userProgress');
+    const progressSnapshot = await getDocs(progressRef);
+    
     let totalLessonsCompleted = 0;
     let totalProgress = 0;
     let topStreak = 0;
     
-    querySnapshot.forEach((doc) => {
+    progressSnapshot.forEach((doc) => {
       const data = doc.data();
-      totalUsers++;
       totalLessonsCompleted += data.totalLessonsCompleted || 0;
       
       // Calculate progress percentage based on lessons completed

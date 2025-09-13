@@ -12,141 +12,56 @@ import { AudioButton } from "@/components/ui/audio-button";
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
+import { learningModules } from "@/data/learning-content";
 
-// Comprehensive lesson content with timers and structured flow
-const lessonContent = {
-  foundations: {
-    1: {
-      title: "French Alphabet & Pronunciation",
-      duration: 15,
-      sections: [
-        {
-          title: "Introduction to French Alphabet",
-          duration: 3,
-          content: "Welcome to your first French lesson! Today we'll learn the French alphabet and its unique pronunciation rules. The French alphabet has 26 letters, just like English, but with different sounds.",
-          type: "introduction"
-        },
-        {
-          title: "Basic Letters A-E",
-          duration: 4,
-          content: "Let's start with the first five letters of the French alphabet. Each letter has its own unique sound.",
-          examples: [
-            { french: "A", english: "ah", audio: "a.mp3", description: "Like \"ah\" in \"father\"" },
-            { french: "B", english: "bay", audio: "b.mp3", description: "Like \"bay\" in \"baby\"" },
-            { french: "C", english: "say", audio: "c.mp3", description: "Like \"say\" in \"say\"" },
-            { french: "D", english: "day", audio: "d.mp3", description: "Like \"day\" in \"day\"" },
-            { french: "E", english: "uh", audio: "e.mp3", description: "Like \"uh\" in \"the\"" }
-          ],
-          type: "learning"
-        },
-        {
-          title: "Special Characters",
-          duration: 3,
-          content: "French has special characters called diacritics that change pronunciation. These are essential for proper French spelling and pronunciation.",
-          examples: [
-            { french: "é", english: "ay", audio: "e-acute.mp3", description: "Acute accent - like \"ay\" in \"say\"" },
-            { french: "è", english: "eh", audio: "e-grave.mp3", description: "Grave accent - like \"eh\" in \"bed\"" },
-            { french: "ç", english: "s", audio: "c-cedilla.mp3", description: "Cedilla - always sounds like \"s\"" }
-          ],
-          type: "learning"
-        },
-        {
-          title: "Practice Session",
-          duration: 3,
-          content: "Now let's practice what you've learned with some interactive exercises.",
-          exercises: [
-            {
-              type: "pronunciation",
-              question: "How do you pronounce the letter \"C\" in French?",
-              options: ["see", "say", "kay"],
-              correct: 1,
-              explanation: "In French, \"C\" is pronounced like \"say\" in English."
-            },
-            {
-              type: "matching",
-              question: "Match the French letter with its pronunciation:",
-              pairs: [
-                { french: "A", pronunciations: ["ah", "ay", "uh"] },
-                { french: "E", pronunciations: ["ee", "uh", "ay"] }
-              ],
-              correct: [0, 1],
-              explanation: "A sounds like \"ah\" and E sounds like \"uh\" in French."
-            }
-          ],
-          type: "practice"
-        },
-        {
-          title: "Review & Summary",
-          duration: 2,
-          content: "Great job! You've learned the French alphabet basics. Remember: French pronunciation is different from English, so practice regularly.",
-          type: "review"
-        }
-      ]
-    },
-    2: {
-      title: "Basic Greetings",
-      duration: 20,
-      sections: [
-        {
-          title: "Introduction to Greetings",
-          duration: 3,
-          content: "Greetings are the foundation of French conversation. Let's learn the most important ones you'll use daily.",
-          type: "introduction"
-        },
-        {
-          title: "Common Greetings",
-          duration: 5,
-          content: "Master these essential French greetings for different times of day and situations.",
-          examples: [
-            { french: "Bonjour", english: "Hello/Good morning", audio: "bonjour.mp3", description: "Used from morning until evening" },
-            { french: "Bonsoir", english: "Good evening", audio: "bonsoir.mp3", description: "Used in the evening" },
-            { french: "Salut", english: "Hi/Bye", audio: "salut.mp3", description: "Informal greeting" },
-            { french: "Au revoir", english: "Goodbye", audio: "au-revoir.mp3", description: "Formal goodbye" }
-          ],
-          type: "learning"
-        },
-        {
-          title: "Polite Expressions",
-          duration: 4,
-          content: "French culture values politeness. Learn these important polite expressions.",
-          examples: [
-            { french: "S'il vous plaît", english: "Please", audio: "s-il-vous-plait.mp3", description: "Formal way to say please" },
-            { french: "Merci", english: "Thank you", audio: "merci.mp3", description: "Thank you" },
-            { french: "Excusez-moi", english: "Excuse me", audio: "excusez-moi.mp3", description: "Excuse me" }
-          ],
-          type: "learning"
-        },
-        {
-          title: "Practice Session",
-          duration: 5,
-          content: "Practice using these greetings in different scenarios.",
-          exercises: [
-            {
-              type: "translation",
-              question: "How do you say \"Hello\" in French?",
-              options: ["Salut", "Bonjour", "Bonsoir"],
-              correct: 1,
-              explanation: "Bonjour is the most common way to say hello in French."
-            },
-            {
-              type: "scenario",
-              question: "What would you say when meeting someone in the morning?",
-              options: ["Bonsoir", "Bonjour", "Salut"],
-              correct: 1,
-              explanation: "Bonjour is appropriate for morning greetings."
-            }
-          ],
-          type: "practice"
-        },
-        {
-          title: "Review & Summary",
-          duration: 3,
-          content: "Excellent! You now know the essential French greetings. Practice using them in real conversations.",
-          type: "review"
-        }
-      ]
-    }
-  }
+// Helper function to get lesson data from learning modules
+const getLessonData = (moduleId: string, lessonId: string) => {
+  const moduleData = learningModules.find(m => m.id === moduleId);
+  if (!moduleData) return null;
+  
+  const lesson = moduleData.lessons.find(l => l.id === lessonId);
+  if (!lesson) return null;
+  
+  // Convert the lesson data to the expected format with sections
+  return {
+    title: lesson.title,
+    duration: lesson.duration,
+    sections: [
+      {
+        title: "Introduction",
+        duration: Math.floor(lesson.duration * 0.2),
+        content: lesson.description,
+        type: "introduction"
+      },
+      {
+        title: "Learning Content",
+        duration: Math.floor(lesson.duration * 0.5),
+        content: lesson.content,
+        type: "learning"
+      },
+      {
+        title: "Practice Session",
+        duration: Math.floor(lesson.duration * 0.2),
+        content: "Practice what you've learned with interactive exercises.",
+        exercises: [
+          {
+            type: "translation",
+            question: `What is the main topic of this lesson?`,
+            options: [lesson.title, "Grammar", "Pronunciation", "Vocabulary"],
+            correct: 0,
+            explanation: `This lesson focuses on ${lesson.title.toLowerCase()}.`
+          }
+        ],
+        type: "practice"
+      },
+      {
+        title: "Review & Summary",
+        duration: Math.floor(lesson.duration * 0.1),
+        content: `Great job! You've completed the lesson on ${lesson.title.toLowerCase()}. Keep practicing to master this topic.`,
+        type: "review"
+      }
+    ]
+  };
 };
 
 export default function LessonPage() {
@@ -197,13 +112,8 @@ export default function LessonPage() {
     exercises?: Exercise[];
   }
 
-  interface Lesson {
-    title: string;
-    duration: number;
-    sections: LessonSection[];
-  }
 
-  const lesson = (lessonContent as Record<string, Record<string, Lesson>>)[moduleId]?.[lessonId] as Lesson | undefined;
+  const lesson = getLessonData(moduleId, lessonId);
   const isLessonDone = isLessonCompleted(moduleId, lessonId);
   const currentSectionData = lesson?.sections?.[currentSection];
 
@@ -452,10 +362,10 @@ export default function LessonPage() {
                 <p className="text-muted-foreground mb-4">{currentSectionData.content}</p>
                 
                 {/* Examples */}
-                {currentSectionData.examples && (
+                {'examples' in currentSectionData && (currentSectionData as LessonSection).examples && (
                   <div className="space-y-3">
                     <h4 className="font-medium">Examples:</h4>
-                    {currentSectionData.examples.map((example: Example, exampleIndex: number) => (
+                    {(currentSectionData as LessonSection).examples!.map((example: Example, exampleIndex: number) => (
                       <div key={exampleIndex} className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50">
                         <div className="flex-1">
                           <div className="font-medium text-lg">{example.french}</div>
@@ -475,10 +385,10 @@ export default function LessonPage() {
                 )}
 
                 {/* Exercises */}
-                {currentSectionData.exercises && (
+                {'exercises' in currentSectionData && (currentSectionData as LessonSection).exercises && (
                   <div className="space-y-4 mt-6">
                     <h4 className="font-medium">Practice:</h4>
-                    {currentSectionData.exercises.map((exercise: Exercise, index: number) => (
+                    {(currentSectionData as LessonSection).exercises!.map((exercise: Exercise, index: number) => (
                       <div key={index} className="p-4 border rounded-lg">
                         <h5 className="font-medium mb-3">{exercise.question}</h5>
                         

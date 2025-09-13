@@ -41,6 +41,37 @@ export interface UserProgress {
   lessons: Record<string, LessonProgress>;
 }
 
+// Helper function to calculate streak
+export function calculateStreak(lastActiveDate: Timestamp, currentStreak: number): {
+  currentStreak: number;
+  isNewStreak: boolean;
+} {
+  const today = new Date();
+  const lastActive = lastActiveDate.toDate();
+  const daysDifference = Math.floor((today.getTime() - lastActive.getTime()) / (1000 * 60 * 60 * 24));
+  
+  let newCurrentStreak = currentStreak;
+  let isNewStreak = false;
+  
+  if (daysDifference === 0) {
+    // Same day - maintain current streak
+    newCurrentStreak = currentStreak;
+  } else if (daysDifference === 1) {
+    // Consecutive day - increment streak
+    newCurrentStreak = currentStreak + 1;
+    isNewStreak = true;
+  } else {
+    // More than 1 day gap - reset streak to 1 (starting fresh)
+    newCurrentStreak = 1;
+    isNewStreak = true;
+  }
+  
+  return {
+    currentStreak: newCurrentStreak,
+    isNewStreak
+  };
+}
+
 // Get user progress
 export async function getUserProgress(uid: string): Promise<UserProgress | null> {
   try {
@@ -153,10 +184,8 @@ export async function updateLessonProgress(
     const totalLessonsCompleted = Object.values(updatedLessons).filter(l => l.completed).length;
     const totalTimeSpent = Object.values(updatedLessons).reduce((sum, l) => sum + l.timeSpent, 0);
     
-    // Update streak (simplified - in real app, you'd check consecutive days)
-    const today = new Date().toDateString();
-    const lastActive = userProgress.lastActiveDate.toDate().toDateString();
-    const currentStreak = today === lastActive ? userProgress.currentStreak + 1 : 1;
+    // Update streak with proper consecutive day validation
+    const { currentStreak, isNewStreak } = calculateStreak(userProgress.lastActiveDate, userProgress.currentStreak);
     
     // Determine level based on progress
     let level: 'beginner' | 'intermediate' | 'advanced' = 'beginner';

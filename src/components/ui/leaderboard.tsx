@@ -125,28 +125,28 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
     <div className="space-y-6">
       {/* Stats Overview */}
       {showStats && stats && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <Card className="border border-border bg-card">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">{stats.totalUsers}</div>
+              <div className="text-2xl font-bold text-primary mb-1">{stats.totalUsers}</div>
               <div className="text-sm text-muted-foreground">Total Users</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border bg-card">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">{stats.totalLessonsCompleted}</div>
+              <div className="text-2xl font-bold text-primary mb-1">{stats.totalLessonsCompleted}</div>
               <div className="text-sm text-muted-foreground">Lessons Completed</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border bg-card">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">{stats.averageProgress}%</div>
+              <div className="text-2xl font-bold text-primary mb-1">{stats.averageProgress}%</div>
               <div className="text-sm text-muted-foreground">Avg Progress</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="border border-border bg-card">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">{stats.topStreak}</div>
+              <div className="text-2xl font-bold text-primary mb-1">{stats.topStreak}</div>
               <div className="text-sm text-muted-foreground">Top Streak</div>
             </CardContent>
           </Card>
@@ -182,7 +182,7 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
               No data available yet. Be the first to complete some lessons!
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 sm:space-y-4">
               {displayData.map((entry, index) => {
                 const rank = index + 1;
                 const isCurrentUser = isAuthenticated && user?.uid === entry.uid;
@@ -190,27 +190,126 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                 return (
                   <div
                     key={entry.uid}
-                    className={`flex items-center justify-between p-4 rounded-lg border transition-all duration-200 ${
+                    className={`p-4 sm:p-6 rounded-xl border-2 transition-all duration-200 ${
                       isCurrentUser 
-                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-300 dark:border-blue-600 shadow-md' 
-                        : 'hover:bg-muted/50 hover:shadow-sm'
+                        ? 'bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-400 dark:border-blue-500 shadow-lg' 
+                        : 'border-border hover:bg-muted/30 hover:shadow-md hover:border-primary/30'
                     }`}
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-8 h-8">
+                    {/* Mobile Layout */}
+                    <div className="block sm:hidden">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3 flex-1">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted flex-shrink-0">
+                            {getRankIcon(rank)}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                              <span className="font-semibold text-base truncate">{entry.displayName}</span>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {isCurrentUser && (
+                                  <Badge variant="default" className="text-xs bg-blue-500 text-white px-2 py-0.5">
+                                    You
+                                  </Badge>
+                                )}
+                                {rank <= 3 && (
+                                  <Badge variant={getRankBadgeVariant(rank)} className="text-xs">
+                                    {rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉'}
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right flex-shrink-0 ml-2">
+                          {isModuleView ? (
+                            <div className="text-lg font-bold text-primary">{'progress' in entry ? `${entry.progress}%` : '0%'}</div>
+                          ) : (
+                            <div className="text-lg font-bold text-primary">{'overallProgress' in entry ? `${entry.overallProgress}%` : '0%'}</div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Stats Column Layout */}
+                      <div className="flex flex-col gap-2 mb-3">
+                        {isModuleView ? (
+                          <>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <BookOpen className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Lessons</span>
+                              </div>
+                              <div className="text-sm font-bold">{'lessonsCompleted' in entry ? entry.lessonsCompleted : 0}</div>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <Target className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Progress</span>
+                              </div>
+                              <div className="text-sm font-bold">{'progress' in entry ? `${entry.progress}%` : '0%'}</div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <BookOpen className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Lessons</span>
+                              </div>
+                              <div className="text-sm font-bold">{'totalLessonsCompleted' in entry ? entry.totalLessonsCompleted : 0}</div>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <Star className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Streak</span>
+                              </div>
+                              <div className="text-sm font-bold">{'currentStreak' in entry ? entry.currentStreak : 0} days</div>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <Clock className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Time</span>
+                              </div>
+                              <div className="text-sm font-bold">{'totalTimeSpent' in entry ? Math.round(entry.totalTimeSpent) : 0} min</div>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                              <div className="flex items-center gap-2">
+                                <Award className="h-4 w-4 text-primary" />
+                                <span className="text-sm font-medium">Level</span>
+                              </div>
+                              <div className="text-sm font-bold">{'level' in entry ? entry.level : 'beginner'}</div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                      
+                      {/* Progress Bar */}
+                      {isModuleView ? (
+                        <Progress value={'progress' in entry ? entry.progress : 0} className="w-full h-2" />
+                      ) : (
+                        <div className="text-center">
+                          <div className="text-sm text-muted-foreground">
+                            Level: {'level' in entry ? entry.level : 'beginner'}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Desktop Layout */}
+                    <div className="hidden sm:flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-muted">
                         {getRankIcon(rank)}
                       </div>
                       
                       <div className="flex-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">
-                            {entry.displayName}
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-lg">{entry.displayName}</span>
                             {isCurrentUser && (
-                              <Badge variant="default" className="ml-2 text-xs bg-blue-500 text-white">
+                              <Badge variant="default" className="text-xs bg-blue-500 text-white">
                                 You
                               </Badge>
                             )}
-                          </span>
                           {rank <= 3 && (
                             <Badge variant={getRankBadgeVariant(rank)} className="text-xs">
                               {rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉'}
@@ -218,18 +317,18 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                           )}
                         </div>
                         
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground mt-1">
+                          <div className="flex items-center gap-6 text-sm text-muted-foreground">
                           {isModuleView ? (
                             <>
                               <div className="flex items-center gap-1">
-                                <BookOpen className="h-3 w-3" />
-                                {'lessonsCompleted' in entry ? `${entry.lessonsCompleted}/${entry.totalLessons}` : '0/0'} lessons
+                                  <BookOpen className="h-4 w-4" />
+                                  {'lessonsCompleted' in entry ? `${entry.lessonsCompleted}/${entry.totalLessons}` : '0/0'} lessons
                               </div>
                               <div className="flex items-center gap-1">
-                                <Target className="h-3 w-3" />
-                                {'progress' in entry ? `${entry.progress}%` : '0%'} complete
+                                  <Target className="h-4 w-4" />
+                                  {'progress' in entry ? `${entry.progress}%` : '0%'} complete
                               </div>
-                              {'completed' in entry && entry.completed && (
+                                {'completed' in entry && entry.completed && (
                                 <Badge variant="default" className="text-xs">
                                   Completed
                                 </Badge>
@@ -238,16 +337,16 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
                           ) : (
                             <>
                               <div className="flex items-center gap-1">
-                                <BookOpen className="h-3 w-3" />
-                                {'totalLessonsCompleted' in entry ? entry.totalLessonsCompleted : 0} lessons
+                                  <BookOpen className="h-4 w-4" />
+                                  {'totalLessonsCompleted' in entry ? entry.totalLessonsCompleted : 0} lessons
                               </div>
                               <div className="flex items-center gap-1">
-                                <Star className="h-3 w-3" />
-                                {'currentStreak' in entry ? entry.currentStreak : 0} day streak
+                                  <Star className="h-4 w-4" />
+                                  {'currentStreak' in entry ? entry.currentStreak : 0} day streak
                               </div>
                               <div className="flex items-center gap-1">
-                                <Clock className="h-3 w-3" />
-                                {'totalTimeSpent' in entry ? Math.round(entry.totalTimeSpent) : 0} min
+                                  <Clock className="h-4 w-4" />
+                                  {'totalTimeSpent' in entry ? Math.round(entry.totalTimeSpent) : 0} min
                               </div>
                             </>
                           )}
@@ -257,18 +356,19 @@ export function Leaderboard({ moduleId, showStats = true, limit = 10 }: Leaderbo
 
                     <div className="text-right">
                       {isModuleView ? (
-                        <div className="space-y-1">
-                          <div className="text-lg font-bold">{'progress' in entry ? `${entry.progress}%` : '0%'}</div>
-                          <Progress value={'progress' in entry ? entry.progress : 0} className="w-20 h-2" />
+                          <div className="space-y-2">
+                            <div className="text-xl font-bold">{'progress' in entry ? `${entry.progress}%` : '0%'}</div>
+                            <Progress value={'progress' in entry ? entry.progress : 0} className="w-24 h-2" />
                         </div>
                       ) : (
                         <div className="space-y-1">
-                          <div className="text-lg font-bold">{'overallProgress' in entry ? `${entry.overallProgress}%` : '0%'}</div>
-                          <div className="text-xs text-muted-foreground">
-                            Level: {'level' in entry ? entry.level : 'beginner'}
+                            <div className="text-xl font-bold">{'overallProgress' in entry ? `${entry.overallProgress}%` : '0%'}</div>
+                            <div className="text-sm text-muted-foreground">
+                              Level: {'level' in entry ? entry.level : 'beginner'}
+                            </div>
                           </div>
+                        )}
                         </div>
-                      )}
                     </div>
                   </div>
                 );

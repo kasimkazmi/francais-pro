@@ -25,7 +25,7 @@ export async function getAppStats(): Promise<AppStats> {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-    // Get active users (logged in within last 30 days)
+    // Get active users (active within last 30 days from userProfiles)
     const activeUsersQuery = query(
       collection(db, 'userProfiles'),
       where('lastActiveAt', '>=', Timestamp.fromDate(thirtyDaysAgo))
@@ -33,7 +33,7 @@ export async function getAppStats(): Promise<AppStats> {
     const activeUsersSnapshot = await getDocs(activeUsersQuery);
     const activeUsers = activeUsersSnapshot.size;
 
-    // Get total users
+    // Get total users from userProfiles (all registered users)
     const totalUsersQuery = query(collection(db, 'userProfiles'));
     const totalUsersSnapshot = await getDocs(totalUsersQuery);
     const totalUsers = totalUsersSnapshot.size;

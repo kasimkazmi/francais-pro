@@ -164,8 +164,8 @@ export default function WelcomePage() {
         <div className="my-16 text-center">
           <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border-blue-200 dark:border-blue-800">
           <CardHeader>
-              <CardTitle className="text-2xl">Ready to Start Your French Journey?</CardTitle>
-              <CardDescription className="text-lg">
+              <CardTitle className="text-2xl text-gray-900 dark:text-white">Ready to Start Your French Journey?</CardTitle>
+              <CardDescription className="text-lg text-gray-900 dark:text-white">
                 Join thousands of successful learners and master French with our proven method.
             </CardDescription>
           </CardHeader>
@@ -184,7 +184,7 @@ export default function WelcomePage() {
                   <Button 
                     variant="outline" 
                     size="lg"
-                    className="hover:shadow-lg active:scale-95 transition-all duration-200"
+                    className="hover:shadow-lg active:scale-95 transition-all duration-200 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
                   >
                     <BookOpen className="mr-2 h-4 w-4" />
                     Try Sample Lesson

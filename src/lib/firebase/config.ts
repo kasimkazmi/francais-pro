@@ -16,12 +16,12 @@ export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 
 // Add Firebase initialization logging
-console.log('🔥 Firebase initialized:', {
-  projectId: firebaseConfig.projectId,
-  authDomain: firebaseConfig.authDomain,
-  hasAuth: !!auth,
-  hasDb: !!db
-});
+// console.log('🔥 Firebase initialized:', {
+//   projectId: firebaseConfig.projectId,
+//   authDomain: firebaseConfig.authDomain,
+//   hasAuth: !!auth,
+//   hasDb: !!db
+// });
 
 export default app;
 
