@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   signOut,
   User,
+  updateProfile,
 } from 'firebase/auth';
 import { auth, googleProvider } from './config';
 
@@ -13,8 +14,14 @@ export function observeAuth(callback: (user: User | null) => void) {
   return onAuthStateChanged(auth, callback);
 }
 
-export async function emailSignUp(email: string, password: string) {
+export async function emailSignUp(email: string, password: string, displayName?: string) {
   const res = await createUserWithEmailAndPassword(auth, email, password);
+  
+  // Set display name if provided
+  if (displayName) {
+    await updateProfile(res.user, { displayName });
+  }
+  
   return res.user;
 }
 

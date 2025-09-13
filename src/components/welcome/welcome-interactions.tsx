@@ -50,7 +50,7 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </Link>
-        <Link href="/alphabet">
+        <Link href="/home">
           <Button 
             variant="outline" 
             size="lg"

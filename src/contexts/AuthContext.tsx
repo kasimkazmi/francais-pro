@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { User } from 'firebase/auth';
 import { observeAuth, emailSignIn, emailSignUp, signOutUser, resetPassword, googleSignIn } from '@/lib/firebase/auth';
+import { updateProfile } from 'firebase/auth';
+import { auth } from '@/lib/firebase/config';
 
 interface AppUser {
   uid: string;
@@ -23,6 +25,8 @@ interface AuthContextType {
   sendReset: (email: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
+  needsUsername: boolean;
+  setUserDisplayName: (displayName: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,10 +46,20 @@ function mapUser(u: User): AppUser {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AppUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [needsUsername, setNeedsUsername] = useState(false);
 
   useEffect(() => {
     const unsub = observeAuth((u) => {
-      setUser(u ? mapUser(u) : null);
+      const mappedUser = u ? mapUser(u) : null;
+      setUser(mappedUser);
+      
+      // Check if user needs a username
+      if (mappedUser && !mappedUser.displayName) {
+        setNeedsUsername(true);
+      } else {
+        setNeedsUsername(false);
+      }
+      
       setIsLoading(false);
     });
     return () => unsub();
@@ -63,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signup = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      const u = await emailSignUp(email, password);
+      const u = await emailSignUp(email, password, name);
       setUser(mapUser(u));
       return true;
     } catch {
@@ -88,11 +102,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     signOutUser();
     setUser(null);
+    setNeedsUsername(false);
+  };
+
+  const setUserDisplayName = async (displayName: string): Promise<void> => {
+    if (!user) throw new Error('No user logged in');
+    
+    try {
+      // Update Firebase Auth profile
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        await updateProfile(currentUser, { displayName });
+      }
+      
+      // Update local state
+      setUser(prev => prev ? { ...prev, displayName } : null);
+      setNeedsUsername(false);
+    } catch (error) {
+      console.error('Error setting display name:', error);
+      throw error;
+    }
   };
 
   const value = useMemo<AuthContextType>(
-    () => ({ user, isLoading, login, signup, loginWithGoogle, sendReset, logout, isAuthenticated: !!user }),
-    [user, isLoading]
+    () => ({ 
+      user, 
+      isLoading, 
+      login, 
+      signup, 
+      loginWithGoogle, 
+      sendReset, 
+      logout, 
+      isAuthenticated: !!user,
+      needsUsername,
+      setUserDisplayName
+    }),
+    [user, isLoading, needsUsername]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

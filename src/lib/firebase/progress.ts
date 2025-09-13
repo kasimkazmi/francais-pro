@@ -140,7 +140,17 @@ export async function updateLessonProgress(
 ): Promise<void> {
   try {
     const userProgressRef = doc(db, 'userProgress', uid);
-    const userProgress = await getUserProgress(uid) || await initializeUserProgress(uid);
+    
+    // Check if document exists first
+    const docSnap = await getDoc(userProgressRef);
+    let userProgress: UserProgress;
+    
+    if (docSnap.exists()) {
+      userProgress = docSnap.data() as UserProgress;
+    } else {
+      // Initialize if document doesn't exist
+      userProgress = await initializeUserProgress(uid);
+    }
     
     const lessonKey = `${moduleId}_${lessonId}`;
     const existingLesson = userProgress.lessons[lessonKey];
@@ -204,16 +214,13 @@ export async function updateLessonProgress(
       lessons: updatedLessons
     };
 
-    await updateDoc(userProgressRef, updatedProgress);
-    
-    // Update display name in user progress if available
+    // Include display name if available from current user
     const userProfile = auth.currentUser;
     if (userProfile && userProfile.displayName) {
-      await updateDoc(userProgressRef, {
-        displayName: userProfile.displayName
-      });
       updatedProgress.displayName = userProfile.displayName;
     }
+    
+    await updateDoc(userProgressRef, updatedProgress);
     
     // Sync to public leaderboard
     try {
@@ -260,9 +267,18 @@ export async function getLessonProgress(uid: string, moduleId: string, lessonId:
 export async function updateUserDisplayName(uid: string, displayName: string): Promise<void> {
   try {
     const userProgressRef = doc(db, 'userProgress', uid);
-    await updateDoc(userProgressRef, {
-      displayName: displayName
-    });
+    
+    // Check if document exists first
+    const docSnap = await getDoc(userProgressRef);
+    
+    if (docSnap.exists()) {
+      await updateDoc(userProgressRef, {
+        displayName: displayName
+      });
+    } else {
+      // Initialize document with display name if it doesn't exist
+      await initializeUserProgress(uid, displayName);
+    }
   } catch (error) {
     console.error('Error updating user display name:', error);
     throw error;

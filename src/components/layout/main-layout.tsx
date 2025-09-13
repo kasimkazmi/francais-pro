@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/header';
 import { CommunityChat } from '@/components/ui/community-chat';
 import { AuthModal } from '@/components/ui/auth-modal';
 import { SearchModal } from '@/components/ui/search-modal';
+import { UsernameModal } from '@/components/ui/username-modal';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface MainLayoutProps {
@@ -19,7 +20,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   const [isCommunityChatOpen, setIsCommunityChatOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, needsUsername, user, setUserDisplayName } = useAuth();
   const pathname = usePathname();
 
   // Handle keyboard shortcuts
@@ -104,13 +105,7 @@ export function MainLayout({ children }: MainLayoutProps) {
                 French Fundamentals
               </h3>
               <div className="space-y-1">
-                <Link href="/welcome" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
-                  isActiveRoute('/welcome') 
-                    ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
-                    : 'hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 active:bg-gray-200 dark:active:bg-gray-700'
-                }`}>
-                  Get Started
-                </Link>
+                
                 <Link href="/alphabet" className={`flex items-center rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
                   isActiveRoute('/alphabet') 
                     ? 'bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100' 
@@ -339,6 +334,15 @@ export function MainLayout({ children }: MainLayoutProps) {
       <SearchModal 
         isOpen={isSearchModalOpen} 
         onClose={() => setIsSearchModalOpen(false)} 
+      />
+
+      {/* Username Modal */}
+      <UsernameModal 
+        isOpen={needsUsername && isAuthenticated} 
+        onClose={() => {}} 
+        onSubmit={setUserDisplayName}
+        suggestedUsername={user?.email ? user.email.split('@')[0] : undefined}
+        userEmail={user?.email || undefined}
       />
     </div>
   );
