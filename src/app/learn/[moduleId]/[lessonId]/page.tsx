@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -119,9 +119,9 @@ export default function LessonPage() {
     exercises?: Exercise[];
   }
 
-  const lesson = getLessonData(moduleId, lessonId);
+  const lesson = useMemo(() => getLessonData(moduleId, lessonId), [moduleId, lessonId]);
   const isLessonDone = isLessonCompleted(moduleId, lessonId);
-  const currentSectionData = lesson?.sections?.[currentSection];
+  const currentSectionData = useMemo(() => lesson?.sections?.[currentSection], [lesson, currentSection]);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -150,12 +150,12 @@ export default function LessonPage() {
 
   // Section timer
   useEffect(() => {
-    if (currentSectionData && isSessionActive) {
+    if (isSessionActive && lesson?.sections?.[currentSection]) {
       const startTime = new Date();
       setSectionStartTime(startTime);
       setSectionTimeSpent(0);
     }
-  }, [currentSection, currentSectionData, isSessionActive]);
+  }, [currentSection, isSessionActive, lesson]);
 
   // Separate effect for section timer
   useEffect(() => {
@@ -611,14 +611,14 @@ export default function LessonPage() {
                   <Button 
                     variant="outline" 
                     onClick={() => setShowResults(false)}
-                    className="flex-1 text-sm sm:text-base"
+                    className="flex-1 hover:bg-gray-700 hover:text-white text-black text-sm sm:text-base"
                   >
                     <RotateCcw className="h-4 w-4 mr-2" />
                     Review
                   </Button>
                   <Button 
                     onClick={() => router.back()}
-                    className="flex-1 text-sm sm:text-base"
+                    className="flex-1 hover:bg-green-700 hover:text-white text-black text-sm sm:text-base"
                   >
                     Continue Learning
                   </Button>
