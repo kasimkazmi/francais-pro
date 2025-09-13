@@ -6,6 +6,7 @@ import { SimpleTooltip } from '@/components/ui/simple-tooltip';
 import { NoSSR } from '@/components/ui/no-ssr';
 import { Play, Pause, VolumeX } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { isMobileDevice } from '@/lib/utils/mobile-detection';
 
 interface AudioButtonProps {
   text: string;
@@ -135,6 +136,7 @@ export function AudioButton({
           </span>
         </EnhancedButton>
       }>
+      {!isMobileDevice() && showTooltip ? (
         <SimpleTooltip 
           content={getTooltipText()} 
           side="top"
@@ -142,6 +144,9 @@ export function AudioButton({
         >
           {buttonElement}
         </SimpleTooltip>
+      ) : (
+        buttonElement
+      )}
       </NoSSR>
     );
   }

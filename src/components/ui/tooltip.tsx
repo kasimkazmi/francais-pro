@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
+import { isMobileDevice } from '@/lib/utils/mobile-detection';
 
 interface TooltipProps {
   content: string | React.ReactNode;
@@ -25,6 +26,9 @@ export function Tooltip({
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const showTooltip = () => {
+    // Don't show tooltips on mobile devices
+    if (isMobileDevice()) return;
+    
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -35,6 +39,9 @@ export function Tooltip({
   };
 
   const hideTooltip = () => {
+    // Don't show tooltips on mobile devices
+    if (isMobileDevice()) return;
+    
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
