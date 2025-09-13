@@ -185,7 +185,7 @@ export async function updateLessonProgress(
     const totalTimeSpent = Object.values(updatedLessons).reduce((sum, l) => sum + l.timeSpent, 0);
     
     // Update streak with proper consecutive day validation
-    const { currentStreak, isNewStreak } = calculateStreak(userProgress.lastActiveDate, userProgress.currentStreak);
+    const { currentStreak } = calculateStreak(userProgress.lastActiveDate, userProgress.currentStreak);
     
     // Determine level based on progress
     let level: 'beginner' | 'intermediate' | 'advanced' = 'beginner';

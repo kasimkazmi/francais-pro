@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SearchProvider } from "@/contexts/search-context";
@@ -55,16 +55,6 @@ export const metadata: Metadata = {
   applicationName: "Français Pro",
   generator: "Next.js",
   referrer: "origin-when-cross-origin",
-  colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" }
-  ],
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   alternates: {
     canonical: "https://francais-pro.vercel.app",
     languages: {
@@ -130,6 +120,17 @@ export const metadata: Metadata = {
     "mobile-web-app-capable": "yes",
     "theme-color": "#2563eb",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" }
+  ],
 };
 
 export default function RootLayout({

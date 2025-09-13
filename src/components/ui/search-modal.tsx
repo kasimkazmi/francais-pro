@@ -62,6 +62,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     }
   }, [isOpen]);
 
+  const handleResultClick = useCallback((result: { url: string }) => {
+    router.push(result.url);
+    onClose();
+    setQuery('');
+    clearSearch();
+  }, [router, onClose, clearSearch]);
+
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -99,14 +106,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, searchResults, selectedIndex, onClose]);
-
-  const handleResultClick = useCallback((result: { url: string }) => {
-    router.push(result.url);
-    onClose();
-    setQuery('');
-    clearSearch();
-  }, [router, onClose, clearSearch]);
+  }, [isOpen, searchResults, selectedIndex, onClose, handleResultClick]);
 
   // Reset selected index when query changes
   useEffect(() => {

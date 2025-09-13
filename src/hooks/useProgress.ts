@@ -11,6 +11,22 @@ import {
   type ModuleProgress,
   type LessonProgress
 } from '@/lib/firebase/progress';
+import { learningModules } from '@/data/learning-content';
+
+// Helper function to get actual lesson ID from numeric or string ID
+const getActualLessonId = (moduleId: string, lessonId: string): string => {
+  const moduleData = learningModules.find(m => m.id === moduleId);
+  if (!moduleData) return lessonId;
+  
+  // If lessonId is numeric, convert to actual lesson ID
+  if (!isNaN(Number(lessonId))) {
+    const lessonIndex = Number(lessonId) - 1; // Convert to 0-based index
+    const lesson = moduleData.lessons[lessonIndex];
+    return lesson ? lesson.id : lessonId;
+  }
+  
+  return lessonId;
+};
 
 export function useProgress() {
   const { user, isAuthenticated } = useAuth();
@@ -61,7 +77,8 @@ export function useProgress() {
     }
 
     try {
-      await updateLessonProgress(user.uid, moduleId, lessonId, completed, score, timeSpent);
+      const actualLessonId = getActualLessonId(moduleId, lessonId);
+      await updateLessonProgress(user.uid, moduleId, actualLessonId, completed, score, timeSpent);
       // Reload progress to get updated data
       await loadProgress();
     } catch (err) {
@@ -97,7 +114,8 @@ export function useProgress() {
   // Check if lesson is completed
   const isLessonCompleted = useCallback((moduleId: string, lessonId: string): boolean => {
     if (!progress) return false;
-    const lessonKey = `${moduleId}_${lessonId}`;
+    const actualLessonId = getActualLessonId(moduleId, lessonId);
+    const lessonKey = `${moduleId}_${actualLessonId}`;
     return progress.lessons[lessonKey]?.completed || false;
   }, [progress]);
 
