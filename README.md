@@ -13,12 +13,12 @@ Français Pro helps immigrants learn French efficiently for Canadian Express Ent
 
 ## ✨ **Key Features**
 
-- **🎓 Interactive Lessons**: 500+ lessons covering all CLB levels
-- **🎵 Audio Pronunciation**: Native speaker quality with click-to-hear
-- **📊 Progress Tracking**: Real-time analytics and achievement system
-- **🇨🇦 Immigration Focus**: Express Entry CRS score optimization
-- **🏆 Community Features**: Leaderboards and peer learning
-- **📱 Mobile Optimized**: Works perfectly on all devices
+- **🎓 Interactive Lessons**: Structured lessons covering foundations, grammar, and vocabulary
+- **🎵 Audio Pronunciation**: Web Speech API integration for pronunciation practice
+- **📊 Progress Tracking**: Real-time progress tracking and achievement system
+- **🇨🇦 Immigration Focus**: Resources for Canadian Express Entry preparation
+- **🏆 Community Features**: Leaderboards and progress sharing
+- **📱 Mobile Optimized**: Responsive design that works on all devices
 
 ## 🌐 **Live Demo**
 

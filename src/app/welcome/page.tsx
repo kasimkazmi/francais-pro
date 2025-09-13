@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-// Badge component removed as it's not used in this file
 import { Header } from '@/components/layout/header';
 import { WelcomeInteractions } from '@/components/welcome/welcome-interactions';
 import { DynamicStats } from '@/components/welcome/dynamic-stats';
@@ -23,37 +22,37 @@ const features = [
   {
     icon: "BookOpen",
     title: "Interactive Lessons",
-    description: "Learn with engaging, structured lessons designed for all skill levels.",
+    description: "Learn with engaging, structured lessons covering foundations, grammar, and vocabulary.",
     href: "/learn"
   },
   {
     icon: "Users",
-    title: "Community Learning",
-    description: "Join thousands of learners in our supportive French learning community.",
+    title: "Community Features",
+    description: "Connect with fellow learners through leaderboards and progress sharing.",
     href: "/leaderboard"
   },
   {
     icon: "Trophy",
     title: "Progress Tracking",
-    description: "Track your learning journey with detailed analytics and achievements.",
+    description: "Monitor your learning journey with real-time progress tracking and achievements.",
     href: "/progress"
   },
   {
     icon: "Play",
-    title: "Practice Mode",
-    description: "Reinforce your learning with interactive exercises and real-world scenarios.",
+    title: "Practice Exercises",
+    description: "Reinforce your learning with interactive exercises and pronunciation practice.",
     href: "/practice"
   },
   {
     icon: "Target",
-    title: "Goal Setting",
-    description: "Set and achieve your French learning goals with personalized milestones.",
+    title: "Structured Learning",
+    description: "Follow a clear learning path from basics to advanced French concepts.",
     href: "/favorites"
   },
   {
     icon: "Globe",
-    title: "Real Conversations",
-    description: "Practice with authentic French conversations and cultural insights.",
+    title: "Cultural Context",
+    description: "Learn French with cultural insights and practical language usage.",
     href: "/conversations"
   }
 ];
@@ -81,8 +80,8 @@ export default function WelcomePage() {
             Bienvenue à <span className="text-blue-600">Français Pro</span>
           </h1>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Your journey to mastering French starts here. Learn with interactive lessons, 
-            practice with real conversations, and join a community of French learners.
+            Your journey to learning French starts here. Master the fundamentals with structured lessons, 
+            practice with interactive exercises, and track your progress with our free learning platform.
           </p>
           
           {/* Interactive CTA Buttons */}
@@ -134,27 +133,58 @@ export default function WelcomePage() {
               <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="h-8 w-8 text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Proven Method</h3>
+              <h3 className="text-lg font-semibold mb-2">100% Free</h3>
               <p className="text-muted-foreground">
-                Our structured approach has helped thousands master French efficiently.
+                No hidden costs or subscriptions. Access all lessons and features completely free forever.
               </p>
-                          </div>
+            </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Flexible Learning</h3>
+              <h3 className="text-lg font-semibold mb-2">Self-Paced Learning</h3>
               <p className="text-muted-foreground">
-                Learn at your own pace with lessons designed to fit your schedule.
+                Learn at your own speed with structured lessons covering foundations, grammar, and vocabulary.
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Award className="h-8 w-8 text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Expert Content</h3>
+              <h3 className="text-lg font-semibold mb-2">Progress Tracking</h3>
               <p className="text-muted-foreground">
-                Learn from native speakers and certified French language experts.
+                Monitor your learning journey with real-time progress tracking and achievement system.
+              </p>
+            </div>
+          </div>
+          
+          {/* Additional Features Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Play className="h-8 w-8 text-orange-600" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Interactive Lessons</h3>
+              <p className="text-muted-foreground">
+                Engaging lessons with exercises, examples, and audio pronunciation for better learning.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-teal-100 dark:bg-teal-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-teal-600" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Community Features</h3>
+              <p className="text-muted-foreground">
+                Connect with fellow learners through leaderboards and shared progress tracking.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="h-8 w-8 text-indigo-600" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Mobile Optimized</h3>
+              <p className="text-muted-foreground">
+                Learn anywhere, anytime with our responsive design that works perfectly on all devices.
               </p>
             </div>
           </div>
@@ -166,7 +196,7 @@ export default function WelcomePage() {
           <CardHeader>
               <CardTitle className="text-2xl text-gray-900 dark:text-white">Ready to Start Your French Journey?</CardTitle>
               <CardDescription className="text-lg text-gray-900 dark:text-white">
-                Join thousands of successful learners and master French with our proven method.
+                Begin learning French today with our free, structured lessons and interactive features.
             </CardDescription>
           </CardHeader>
           <CardContent>
