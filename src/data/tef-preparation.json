@@ -1,0 +1,420 @@
+{
+  "overview": {
+    "title": "TEF Canada Preparation Roadmap",
+    "description": "Comprehensive study plan to achieve your target TEF Canada scores",
+    "duration": "12-16 weeks",
+    "levels": {
+      "CLB4": "Basic proficiency for immigration",
+      "CLB5": "Intermediate proficiency", 
+      "CLB6": "Good proficiency",
+      "CLB7": "Advanced proficiency",
+      "CLB8": "Very advanced proficiency",
+      "CLB9": "Expert proficiency",
+      "CLB10": "Native-like proficiency"
+    }
+  },
+  "studyPlan": {
+    "beginner": {
+      "duration": "16 weeks",
+      "targetScore": "CLB 4-5",
+      "weeklyHours": "10-15 hours",
+      "phases": [
+        {
+          "phase": "Foundation (Weeks 1-4)",
+          "focus": "Basic French fundamentals",
+          "activities": [
+            "Master French alphabet and pronunciation",
+            "Learn 500 essential vocabulary words",
+            "Study basic grammar (articles, present tense)",
+            "Practice daily greetings and introductions",
+            "Complete foundations module"
+          ],
+          "resources": ["Alphabet", "Greetings", "Numbers", "Basic Grammar"],
+          "target": "A1 level proficiency"
+        },
+        {
+          "phase": "Building (Weeks 5-8)", 
+          "focus": "Intermediate skills development",
+          "activities": [
+            "Expand vocabulary to 1000 words",
+            "Master past and future tenses",
+            "Practice common conversations",
+            "Study French culture and expressions",
+            "Complete vocabulary and grammar modules"
+          ],
+          "resources": ["Vocabulary", "Grammar", "Conversations", "Culture"],
+          "target": "A2 level proficiency"
+        },
+        {
+          "phase": "Practice (Weeks 9-12)",
+          "focus": "TEF-specific preparation",
+          "activities": [
+            "Take practice TEF tests",
+            "Focus on reading comprehension",
+            "Practice listening exercises",
+            "Study TEF format and timing",
+            "Complete immigration module"
+          ],
+          "resources": ["Immigration", "Practice Tests", "Reading", "Listening"],
+          "target": "CLB 4-5 level"
+        },
+        {
+          "phase": "Refinement (Weeks 13-16)",
+          "focus": "Final preparation and test taking",
+          "activities": [
+            "Mock TEF exams under timed conditions",
+            "Review weak areas",
+            "Practice speaking and writing",
+            "Final vocabulary review",
+            "Test day preparation"
+          ],
+          "resources": ["Mock Exams", "Speaking Practice", "Writing Practice"],
+          "target": "Ready for TEF exam"
+        }
+      ]
+    },
+    "intermediate": {
+      "duration": "12 weeks",
+      "targetScore": "CLB 6-7",
+      "weeklyHours": "12-18 hours",
+      "phases": [
+        {
+          "phase": "Review & Strengthen (Weeks 1-3)",
+          "focus": "Strengthen existing skills",
+          "activities": [
+            "Review grammar fundamentals",
+            "Expand vocabulary to 2000 words",
+            "Practice complex conversations",
+            "Study business and professional French",
+            "Complete intermediate modules"
+          ],
+          "resources": ["Business", "Advanced Grammar", "Professional Vocabulary"],
+          "target": "B1 level proficiency"
+        },
+        {
+          "phase": "Advanced Skills (Weeks 4-7)",
+          "focus": "Advanced language skills",
+          "activities": [
+            "Master complex grammar structures",
+            "Practice formal and informal registers",
+            "Study French literature and culture",
+            "Practice academic writing",
+            "Complete advanced modules"
+          ],
+          "resources": ["Literature", "History", "Arts", "Advanced Writing"],
+          "target": "B2 level proficiency"
+        },
+        {
+          "phase": "TEF Mastery (Weeks 8-10)",
+          "focus": "TEF exam mastery",
+          "activities": [
+            "Intensive TEF practice tests",
+            "Master all four test sections",
+            "Practice time management",
+            "Focus on weak areas",
+            "Complete immigration preparation"
+          ],
+          "resources": ["TEF Practice", "Immigration", "Test Strategies"],
+          "target": "CLB 6-7 level"
+        },
+        {
+          "phase": "Final Push (Weeks 11-12)",
+          "focus": "Exam readiness",
+          "activities": [
+            "Daily mock TEF exams",
+            "Final review of all materials",
+            "Practice speaking under pressure",
+            "Prepare for test day",
+            "Confidence building"
+          ],
+          "resources": ["Mock Exams", "Speaking Practice", "Final Review"],
+          "target": "Ready for TEF exam"
+        }
+      ]
+    },
+    "advanced": {
+      "duration": "8 weeks",
+      "targetScore": "CLB 8-9",
+      "weeklyHours": "15-20 hours",
+      "phases": [
+        {
+          "phase": "Polish Skills (Weeks 1-2)",
+          "focus": "Refine advanced skills",
+          "activities": [
+            "Master nuanced vocabulary",
+            "Practice complex grammar",
+            "Study formal French registers",
+            "Practice academic discourse",
+            "Complete expert modules"
+          ],
+          "resources": ["Advanced Literature", "Professional French", "Academic Writing"],
+          "target": "C1 level proficiency"
+        },
+        {
+          "phase": "TEF Excellence (Weeks 3-5)",
+          "focus": "TEF exam excellence",
+          "activities": [
+            "Advanced TEF practice tests",
+            "Master all test nuances",
+            "Practice perfect timing",
+            "Study advanced topics",
+            "Complete expert preparation"
+          ],
+          "resources": ["Advanced TEF", "Expert Practice", "Complex Topics"],
+          "target": "CLB 8-9 level"
+        },
+        {
+          "phase": "Perfection (Weeks 6-8)",
+          "focus": "Achieving excellence",
+          "activities": [
+            "Daily advanced mock exams",
+            "Perfect all four sections",
+            "Master test-taking strategies",
+            "Build unshakeable confidence",
+            "Final preparation"
+          ],
+          "resources": ["Expert Mock Exams", "Perfect Practice", "Confidence Building"],
+          "target": "Ready for TEF excellence"
+        }
+      ]
+    }
+  },
+  "dailyRoutine": {
+    "weekdays": {
+      "morning": {
+        "duration": "30 minutes",
+        "activities": [
+          "Review previous day's vocabulary",
+          "Practice pronunciation with audio",
+          "Quick grammar review",
+          "Read French news or articles"
+        ]
+      },
+      "afternoon": {
+        "duration": "45-60 minutes",
+        "activities": [
+          "Main lesson or module study",
+          "Practice exercises",
+          "Writing practice",
+          "Grammar drills"
+        ]
+      },
+      "evening": {
+        "duration": "30 minutes",
+        "activities": [
+          "Listening practice",
+          "Vocabulary review",
+          "Conversation practice",
+          "Plan next day's study"
+        ]
+      }
+    },
+    "weekends": {
+      "duration": "2-3 hours",
+      "activities": [
+        "Complete weekly assessments",
+        "Take practice TEF tests",
+        "Review weak areas",
+        "Cultural immersion activities",
+        "Speaking practice with others"
+      ]
+    }
+  },
+  "testSections": {
+    "reading": {
+      "title": "Compréhension de l'écrit (Reading Comprehension)",
+      "duration": "60 minutes",
+      "questions": 50,
+      "description": "Tests your ability to understand written French texts",
+      "preparation": [
+        "Read French newspapers daily",
+        "Practice with various text types",
+        "Learn reading strategies",
+        "Build vocabulary for different topics",
+        "Practice time management"
+      ],
+      "tips": [
+        "Read questions before the text",
+        "Look for keywords",
+        "Don't translate word by word",
+        "Use context clues",
+        "Manage your time wisely"
+      ]
+    },
+    "listening": {
+      "title": "Compréhension de l'oral (Listening Comprehension)",
+      "duration": "40 minutes", 
+      "questions": 60,
+      "description": "Tests your ability to understand spoken French",
+      "preparation": [
+        "Listen to French podcasts daily",
+        "Watch French movies with subtitles",
+        "Practice with different accents",
+        "Focus on key information",
+        "Practice note-taking"
+      ],
+      "tips": [
+        "Listen for main ideas first",
+        "Pay attention to numbers and dates",
+        "Don't get stuck on unknown words",
+        "Use context to understand",
+        "Practice with different speeds"
+      ]
+    },
+    "writing": {
+      "title": "Expression écrite (Written Expression)",
+      "duration": "60 minutes",
+      "tasks": 2,
+      "description": "Tests your ability to write in French",
+      "preparation": [
+        "Practice formal and informal writing",
+        "Learn common essay structures",
+        "Expand vocabulary for writing",
+        "Practice grammar in context",
+        "Time yourself while writing"
+      ],
+      "tips": [
+        "Plan your writing first",
+        "Use varied vocabulary",
+        "Check grammar and spelling",
+        "Write clearly and concisely",
+        "Practice common topics"
+      ]
+    },
+    "speaking": {
+      "title": "Expression orale (Oral Expression)",
+      "duration": "15 minutes",
+      "tasks": 2,
+      "description": "Tests your ability to speak French",
+      "preparation": [
+        "Practice speaking daily",
+        "Record yourself speaking",
+        "Practice with native speakers",
+        "Learn common expressions",
+        "Practice pronunciation"
+      ],
+      "tips": [
+        "Speak clearly and confidently",
+        "Use varied vocabulary",
+        "Don't be afraid to make mistakes",
+        "Practice common topics",
+        "Listen carefully to questions"
+      ]
+    }
+  },
+  "scoringGuide": {
+    "CLB4": {
+      "reading": "121-150 points",
+      "listening": "145-180 points", 
+      "writing": "181-225 points",
+      "speaking": "181-225 points",
+      "description": "Basic proficiency - can understand simple texts and conversations",
+      "requirements": "Minimum for many immigration programs"
+    },
+    "CLB5": {
+      "reading": "151-180 points",
+      "listening": "181-216 points",
+      "writing": "226-270 points", 
+      "speaking": "226-270 points",
+      "description": "Intermediate proficiency - can handle everyday situations",
+      "requirements": "Good for Express Entry points"
+    },
+    "CLB6": {
+      "reading": "181-206 points",
+      "listening": "217-248 points",
+      "writing": "271-309 points",
+      "speaking": "271-309 points", 
+      "description": "Good proficiency - can handle complex situations",
+      "requirements": "Strong Express Entry points"
+    },
+    "CLB7": {
+      "reading": "207-232 points",
+      "listening": "249-279 points",
+      "writing": "310-348 points",
+      "speaking": "310-348 points",
+      "description": "Advanced proficiency - can handle professional situations",
+      "requirements": "Maximum Express Entry points"
+    },
+    "CLB8": {
+      "reading": "233-247 points",
+      "listening": "280-297 points", 
+      "writing": "349-370 points",
+      "speaking": "349-370 points",
+      "description": "Very advanced proficiency - near-native level",
+      "requirements": "Professional and academic use"
+    }
+  },
+  "resources": {
+    "official": [
+      {
+        "name": "TEF Canada Official Guide",
+        "type": "Book",
+        "description": "Official preparation guide from CCI Paris"
+      },
+      {
+        "name": "TEF Canada Sample Tests",
+        "type": "Practice Tests", 
+        "description": "Official sample tests from CCI Paris"
+      }
+    ],
+    "platform": [
+      "Alphabet & Pronunciation",
+      "Basic Greetings", 
+      "Numbers & Vocabulary",
+      "Grammar Fundamentals",
+      "Conversations Practice",
+      "Culture & Expressions",
+      "Business French",
+      "Immigration Content",
+      "Literature & History",
+      "Arts & Sports"
+    ],
+    "external": [
+      {
+        "name": "RFI Savoirs",
+        "type": "Listening",
+        "description": "French radio with transcripts"
+      },
+      {
+        "name": "TV5Monde",
+        "type": "Video",
+        "description": "French TV with learning resources"
+      },
+      {
+        "name": "Le Monde",
+        "type": "Reading",
+        "description": "French newspaper for reading practice"
+      }
+    ]
+  },
+  "weeklySchedule": {
+    "monday": {
+      "focus": "Reading & Vocabulary",
+      "activities": ["Read French articles", "Learn new vocabulary", "Practice reading comprehension"]
+    },
+    "tuesday": {
+      "focus": "Listening & Speaking", 
+      "activities": ["Listen to French podcasts", "Practice pronunciation", "Record speaking practice"]
+    },
+    "wednesday": {
+      "focus": "Grammar & Writing",
+      "activities": ["Study grammar rules", "Practice writing exercises", "Review common mistakes"]
+    },
+    "thursday": {
+      "focus": "Conversation & Culture",
+      "activities": ["Practice conversations", "Study French culture", "Learn expressions"]
+    },
+    "friday": {
+      "focus": "Practice Test Day",
+      "activities": ["Take practice TEF test", "Review mistakes", "Focus on weak areas"]
+    },
+    "saturday": {
+      "focus": "Immersion & Review",
+      "activities": ["French movies/music", "Review week's material", "Plan next week"]
+    },
+    "sunday": {
+      "focus": "Assessment & Planning",
+      "activities": ["Weekly assessment", "Mock TEF test", "Plan improvements"]
+    }
+  }
+}
