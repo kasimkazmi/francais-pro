@@ -32,8 +32,8 @@ We hope that you:
 Remember that this is a community we build together 💪
 
 ### 🚀 Getting Started
-1. **Explore the Platform** - Visit [francais-pro.vercel.app](https://francais-pro.vercel.app)
-2. **Read the Documentation** - Check our [Getting Started Guide](https://github.com/your-username/francais-pro/blob/main/docs/Getting-Started.md)
+1. **Explore the Platform** - Visit [francais-pro.vercel.app](https://www.frenchpro.ca/)
+2. **Read the Documentation** - Check our [Getting Started Guide](https://github.com/kasimkazmi/francais-pro/blob/master/docs/Getting-Started.md)
 3. **Join Discussions** - Participate in community conversations
 4. **Share Your Progress** - Use our Show and Tell template
 5. **Ask Questions** - Use our Q&A template for French learning help
@@ -59,9 +59,9 @@ To get started, comment below with an introduction of yourself and tell us:
 *Let's learn French together and build an amazing community of French learners!*
 
 **Quick Links:**
-- 🏠 [Platform Home](https://francais-pro.vercel.app)
-- 📚 [Learning Modules](https://francais-pro.vercel.app/learn)
-- 🎨 [Cultural Content](https://francais-pro.vercel.app/arts)
-- 🎯 [TEF Preparation](https://francais-pro.vercel.app/tef-preparation)
-- 🐛 [Report Issues](https://github.com/your-username/francais-pro/issues)
-- 💡 [Request Features](https://github.com/your-username/francais-pro/discussions/categories/ideas)
+- 🏠 [Platform Home](https://www.frenchpro.ca/)
+- 📚 [Learning Modules](https://www.frenchpro.ca/learn)
+- 🎨 [Cultural Content](https://www.frenchpro.ca/arts)
+- 🎯 [TEF Preparation](https://www.frenchpro.ca/tef)
+- 🐛 [Report Issues](https://github.com/kasimkazmi/francais-pro/issues)
+- 💡 [Request Features](https://github.com/kasimkazmi/francais-pro/discussions/categories/ideas)
