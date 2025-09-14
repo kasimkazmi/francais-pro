@@ -55,5 +55,5 @@ assignees: ''
 
 **Related:**
 - 🔗 Link to existing issues if applicable
-- 📖 Check our [Contributing Guide](https://github.com/your-username/francais-pro/blob/main/docs/Contributing.md)
-- 🎯 See our [Project Roadmap](https://github.com/your-username/francais-pro/blob/main/ROADMAP.md)
+- 📖 Check our [Contributing Guide](https://github.com/kasimkazmi/francais-pro/blob/master/docs/Contributing.md)
+- 🎯 See our [Project Roadmap](https://github.com/kasimkazmi/francais-pro/blob/master/ROADMAP.md)

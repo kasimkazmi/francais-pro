@@ -112,7 +112,7 @@ export default function SupportPage() {
           </Card>
 
           {/* Open Collective */}
-          <Card className="border-2 border-gray-200 dark:border-gray-700 hover:border-green-500 transition-colors">
+          {/* <Card className="border-2 border-gray-200 dark:border-gray-700 hover:border-green-500 transition-colors">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users className="h-5 w-5 text-green-500" />
@@ -130,7 +130,7 @@ export default function SupportPage() {
                 </a>
               </Button>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* What Your Support Enables */}
