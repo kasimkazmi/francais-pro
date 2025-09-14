@@ -1,6 +1,6 @@
 # 🇫🇷 Français Pro
 
-> **A comprehensive French learning platform for Canadian immigration - built with Next.js 15**
+> **A modern, interactive French learning platform built with Next.js 15, inspired by shadcn/ui design principles. It features comprehensive progress tracking and gamified learning experiences—all within an intuitive, clean, documentation-style interface to help you learn French from zero to hero.**
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
