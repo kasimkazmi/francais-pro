@@ -9,7 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAdmin } from '@/contexts/AdminContext';
 import { db } from '@/lib/firebase/config';
 import { collection, getDocs, doc, getDoc, query, orderBy } from 'firebase/firestore';
-import { auth } from '@/lib/firebase/config';
 import { 
   Users, 
   Search, 

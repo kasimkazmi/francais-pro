@@ -211,7 +211,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
     } catch (err) {
       console.error('Error ending session:', err);
     }
-  }, [currentSession, user]);
+  }, [currentSession]);
 
   // Refresh user sessions
   const refreshSessions = useCallback(async () => {

@@ -442,11 +442,11 @@ export function UserStorageManagement() {
                 <SortAsc className="h-5 w-5" />
                 Sort & Order
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 min-w-0">
                   <label className="text-sm font-medium mb-2 block">Sort By</label>
                   <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Sort By" />
                     </SelectTrigger>
                     <SelectContent>
@@ -461,14 +461,14 @@ export function UserStorageManagement() {
                   </Select>
                 </div>
 
-                <div>
+                <div className="flex-shrink-0">
                   <label className="text-sm font-medium mb-2 block">Order</label>
                   <div className="flex gap-2">
                     <Button
                       variant={sortOrder === 'desc' ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSortOrder('desc')}
-                      className="flex-1"
+                      className="min-w-[80px]"
                     >
                       <SortDesc className="h-4 w-4 mr-1" />
                       Desc
@@ -477,7 +477,7 @@ export function UserStorageManagement() {
                       variant={sortOrder === 'asc' ? 'default' : 'outline'}
                       size="sm"
                       onClick={() => setSortOrder('asc')}
-                      className="flex-1"
+                      className="min-w-[80px]"
                     >
                       <SortAsc className="h-4 w-4 mr-1" />
                       Asc

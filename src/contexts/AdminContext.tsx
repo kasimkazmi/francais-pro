@@ -204,7 +204,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         })));
         
         let activitiesInLast7Days = 0;
-        let activitiesByType = {};
+        const activitiesByType: Record<string, number> = {};
         
         activitiesSnapshot.forEach((doc) => {
           const activityData = doc.data();
@@ -288,7 +288,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Helper function to get activity descriptions (lesson activities only)
-  const getActivityDescription = (activityType: string, activityData: any): string => {
+  const getActivityDescription = (activityType: string, activityData: Record<string, unknown>): string => {
     switch (activityType) {
       case 'lesson_start':
         return `Started lesson: ${activityData.lessonId || 'Unknown'}`;
