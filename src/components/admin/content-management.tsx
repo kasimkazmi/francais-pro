@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/lib/firebase/config';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { StyledTabs, TabsContent } from "@/components/ui/styled-tabs";
 import { 
   BookOpen, 
   Plus, 
@@ -21,17 +23,32 @@ import {
   Lightbulb,
   Globe,
   Users,
-  TrendingUp
+  TrendingUp,
+  BarChart3,
+  Type,
+  BookMarked
 } from 'lucide-react';
 
 interface ContentItem {
   id: string;
-  type: 'alphabet' | 'numbers' | 'greetings' | 'vocabulary' | 'expressions' | 'grammar' | 'conversations';
+  type: 'alphabet' | 'numbers' | 'greetings' | 'vocabulary' | 'expressions' | 'grammar' | 'conversations' | 'foundations';
   title: string;
   content: Record<string, unknown>;
   lastModified: Date;
   usage: number;
 }
+
+// Content types mapping
+const CONTENT_TYPES = {
+  'alphabet': 'Alphabet',
+  'numbers': 'Numbers', 
+  'greetings': 'Greetings',
+  'vocabulary': 'Vocabulary',
+  'expressions': 'Expressions',
+  'grammar': 'Grammar',
+  'conversations': 'Conversations',
+  'foundations': 'Foundations'
+} as const;
 
 export function ContentManagement() {
   const [contentItems, setContentItems] = useState<ContentItem[]>([]);
@@ -39,57 +56,95 @@ export function ContentManagement() {
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
   const [activeTab, setActiveTab] = useState('overview');
 
-  // Mock data - in real app, this would come from your content files
-  const mockContent: ContentItem[] = useMemo(() => [
-    {
-      id: 'alphabet-1',
-      type: 'alphabet',
-      title: 'French Alphabet',
-      content: { letters: ['A', 'B', 'C', 'D', 'E'] },
-      lastModified: new Date(),
-      usage: 1250
-    },
-    {
-      id: 'numbers-1',
-      type: 'numbers',
-      title: 'Numbers 1-20',
-      content: { numbers: [1, 2, 3, 4, 5] },
-      lastModified: new Date(),
-      usage: 980
-    },
-    {
-      id: 'greetings-1',
-      type: 'greetings',
-      title: 'Basic Greetings',
-      content: { greetings: ['Bonjour', 'Bonsoir', 'Salut'] },
-      lastModified: new Date(),
-      usage: 2100
-    },
-    {
-      id: 'vocabulary-1',
-      type: 'vocabulary',
-      title: 'Family Vocabulary',
-      content: { words: ['mère', 'père', 'sœur', 'frère'] },
-      lastModified: new Date(),
-      usage: 1500
-    },
-    {
-      id: 'expressions-1',
-      type: 'expressions',
-      title: 'Common Expressions',
-      content: { expressions: ['Comment allez-vous?', 'Merci beaucoup'] },
-      lastModified: new Date(),
-      usage: 1800
-    }
-  ], []);
+  // Function to fetch real content and usage data from Firebase
+  const fetchContentData = async () => {
+    try {
+      // Get all user activities for usage data
+      const activitiesSnapshot = await getDocs(collection(db, 'userActivities'));
+      const activities = activitiesSnapshot.docs.map(doc => doc.data());
+      
+      console.log('🔍 All Activities Debug:', {
+        totalActivities: activities.length,
+        activities: activities.map(activity => ({
+          activityType: activity.activityType,
+          moduleId: activity.activityData?.moduleId,
+          lessonId: activity.activityData?.lessonId,
+          timestamp: activity.timestamp
+        }))
+      });
+      
+      // Count activities by content type/module
+      const usageByType: { [key: string]: number } = {};
+      
+      // Count all activity types for debugging
+      const activityTypeCounts: { [key: string]: number } = {};
+      activities.forEach(activity => {
+        const type = activity.activityType || 'unknown';
+        activityTypeCounts[type] = (activityTypeCounts[type] || 0) + 1;
+      });
+      console.log('📈 Activity Type Counts:', activityTypeCounts);
+      
+      activities.forEach(activity => {
+        if (activity.activityType === 'lesson_complete' || activity.activityType === 'lesson_start') {
+          // Try different possible field names for moduleId
+          const moduleId = activity.activityData?.moduleId || 
+                          activity.activityData?.module || 
+                          activity.moduleId || 
+                          'unknown';
+          usageByType[moduleId] = (usageByType[moduleId] || 0) + 1;
+        }
+      });
+      
+      console.log('📊 Usage by Type Debug:', usageByType);
 
+      // If no lesson activities found, try to count all activities as a fallback
+      if (Object.keys(usageByType).length === 0 && activities.length > 0) {
+        console.log('⚠️ No lesson activities found, counting all activities as fallback');
+        activities.forEach(activity => {
+          const type = activity.activityType || 'general';
+          usageByType[type] = (usageByType[type] || 0) + 1;
+        });
+      }
+
+      // Create content items based on available data types
+      const contentItems: ContentItem[] = Object.entries(CONTENT_TYPES).map(([type, title]) => {
+        const usage = usageByType[type] || 0;
+        return {
+          id: `${type}-content`,
+          type: type as ContentItem['type'],
+          title: title,
+          content: { type: type, description: `${title} learning content` },
+          lastModified: new Date(),
+          usage: usage
+        };
+      });
+
+      return contentItems;
+    } catch (error) {
+      console.error('Error fetching content data:', error);
+      return [];
+    }
+  };
+
+ 
   useEffect(() => {
-    // Simulate loading content
-    setTimeout(() => {
-      setContentItems(mockContent);
-      setLoading(false);
-    }, 1000);
-  }, [mockContent]);
+    const loadContent = async () => {
+      try {
+        setLoading(true);
+        
+        // Fetch real content data from Firebase
+        const contentData = await fetchContentData();
+        setContentItems(contentData);
+      } catch (error) {
+        console.error('Error loading content:', error);
+        setContentItems([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadContent();
+  }, []);
 
   const getContentIcon = (type: string) => {
     switch (type) {
@@ -107,6 +162,8 @@ export function ContentManagement() {
         return <FileText className="h-4 w-4" />;
       case 'conversations':
         return <MessageCircle className="h-4 w-4" />;
+      case 'foundations':
+        return <BookOpen className="h-4 w-4" />;
       default:
         return <BookOpen className="h-4 w-4" />;
     }
@@ -128,6 +185,8 @@ export function ContentManagement() {
         return 'bg-indigo-500';
       case 'conversations':
         return 'bg-teal-500';
+      case 'foundations':
+        return 'bg-amber-500';
       default:
         return 'bg-gray-500';
     }
@@ -186,13 +245,48 @@ export function ContentManagement() {
       </div>
 
       {/* Content Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="alphabet">Alphabet</TabsTrigger>
-          <TabsTrigger value="vocabulary">Vocabulary</TabsTrigger>
-          <TabsTrigger value="grammar">Grammar</TabsTrigger>
-        </TabsList>
+      <StyledTabs 
+        value={activeTab} 
+        onValueChange={setActiveTab}
+        tabs={[
+          {
+            value: 'overview',
+            label: 'Overview',
+            shortLabel: 'Overview',
+            icon: <BarChart3 className="h-4 w-4" />,
+            color: 'text-blue-600',
+            hoverColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/30',
+            activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500'
+          },
+          {
+            value: 'alphabet',
+            label: 'Alphabet',
+            shortLabel: 'Alphabet',
+            icon: <Type className="h-4 w-4" />,
+            color: 'text-green-600',
+            hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/30',
+            activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500'
+          },
+          {
+            value: 'vocabulary',
+            label: 'Vocabulary',
+            shortLabel: 'Vocab',
+            icon: <BookMarked className="h-4 w-4" />,
+            color: 'text-purple-600',
+            hoverColor: 'hover:bg-purple-50 dark:hover:bg-purple-900/30',
+            activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-violet-500'
+          },
+          {
+            value: 'grammar',
+            label: 'Grammar',
+            shortLabel: 'Grammar',
+            icon: <FileText className="h-4 w-4" />,
+            color: 'text-orange-600',
+            hoverColor: 'hover:bg-orange-50 dark:hover:bg-orange-900/30',
+            activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-amber-500'
+          }
+        ]}
+      >
 
         {/* Overview Tab */}
         <TabsContent value="overview" className="space-y-6">
@@ -385,7 +479,7 @@ export function ContentManagement() {
             </Card>
           </TabsContent>
         ))}
-      </Tabs>
+      </StyledTabs>
 
       {/* Edit Modal */}
       {editingItem && (

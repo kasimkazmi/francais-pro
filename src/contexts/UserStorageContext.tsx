@@ -83,11 +83,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
       await createOrUpdateUserProfile(user.uid, profileData);
       await refreshProfile();
       
-      // Log profile update activity
-      await logActivity('profile_update', {
-        deviceInfo: getDeviceInfo(),
-        userAgent: navigator.userAgent,
-      });
+      // Note: Profile update activity logging removed - only lesson activities are logged
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');
       throw err;
@@ -196,11 +192,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
       
       setCurrentSession(session);
       
-      // Log login activity
-      await logUserActivity(user.uid, 'login', {
-        deviceInfo,
-        userAgent: navigator.userAgent,
-      }, sessionId);
+      // Note: Login activity logging removed - only lesson activities are logged
     } catch (err) {
       console.error('Error starting session:', err);
     }
@@ -213,13 +205,7 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
     try {
       await endUserSession(currentSession.sessionId);
       
-      // Log logout activity
-      if (user) {
-        await logUserActivity(user.uid, 'logout', {
-          deviceInfo: currentSession.deviceInfo,
-          userAgent: currentSession.userAgent,
-        }, currentSession.sessionId);
-      }
+      // Note: Logout activity logging removed - only lesson activities are logged
       
       setCurrentSession(null);
     } catch (err) {

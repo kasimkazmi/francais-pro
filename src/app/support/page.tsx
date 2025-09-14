@@ -82,7 +82,7 @@ export default function SupportPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Support the project through GitHub&apos;s native sponsorship platform
               </p>
-              <Button className="w-full text-gray-600 dark:text-gray-300 " asChild>
+              <Button className="w-full text-gray-600 dark:text-gray-300 " variant="outline" asChild>
                 <a href="https://github.com/sponsors/kasimkazmi" target="_blank" rel="noopener noreferrer">
                   Sponsor on GitHub
                 </a>
@@ -93,17 +93,17 @@ export default function SupportPage() {
           {/* Ko-fi */}
           <Card className="border-2 border-gray-200 dark:border-gray-700 hover:border-pink-500 transition-colors">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-gray-600 dark:text-gray-300 ">
                 <Coffee className="h-5 w-5 text-pink-500" />
                 Ko-fi
               </CardTitle>
-              <Badge variant="secondary">Buy Me a Coffee</Badge>
+              <Badge variant="secondary" className=' text-gray-600 dark:text-gray-300 '>Buy Me a Coffee</Badge>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Show your appreciation with a small donation - perfect for coffee breaks!
               </p>
-              <Button className="w-full" variant="outline" asChild>
+              <Button className="w-full text-gray-600 dark:text-gray-300 " variant="outline" asChild>
                 <a href="https://ko-fi.com/francais_pro" target="_blank" rel="noopener noreferrer">
                   Buy a Coffee
                 </a>
@@ -136,12 +136,12 @@ export default function SupportPage() {
         {/* What Your Support Enables */}
         <Card className="mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">What Your Support Enables</CardTitle>
+            <CardTitle className="text-2xl text-center text-gray-600 dark:text-gray-300 ">What Your Support Enables</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold text-lg mb-3">Development & Features</h3>
+                <h3 className="font-semibold text-lg mb-3 text-gray-600 dark:text-gray-300 ">Development & Features</h3>
                 <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                   <li>• New learning modules and content</li>
                   <li>• AI-powered pronunciation feedback</li>
@@ -151,7 +151,7 @@ export default function SupportPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold text-lg mb-3">Community & Support</h3>
+                <h3 className="font-semibold text-lg mb-3 text-gray-600 dark:text-gray-300 ">Community & Support</h3>
                 <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                   <li>• Community forums and discussions</li>
                   <li>• Live tutoring sessions</li>
@@ -167,7 +167,7 @@ export default function SupportPage() {
         {/* Support Tiers */}
         <Card className="mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Support Tiers</CardTitle>
+            <CardTitle className="text-2xl text-center text-gray-600 dark:text-gray-300 ">Support Tiers</CardTitle>
             <CardDescription className="text-center">
               Choose the level of support that works for you
             </CardDescription>
@@ -175,7 +175,7 @@ export default function SupportPage() {
           <CardContent>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center p-6 border rounded-lg">
-                <h3 className="font-bold text-lg mb-2">☕ Coffee Supporter</h3>
+                <h3 className="font-bold text-lg mb-2 text-gray-600 dark:text-gray-300 ">☕ Coffee Supporter</h3>
                 <p className="text-2xl font-bold text-blue-600 mb-2">$5/month</p>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Help keep the lights on and support basic development
@@ -188,7 +188,7 @@ export default function SupportPage() {
               </div>
 
               <div className="text-center p-6 border rounded-lg border-blue-500">
-                <h3 className="font-bold text-lg mb-2">🌟 French Enthusiast</h3>
+                <h3 className="font-bold text-lg mb-2 text-gray-600 dark:text-gray-300 ">🌟 French Enthusiast</h3>
                 <p className="text-2xl font-bold text-blue-600 mb-2">$15/month</p>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Support content creation and feature development
@@ -202,7 +202,7 @@ export default function SupportPage() {
               </div>
 
               <div className="text-center p-6 border rounded-lg">
-                <h3 className="font-bold text-lg mb-2">🚀 Champion</h3>
+                <h3 className="font-bold text-lg mb-2 text-gray-600 dark:text-gray-300 ">🚀 Champion</h3>
                 <p className="text-2xl font-bold text-blue-600 mb-2">$50/month</p>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Help us build the future of French learning

@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useAdmin } from '@/contexts/AdminContext';
 import { db } from '@/lib/firebase/config';
 import { collection, getDocs, doc, getDoc, query, orderBy } from 'firebase/firestore';
+import { auth } from '@/lib/firebase/config';
 import { 
   Users, 
   Search, 
@@ -51,13 +52,22 @@ export function UserManagement() {
     try {
       setLoading(true);
       
-      // Get user progress data
-      const progressQuery = query(collection(db, 'userProgress'), orderBy('lastActiveDate', 'desc'));
-      const progressSnapshot = await getDocs(progressQuery);
+      // Get user profiles data
+      // Try with orderBy first, fallback to simple query if it fails
+      let profilesSnapshot;
+      try {
+        const profilesQuery = query(collection(db, 'userProfiles'), orderBy('lastActiveAt', 'desc'));
+        profilesSnapshot = await getDocs(profilesQuery);
+      } catch (orderByError) {
+        console.log('OrderBy failed, using simple query:', orderByError);
+        profilesSnapshot = await getDocs(collection(db, 'userProfiles'));
+      }
+      
+      console.log('Total users found:', profilesSnapshot.size);
       
       const usersData: UserData[] = [];
       
-      for (const docSnapshot of progressSnapshot.docs) {
+      for (const docSnapshot of profilesSnapshot.docs) {
         const data = docSnapshot.data();
         
         // Check if user is admin
@@ -68,15 +78,24 @@ export function UserManagement() {
         const bannedDoc = await getDoc(doc(db, 'bannedUsers', docSnapshot.id));
         const isBanned = bannedDoc.exists() && bannedDoc.data()?.status === 'banned';
         
+        // Debug: Log the user data to see what's available
+        console.log('User data for', docSnapshot.id, ':', {
+          email: data.email,
+          displayName: data.displayName,
+          hasEmail: !!data.email,
+          emailType: typeof data.email,
+          allKeys: Object.keys(data)
+        });
+        
         usersData.push({
           uid: docSnapshot.id,
           email: data.email || 'No email',
           displayName: data.displayName || 'Anonymous',
           totalLessonsCompleted: data.totalLessonsCompleted || 0,
-          totalTimeSpent: data.totalTimeSpent || 0,
-          currentStreak: data.currentStreak || 0,
-          level: data.level || 'beginner',
-          lastActiveDate: data.lastActiveDate?.toDate() || new Date(),
+          totalTimeSpent: data.totalStudyTime || 0, // Changed from totalTimeSpent to totalStudyTime
+          currentStreak: data.streakCount || 0, // Changed from currentStreak to streakCount
+          level: data.level?.toString() || 'beginner',
+          lastActiveDate: data.lastActiveAt?.toDate() || new Date(),
           role: adminData?.role || 'user',
           isBanned
         });
@@ -301,7 +320,7 @@ export function UserManagement() {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Mail className="h-3 w-3" />
-                        {user.email}
+                        {user.email === 'No email' ? `UID: ${user.uid}` : user.email}
                       </div>
                       <div className="flex items-center gap-1">
                         <BookOpen className="h-3 w-3" />

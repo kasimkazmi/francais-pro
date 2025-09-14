@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore';
 import { db, auth } from './config';
 import { syncUserToLeaderboard } from './leaderboard-public';
+import { logUserActivity } from './user-storage';
 
 export interface LessonProgress {
   lessonId: string;
@@ -221,6 +222,42 @@ export async function updateLessonProgress(
     }
     
     await updateDoc(userProgressRef, updatedProgress);
+    
+    // Log activity if lesson was completed
+    if (completed) {
+      try {
+        // Generate a session ID for activity logging (simplified)
+        const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        
+        await logUserActivity(uid, 'lesson_complete', {
+          lessonId,
+          moduleId,
+          score,
+          timeSpent,
+          deviceInfo: navigator.platform,
+          userAgent: navigator.userAgent,
+        }, sessionId);
+      } catch (activityError) {
+        console.error('Error logging lesson completion activity:', activityError);
+        // Don't throw - this is not critical
+      }
+    } else {
+      // Log lesson start activity
+      try {
+        const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        
+        await logUserActivity(uid, 'lesson_start', {
+          lessonId,
+          moduleId,
+          timeSpent,
+          deviceInfo: navigator.platform,
+          userAgent: navigator.userAgent,
+        }, sessionId);
+      } catch (activityError) {
+        console.error('Error logging lesson start activity:', activityError);
+        // Don't throw - this is not critical
+      }
+    }
     
     // Sync to public leaderboard
     try {

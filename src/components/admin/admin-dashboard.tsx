@@ -17,11 +17,42 @@ import {
   Activity,
   Clock,
   Target,
+  RefreshCw,
 } from 'lucide-react';
 
+// Helper function to get relative time
+const getRelativeTime = (timestamp: Date) => {
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - timestamp.getTime()) / 1000);
+  
+  if (diffInSeconds < 60) {
+    return 'Just now';
+  } else if (diffInSeconds < 3600) {
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `${minutes}m ago`;
+  } else if (diffInSeconds < 86400) {
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours}h ago`;
+  } else if (diffInSeconds < 604800) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `${days}d ago`;
+  } else {
+    return timestamp.toLocaleDateString();
+  }
+};
+
 export function AdminDashboard() {
-  const { isAdmin, isModerator, adminUser, adminStats, loading, error } = useAdmin();
+  const { isAdmin, isModerator, adminUser, adminStats, loading, error, refreshStats } = useAdmin();
   const { user } = useAuth();
+  
+  // Handle refresh stats
+  const handleRefreshStats = async () => {
+    try {
+      await refreshStats();
+    } catch (error) {
+      console.error('Error refreshing stats:', error);
+    }
+  };
 
   // Redirect if not admin
   if (!isAdmin && !isModerator) {
@@ -89,6 +120,15 @@ export function AdminDashboard() {
               <Badge variant={isAdmin ? "default" : "secondary"}>
                 {isAdmin ? "Administrator" : "Moderator"}
               </Badge>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleRefreshStats}
+                disabled={loading}
+              >
+                <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
               <Button variant="outline" size="sm">
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
@@ -121,7 +161,7 @@ export function AdminDashboard() {
               <CardContent>
                 <div className="text-2xl font-bold">{adminStats.totalLessonsCompleted}</div>
                 <p className="text-xs text-muted-foreground">
-                  Across all users
+                  Total lessons completed by all users
                 </p>
               </CardContent>
             </Card>
@@ -161,8 +201,8 @@ export function AdminDashboard() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Top Performers */}
-              <Card>
-                <CardHeader>
+              <Card className="flex flex-col h-96">
+                <CardHeader className="flex-shrink-0">
                   <CardTitle className="flex items-center gap-2">
                     <Crown className="h-5 w-5 text-yellow-500" />
                     Top Performers
@@ -171,36 +211,43 @@ export function AdminDashboard() {
                     Users with the highest progress
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {adminStats?.topPerformers.slice(0, 5).map((performer, index) => (
-                      <div key={performer.uid} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                            <span className="text-sm font-bold text-primary">
-                              {index + 1}
-                            </span>
+                <CardContent className="flex-1 overflow-hidden">
+                  <div className="h-full overflow-y-auto space-y-4 pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
+                    {adminStats?.topPerformers && adminStats.topPerformers.length > 0 ? (
+                      adminStats.topPerformers.map((performer, index) => (
+                        <div key={performer.uid} className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                              <span className="text-sm font-bold text-primary">
+                                {index + 1}
+                              </span>
+                            </div>
+                            <div>
+                              <p className="font-medium truncate max-w-32">{performer.displayName}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {performer.totalLessonsCompleted} lessons completed
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <p className="font-medium">{performer.displayName}</p>
-                            <p className="text-sm text-muted-foreground">
-                              {performer.totalLessonsCompleted} lessons
-                            </p>
+                          <div className="text-right">
+                            <p className="font-bold text-primary">{performer.overallProgress}%</p>
+                            <p className="text-xs text-muted-foreground">Progress</p>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <p className="font-bold text-primary">{performer.overallProgress}%</p>
-                          <p className="text-xs text-muted-foreground">Progress</p>
-                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-8 text-muted-foreground">
+                        <Crown className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                        <p>No top performers yet</p>
                       </div>
-                    ))}
+                    )}
                   </div>
                 </CardContent>
               </Card>
 
               {/* Recent Activity */}
-              <Card>
-                <CardHeader>
+              <Card className="flex flex-col h-96">
+                <CardHeader className="flex-shrink-0">
                   <CardTitle className="flex items-center gap-2">
                     <Clock className="h-5 w-5 text-blue-500" />
                     Recent Activity
@@ -209,20 +256,20 @@ export function AdminDashboard() {
                     Latest user actions
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="flex-1 overflow-hidden">
+                  <div className="h-full overflow-y-auto space-y-4 pr-2 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
                     {adminStats?.recentActivity && adminStats.recentActivity.length > 0 ? (
-                      adminStats.recentActivity.slice(0, 5).map((activity, index) => (
+                      adminStats.recentActivity.map((activity, index) => (
                         <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
                           <div className="p-2 rounded-full bg-blue-100 dark:bg-blue-900/20">
                             <Activity className="h-4 w-4 text-blue-600" />
                           </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-medium">{activity.displayName}</p>
-                            <p className="text-xs text-muted-foreground">{activity.action}</p>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium truncate">{activity.displayName}</p>
+                            <p className="text-xs text-muted-foreground truncate">{activity.action}</p>
                           </div>
-                          <div className="text-xs text-muted-foreground">
-                            {activity.timestamp.toLocaleDateString()}
+                          <div className="text-xs text-muted-foreground flex-shrink-0" title={activity.timestamp.toLocaleString()}>
+                            {getRelativeTime(activity.timestamp)}
                           </div>
                         </div>
                       ))

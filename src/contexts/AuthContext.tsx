@@ -99,10 +99,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await resetPassword(email);
   };
 
-  const logout = () => {
-    signOutUser();
-    setUser(null);
-    setNeedsUsername(false);
+  const logout = async () => {
+    try {
+      await signOutUser();
+      setUser(null);
+      setNeedsUsername(false);
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Still clear local state even if Firebase logout fails
+      setUser(null);
+      setNeedsUsername(false);
+    }
   };
 
   const setUserDisplayName = useCallback(async (displayName: string): Promise<void> => {
