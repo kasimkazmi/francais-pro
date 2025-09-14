@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { StyledTabs, TabsContent } from '@/components/ui/styled-tabs';
-import { Clock, MapPin, Users, BookOpen } from 'lucide-react';
+import { Clock, Users } from 'lucide-react';
 import historyData from '@/data/history.json';
 
 export function HistoryContent() {
@@ -135,29 +135,31 @@ export function HistoryContent() {
         {/* Famous Figures */}
         <TabsContent value="figures" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {historyData.famousFigures.map((figure, index) => (
+            {historyData.famousFigures.map((figure) => (
               <Card key={figure.name}>
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Users className="h-5 w-5" />
                     {figure.name}
                   </CardTitle>
-                  <CardDescription>{figure.period}</CardDescription>
+                  <CardDescription>{figure.title}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center gap-2 mb-3">
                     <AudioButton text={figure.name} size="sm" />
                     <span className="text-sm text-muted-foreground">
-                      {figure.pronunciation}
+                      {figure.dates}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {figure.description}
-                  </p>
                   <div className="mt-3">
-                    <Badge variant="outline" className="text-xs">
-                      {figure.role}
-                    </Badge>
+                    <h4 className="font-semibold mb-2">Achievements:</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {figure.achievements?.slice(0, 2).map((achievement, i) => (
+                        <Badge key={i} variant="secondary" className="text-xs">
+                          {achievement}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>

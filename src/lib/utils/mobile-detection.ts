@@ -21,11 +21,14 @@ export function isMobileDevice(): boolean {
 
 // Hook to detect mobile devices with reactive updates
 export function useIsMobile(): boolean {
-  if (typeof window === 'undefined') return false;
-  
-  const [isMobile, setIsMobile] = React.useState(() => isMobileDevice());
+  const [isMobile, setIsMobile] = React.useState(false);
   
   React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Set initial value
+    setIsMobile(isMobileDevice());
+    
     const handleResize = () => {
       setIsMobile(isMobileDevice());
     };

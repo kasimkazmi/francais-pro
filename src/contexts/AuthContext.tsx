@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import type { User } from 'firebase/auth';
 import { observeAuth, emailSignIn, emailSignUp, signOutUser, resetPassword, googleSignIn } from '@/lib/firebase/auth';
 import { updateProfile } from 'firebase/auth';
@@ -105,7 +105,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setNeedsUsername(false);
   };
 
-  const setUserDisplayName = async (displayName: string): Promise<void> => {
+  const setUserDisplayName = useCallback(async (displayName: string): Promise<void> => {
     if (!user) throw new Error('No user logged in');
     
     try {
@@ -122,7 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Error setting display name:', error);
       throw error;
     }
-  };
+  }, [user]);
 
   const value = useMemo<AuthContextType>(
     () => ({ 
@@ -137,7 +137,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       needsUsername,
       setUserDisplayName
     }),
-    [user, isLoading, needsUsername]
+    [user, isLoading, needsUsername, setUserDisplayName]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

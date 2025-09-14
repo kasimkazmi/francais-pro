@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { StyledTabs, TabsContent } from '@/components/ui/styled-tabs';
-import { Trophy, Target, Users, Star } from 'lucide-react';
+import { Trophy, Target, Star } from 'lucide-react';
 import sportsData from '@/data/sports.json';
 
 export function SportsContent() {
@@ -138,7 +138,7 @@ export function SportsContent() {
         {/* All Sports */}
         <TabsContent value="competitions" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {sportsData.sports.map((sport, index) => (
+            {sportsData.sports.map((sport) => (
               <Card key={sport.french}>
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
@@ -177,17 +177,17 @@ export function SportsContent() {
         {/* Additional Sports */}
         <TabsContent value="vocabulary" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {[...sportsData.games, ...sportsData.fitness, ...sportsData.olympics, ...sportsData.frenchSports].map((sport, index) => (
-              <Card key={sport.name || sport.french}>
+            {[...sportsData.games, ...sportsData.fitness, ...sportsData.olympics, ...sportsData.frenchSports].map((sport) => (
+              <Card key={'name' in sport ? sport.name : sport.french}>
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Star className="h-5 w-5" />
-                    {sport.name || sport.french}
+                    {'name' in sport ? sport.name : sport.french}
                   </CardTitle>
                   <CardDescription>{sport.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {sport.vocabulary && (
+                  {'vocabulary' in sport && sport.vocabulary && (
                     <div className="space-y-2">
                       {sport.vocabulary.map((vocab, i) => (
                         <div key={i} className="flex items-center justify-between p-2 border rounded">

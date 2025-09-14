@@ -3,9 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { StyledTabs, TabsContent } from '@/components/ui/styled-tabs';
-import { Progress } from '@/components/ui/progress';
 import { 
   Target, 
   Calendar, 
@@ -28,7 +26,6 @@ export function TEFContent() {
   const [selectedDay, setSelectedDay] = useState('monday');
 
   const currentPlan = tefData.studyPlan[selectedLevel as keyof typeof tefData.studyPlan];
-  const currentPhase = currentPlan.phases[selectedPhase];
 
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-8">
@@ -307,7 +304,7 @@ export function TEFContent() {
                     {data.title}
                   </CardTitle>
                   <CardDescription>
-                    {data.duration} • {data.questions || data.tasks} {data.questions ? 'questions' : 'tasks'}
+                    {data.duration} • {'questions' in data ? data.questions : data.tasks} {'questions' in data ? 'questions' : 'tasks'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">

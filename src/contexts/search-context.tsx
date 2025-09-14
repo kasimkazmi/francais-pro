@@ -12,13 +12,6 @@ import conversationsData from '@/data/conversations.json';
 import cultureData from '@/data/culture.json';
 import expressionsData from '@/data/expressions.json';
 import immigrationData from '@/data/immigration.json';
-import artsData from '@/data/arts.json';
-import businessData from '@/data/business.json';
-import historyData from '@/data/history.json';
-import literatureData from '@/data/literature.json';
-import sportsData from '@/data/sports.json';
-import travelData from '@/data/travel.json';
-import tefData from '@/data/tef-preparation.json';
 import { 
   AlphabetData, 
   NumbersData, 
