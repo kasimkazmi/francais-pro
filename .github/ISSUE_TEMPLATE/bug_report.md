@@ -1,9 +1,10 @@
 ---
-name: 🐛 Bug Report - Français Pro
+name: Bug_Report
 about: Report a bug or issue with the Français Pro learning platform
-title: '[BUG] '
-labels: ['bug', 'needs-triage']
+title: "[BUG] "
+labels: bug
 assignees: ''
+
 ---
 
 ## 🐛 Bug Description
