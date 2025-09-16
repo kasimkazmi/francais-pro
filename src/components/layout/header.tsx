@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
 import { AuthModal } from '@/components/ui/auth-modal';
+import { ProfileModal } from '@/components/ui/profile-modal';
 import { ConfirmModal } from '@/components/ui/confirm-modal';
 import { Portal } from '@/components/ui/portal';
 import { Menu, X, User, LogOut, Search, Github } from 'lucide-react';
@@ -15,6 +16,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
   const pathname = usePathname();
   
@@ -111,15 +113,22 @@ export function Header() {
             <ThemeToggle />
             {isAuthenticated ? (
               <div className="flex items-center space-x-2">
-                <div className="hidden sm:flex items-center space-x-2 text-sm">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hidden sm:flex items-center gap-2 text-sm"
+                  onClick={() => setShowProfileModal(true)}
+                  title="Edit Profile"
+                >
                   <User className="h-4 w-4" />
                   <span className="text-muted-foreground">{user?.displayName || user?.email || 'User'}</span>
-                </div>
+                </Button>
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLogout}
                   className="text-muted-foreground hover:text-foreground"
+                  title="Logout"
                 >
                   <LogOut className="h-4 w-4" />
                 </Button>
@@ -173,6 +182,14 @@ export function Header() {
                 >
                   Progress
                 </Link>
+              )}
+              {isAuthenticated && (
+                <button
+                  onClick={() => { setShowProfileModal(true); setIsMobileMenuOpen(false); }}
+                  className="text-left text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                >
+                  Edit Profile
+                </button>
               )}
               <Link 
                 href="/leaderboard" 
@@ -230,6 +247,10 @@ export function Header() {
         <AuthModal 
           isOpen={showAuthModal} 
           onClose={() => setShowAuthModal(false)} 
+        />
+        <ProfileModal 
+          isOpen={showProfileModal}
+          onClose={() => setShowProfileModal(false)}
         />
         <ConfirmModal
           isOpen={showLogoutConfirm}

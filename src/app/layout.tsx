@@ -8,6 +8,7 @@ import { AdminProvider } from "@/contexts/AdminContext";
 import { UserStorageProvider } from "@/contexts/UserStorageContext";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from 'react-hot-toast'
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
@@ -196,7 +197,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
+      <head suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -216,6 +217,32 @@ export default function RootLayout({
             </AdminProvider>
           </UserStorageProvider>
         </AuthProvider>
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'var(--toast-bg)',
+              color: 'var(--toast-color)',
+              border: '1px solid var(--toast-border)',
+              borderRadius: '12px',
+              fontSize: '14px',
+              fontWeight: '500',
+            },
+            success: {
+              iconTheme: {
+                primary: '#10b981',
+                secondary: '#ffffff',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: '#ef4444',
+                secondary: '#ffffff',
+              },
+            },
+          }}
+        />
         <SpeedInsights />
         <Analytics />
       </body>

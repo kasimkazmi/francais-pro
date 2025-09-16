@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { X, Mail, Lock, User, Loader2, Shield } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import toast from 'react-hot-toast';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -54,11 +55,51 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
         setEmail('');
         setPassword('');
         setName('');
-      } else {
-        setError(mode === 'login' ? 'Invalid email or password' : 'Failed to create account');
+        toast.success(mode === 'login' ? 'Signed in. Welcome back!' : 'Account created. Welcome!');
       }
-    } catch {
-      setError('An error occurred. Please try again.');
+    } catch (e: unknown) {
+      const err = e as { code?: string; message?: string };
+      const code = err?.code || '';
+      const message = err?.message || '';
+      if (mode === 'login') {
+        switch (code) {
+          case 'auth/invalid-credential':
+          case 'auth/wrong-password':
+          case 'auth/user-not-found':
+            setError('Invalid email or password.');
+            toast.error('Invalid email or password.');
+            break;
+          case 'auth/too-many-requests':
+            setError('Too many attempts. Please try again later.');
+            toast('Too many attempts. Try again later.', { icon: '⚠️' });
+            break;
+          default:
+            setError(message || 'Could not sign in. Please try again.');
+            toast.error(message || 'Could not sign in. Please try again.');
+        }
+      } else {
+        switch (code) {
+          case 'auth/email-already-in-use':
+            setError('This email is already registered. Try signing in.');
+            toast('Email already in use. Try signing in.', { icon: 'ℹ️' });
+            break;
+          case 'auth/weak-password':
+            setError('Password should be at least 6 characters.');
+            toast('Use a stronger password (6+ characters).', { icon: '🔒' });
+            break;
+          case 'auth/operation-not-allowed':
+            setError('Email/password accounts are not enabled.');
+            toast.error('Signup unavailable. Enable Email/Password in Firebase.');
+            break;
+          case 'auth/invalid-email':
+            setError('Please enter a valid email address.');
+            toast('Enter a valid email address.', { icon: '✉️' });
+            break;
+          default:
+            setError(message || 'Could not create account. Please try again.');
+            toast.error(message || 'Could not create account. Please try again.');
+        }
+      }
     } finally {
       setIsLoading(false);
     }

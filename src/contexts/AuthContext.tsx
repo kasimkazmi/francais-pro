@@ -70,8 +70,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const u = await emailSignIn(email, password);
       setUser(mapUser(u));
       return true;
-    } catch {
-      return false;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
     }
   };
 
@@ -80,8 +81,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const u = await emailSignUp(email, password, name);
       setUser(mapUser(u));
       return true;
-    } catch {
-      return false;
+    } catch (error) {
+      console.error('Signup failed:', error);
+      throw error;
     }
   };
 
@@ -90,8 +92,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const u = await googleSignIn();
       setUser(mapUser(u));
       return true;
-    } catch {
-      return false;
+    } catch (error) {
+      console.error('Google login failed:', error);
+      throw error;
     }
   };
 

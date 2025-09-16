@@ -32,6 +32,10 @@
     "prisma": "^6.15.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-phone-number-input": "^3.4.12",
+    "react-select": "^5.10.2",
+    "react-select-country-list": "^2.2.3",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13"
   },
