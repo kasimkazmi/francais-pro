@@ -45,7 +45,7 @@ export function DarkModeToggle({ className, isThemeEnabled, themePrimaryColor }:
       variant="ghost"
       size="sm"
       className={`h-9 w-9 px-0 ${isThemeEnabled ? 'hover:bg-[var(--theme-hover-bg)]' : 'hover:bg-gray-100 dark:hover:bg-gray-800'} ${className || ''}`}
-      style={isThemeEnabled ? ({ ['--theme-hover-bg' as any]: themePrimaryColor } as React.CSSProperties) : undefined}
+      style={isThemeEnabled ? ({ '--theme-hover-bg': themePrimaryColor } as React.CSSProperties) : undefined}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       {isDark ? (
