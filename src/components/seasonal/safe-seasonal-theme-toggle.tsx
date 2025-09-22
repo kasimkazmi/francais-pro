@@ -32,7 +32,7 @@ export function SafeSeasonalThemeToggle({
       setIsEnabled(userEnabled);
     } catch (error) {
       // localStorage not available
-      console.warn('localStorage not available');
+      // console.warn('localStorage not available');
     }
   }, []);
 
@@ -55,7 +55,7 @@ export function SafeSeasonalThemeToggle({
         root.classList.remove(`${currentTheme}-mode`);
       }
     } catch (error) {
-      console.warn('Could not save theme preference');
+      // console.warn('Could not save theme preference');
     }
     
     if (onToggle) {

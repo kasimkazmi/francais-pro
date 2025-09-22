@@ -136,7 +136,7 @@ export function HalloweenLoader({
       clearInterval(messageInterval);
       clearInterval(spellInterval);
     };
-  }, [isLoading, duration, onComplete]);
+  }, [isLoading, duration, onComplete, router]);
 
   if (!showLoader || !mounted) return null;
 

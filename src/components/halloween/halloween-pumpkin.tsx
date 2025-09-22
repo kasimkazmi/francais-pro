@@ -28,7 +28,6 @@ const sizeDimensions = {
 
 export function HalloweenPumpkin({
   size = 'md',
-  color = 'orange',
   animated = false,
   glow = false,
   className = ''

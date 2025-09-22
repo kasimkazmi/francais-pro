@@ -2,15 +2,15 @@
 
 import { useEffect } from 'react';
 import { useTheme } from '@/contexts/DarkLightThemeContext';
-import { applyThemeStyles } from '@/lib/theme-styles';
+// Note: theme styles are applied via CSS classes on <html> by DarkLightThemeContext
 
 export function ThemeInitializer() {
-  const { themeConfig } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
-    // Apply theme styles when theme changes
-    applyThemeStyles(themeConfig);
-  }, [themeConfig]);
+    // DarkLightThemeContext already toggles 'light'/'dark' on <html>.
+    // Keep hook to react to changes if additional side-effects are needed later.
+  }, [theme]);
 
   return null; // This component doesn't render anything
 }

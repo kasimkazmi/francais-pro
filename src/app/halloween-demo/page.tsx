@@ -399,10 +399,10 @@ export default function HalloweenDemoPage() {
               decoration="ghost"
             >
               <div className="space-y-2">
-                <p className="text-orange-200">• "Joyeux Halloween!"</p>
-                <p className="text-orange-200">• "Des bonbons ou un sort!"</p>
-                <p className="text-orange-200">• "Boo!" (same in French)</p>
-                <p className="text-orange-200">• "C'est effrayant!"</p>
+                <p className="text-orange-200">• &quot;Joyeux Halloween!&quot;</p>
+                <p className="text-orange-200">• &quot;Des bonbons ou un sort!&quot;</p>
+                <p className="text-orange-200">• &quot;Boo!&quot; (same in French)</p>
+                <p className="text-orange-200">• &quot;C&apos;est effrayant!&quot;</p>
               </div>
             </HalloweenCard>
 
@@ -498,7 +498,7 @@ export default function HalloweenDemoPage() {
             <Card className="halloween-card">
               <CardHeader>
                 <CardTitle className="halloween-text-glow">Flying Animations</CardTitle>
-                <CardDescription className="text-orange-200">
+            <CardDescription className="text-orange-200">
                   Watch bats and spiders move across the screen
                 </CardDescription>
               </CardHeader>
@@ -572,16 +572,16 @@ export default function HalloweenDemoPage() {
             >
               <div className="space-y-3">
                 <div className="p-3 bg-purple-900/30 rounded">
-                  <p className="text-orange-200 font-bold">"Joyeux Halloween!"</p>
+                  <p className="text-orange-200 font-bold">&quot;Joyeux Halloween!&quot;</p>
                   <p className="text-orange-400 text-sm">Happy Halloween!</p>
                 </div>
                 <div className="p-3 bg-purple-900/30 rounded">
-                  <p className="text-orange-200 font-bold">&quot;Des bonbons ou un sort!"</p>
+                  <p className="text-orange-200 font-bold">&quot;Des bonbons ou un sort!&quot;</p>
                   <p className="text-orange-400 text-sm">Trick or treat!</p>
                 </div>
                 <div className="p-3 bg-purple-900/30 rounded">
-                  <p className="text-orange-200 font-bold">"C'est effrayant!"</p>
-                  <p className="text-orange-400 text-sm">It's scary!</p>
+                  <p className="text-orange-200 font-bold">&quot;C&apos;est effrayant!&quot;</p>
+                  <p className="text-orange-400 text-sm">It&apos;s scary!</p>
                 </div>
               </div>
             </HalloweenCard>
