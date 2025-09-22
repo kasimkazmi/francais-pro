@@ -148,53 +148,58 @@ export function DynamicStats() {
 
   return (
     <>
-      {/* SVG Filter for Gooey Blood Effect */}
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style={{width: 0, height: 0, position: 'absolute'}}>
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
+      {/* SVG Filter for Gooey Blood Effect - only when theme enabled */}
+      {isEnabled && (
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style={{width: 0, height: 0, position: 'absolute'}}>
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+          </defs>
+        </svg>
+      )}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 my-12">
         {statsDisplay.map((stat, index) => (
           <div key={index} className="relative group overflow-hidden rounded-md text-center transition-transform duration-300 group-hover:scale-[1.03]">
-            {/* Blurred red shape glow under splatter */}
-            <div
-              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-55"
-              style={{
-                backgroundImage: `
-                  radial-gradient(60% 48% at 50% 52%, rgba(150,0,0,0.45), transparent 62%),
-                  radial-gradient(38% 30% at 35% 44%, rgba(190,0,0,0.35), transparent 60%),
-                  radial-gradient(34% 28% at 68% 60%, rgba(210,0,0,0.32), transparent 60%),
-                  radial-gradient(22% 18% at 28% 70%, rgba(160,0,0,0.30), transparent 60%),
-                  radial-gradient(18% 16% at 78% 34%, rgba(180,0,0,0.28), transparent 60%)
-                `,
-                filter: 'blur(22px)',
-                transform: 'rotate(-6deg)'
-              }}
-            />
-            {/* Blood splatter GIF on hover */}
-            <div
-              className="pointer-events-none absolute inset-0 opacity-0 scale-95 transition-all duration-300 group-hover:opacity-90 group-hover:scale-100"
-              style={{
-                backgroundImage: "url(/halloween/images/blood-splatter.gif)",
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                backgroundSize: '60% 85%',
-                top: '20%', 
-              }}
-            />
+            {/* Blurred red shape glow under splatter - only when theme enabled */}
+            {isEnabled && (
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-55"
+                style={{
+                  backgroundImage: `
+                    radial-gradient(60% 48% at 50% 52%, rgba(150,0,0,0.45), transparent 62%),
+                    radial-gradient(38% 30% at 35% 44%, rgba(190,0,0,0.35), transparent 60%),
+                    radial-gradient(34% 28% at 68% 60%, rgba(210,0,0,0.32), transparent 60%),
+                    radial-gradient(22% 18% at 28% 70%, rgba(160,0,0,0.30), transparent 60%),
+                    radial-gradient(18% 16% at 78% 34%, rgba(180,0,0,0.28), transparent 60%)
+                  `,
+                  filter: 'blur(22px)',
+                  transform: 'rotate(-6deg)'
+                }}
+              />
+            )}
+            {/* Blood splatter GIF on hover - only when theme enabled */}
+            {isEnabled && (
+              <div
+                className="pointer-events-none absolute inset-0 opacity-0 scale-95 transition-all duration-300 group-hover:opacity-90 group-hover:scale-100"
+                style={{
+                  backgroundImage: "url(/halloween/images/blood-splatter.gif)",
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                  backgroundSize: '60% 85%',
+                  top: '20%', 
+                }}
+              />
+            )}
             {/* Pop animation for content on hover */}
             <style jsx>{`
               @keyframes statPop { 0%{transform:scale(1) translateY(0)} 60%{transform:scale(1.12) translateY(-4px)} 100%{transform:scale(1.04) translateY(-2px)} }
               .group:hover .stat-number { animation: statPop 420ms ease-out forwards; text-shadow: 0 6px 18px rgba(255,0,0,.35); }
               .group:hover .stat-label { animation: statPop 420ms ease-out 40ms forwards; }
               
-            
               }
             `}</style>
             <div
@@ -225,9 +230,13 @@ export function DynamicStats() {
               }
             >
               {stat.label}
-              <span className="blood-drop"></span>
-              <span className="blood-drop"></span>
-              <span className="blood-drop"></span>
+              {isEnabled && (
+                <>
+                  <span className="blood-drop"></span>
+                  <span className="blood-drop"></span>
+                  <span className="blood-drop"></span>
+                </>
+              )}
             </div>
           </div>
         ))}

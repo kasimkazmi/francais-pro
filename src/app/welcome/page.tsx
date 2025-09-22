@@ -312,7 +312,8 @@ export default function WelcomePage() {
         {/* Call to Action - Seasonal Theme Content */}
         <div className="mt-24 text-center">
           <SeasonalCard
-          
+            // titleClassName="text-2xl font-bold tracking-wide"
+            // descriptionClassName="text-xl tracking-widest mt-2"
             title="Ready to Start Your French Journey?"
             description="Begin learning French today with our free, structured lessons and interactive features."
             decoration="pumpkin"

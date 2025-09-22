@@ -108,11 +108,15 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
               decoration="pumpkin"
               glow={true}
               animated={true}
-              titleClassName={`text-lg ${
-                isEnabled ? "leading-widest tracking-widest" : ""
+              titleClassName={` ${
+                isEnabled
+                  ? "leading-widest tracking-widest text-md"
+                  : "text-lg font-bold tracking-wide "
               }`}
-              descriptionClassName={`text-sm mt-2 ${
-                isEnabled ? "  text-lg tracking-widest" : ""
+              descriptionClassName={` ${
+                isEnabled
+                  ? "text-lg leading-widest tracking-widest"
+                  : "text-sm mt-2 leading-widest text-muted-foreground  "
               }`}
               className="hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer h-48 w-full max-w-80 flex flex-col justify-center items-center text-center"
             />

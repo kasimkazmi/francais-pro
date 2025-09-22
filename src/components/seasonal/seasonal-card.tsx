@@ -1,14 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { HalloweenPumpkin } from '@/components/halloween/halloween-pumpkin';
-import { HalloweenGhost } from '@/components/halloween/halloween-ghost';
-import { HalloweenBat } from '@/components/halloween/halloween-bat';
-import { HalloweenSpider } from '@/components/halloween/halloween-spider';
-import { HalloweenWitchHat } from '@/components/halloween/halloween-witch-hat';
+import React, { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { useSeasonalTheme } from "@/contexts/SeasonalThemeContext";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { HalloweenPumpkin } from "@/components/halloween/halloween-pumpkin";
+import { HalloweenGhost } from "@/components/halloween/halloween-ghost";
+import { HalloweenBat } from "@/components/halloween/halloween-bat";
+import { HalloweenSpider } from "@/components/halloween/halloween-spider";
+import { HalloweenWitchHat } from "@/components/halloween/halloween-witch-hat";
 
 interface SeasonalCardProps {
   title?: string | React.ReactNode;
@@ -31,7 +37,7 @@ export function SeasonalCard({
   glow = true,
   animated = true,
   titleClassName,
-  descriptionClassName
+  descriptionClassName,
 }: SeasonalCardProps) {
   const { currentTheme, themeConfig, isActive, isEnabled } = useSeasonalTheme();
   const [mounted, setMounted] = useState(false);
@@ -40,29 +46,27 @@ export function SeasonalCard({
     setMounted(true);
   }, []);
 
- 
-
   const renderDecoration = () => {
     if (!isActive || !decoration) return null;
 
     const decorationProps = {
-      size: 'sm' as const,
+      size: "sm" as const,
       animated,
-      className: 'absolute top-4 right-4 opacity-60'
+      className: "absolute top-4 right-4 opacity-60",
     };
 
     // Use existing Halloween decorations for Halloween theme
-    if (currentTheme === 'halloween') {
+    if (currentTheme === "halloween") {
       switch (decoration) {
-        case 'pumpkin':
+        case "pumpkin":
           return <HalloweenPumpkin {...decorationProps} glow={glow} />;
-        case 'ghost':
+        case "ghost":
           return <HalloweenGhost {...decorationProps} />;
-        case 'bat':
+        case "bat":
           return <HalloweenBat {...decorationProps} />;
-        case 'spider':
+        case "spider":
           return <HalloweenSpider {...decorationProps} />;
-        case 'witch-hat':
+        case "witch-hat":
           return <HalloweenWitchHat {...decorationProps} />;
         default:
           return null;
@@ -90,47 +94,57 @@ export function SeasonalCard({
   }
 
   return (
-    <Card 
+    <Card
       className={cn(
-        !isActive && 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-800',
-        isActive && 'seasonal-card',
-        isActive && animated && 'seasonal-float',
-        isActive && glow && 'seasonal-glow',
+        !isActive &&
+          "hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer",
+        isActive && "seasonal-card",
+        isActive && animated && "seasonal-float",
+        isActive && glow && "seasonal-glow",
         className
       )}
     >
       {renderDecoration()}
-      
-      <CardHeader>
-        <CardTitle 
-          className={cn(
-            !isActive && 'text-2xl text-gray-900 dark:text-white',
-            isActive && "text-2xl font-bold tracking-wide,"
 
+      <CardHeader>
+        <CardTitle
+          className={cn(
+            !isActive && "text-2xl    ",
+            isEnabled && "text-2xl font-bold tracking-wide",
+            titleClassName
           )}
-          style={isEnabled ? {
-            color: themeConfig.colors.primary,
-            fontFamily: themeConfig.fonts.primary
-          } : undefined}
+          style={
+            isEnabled
+              ? {
+                  color: themeConfig.colors.primary,
+                  fontFamily: themeConfig.fonts.primary,
+                }
+              : undefined
+          }
         >
           {title}
         </CardTitle>
         {description && (
-          <CardDescription 
+          <CardDescription
             className={cn(
-              !isActive && 'text-lg text-gray-900 dark:text-white',
-            isActive && "text-xl tracking-widest mt-2",
+              !isActive && "text-lg",
+              isActive && "text-xl tracking-widest mt-2",
+              descriptionClassName
             )}
-            style={isEnabled ? {
-              color: themeConfig.colors.tertiary,
-              fontFamily: themeConfig.fonts.paragraph
-            } : undefined}
+            style={
+              isEnabled
+                ? {
+                    color: themeConfig.colors.tertiary,
+                    fontFamily: themeConfig.fonts.paragraph,
+                  }
+                : undefined
+            }
           >
             {description}
           </CardDescription>
         )}
       </CardHeader>
-      
+
       {children && <CardContent>{children}</CardContent>}
     </Card>
   );
