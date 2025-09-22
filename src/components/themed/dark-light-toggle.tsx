@@ -6,9 +6,11 @@ import { Sun, Moon } from 'lucide-react';
 
 interface DarkModeToggleProps {
   className?: string;
+  isThemeEnabled?: boolean;
+  themePrimaryColor?: string;
 }
 
-export function DarkModeToggle({ className }: DarkModeToggleProps) {
+export function DarkModeToggle({ className, isThemeEnabled, themePrimaryColor }: DarkModeToggleProps) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -42,7 +44,8 @@ export function DarkModeToggle({ className }: DarkModeToggleProps) {
       onClick={toggleTheme}
       variant="ghost"
       size="sm"
-      className={`h-9 w-9 px-0 hover:bg-gray-100 dark:hover:bg-gray-800 ${className || ''}`}
+      className={`h-9 w-9 px-0 ${isThemeEnabled ? 'hover:bg-[var(--theme-hover-bg)]' : 'hover:bg-gray-100 dark:hover:bg-gray-800'} ${className || ''}`}
+      style={isThemeEnabled ? ({ ['--theme-hover-bg' as any]: themePrimaryColor } as React.CSSProperties) : undefined}
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       {isDark ? (

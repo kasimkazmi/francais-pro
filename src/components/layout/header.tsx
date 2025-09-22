@@ -20,7 +20,7 @@ export function Header() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
-  const { currentTheme } = useSeasonalTheme();
+  const { currentTheme, isEnabled, themeConfig } = useSeasonalTheme();
   const pathname = usePathname();
   
   // Hide search button on welcome page since it doesn't use MainLayout
@@ -46,22 +46,22 @@ export function Header() {
           <Link href="/welcome" className="mr-6 ml-10 flex items-center">
             <span className="font-bold">Français Pro</span>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link href="/learn" className="transition-colors hover:text-foreground/80 text-foreground/60">
+          <nav className="flex items-center space-x-6 text-sm font-medium" style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}>
+            <Link href="/learn" className={`transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}>
               Learn
             </Link>
-            <Link href="/lessons" className="transition-colors hover:text-foreground/80 text-foreground/60">
+            <Link href="/lessons" className={`transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}>
               Lessons
             </Link>
-            <Link href="/practice" className="transition-colors hover:text-foreground/80 text-foreground/60">
+            <Link href="/practice" className={`transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}>
               Practice
             </Link>
             {isAuthenticated && (
-              <Link href="/progress" className="transition-colors hover:text-foreground/80 text-foreground/60">
+              <Link href="/progress" className={`transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}>
                 Progress
               </Link>
             )}
-            <Link href="/leaderboard" className="transition-colors hover:text-foreground/80 text-foreground/60">
+            <Link href="/leaderboard" className={`transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}>
               Leaderboard
             </Link>
           </nav>
@@ -107,13 +107,17 @@ export function Header() {
             <Button
               variant="ghost"
               size="sm"
-              className="h-9 w-9 p-0"
+              className={`h-9 w-9 p-0 ${isEnabled ? 'hover:text-[var(--nav-hover)]' : ''}`}
+              style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}
               onClick={() => window.open('https://github.com/kasimkazmi/francais-pro', '_blank')}
               title="View on GitHub"
             >
               <Github className="h-4 w-4" />
             </Button>
-            <DarkModeToggle />
+            <DarkModeToggle 
+              isThemeEnabled={isEnabled}
+              themePrimaryColor={isEnabled ? themeConfig.colors.primary : undefined}
+            />
             {currentTheme !== 'default' && <SeasonalThemeToggle />}
             {isAuthenticated ? (
               <div className="flex items-center space-x-2">
@@ -131,7 +135,8 @@ export function Header() {
                   variant="ghost" 
                   size="sm" 
                   onClick={handleLogout}
-                  className="text-muted-foreground hover:text-foreground"
+                  className={`text-muted-foreground ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground'}`}
+                  style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}
                   title="Logout"
                 >
                   <LogOut className="h-4 w-4" />
@@ -156,24 +161,24 @@ export function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t bg-background">
           <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-4" style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}>
               <Link 
                 href="/learn" 
-                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                className={`text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Learn
               </Link>
               <Link 
                 href="/lessons" 
-                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                className={`text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Lessons
               </Link>
               <Link 
                 href="/practice" 
-                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                className={`text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Practice
@@ -181,7 +186,7 @@ export function Header() {
               {isAuthenticated && (
                 <Link 
                   href="/progress" 
-                  className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                  className={`text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Progress
@@ -197,7 +202,7 @@ export function Header() {
               )}
               <Link 
                 href="/leaderboard" 
-                className="text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                className={`text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Leaderboard
@@ -207,7 +212,8 @@ export function Header() {
                   window.open('https://github.com/kasimkazmi/francais-pro', '_blank');
                   setIsMobileMenuOpen(false);
                 }}
-                className="flex items-center gap-2 text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+                className={`flex items-center gap-2 text-sm font-medium transition-colors ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground/80'} text-foreground/60`}
+                style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}
               >
                 <Github className="h-4 w-4" />
                 View on GitHub
@@ -223,7 +229,8 @@ export function Header() {
                       variant="ghost" 
                       size="sm" 
                       onClick={handleMobileLogout}
-                      className="text-muted-foreground hover:text-foreground"
+                      className={`text-muted-foreground ${isEnabled ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground'}`}
+                      style={isEnabled ? ({ ['--nav-hover' as any]: themeConfig.colors.primary } as React.CSSProperties) : undefined}
                     >
                       <LogOut className="h-4 w-4" />
                     </Button>
