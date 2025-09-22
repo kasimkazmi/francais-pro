@@ -184,6 +184,59 @@
   100% { transform: scale(3) rotate(360deg); opacity: 0; }
 }
 
+@keyframes flicker {
+  0%, 100% { 
+    transform: translateX(-50%) scale(1) rotate(-1deg);
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.8);
+  }
+  10% { 
+    transform: translateX(-50%) scale(1.1) rotate(1deg);
+    opacity: 0.9;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 1);
+  }
+  20% { 
+    transform: translateX(-50%) scale(0.9) rotate(-0.5deg);
+    opacity: 0.8;
+    box-shadow: 0 0 4px rgba(255, 193, 7, 0.6);
+  }
+  30% { 
+    transform: translateX(-50%) scale(1.05) rotate(0.5deg);
+    opacity: 0.95;
+    box-shadow: 0 0 7px rgba(255, 193, 7, 0.9);
+  }
+  40% { 
+    transform: translateX(-50%) scale(0.95) rotate(-0.3deg);
+    opacity: 0.85;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+  }
+  50% { 
+    transform: translateX(-50%) scale(1.08) rotate(0.8deg);
+    opacity: 1;
+    box-shadow: 0 0 9px rgba(255, 193, 7, 1);
+  }
+  60% { 
+    transform: translateX(-50%) scale(0.92) rotate(-0.6deg);
+    opacity: 0.9;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.8);
+  }
+  70% { 
+    transform: translateX(-50%) scale(1.03) rotate(0.3deg);
+    opacity: 0.88;
+    box-shadow: 0 0 7px rgba(255, 193, 7, 0.85);
+  }
+  80% { 
+    transform: translateX(-50%) scale(0.98) rotate(-0.2deg);
+    opacity: 0.92;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.75);
+  }
+  90% { 
+    transform: translateX(-50%) scale(1.06) rotate(0.4deg);
+    opacity: 0.96;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.95);
+  }
+}
+
 /* Halloween utility classes */
 .halloween-float {
   animation: float 3s ease-in-out infinite;
