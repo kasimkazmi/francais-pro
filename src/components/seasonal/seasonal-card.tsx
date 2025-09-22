@@ -92,6 +92,7 @@ export function SeasonalCard({
   return (
     <Card 
       className={cn(
+        !isActive && 'bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-800',
         isActive && 'seasonal-card',
         isActive && animated && 'seasonal-float',
         isActive && glow && 'seasonal-glow',
@@ -102,7 +103,11 @@ export function SeasonalCard({
       
       <CardHeader>
         <CardTitle 
-          className={titleClassName}
+          className={cn(
+            !isActive && 'text-2xl text-gray-900 dark:text-white',
+            isActive && "text-2xl font-bold tracking-wide,"
+
+          )}
           style={isEnabled ? {
             color: themeConfig.colors.primary,
             fontFamily: themeConfig.fonts.primary
@@ -112,7 +117,10 @@ export function SeasonalCard({
         </CardTitle>
         {description && (
           <CardDescription 
-            className={descriptionClassName}
+            className={cn(
+              !isActive && 'text-lg text-gray-900 dark:text-white',
+            isActive && "text-xl tracking-widest mt-2",
+            )}
             style={isEnabled ? {
               color: themeConfig.colors.tertiary,
               fontFamily: themeConfig.fonts.paragraph
