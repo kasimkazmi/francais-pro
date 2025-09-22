@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { SeasonalThemeToggle } from '@/components/seasonal/seasonal-theme-toggle';
+import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
 import { Button } from '@/components/ui/button';
 import { AuthModal } from '@/components/ui/auth-modal';
 import { ProfileModal } from '@/components/ui/profile-modal';
@@ -11,6 +12,7 @@ import { Portal } from '@/components/ui/portal';
 import { Menu, X, User, LogOut, Search, Github } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { DarkModeToggle } from '../themed/dark-light-toggle';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,6 +20,7 @@ export function Header() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const { currentTheme } = useSeasonalTheme();
   const pathname = usePathname();
   
   // Hide search button on welcome page since it doesn't use MainLayout
@@ -110,7 +113,8 @@ export function Header() {
             >
               <Github className="h-4 w-4" />
             </Button>
-            <ThemeToggle />
+            <DarkModeToggle />
+            {currentTheme !== 'default' && <SeasonalThemeToggle />}
             {isAuthenticated ? (
               <div className="flex items-center space-x-2">
                 <Button

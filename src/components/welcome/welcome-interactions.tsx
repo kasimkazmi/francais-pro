@@ -1,20 +1,22 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { AuthModal } from '@/components/ui/auth-modal';
-import { useAuth } from '@/contexts/AuthContext';
-import { 
-  BookOpen, 
-  Users, 
-  Trophy, 
+import React, { useState } from "react";
+import Link from "next/link";
+import { AuthModal } from "@/components/ui/auth-modal";
+import { useAuth } from "@/contexts/AuthContext";
+import { ThemeAwareButton } from "@/components/seasonal/theme-aware-button";
+import { ThemeAwareIcon } from "@/components/seasonal/theme-aware-icon";
+import {
+  BookOpen,
+  Users,
+  Trophy,
   ArrowRight,
   Play,
   Target,
-  Globe
-} from 'lucide-react';
+  Globe,
+} from "lucide-react";
+import { SeasonalCard } from "../seasonal/seasonal-card";
+import { useSeasonalTheme } from "@/contexts/SeasonalThemeContext";
 
 interface WelcomeInteractionsProps {
   features: Array<{
@@ -28,6 +30,7 @@ interface WelcomeInteractionsProps {
 export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
   const { isAuthenticated } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const { isEnabled } = useSeasonalTheme();
 
   const gate = () => (e: React.MouseEvent) => {
     if (!isAuthenticated) {
@@ -40,48 +43,79 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
     <>
       {/* Interactive CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Link href="/home">
-          <Button 
-            size="lg" 
-            className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200"
-            onClick={gate()}
+        <Link href="/home" onClick={gate()}>
+          <ThemeAwareButton
+            size="lg"
+            className="hover:shadow-lg active:scale-95 transition-all duration-200"
           >
             Start Learning Now
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          </ThemeAwareButton>
         </Link>
-        <Link href="/home">
-          <Button 
-            variant="outline" 
+        <Link href="/home" onClick={gate()}>
+          <ThemeAwareButton
+            variant="outline"
             size="lg"
             className="hover:shadow-lg active:scale-95 transition-all duration-200"
           >
             <BookOpen className="mr-2 h-4 w-4" />
             Explore Lessons
-          </Button>
+          </ThemeAwareButton>
         </Link>
       </div>
 
       {/* Interactive Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-12">
-              {features.map((feature, index) => (
-                <Link key={index} href={feature.href} onClick={gate()}>
-            <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer">
-              <CardHeader>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-12 justify-items-center">
+        {features.map((feature, index) => (
+          <Link key={index} href={feature.href} onClick={gate()}>
+            <SeasonalCard
+              title={
                 <div className="flex items-center space-x-2">
-                  {feature.icon === "BookOpen" && <BookOpen className="h-6 w-6 text-blue-600" />}
-                  {feature.icon === "Users" && <Users className="h-6 w-6 text-blue-600" />}
-                  {feature.icon === "Trophy" && <Trophy className="h-6 w-6 text-blue-600" />}
-                  {feature.icon === "Play" && <Play className="h-6 w-6 text-blue-600" />}
-                  {feature.icon === "Target" && <Target className="h-6 w-6 text-blue-600" />}
-                  {feature.icon === "Globe" && <Globe className="h-6 w-6 text-blue-600" />}
-                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  {!isEnabled && feature.icon === "BookOpen" && (
+                    <ThemeAwareIcon size="lg">
+                      <BookOpen />
+                    </ThemeAwareIcon>
+                  )}
+                  {!isEnabled && feature.icon === "Users" && (
+                    <ThemeAwareIcon size="lg">
+                      <Users />
+                    </ThemeAwareIcon>
+                  )}
+                  {!isEnabled && feature.icon === "Trophy" && (
+                    <ThemeAwareIcon size="lg">
+                      <Trophy />
+                    </ThemeAwareIcon>
+                  )}
+                  {!isEnabled && feature.icon === "Play" && (
+                    <ThemeAwareIcon size="lg">
+                      <Play />
+                    </ThemeAwareIcon>
+                  )}
+                  {!isEnabled && feature.icon === "Target" && (
+                    <ThemeAwareIcon size="lg">
+                      <Target />
+                    </ThemeAwareIcon>
+                  )}
+                  {!isEnabled && feature.icon === "Globe" && (
+                    <ThemeAwareIcon size="lg">
+                      <Globe />
+                    </ThemeAwareIcon>
+                  )}
+                  <span>{feature.title}</span>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{feature.description}</CardDescription>
-              </CardContent>
-            </Card>
+              }
+              description={feature.description}
+              decoration="pumpkin"
+              glow={true}
+              animated={true}
+              titleClassName={`text-lg ${
+                isEnabled ? "leading-widest tracking-widest" : ""
+              }`}
+              descriptionClassName={`text-sm mt-2 ${
+                isEnabled ? "  text-lg tracking-widest" : ""
+              }`}
+              className="hover:shadow-lg transition-all duration-200 hover:scale-105 cursor-pointer h-48 w-full max-w-80 flex flex-col justify-center items-center text-center"
+            />
           </Link>
         ))}
       </div>
@@ -89,9 +123,9 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
       {/* Stats are now handled by DynamicStats component */}
 
       {/* Auth Modal */}
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
       />
     </>
   );

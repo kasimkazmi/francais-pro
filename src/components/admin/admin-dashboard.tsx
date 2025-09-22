@@ -18,7 +18,9 @@ import {
   Clock,
   Target,
   RefreshCw,
+  Palette,
 } from 'lucide-react';
+import { SeasonalThemeAdmin } from './seasonal-theme-admin';
 
 // Helper function to get relative time
 const getRelativeTime = (timestamp: Date) => {
@@ -312,6 +314,15 @@ export function AdminDashboard() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Seasonal Theme Management */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <Palette className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold">Theme Management</h2>
+            </div>
+            <SeasonalThemeAdmin />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAppStats } from '@/lib/firebase/stats';
+import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
 
 interface StatsData {
   activeUsers: number;
@@ -12,6 +13,7 @@ interface StatsData {
 }
 
 export function DynamicStats() {
+  const { isEnabled, themeConfig } = useSeasonalTheme();
   const [stats, setStats] = useState<StatsData>({
     activeUsers: 0,
     totalUsers: 0,
@@ -121,11 +123,30 @@ export function DynamicStats() {
 
   const statsDisplay = getDisplayStats();
 
+  const getStatsColor = () => {
+    if (!isEnabled) {
+      return 'text-blue-600';
+    }
+    return themeConfig.colors.primary;
+  };
+
+  const getStatsStyle = () => {
+    if (!isEnabled) {
+      return {};
+    }
+    return {
+      color: themeConfig.colors.primary
+    };
+  };
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 my-12">
       {statsDisplay.map((stat, index) => (
         <div key={index} className="text-center">
-          <div className="text-3xl font-bold text-blue-600 mb-2">
+          <div 
+            className={`text-3xl font-bold ${!isEnabled ? getStatsColor() : ''} mb-2`}
+            style={getStatsStyle()}
+          >
             {stat.number}
           </div>
           <div className="text-sm text-muted-foreground">

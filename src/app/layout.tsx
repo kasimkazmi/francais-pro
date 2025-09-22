@@ -1,14 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "../styles/halloween.css";
+import "../styles/seasonal-themes.css";
 import { SearchProvider } from "@/contexts/search-context";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { AdminProvider } from "@/contexts/AdminContext";
 import { UserStorageProvider } from "@/contexts/UserStorageContext";
+import { SeasonalThemeProvider } from "@/contexts/SeasonalThemeContext";
+import { DarkLightThemeContext } from "@/contexts/DarkLightThemeContext";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from 'react-hot-toast'
+import { HalloweenMusicManager } from "@/components/halloween/halloween-music-manager"
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
@@ -206,17 +211,22 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
-        <AuthProvider>
-          <UserStorageProvider>
-            <AdminProvider>
-              <FavoritesProvider>
-                <SearchProvider>
-                  {children}
-                </SearchProvider>
-              </FavoritesProvider>
-            </AdminProvider>
-          </UserStorageProvider>
-        </AuthProvider>
+        <div id="loading-overlay" className="fixed inset-0 bg-black z-[9998] hidden"></div>
+        <DarkLightThemeContext>
+          <SeasonalThemeProvider>
+            <AuthProvider>
+              <UserStorageProvider>
+                <AdminProvider>
+                  <FavoritesProvider>
+                    <SearchProvider>
+                      {children}
+                    </SearchProvider>
+                  </FavoritesProvider>
+                </AdminProvider>
+              </UserStorageProvider>
+            </AuthProvider>
+          </SeasonalThemeProvider>
+        </DarkLightThemeContext>
         <Toaster
           position="bottom-right"
           toastOptions={{
@@ -245,6 +255,7 @@ export default function RootLayout({
         />
         <SpeedInsights />
         <Analytics />
+        <HalloweenMusicManager volume={0.3} loop={true} />
       </body>
     </html>
   );

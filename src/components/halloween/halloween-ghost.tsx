@@ -1,0 +1,53 @@
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
+
+interface HalloweenGhostProps {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  animated?: boolean;
+  className?: string;
+}
+
+const sizeClasses = {
+  sm: 'w-6 h-6',
+  md: 'w-8 h-8',
+  lg: 'w-12 h-12',
+  xl: 'w-16 h-16'
+};
+
+const sizeDimensions = {
+  sm: { width: 24, height: 24 },
+  md: { width: 32, height: 32 },
+  lg: { width: 48, height: 48 },
+  xl: { width: 64, height: 64 }
+};
+
+export function HalloweenGhost({
+  size = 'md',
+  animated = false,
+  className = ''
+}: HalloweenGhostProps) {
+  const dimensions = sizeDimensions[size];
+  
+  return (
+    <div
+      className={cn(
+        'inline-flex items-center justify-center',
+        sizeClasses[size],
+        animated && 'halloween-ghost-',
+        className
+      )}
+    >
+      <Image
+        src="/halloween/ghost-spirits.gif"
+        alt="Halloween Ghost"
+        width={dimensions.width}
+        height={dimensions.height}
+        className="w-full h-full object-contain"
+        unoptimized
+      />
+    </div>
+  );
+}

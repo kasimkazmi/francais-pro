@@ -19,7 +19,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { DarkModeToggle } from '@/components/themed/dark-light-toggle';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -101,7 +101,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                     <h2 className="text-sm font-semibold text-red-600">Admin Panel</h2>
                   </div>
                 </div>
-                <ThemeToggle />
+                <DarkModeToggle />
               </div>
               <div className="text-xs text-muted-foreground">
                 <p>Welcome, {user?.displayName || user?.email}</p>
@@ -201,7 +201,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <h3 className="text-sm font-semibold text-red-600">Admin Menu</h3>
               </div>
               <div className="flex items-center gap-2">
-                <ThemeToggle />
+                <DarkModeToggle />
                 <Button
                   variant="ghost"
                   size="sm"
