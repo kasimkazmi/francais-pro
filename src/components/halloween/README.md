@@ -11,10 +11,18 @@ A collection of spooky Halloween-themed components for the Français Pro French 
 - **HalloweenSpider** - Crawling spider with leg animations
 - **HalloweenWitchHat** - Bouncing witch hat with band and buckle
 
+### GIF Utilities
+- **HalloweenGif** - Generic GIF renderer for assets in `/public/halloween/images`
+- **HalloweenTeaBat** - Convenience wrapper for `teabat.gif`
+
 ### Composite Components
 - **HalloweenDecorations** - Container with floating decorations and background effects
 - **HalloweenCard** - Themed card component with Halloween styling
-- **SeasonalThemeToggle** - Unified toggle for all seasonal themes (including Halloween)
+- **HalloweenListCard** - Checklist/numbered/instructions card with Halloween styles
+- **HalloweenLoader** - Halloween loading screen with progress and auto-complete
+- **HalloweenPageWrapper** - Page wrapper that adds subtle Halloween ambience
+- **HalloweenMusicManager** - Plays Halloween background audio (when enabled)
+- **SafeSeasonalThemeToggle** - Safe header toggle for seasonal themes (including Halloween)
 
 ## Usage
 
@@ -53,6 +61,30 @@ import { HalloweenCard } from '@/components/halloween';
 >
   <p>Content goes here...</p>
 </HalloweenCard>
+```
+
+### Loader, Page Wrapper and Music
+```tsx
+import { HalloweenLoader, HalloweenPageWrapper, HalloweenMusicManager } from '@/components/halloween';
+
+// Loader (call when needed)
+<HalloweenLoader isLoading duration={3000} onComplete={() => {/* ... */}} />
+
+// Wrapper around content
+<HalloweenPageWrapper>
+  <YourContent />
+</HalloweenPageWrapper>
+
+// Background music (conditionally render)
+<HalloweenMusicManager volume={0.4} loop />
+```
+
+### GIFs
+```tsx
+import { HalloweenGif, HalloweenTeaBat } from '@/components/halloween';
+
+<HalloweenTeaBat size="xl" glow />
+<HalloweenGif src="/halloween/images/ghost-spirits.gif" size="xl" />
 ```
 
 ### Theme Toggle
@@ -97,6 +129,29 @@ import { SeasonalThemeToggle } from '@/components/seasonal/seasonal-theme-toggle
 - `decoration`: 'pumpkin' | 'ghost' | 'bat' | 'none' - Decoration type
 - `glow`: boolean - Enable glowing effect
 
+#### HalloweenListCard
+- `items`: Array<{ id: string; text: string; completed?: boolean; highlight?: boolean }>
+- `listStyle`: 'spooky' | 'numbers' | 'instructions'
+- `showCheckmarks`: boolean
+
+#### HalloweenLoader
+- `isLoading`: boolean
+- `duration`: number (ms)
+- `onComplete`: () => void
+
+#### HalloweenPageWrapper
+- Wraps children with themed ambience
+
+#### HalloweenMusicManager
+- `volume`: number (0–1)
+- `loop`: boolean
+
+#### HalloweenGif
+- `src`: string (path under `/public`)
+- `size`: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+- `animated`: boolean
+- `glow`: boolean
+
 ## CSS Classes
 
 The components use several CSS classes defined in `globals.css`:
@@ -114,9 +169,11 @@ The components use several CSS classes defined in `globals.css`:
 - `.halloween-text` - Halloween-themed text styling
 - `.halloween-bg` - Halloween background effects
 
+Note: GIF paths were moved to `/public/halloween/images`. Update any static references accordingly.
+
 ## Demo
 
-Visit `/halloween-demo` to see all components in action with interactive controls.
+Visit `/halloween-demo` to see all components in one place (fonts, icons, cards, lists, loader controls, page wrapper, GIFs, music, and theme toggle).
 
 ## Integration
 
