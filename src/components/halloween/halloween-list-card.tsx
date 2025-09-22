@@ -23,7 +23,7 @@ interface HalloweenListCardProps {
   decoration?: 'pumpkin' | 'ghost' | 'bat' | 'spider' | 'witch-hat' | 'none';
   glow?: boolean;
   animated?: boolean;
-  showCheckmarks?: boolean;
+  showCheckmarks?: boolean; // reserved for future use
   listStyle?: 'bullets' | 'numbers' | 'icons' | 'spooky' | 'instructions';
 }
 

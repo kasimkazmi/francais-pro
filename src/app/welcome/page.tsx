@@ -18,7 +18,7 @@ import {
   Clock,
   Award,
 } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 
 // Feature cards data
 const featureCards = [

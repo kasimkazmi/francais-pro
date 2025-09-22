@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 interface HalloweenWitchHatProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  color?: 'black' | 'purple' | 'green';
+  color?: 'black' | 'purple' | 'green'; // note: color is forwarded to SVG via currentColor
   animated?: boolean;
   className?: string;
 }

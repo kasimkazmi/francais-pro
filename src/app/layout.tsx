@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import "../styles/halloween.css";
 import "../styles/seasonal-themes.css";
@@ -17,6 +17,11 @@ import { HalloweenMusicManager } from "@/components/halloween/halloween-music-ma
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
+});
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["300", "500", "700", "900"],
+  variable: "--font-raleway",
 });
 
 export const metadata: Metadata = {
@@ -203,9 +208,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head suppressHydrationWarning>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700;900&display=swap" rel="stylesheet" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -213,7 +215,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${raleway.variable} font-sans antialiased`} suppressHydrationWarning>
         <div id="loading-overlay" className="fixed inset-0 bg-black z-[9998] hidden"></div>
         <DarkLightThemeContext>
           <SeasonalThemeProvider>

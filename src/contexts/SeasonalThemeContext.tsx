@@ -200,10 +200,9 @@ const SeasonalThemeContext = createContext<SeasonalThemeContextType | undefined>
 export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
   const [currentTheme, setCurrentThemeState] = useState<SeasonalThemeType>('default');
   const [isEnabled, setIsEnabled] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     
     // Check for admin-selected theme
     const adminTheme = localStorage.getItem('admin-selected-theme') as SeasonalThemeType;

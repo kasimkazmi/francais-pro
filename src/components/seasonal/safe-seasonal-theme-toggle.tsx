@@ -30,9 +30,9 @@ export function SafeSeasonalThemeToggle({
       // Check for user's enable/disable preference
       const userEnabled = localStorage.getItem('seasonal-theme-enabled') === 'true';
       setIsEnabled(userEnabled);
-    } catch (error) {
+    } catch {
       // localStorage not available
-      // console.warn('localStorage not available');
+      // swallow
     }
   }, []);
 
@@ -54,8 +54,8 @@ export function SafeSeasonalThemeToggle({
       } else {
         root.classList.remove(`${currentTheme}-mode`);
       }
-    } catch (error) {
-      // console.warn('Could not save theme preference');
+    } catch {
+      // swallow
     }
     
     if (onToggle) {
