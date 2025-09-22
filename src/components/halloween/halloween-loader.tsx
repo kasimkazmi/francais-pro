@@ -7,6 +7,7 @@ import { HalloweenBat } from "./halloween-bat";
 import { HalloweenGhost } from "./halloween-ghost";
 import { HalloweenSpider } from "./halloween-spider";
 import { HalloweenPumpkin } from "./halloween-pumpkin";
+import { HalloweenGif } from "./halloween-gif";
 
 // Mock components for the Halloween elements
 
@@ -16,7 +17,6 @@ interface HalloweenLoaderProps {
   onComplete?: () => void;
   duration?: number;
 }
-
 
 export function HalloweenLoader({
   isLoading = true,
@@ -60,17 +60,17 @@ export function HalloweenLoader({
     }
 
     const loadingMessages = [
-      "🎃 Awakening the French spirits...",
-      "👻 Conjuring vocabulary ghosts...",
-      "🦇 Summoning pronunciation bats...",
-      "🕷️ Weaving grammar webs...",
-      "🧙‍♀️ Brewing learning potions...",
-      "🔮 Channeling language magic...",
-      "⚡ Electrifying your mind...",
-      "🌙 Invoking lunar wisdom...",
-      "✨ Casting comprehension spells...",
-      "🌟 Illuminating French mysteries...",
-      "💫 Almost ready for your French adventure!",
+      "Awakening the French spirits...",
+      "Conjuring vocabulary ghosts...",
+      "Summoning pronunciation bats...",
+      "Weaving grammar webs...",
+      "Brewing learning potions...",
+      "Channeling language magic...",
+      "Electrifying your mind...",
+      "Invoking lunar wisdom...",
+      "Casting comprehension spells...",
+      "Illuminating French mysteries...",
+      "Almost ready for your French adventure!",
     ];
 
     const interval = setInterval(() => {
@@ -98,7 +98,7 @@ export function HalloweenLoader({
             setShowLoader(false);
             if (onComplete) onComplete();
             // Navigate to welcome route after completion
-            router.push('/welcome');
+            router.push("/welcome");
           }, 1500);
           return 100;
         }
@@ -298,11 +298,15 @@ export function HalloweenLoader({
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${3 + Math.random() * 5}s`,
             }}
           >
-            🦇
+            <HalloweenGif
+              src="/halloween/images/lovebat.gif"
+              size="xl"
+              className="ml-2"
+            />
           </div>
         ))}
       </div>
@@ -312,44 +316,47 @@ export function HalloweenLoader({
         <div className="absolute inset-0 pointer-events-none">
           <div
             className="absolute top-1/4 left-1/4"
-            style={{ animation: "ghostFloat 4s ease-in-out infinite" }}
           >
-            <HalloweenGhost size="lg" animated={true} />
-            {/* <img src="/halloween/ghost-spirits.gif" alt="Ghost" className="w-16 h-16" /> */}
+            <HalloweenGif
+          src="/halloween/images/ghost-halloween.gif"
+          size="xl"
+          className="ml-2"
+        />  
           </div>
           <div
             className="absolute top-1/3 right-1/4"
             style={{ animation: "float 3s ease-in-out infinite" }}
           >
-            {/* <img src="/halloween/pumkin2.gif" alt="Pumpkin" className="w-20 h-20" /> */}
             <HalloweenPumpkin size="lg" glow={true} animated={true} />
+            {/* <HalloweenGif src="/halloween/images/pumkin2.gif" size="lg" className="ml-2" /> */}
           </div>
           <div
             className="absolute bottom-1/4 left-1/3"
-            style={{ animation: "witchHatSpin 5s ease-in-out infinite" }}
           >
-            {/* <img src="/halloween/sketing.gif" alt="Skeleton" className="w-16 h-16" /> */}
+            <HalloweenGif src="/halloween/images/mix.gif" size="xl" />
           </div>
           <div
             className="absolute bottom-1/3 right-1/3"
             style={{ animation: "spiderCrawl 4s ease-in-out infinite" }}
           >
-            {/* <img src="/halloween/spooky.gif" alt="Spooky" className="w-14 h-14" /> */}
             <HalloweenSpider size="md" color="black" animated={true} />
+            <HalloweenGif
+              src="/halloween/images/lovebat.gif"
+              size="xl"
+              className="ml-2"
+            />
           </div>
           <div
             className="absolute top-1/2 left-1/6"
             style={{ animation: "batFly 3s ease-in-out infinite" }}
           >
-            {/* <img src="/halloween/catbat.gif" alt="Bat" className="w-18 h-18" /> */}
             <HalloweenBat size="lg" animated={true} />
           </div>
           <div
             className="absolute top-2/3 right-1/6"
-            style={{ animation: "ghostFloat 3.5s ease-in-out infinite" }}
-          >
-            {/* <img src="/halloween/boo.gif" alt="Boo" className="w-14 h-14" /> */}
-            <HalloweenGhost size="md" animated={true} />
+          >  
+            <HalloweenGhost size="lg"  />
+
           </div>
         </div>
       </div>
@@ -359,7 +366,7 @@ export function HalloweenLoader({
         {/* Current spell indicator */}
         <div className="absolute -top-20   left-1/2 transform -translate-x-1/2 text-4xl animate-bounce">
           <Image
-            src="/halloween/pumkin.gif"
+            src="/halloween/images/pumkin.gif"
             alt="Halloween Pumpkin"
             width={96}
             height={96}
@@ -372,10 +379,10 @@ export function HalloweenLoader({
         <div className="mb-8 mt-14">
           <h2
             className="font-bold mb-4 relative overflow-hidden halloween-font-magnificent-title"
-            style={{ 
+            style={{
               animation: "textGlow 2s ease-in-out infinite",
               fontSize: "2rem",
-              lineHeight: "4rem"
+              lineHeight: "4rem",
             }}
           >
             <span className="text-orange-300 ">
@@ -387,8 +394,6 @@ export function HalloweenLoader({
               </span>
             )}
           </h2>
-
-         
         </div>
 
         {/*  progress bar with magic effects */}
@@ -416,7 +421,7 @@ export function HalloweenLoader({
 
       {/* Background decoration with GIFs */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20">
-        {/* <img src="/halloween/spookyseason.gif" alt="Spooky Season" className="w-32 h-32" /> */}
+        <HalloweenGif src="/halloween/images/spookyseason.gif" size="xl" />
         <HalloweenSpider size="sm" color="brown" animated={true} />
       </div>
 
@@ -424,10 +429,10 @@ export function HalloweenLoader({
       {/* 
       {/* Additional corner decorations */}
       <div className="absolute top-8 right-8 opacity-15">
-        <HalloweenGhost size="sm" animated={true} />
+        <HalloweenGif src="/halloween/images/teabat.gif" size="md" />
       </div>
       <div className="absolute bottom-8 left-8 opacity-15">
-        <HalloweenGhost size="sm" animated={true} />
+        <HalloweenGif src="/halloween/images/boohoo.gif" size="md" />
       </div>
     </div>
   );

@@ -1,0 +1,171 @@
+/* Seasonal Theme Styles - Integrates with existing Halloween system */
+
+/* CSS Variables for seasonal themes */
+:root {
+  --seasonal-primary: #2563eb;
+  --seasonal-secondary: #64748b;
+  --seasonal-accent: #f59e0b;
+  --seasonal-background: #ffffff;
+  --seasonal-text: #1f2937;
+  --seasonal-font-primary: 'Inter', sans-serif;
+  --seasonal-font-secondary: 'Inter', sans-serif;
+  --seasonal-font-accent: 'Inter', sans-serif;
+}
+
+/* Seasonal theme button styles */
+.seasonal-button {
+  background: linear-gradient(45deg, var(--seasonal-primary), var(--seasonal-secondary));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.seasonal-button:hover {
+  background: linear-gradient(45deg, var(--seasonal-secondary), var(--seasonal-primary));
+  transform: scale(1.05);
+}
+
+/* Seasonal text styles */
+.seasonal-text-primary {
+  color: var(--seasonal-primary);
+  font-family: var(--seasonal-font-primary);
+}
+
+.seasonal-text-secondary {
+  color: var(--seasonal-secondary);
+  font-family: var(--seasonal-font-secondary);
+}
+
+.seasonal-text-accent {
+  color: var(--seasonal-accent);
+  font-family: var(--seasonal-font-accent);
+}
+
+/* Seasonal background */
+.seasonal-bg {
+  background-color: var(--seasonal-background);
+}
+
+.seasonal-text {
+  color: var(--seasonal-text);
+}
+
+/* Seasonal heading styles */
+.seasonal-heading-1,
+.seasonal-heading-2,
+.seasonal-heading-3,
+.seasonal-heading-4,
+.seasonal-heading-5,
+.seasonal-heading-6 {
+  font-family: var(--seasonal-font-primary) !important;
+  color: var(--seasonal-primary);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.seasonal-heading-1 { font-size: 2.5em; line-height: 1.1; }
+.seasonal-heading-2 { font-size: 2em; line-height: 1.2; }
+.seasonal-heading-3 { font-size: 1.75em; line-height: 1.3; }
+.seasonal-heading-4 { font-size: 1.5em; line-height: 1.4; }
+.seasonal-heading-5 { font-size: 1.25em; line-height: 1.4; }
+.seasonal-heading-6 { font-size: 1.125em; line-height: 1.5; }
+
+/* Card content headings for seasonal themes */
+.seasonal-card-content h1,
+.seasonal-card-content h2,
+.seasonal-card-content h3,
+.seasonal-card-content h4,
+.seasonal-card-content h5,
+.seasonal-card-content h6 {
+  font-family: var(--seasonal-font-primary) !important;
+  color: var(--seasonal-primary);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.seasonal-card-content h1 { font-size: 2em; line-height: 1.1; }
+.seasonal-card-content h2 { font-size: 1.75em; line-height: 1.2; }
+.seasonal-card-content h3 { font-size: 1.5em; line-height: 1.3; }
+.seasonal-card-content h4 { font-size: 1.25em; line-height: 1.4; }
+.seasonal-card-content h5 { font-size: 1.125em; line-height: 1.4; }
+.seasonal-card-content h6 { font-size: 1em; line-height: 1.5; }
+
+/* Seasonal card styles */
+.seasonal-card {
+  border: 2px solid var(--seasonal-primary);
+  background: linear-gradient(135deg, var(--seasonal-background) 0%, rgba(var(--seasonal-primary), 0.05) 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.seasonal-float {
+  animation: seasonalFloat 3s ease-in-out infinite;
+}
+
+.seasonal-glow {
+  box-shadow: 0 0 20px rgba(var(--seasonal-primary), 0.3);
+}
+
+@keyframes seasonalFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Integration with existing Halloween system */
+.halloween-mode {
+  --seasonal-primary: #ff6b35;
+  --seasonal-secondary: #8b5cf6;
+  --seasonal-accent: #10b981;
+  --seasonal-background: #1a1a1a;
+  --seasonal-text: #f3f4f6;
+  --seasonal-font-primary: 'MagnificentNightmare', 'Brush Script MT', cursive, serif;
+  --seasonal-font-secondary: 'SpookyMonster', 'Chiller', 'Impact', sans-serif;
+  --seasonal-font-accent: 'MagnificentNightmare', 'Brush Script MT', cursive, serif;
+}
+
+/* Christmas theme */
+.christmas-mode {
+  --seasonal-primary: #dc2626;
+  --seasonal-secondary: #059669;
+  --seasonal-accent: #fbbf24;
+  --seasonal-background: #fef2f2;
+  --seasonal-text: #1f2937;
+  --seasonal-font-primary: 'Dancing Script', cursive;
+  --seasonal-font-secondary: 'Mountains of Christmas', cursive;
+  --seasonal-font-accent: 'Dancing Script', cursive;
+}
+
+/* Spring theme */
+.spring-mode {
+  --seasonal-primary: #10b981;
+  --seasonal-secondary: #f59e0b;
+  --seasonal-accent: #ec4899;
+  --seasonal-background: #f0fdf4;
+  --seasonal-text: #1f2937;
+  --seasonal-font-primary: 'Pacifico', cursive;
+  --seasonal-font-secondary: 'Dancing Script', cursive;
+  --seasonal-font-accent: 'Pacifico', cursive;
+}
+
+/* Summer theme */
+.summer-mode {
+  --seasonal-primary: #f59e0b;
+  --seasonal-secondary: #06b6d4;
+  --seasonal-accent: #ec4899;
+  --seasonal-background: #fefce8;
+  --seasonal-text: #1f2937;
+  --seasonal-font-primary: 'Lobster', cursive;
+  --seasonal-font-secondary: 'Quicksand', sans-serif;
+  --seasonal-font-accent: 'Lobster', cursive;
+}
+
+/* Autumn theme */
+.autumn-mode {
+  --seasonal-primary: #ea580c;
+  --seasonal-secondary: #a3a3a3;
+  --seasonal-accent: #dc2626;
+  --seasonal-background: #fef3c7;
+  --seasonal-text: #1f2937;
+  --seasonal-font-primary: 'Merriweather', serif;
+  --seasonal-font-secondary: 'Open Sans', sans-serif;
+  --seasonal-font-accent: 'Merriweather', serif;
+}

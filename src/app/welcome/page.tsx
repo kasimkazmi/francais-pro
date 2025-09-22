@@ -216,7 +216,7 @@ export default function WelcomePage() {
             {/* Halloween Decoration */}
             {/* <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 rounded-lg p-4 border">
               <div className="text-center">
-                <Image src="/halloween/pumkin.gif" alt="Pumpkin" className="w-12 h-12 mx-auto mb-2" width={48} height={48} />
+                <Image src="/halloween/images/pumkin.gif" alt="Pumpkin" className="w-12 h-12 mx-auto mb-2" width={48} height={48} />
                 <div className="text-xs font-semibold text-orange-800 dark:text-orange-200">Spooky Learning</div>
                 <div className="text-xs text-muted-foreground">Halloween theme active!</div>
               </div>
@@ -405,7 +405,7 @@ export default function WelcomePage() {
             {/* Halloween Animation */}
             {/* <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-lg p-4 border">
               <div className="text-center">
-                <Image src="/halloween/ghost-spirits.gif" alt="Ghost" className="w-10 h-10 mx-auto mb-2" width={40} height={40} />
+                <Image src="/halloween/images/ghost-spirits.gif" alt="Ghost" className="w-10 h-10 mx-auto mb-2" width={40} height={40} />
                 <div className="text-xs font-semibold text-purple-800 dark:text-purple-200">Boo!</div>
                 <div className="text-xs text-muted-foreground">Learning is fun!</div>
               </div>
@@ -416,15 +416,15 @@ export default function WelcomePage() {
               <h3 className="text-sm font-semibold text-muted-foreground mb-3">Community</h3>
               <div className="space-y-2 text-xs">
                 <div className="flex items-center gap-2">
-                  <Image src="/halloween/happyhalloween.gif" alt="Happy" className="w-4 h-4" width={16} height={16} />
+                  <Image src="/halloween/images/happyhalloween.gif" alt="Happy" className="w-4 h-4" width={16} height={16} />
                   <span>Join 10K+ learners</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/halloween/catbat.gif" alt="Bat" className="w-4 h-4" width={16} height={16} />
+                  <Image src="/halloween/images/catbat.gif" alt="Bat" className="w-4 h-4" width={16} height={16} />
                   <span>Active discussions</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/halloween/sketing.gif" alt="Skeleton" className="w-4 h-4" />
+                  <Image src="/halloween/images/sketing.gif" alt="Skeleton" className="w-4 h-4" />
                   <span>Weekly challenges</span>
                 </div>
               </div>
@@ -433,7 +433,7 @@ export default function WelcomePage() {
             {/* More Halloween Decorations */}
             {/* <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20 rounded-lg p-4 border">
               <div className="text-center">
-                <Image src="/halloween/spooky.gif" alt="Spooky" className="w-12 h-12 mx-auto mb-2" width={48} height={48} />
+                <Image src="/halloween/images/spooky.gif" alt="Spooky" className="w-12 h-12 mx-auto mb-2" width={48} height={48} />
                 <div className="text-xs font-semibold text-yellow-800 dark:text-yellow-200">Trick or Treat!</div>
                 <div className="text-xs text-muted-foreground">Learn French the spooky way</div>
               </div>

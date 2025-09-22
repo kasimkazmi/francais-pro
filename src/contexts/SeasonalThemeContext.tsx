@@ -279,10 +279,6 @@ export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
   const availableThemes = Object.keys(SEASONAL_THEMES) as SeasonalThemeType[];
   const isActive = isEnabled && currentTheme !== 'default';
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
   return (
     <SeasonalThemeContext.Provider
       value={{

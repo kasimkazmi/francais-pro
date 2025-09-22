@@ -41,7 +41,7 @@ export function HalloweenGhost({
       )}
     >
       <Image
-        src="/halloween/ghost-spirits.gif"
+        src="/halloween/images/ghost-spirits.gif"
         alt="Halloween Ghost"
         width={dimensions.width}
         height={dimensions.height}

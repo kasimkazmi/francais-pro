@@ -46,7 +46,7 @@ export function HalloweenPumpkin({
       )}
     >
       <Image
-        src="/halloween/pumkin2.gif"
+        src="/halloween/images/pumkin2.gif"
         alt="Halloween Pumpkin"
         width={dimensions.width}
         height={dimensions.height}
