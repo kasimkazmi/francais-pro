@@ -18,7 +18,7 @@ interface AuthModalProps {
 
 export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalProps) {
   const router = useRouter();
-  const [mode, setMode] = useState<'login' | 'signup'>(defaultMode);
+  const [mode, setMode] = useState<'login' | 'signup' | 'forgot'>(defaultMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -46,8 +46,18 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
     setError('');
 
     try {
+      if (mode === 'forgot') {
+        if (!email) {
+          setError('Please enter your email address.');
+          return;
+        }
+        await sendReset(email);
+        toast.success('Password reset email sent. Check your inbox.');
+        setMode('login');
+        return;
+      }
+
       let success = false;
-      
       if (mode === 'login') success = await login(email, password);
       else success = await signup(name, email, password);
 
@@ -66,7 +76,10 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
       const err = e as { code?: string; message?: string };
       const code = err?.code || '';
       const message = err?.message || '';
-      if (mode === 'login') {
+      if (mode === 'forgot') {
+        setError(message || 'Could not send reset email. Please try again.');
+        toast.error(message || 'Could not send reset email.');
+      } else if (mode === 'login') {
         switch (code) {
           case 'auth/invalid-credential':
           case 'auth/wrong-password':
@@ -165,13 +178,14 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
             <X className="h-4 w-4" />
           </Button>
           <CardTitle className="text-2xl text-gray-900 dark:text-gray-100">
-            {mode === 'login' ? 'Welcome Back' : 'Join Français Pro'}
+            {mode === 'login' && 'Welcome Back'}
+            {mode === 'signup' && 'Join Français Pro'}
+            {mode === 'forgot' && 'Reset Password'}
           </CardTitle>
           <CardDescription className="text-gray-600 dark:text-gray-400">
-            {mode === 'login' 
-              ? 'Sign in to continue your French learning journey' 
-              : 'Create your account to start learning French'
-            }
+            {mode === 'login' && 'Sign in to continue your French learning journey'}
+            {mode === 'signup' && 'Create your account to start learning French'}
+            {mode === 'forgot' && 'Enter your email and we will send you a reset link.'}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -210,22 +224,24 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               </div>
             </div>
             
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-900 dark:text-gray-100">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="pl-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600"
-                  required
-                  minLength={6}
-                />
+            {mode !== 'forgot' && (
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-gray-900 dark:text-gray-100">Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="pl-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600"
+                    required
+                    minLength={6}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {error && (
               <div className="text-sm text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400 p-3 rounded-md">
@@ -241,25 +257,40 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  {mode === 'login' ? 'Signing In...' : 'Creating Account...'}
+                  {mode === 'login' && 'Signing In...'}
+                  {mode === 'signup' && 'Creating Account...'}
+                  {mode === 'forgot' && 'Sending Reset...'}
                 </>
               ) : (
-                mode === 'login' ? 'Sign In' : 'Create Account'
+                mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'
               )}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              {mode === 'login' ? "Don't have an account?" : "Already have an account?"}
-              <Button
-                variant="link"
-                onClick={switchMode}
-                className="p-0 h-auto ml-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-              >
-                {mode === 'login' ? 'Sign up' : 'Sign in'}
-              </Button>
-            </p>
+            {mode !== 'forgot' ? (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {mode === 'login' ? "Don't have an account?" : "Already have an account?"}
+                <Button
+                  variant="link"
+                  onClick={switchMode}
+                  className="p-0 h-auto ml-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  {mode === 'login' ? 'Sign up' : 'Sign in'}
+                </Button>
+              </p>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Remembered your password?
+                <Button
+                  variant="link"
+                  onClick={() => { setMode('login'); setError(''); }}
+                  className="p-0 h-auto ml-1 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  Back to Sign in
+                </Button>
+              </p>
+            )}
           </div>
 
           {mode === 'login' && (
@@ -267,16 +298,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               <Button
                 variant="link"
                 className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-                onClick={async () => {
-                  if (!email) {
-                    setError('Enter your email above to reset password.');
-                    return;
-                  }
-                  setIsLoading(true);
-                  try { await sendReset(email); setError('Check your email for reset link.'); }
-                  catch { setError('Could not send reset email.'); }
-                  finally { setIsLoading(false); }
-                }}
+                onClick={() => { setMode('forgot'); setError(''); }}
               >
                 Forgot your password?
               </Button>

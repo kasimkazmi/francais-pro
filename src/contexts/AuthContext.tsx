@@ -99,7 +99,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const sendReset = async (email: string) => {
-    await resetPassword(email);
+    // Route users to action handler that sanitizes the URL
+    const continueUrl = `${window.location.origin}/auth/action`;
+    await resetPassword(email, continueUrl);
   };
 
   const logout = async () => {
