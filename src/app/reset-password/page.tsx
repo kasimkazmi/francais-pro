@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,7 +10,9 @@ import toast from 'react-hot-toast';
 import { auth } from '@/lib/firebase/config';
 import { verifyPasswordResetCode, confirmPasswordReset } from '@/lib/firebase/auth';
 
-export default function ResetPasswordPage() {
+export const dynamic = 'force-dynamic';
+
+function ResetPasswordInner() {
   const router = useRouter();
   const params = useSearchParams();
   const oobCode = params.get('oobCode') || '';
@@ -27,7 +29,7 @@ export default function ResetPasswordPage() {
       try {
         const mail = await verifyPasswordResetCode(auth, oobCode);
         setEmail(mail);
-      } catch (e) {
+      } catch (_err) {
         setError('This reset link is invalid or expired.');
       } finally {
         setIsVerifying(false);
@@ -36,8 +38,8 @@ export default function ResetPasswordPage() {
     verify();
   }, [oobCode]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (evt: React.FormEvent) => {
+    evt.preventDefault();
     setError('');
     if (password.length < 6) { setError('Password must be at least 6 characters.'); return; }
     if (password !== confirm) { setError('Passwords do not match.'); return; }
@@ -46,7 +48,7 @@ export default function ResetPasswordPage() {
       await confirmPasswordReset(auth, oobCode, password);
       toast.success('Password has been reset. Please sign in.');
       router.push('/');
-    } catch (e) {
+    } catch (_err) {
       setError('Failed to reset password. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -86,5 +88,14 @@ export default function ResetPasswordPage() {
     </div>
   );
 }
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+      <ResetPasswordInner />
+    </Suspense>
+  );
+}
+
 
 
