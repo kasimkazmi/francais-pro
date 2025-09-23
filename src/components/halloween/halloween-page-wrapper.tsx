@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { HalloweenDecorations } from './halloween-decorations';
 import { HalloweenLoader } from './halloween-loader';
+import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
 
 interface HalloweenPageWrapperProps {
   children: React.ReactNode;
@@ -19,10 +20,13 @@ export function HalloweenPageWrapper({
   decorationIntensity = 'medium',
   className = ''
 }: HalloweenPageWrapperProps) {
-  const [isHalloweenMode, setIsHalloweenMode] = useState(false);
+  const { currentTheme, isEnabled } = useSeasonalTheme();
   const [isLoading, setIsLoading] = useState(showLoader);
   const [mounted, setMounted] = useState(false);
   const [showContent, setShowContent] = useState(!showLoader);
+  
+  // Check if Halloween theme is active
+  const isHalloweenMode = isEnabled && currentTheme === 'halloween';
 
   // Show loading overlay immediately if loader should be shown
   useEffect(() => {
@@ -41,28 +45,8 @@ export function HalloweenPageWrapper({
   useEffect(() => {
     if (!mounted) return;
 
-    // Check if Halloween mode is active
-    const checkHalloweenMode = () => {
-      const isActive = document.documentElement.classList.contains('halloween-mode');
-      setIsHalloweenMode(isActive);
-    };
-
-    checkHalloweenMode();
-
-    // Listen for Halloween mode changes
-    const observer = new MutationObserver(checkHalloweenMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class']
-    });
-
-    return () => observer.disconnect();
-  }, [mounted]);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    if (showLoader) {
+    // Only show loader if both showLoader is true AND Halloween theme is active
+    if (showLoader && isHalloweenMode) {
       // Show loader immediately, hide content
       setShowContent(false);
       setIsLoading(true);
@@ -81,16 +65,17 @@ export function HalloweenPageWrapper({
       return () => clearTimeout(timer);
     } else {
       setShowContent(true);
+      setIsLoading(false);
       // Hide loading overlay
       const loadingOverlay = document.getElementById('loading-overlay');
       if (loadingOverlay) {
         loadingOverlay.classList.add('hidden');
       }
     }
-  }, [showLoader, loaderDuration, mounted]);
+  }, [showLoader, loaderDuration, mounted, isHalloweenMode]);
 
-  // Show loader immediately if it should be shown (independent of theme)
-  if (showLoader && isLoading) {
+  // Show loader only if it should be shown AND Halloween theme is active
+  if (showLoader && isLoading && isHalloweenMode) {
     return (
       <HalloweenLoader 
         isLoading={isLoading}
@@ -103,8 +88,8 @@ export function HalloweenPageWrapper({
     );
   }
 
-  // Don't show content until loader is complete
-  if (showLoader && !showContent) {
+  // Don't show content until loader is complete (only if Halloween theme is active)
+  if (showLoader && !showContent && isHalloweenMode) {
     return null;
   }
 
@@ -112,7 +97,7 @@ export function HalloweenPageWrapper({
     return <div className={`min-h-screen ${className}`}>{children}</div>;
   }
 
-  // Apply Halloween theme decorations only if Halloween mode is active
+  // Apply Halloween theme decorations only if Halloween theme is active
   if (isHalloweenMode) {
     return (
       <HalloweenDecorations 

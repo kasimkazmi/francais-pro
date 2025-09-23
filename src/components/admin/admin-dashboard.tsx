@@ -20,7 +20,6 @@ import {
   RefreshCw,
   Palette,
 } from 'lucide-react';
-import { SeasonalThemeAdmin } from './seasonal-theme-admin';
 
 // Helper function to get relative time
 const getRelativeTime = (timestamp: Date) => {
@@ -286,44 +285,36 @@ export function AdminDashboard() {
               </Card>
             </div>
 
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-green-500" />
-                  Quick Actions
-                </CardTitle>
-                <CardDescription>
-                  Common administrative tasks
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <UserCheck className="h-6 w-6" />
-                    <span>Manage Users</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <BookOpen className="h-6 w-6" />
-                    <span>Edit Content</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex flex-col gap-2">
-                    <BarChart3 className="h-6 w-6" />
-                    <span>View Analytics</span>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
-          {/* Seasonal Theme Management */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Palette className="h-6 w-6 text-primary" />
-              <h2 className="text-2xl font-bold">Theme Management</h2>
-            </div>
-            <SeasonalThemeAdmin />
-          </div>
+          {/* Quick Actions */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="h-5 w-5 text-green-500" />
+                Quick Actions
+              </CardTitle>
+              <CardDescription>
+                Common administrative tasks
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Button variant="outline" className="h-20 flex flex-col gap-2" onClick={() => window.location.href = '/admin/users'}>
+                  <Users className="h-6 w-6" />
+                  <span>Manage Users</span>
+                </Button>
+                <Button variant="outline" className="h-20 flex flex-col gap-2" onClick={() => window.location.href = '/admin/theme'}>
+                  <Palette className="h-6 w-6" />
+                  <span>Theme Management</span>
+                </Button>
+                <Button variant="outline" className="h-20 flex flex-col gap-2">
+                  <BarChart3 className="h-6 w-6" />
+                  <span>View Analytics</span>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

@@ -3,6 +3,11 @@ import {
   getDoc, 
   setDoc, 
   updateDoc,
+  collection,
+  query,
+  where,
+  limit,
+  getDocs,
   Timestamp 
 } from 'firebase/firestore';
 import { db, auth } from './config';
@@ -223,6 +228,14 @@ export async function updateLessonProgress(
     
     await updateDoc(userProgressRef, updatedProgress);
     
+    // Sync summary data to UserProfile collection
+    try {
+      await syncProgressToProfile(uid, updatedProgress);
+    } catch (syncError) {
+      console.error('Error syncing progress to profile:', syncError);
+      // Don't throw - this is not critical for lesson completion
+    }
+    
     // Log activity if lesson was completed
     if (completed) {
       try {
@@ -318,6 +331,190 @@ export async function updateUserDisplayName(uid: string, displayName: string): P
     }
   } catch (error) {
     console.error('Error updating user display name:', error);
+    throw error;
+  }
+}
+
+// Sync progress summary data to UserProfile collection
+export async function syncProgressToProfile(uid: string, progressData: Partial<UserProgress>): Promise<void> {
+  try {
+    console.log('🔄 Syncing progress to profile for UID:', uid);
+    
+    const userProfileRef = doc(db, 'userProfiles', uid);
+    
+    // Check if UserProfile document exists
+    const profileSnap = await getDoc(userProfileRef);
+    
+    if (profileSnap.exists()) {
+      // Update existing profile with summary data
+      const updateData: Record<string, any> = {
+        updatedAt: Timestamp.now(),
+        lastActiveAt: progressData.lastActiveDate || Timestamp.now()
+      };
+      
+      // Map progress fields to profile fields
+      if (progressData.totalTimeSpent !== undefined) {
+        updateData.totalStudyTime = progressData.totalTimeSpent;
+      }
+      if (progressData.currentStreak !== undefined) {
+        updateData.streakCount = progressData.currentStreak;
+      }
+      if (progressData.longestStreak !== undefined) {
+        updateData.longestStreak = progressData.longestStreak;
+      }
+      if (progressData.level !== undefined) {
+        updateData.level = progressData.level === 'beginner' ? 1 : 
+                           progressData.level === 'intermediate' ? 2 : 3;
+      }
+      if (progressData.wordsLearned !== undefined) {
+        updateData.xp = progressData.wordsLearned;
+      }
+      if (progressData.totalLessonsCompleted !== undefined) {
+        updateData.totalLessonsCompleted = progressData.totalLessonsCompleted;
+      }
+      
+      await updateDoc(userProfileRef, updateData);
+      console.log('✅ Successfully synced progress to existing profile');
+    } else {
+      console.log('⚠️ UserProfile document not found for UID:', uid);
+      console.log('🔧 Creating new UserProfile document...');
+      
+      // Create a new profile document with progress data
+      const newProfileData = {
+        uid: uid,
+        email: progressData.displayName ? `${progressData.displayName}@example.com` : 'unknown@example.com',
+        displayName: progressData.displayName || 'Unknown User',
+        totalStudyTime: progressData.totalTimeSpent || 0,
+        streakCount: progressData.currentStreak || 0,
+        longestStreak: progressData.longestStreak || 0,
+        level: progressData.level === 'beginner' ? 1 : 
+               progressData.level === 'intermediate' ? 2 : 3,
+        xp: progressData.wordsLearned || 0,
+        totalLessonsCompleted: progressData.totalLessonsCompleted || 0,
+        achievements: [],
+        badges: [],
+        accountStatus: 'active' as const,
+        isEmailVerified: false,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+        lastActiveAt: progressData.lastActiveDate || Timestamp.now()
+      };
+      
+      await setDoc(userProfileRef, newProfileData);
+      console.log('✅ Successfully created new UserProfile with progress data');
+    }
+  } catch (error) {
+    console.error('❌ Error syncing progress to profile:', error);
+    throw error;
+  }
+}
+
+// Manual sync function for admin use
+export async function manualSyncUserProfile(uid: string): Promise<void> {
+  try {
+    console.log('🔧 Manual sync for UID:', uid);
+    
+    // First check what progress data exists
+    const progress = await getUserProgress(uid);
+    console.log('📊 Progress data found:', progress);
+    
+    if (progress) {
+      // Check what profile data exists before sync
+      const userProfileRef = doc(db, 'userProfiles', uid);
+      const profileSnap = await getDoc(userProfileRef);
+      console.log('👤 Profile exists before sync:', profileSnap.exists());
+      if (profileSnap.exists()) {
+        console.log('📋 Current profile data:', profileSnap.data());
+      }
+      
+      await syncProgressToProfile(uid, progress);
+      console.log('✅ Manual sync completed');
+      
+      // Verify sync worked
+      const profileSnapAfter = await getDoc(userProfileRef);
+      if (profileSnapAfter.exists()) {
+        console.log('📋 Profile data after sync:', profileSnapAfter.data());
+      }
+    } else {
+      console.log('⚠️ No progress data found for UID:', uid);
+    }
+  } catch (error) {
+    console.error('❌ Error in manual sync:', error);
+    throw error;
+  }
+}
+
+// Debug function to check user data
+export async function debugUserData(uid: string): Promise<void> {
+  try {
+    console.log('🔍 Debugging user data for UID:', uid);
+    
+    // Check UserProgress
+    const progressRef = doc(db, 'userProgress', uid);
+    const progressSnap = await getDoc(progressRef);
+    console.log('📊 UserProgress exists:', progressSnap.exists());
+    if (progressSnap.exists()) {
+      console.log('📊 UserProgress data:', progressSnap.data());
+    }
+    
+    // Check UserProfile
+    const profileRef = doc(db, 'userProfiles', uid);
+    const profileSnap = await getDoc(profileRef);
+    console.log('👤 UserProfile exists:', profileSnap.exists());
+    if (profileSnap.exists()) {
+      console.log('👤 UserProfile data:', profileSnap.data());
+    }
+    
+    // Check UserActivities
+    const activitiesQuery = query(
+      collection(db, 'userActivities'),
+      where('uid', '==', uid),
+      limit(5)
+    );
+    const activitiesSnap = await getDocs(activitiesQuery);
+    console.log('📝 UserActivities count:', activitiesSnap.size);
+    if (activitiesSnap.size > 0) {
+      console.log('📝 Recent activities:', activitiesSnap.docs.map((doc: any) => doc.data()));
+    }
+    
+  } catch (error) {
+    console.error('❌ Error debugging user data:', error);
+  }
+}
+
+// Bulk sync all users (admin utility)
+export async function bulkSyncAllUserProfiles(): Promise<{ success: number; failed: number; errors: string[] }> {
+  try {
+    console.log('🚀 Starting bulk sync of all user profiles...');
+    
+    // Get all users from userProgress collection
+    const progressQuery = collection(db, 'userProgress');
+    const progressSnapshot = await getDocs(progressQuery);
+    
+    let success = 0;
+    let failed = 0;
+    const errors: string[] = [];
+    
+    const syncPromises = progressSnapshot.docs.map(async (doc) => {
+      try {
+        const progressData = doc.data() as UserProgress;
+        await syncProgressToProfile(doc.id, progressData);
+        success++;
+        console.log(`✅ Synced user: ${(doc as any).id}`);
+      } catch (error) {
+        failed++;
+        const errorMsg = `Failed to sync user ${doc.id}: ${error}`;
+        errors.push(errorMsg);
+        console.error(`❌ ${errorMsg}`);
+      }
+    });
+    
+    await Promise.all(syncPromises);
+    
+    console.log(`🎉 Bulk sync completed: ${success} success, ${failed} failed`);
+    return { success, failed, errors };
+  } catch (error) {
+    console.error('❌ Error in bulk sync:', error);
     throw error;
   }
 }

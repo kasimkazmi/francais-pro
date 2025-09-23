@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 // import { Button } from '@/components/ui/button';
 import { useSeasonalTheme, SeasonalThemeType } from '@/contexts/SeasonalThemeContext';
 import { HalloweenPumpkin } from '@/components/halloween/halloween-pumpkin';
+import toast from 'react-hot-toast';
 
 export function SeasonalThemeAdmin() {
   const { currentTheme, setCurrentTheme, availableThemes, isEnabled } = useSeasonalTheme();
@@ -13,6 +14,23 @@ export function SeasonalThemeAdmin() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleThemeChange = (theme: SeasonalThemeType) => {
+    const previousTheme = currentTheme;
+    setCurrentTheme(theme);
+    
+    // Show toast notification
+    if (theme === 'default') {
+      toast.success('Seasonal theme disabled - All users will now see the default theme', {
+        duration: 4000,
+      });
+    } else {
+      const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
+      toast.success(`${themeName} theme activated! All users can now enable this theme.`, {
+        duration: 4000,
+      });
+    }
+  };
 
   if (!mounted) {
     return null;
@@ -78,7 +96,7 @@ export function SeasonalThemeAdmin() {
                     ? 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/20' 
                     : 'hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
-                onClick={() => setCurrentTheme(theme)}
+                onClick={() => handleThemeChange(theme)}
               >
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-3 mb-2">

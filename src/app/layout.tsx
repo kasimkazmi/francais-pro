@@ -214,6 +214,25 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = savedTheme && (savedTheme === 'light' || savedTheme === 'dark') 
+                    ? savedTheme 
+                    : (prefersDark ? 'dark' : 'light');
+                  document.documentElement.classList.add(theme);
+                } catch (e) {
+                  // Fallback to light theme if localStorage fails
+                  document.documentElement.classList.add('light');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${raleway.variable} font-sans antialiased`} suppressHydrationWarning>
         <div id="loading-overlay" className="fixed inset-0 bg-black z-[9998] hidden"></div>

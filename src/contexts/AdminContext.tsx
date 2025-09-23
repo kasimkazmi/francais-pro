@@ -50,7 +50,7 @@ interface AdminContextType {
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export function AdminProvider({ children }: { children: React.ReactNode }) {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
   const [adminStats, setAdminStats] = useState<AdminStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -58,6 +58,11 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
 
   // Check if user is admin
   const checkAdminStatus = useCallback(async () => {
+    // Wait for auth to finish loading before checking admin status
+    if (authLoading) {
+      return;
+    }
+    
     if (!isAuthenticated || !user) {
       setAdminUser(null);
       setLoading(false);
@@ -86,7 +91,7 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setLoading(false);
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated, user, authLoading]);
 
   // Load admin statistics
   const loadAdminStats = useCallback(async () => {
