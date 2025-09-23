@@ -119,12 +119,42 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
         .map(g => g.trim())
         .filter(Boolean);
 
+      // Compute changed fields for success toast
+      const current = userProfile;
+      const payload = {
+        displayName: displayName.trim(),
+        phoneNumber: phoneNumber.trim() || null,
+        dateOfBirth: dateOfBirth || null,
+        country: country.trim() || null,
+        nativeLanguage: nativeLanguage.trim() || null,
+        learningGoals: goals,
+        timezone: timezone || null,
+      };
+      const labelMap: Record<string, string> = {
+        displayName: 'Display Name',
+        phoneNumber: 'Phone Number',
+        dateOfBirth: 'Date of Birth',
+        country: 'Country',
+        nativeLanguage: 'Native Language',
+        learningGoals: 'Learning Goals',
+        timezone: 'Timezone',
+      };
+      const changed: string[] = [];
+      if (current) {
+        Object.entries(payload).forEach(([key, value]) => {
+          const prev = (current as unknown as Record<string, unknown>)[key];
+          const isArray = Array.isArray(value) || Array.isArray(prev);
+          const equal = isArray ? JSON.stringify(prev || []) === JSON.stringify(value || []) : prev === value;
+          if (!equal) changed.push(labelMap[key] || key);
+        });
+      }
+
       await updateProfile({
         displayName: displayName.trim(),
         phoneNumber: phoneNumber.trim() || null,
         dateOfBirth: dateOfBirth || null,
         country: country.trim() || null,
-        nativeLanguage: nativeLanguage.trim() || undefined,
+        nativeLanguage: nativeLanguage.trim() || null,
         learningGoals: goals,
         timezone: timezone || null,
       });
@@ -134,7 +164,11 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
       }
 
       await refreshProfile();
-      toast.success('Profile updated');
+      if (changed.length > 0) {
+        toast.success(`Profile updated: ${changed.join(', ')}`);
+      } else {
+        toast.success('Profile updated');
+      }
       onClose();
     } catch (err) {
       console.error('Profile update failed:', err);
@@ -148,9 +182,9 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] p-4 animate-in fade-in duration-300"
+      className="fixed inset-0 bg-black/70 backdrop-blur-md p-4 animate-in fade-in duration-300"
       data-backdrop="true"
-      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9999, minHeight: '100vh', minWidth: '100vw', backgroundColor: 'rgba(0, 0, 0, 0.7)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', isolation: 'isolate' }}
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9999, minHeight: '100vh', minWidth: '100vw', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', isolation: 'isolate' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className="flex items-center justify-center min-h-full pointer-events-none" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>

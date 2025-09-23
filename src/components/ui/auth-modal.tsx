@@ -119,7 +119,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
   return (
     <div 
-      className="fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] p-4 animate-in fade-in duration-300"
+      className="modal-overlay z-[9999] p-4 animate-in fade-in duration-300"
       data-backdrop="true"
       style={{ 
         position: 'fixed',
@@ -127,12 +127,12 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: 9999,
+        zIndex: 50,
         minHeight: '100vh',
         minWidth: '100vw',
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
+        background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         isolation: 'isolate'
       }}
       onClick={(e) => {
