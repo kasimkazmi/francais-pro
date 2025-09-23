@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { HalloweenBat } from "./halloween-bat";
 import { HalloweenGhost } from "./halloween-ghost";
 import { HalloweenSpider } from "./halloween-spider";
@@ -24,7 +23,7 @@ export function HalloweenLoader({
   onComplete,
   duration = 5000,
 }: HalloweenLoaderProps) {
-  const router = useRouter();
+  
   const [progress, setProgress] = useState(0);
   const [currentMessage, setCurrentMessage] = useState(message);
   const [showLoader, setShowLoader] = useState(isLoading);
@@ -97,8 +96,6 @@ export function HalloweenLoader({
           setTimeout(() => {
             setShowLoader(false);
             if (onComplete) onComplete();
-            // Navigate to welcome route after completion
-            router.push("/welcome");
           }, 1500);
           return 100;
         }
@@ -136,7 +133,7 @@ export function HalloweenLoader({
       clearInterval(messageInterval);
       clearInterval(spellInterval);
     };
-  }, [isLoading, duration, onComplete, router]);
+  }, [isLoading, duration, onComplete]);
 
   if (!showLoader || !mounted) return null;
 

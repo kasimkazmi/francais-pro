@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { getAdminSelectedTheme, subscribeAdminSelectedTheme } from '@/lib/firebase/seasonal';
 
 export type SeasonalThemeType = 'default' | 'halloween' | 'christmas' | 'spring' | 'summer' | 'autumn';
 
@@ -200,24 +201,39 @@ const SeasonalThemeContext = createContext<SeasonalThemeContextType | undefined>
 export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
   const [currentTheme, setCurrentThemeState] = useState<SeasonalThemeType>('default');
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    
-    // Check for admin-selected theme
-    const adminTheme = localStorage.getItem('admin-selected-theme') as SeasonalThemeType;
-    if (adminTheme && SEASONAL_THEMES[adminTheme]) {
-      setCurrentThemeState(adminTheme);
-    }
-    
-    // Check for user's enable/disable preference
-    const userEnabled = localStorage.getItem('seasonal-theme-enabled') === 'true';
-    setIsEnabled(userEnabled);
-    
-    // Apply theme if enabled
-    if (userEnabled && adminTheme) {
-      applyTheme(adminTheme);
-    }
+    let unsub: (() => void) | undefined;
+    (async () => {
+      // 1) Subscribe to global admin theme
+      try {
+        const initial = await getAdminSelectedTheme();
+        if (initial && SEASONAL_THEMES[initial]) {
+          setCurrentThemeState(initial);
+        }
+      } catch {}
+      unsub = subscribeAdminSelectedTheme((theme) => {
+        if (theme && SEASONAL_THEMES[theme]) {
+          setCurrentThemeState(theme);
+          // If user has enabled seasonal themes, apply immediately
+          if (isEnabled) applyTheme(theme);
+        }
+      });
+
+      // 2) User preference (per-user toggle)
+      const userEnabled = localStorage.getItem('seasonal-theme-enabled') === 'true';
+      setIsEnabled(userEnabled);
+      if (userEnabled) {
+        const t = await getAdminSelectedTheme();
+        if (t && SEASONAL_THEMES[t]) applyTheme(t);
+      }
+      
+      // Mark as loaded
+      setIsLoading(false);
+    })();
+    return () => { if (unsub) unsub(); };
   }, []);
 
   const applyTheme = (theme: SeasonalThemeType) => {

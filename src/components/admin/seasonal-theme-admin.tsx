@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 // import { Button } from '@/components/ui/button';
 import { useSeasonalTheme, SeasonalThemeType } from '@/contexts/SeasonalThemeContext';
+import { setAdminSelectedTheme } from '@/lib/firebase/seasonal';
 import { HalloweenPumpkin } from '@/components/halloween/halloween-pumpkin';
 import toast from 'react-hot-toast';
 
@@ -15,9 +16,14 @@ export function SeasonalThemeAdmin() {
     setMounted(true);
   }, []);
 
-  const handleThemeChange = (theme: SeasonalThemeType) => {
-    const previousTheme = currentTheme;
+  const handleThemeChange = async (theme: SeasonalThemeType) => {
     setCurrentTheme(theme);
+    try {
+      await setAdminSelectedTheme(theme);
+    } catch (e) {
+      console.error('Failed to set global seasonal theme', e);
+      toast.error('Could not update theme globally');
+    }
     
     // Show toast notification
     if (theme === 'default') {
@@ -26,7 +32,7 @@ export function SeasonalThemeAdmin() {
       });
     } else {
       const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
-      toast.success(`${themeName} theme activated! All users can now enable this theme.`, {
+      toast.success(`${themeName} theme activated globally. Users can enable/disable it in their UI.`, {
         duration: 4000,
       });
     }

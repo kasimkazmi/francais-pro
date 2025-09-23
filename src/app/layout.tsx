@@ -243,7 +243,9 @@ export default function RootLayout({
                 <AdminProvider>
                   <FavoritesProvider>
                     <SearchProvider>
-                      {children}
+                      <div id="app-content" suppressHydrationWarning>
+                        {children}
+                      </div>
                     </SearchProvider>
                   </FavoritesProvider>
                 </AdminProvider>

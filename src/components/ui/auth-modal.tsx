@@ -46,6 +46,9 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
     setError('');
 
     try {
+      const normalizedEmail = email.trim();
+      const normalizedPassword = password;
+      const normalizedName = name.trim();
       if (mode === 'forgot') {
         if (!email) {
           setError('Please enter your email address.');
@@ -58,8 +61,8 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
       }
 
       let success = false;
-      if (mode === 'login') success = await login(email, password);
-      else success = await signup(name, email, password);
+      if (mode === 'login') success = await login(normalizedEmail, normalizedPassword);
+      else success = await signup(normalizedName, normalizedEmail, normalizedPassword);
 
       if (success) {
         onClose();
