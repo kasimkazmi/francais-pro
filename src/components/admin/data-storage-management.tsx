@@ -9,8 +9,6 @@ import { Progress } from "@/components/ui/progress";
 import { 
   Database, 
   Activity, 
-  AlertTriangle,
-  CheckCircle,
   RefreshCw,
   BarChart3,
   Settings,
@@ -23,7 +21,7 @@ import {
   Zap
 } from 'lucide-react';
 import { useAdmin } from '@/contexts/AdminContext';
-import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
 import toast from 'react-hot-toast';
 
@@ -73,6 +71,8 @@ export function DataStorageManagement() {
     storageBytes: number | null;
     egressBytesMonth: number | null;
     window: { start: string; end: string } | null;
+    billingRequired?: boolean;
+    billingUrl?: string;
   } | null>(null);
 
   // Load system data
@@ -178,7 +178,7 @@ export function DataStorageManagement() {
         const res = await fetch('/api/admin/quotas', { cache: 'no-store' });
         const data = await res.json();
         setQuota(data);
-      } catch (e) {
+      } catch {
         setQuota(null);
       }
 
@@ -326,7 +326,7 @@ export function DataStorageManagement() {
                           {quota.message}
                         </div>
                       )}
-                      {quota.configured && (quota as any).billingRequired && (
+                      {quota.configured && quota.billingRequired && (
                         <div className="md:col-span-2 lg:col-span-3 p-4 border rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
                           <div className="flex items-start space-x-3">
                             <div className="text-yellow-600 dark:text-yellow-400">⚠️</div>
@@ -338,7 +338,7 @@ export function DataStorageManagement() {
                                 Cloud Monitoring API requires billing to be enabled on your Google Cloud project.
                               </p>
                               <a 
-                                href={(quota as any).billingUrl} 
+                                href={quota.billingUrl || '#'} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
