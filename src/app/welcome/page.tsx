@@ -7,7 +7,7 @@ import { SeasonalWelcome } from "@/components/seasonal/seasonal-welcome";
 import { SeasonalHeading } from "@/components/seasonal/seasonal-heading";
 import { ThemeAwareButton } from "@/components/seasonal/theme-aware-button";
 import { ThemeAwareFeatureCard } from "@/components/seasonal/theme-aware-feature-card";
-import { DraggableLearningPath } from "@/components/seasonal/draggable-learning-path";
+import { ClientDraggableLearningPath as DraggableLearningPath } from "@/components/seasonal/ClientDraggableLearningPath";
 import {
   BookOpen,
   Users,

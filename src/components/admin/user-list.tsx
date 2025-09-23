@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { AdminLayout } from '@/components/layout/admin-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,20 +12,16 @@ import {
   Users,
   Search,
   User,
-  Mail,
   Calendar,
   TrendingUp,
   Award,
-  BarChart3,
   RefreshCw,
-  AlertCircle,
   Filter,
   SortAsc,
   SortDesc,
-  Eye,
-  Shield
+  Eye
 } from 'lucide-react';
-import { collection, query, orderBy, getDocs, limit, startAfter, where } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, limit } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
 import { getUserProgress, bulkSyncAllUserProfiles } from '@/lib/firebase/progress';
 import toast from 'react-hot-toast';
@@ -52,7 +47,7 @@ interface UserProfile {
 }
 
 // Utility function to safely convert to lowercase
-const safeToLowerCase = (value: any): string => {
+const safeToLowerCase = (value: unknown): string => {
   if (value === null || value === undefined) return '';
   if (typeof value !== 'string') return String(value).toLowerCase();
   return value.toLowerCase();
@@ -62,11 +57,12 @@ export function UserList() {
   const router = useRouter();
   const { isAdmin, isModerator } = useAdmin();
   const [users, setUsers] = useState<UserProfile[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [bulkSyncing, setBulkSyncing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'lastActive' | 'created' | 'lessons' | 'xp'>('lastActive');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(12); // Show 12 users per page
 
   useEffect(() => {
     if (!isAdmin && !isModerator) {
@@ -79,8 +75,6 @@ export function UserList() {
 
   const loadUsers = async () => {
     try {
-      setLoading(true);
-      setError(null);
 
       // Build query based on sort criteria
       let orderField = 'lastActiveAt';
@@ -164,11 +158,20 @@ export function UserList() {
 
       setUsers(usersWithProgress);
 
+      // Debug: Log all users and their lesson completion counts
+      console.log('=== USER LESSON COMPLETION DEBUG ===');
+      usersWithProgress.forEach(user => {
+        console.log(`${user.displayName}:`, {
+          realLessonsCompleted: user.realLessonsCompleted,
+          totalLessonsCompleted: user.totalLessonsCompleted,
+          final: user.realLessonsCompleted || user.totalLessonsCompleted || 0
+        });
+      });
+      console.log('=== END DEBUG ===');
+
     } catch (err) {
       console.error('Error loading users:', err);
-      setError('Failed to load users');
-    } finally {
-      setLoading(false);
+      // Error handling is now done by the App Router error.tsx file
     }
   };
 
@@ -182,6 +185,63 @@ export function UserList() {
       safeToLowerCase(user.level).includes(query)
     );
   });
+
+  // Sort the filtered users
+  const sortedUsers = [...filteredUsers].sort((a, b) => {
+    let aValue: unknown, bValue: unknown;
+    
+    switch (sortBy) {
+      case 'lastActive':
+        aValue = a.lastActiveAt;
+        bValue = b.lastActiveAt;
+        break;
+      case 'created':
+        aValue = a.createdAt;
+        bValue = b.createdAt;
+        break;
+      case 'lessons':
+        aValue = a.realLessonsCompleted || a.totalLessonsCompleted || 0;
+        bValue = b.realLessonsCompleted || b.totalLessonsCompleted || 0;
+        break;
+      case 'xp':
+        aValue = a.realXP || a.xp || 0;
+        bValue = b.realXP || b.xp || 0;
+        break;
+      default:
+        aValue = a.lastActiveAt;
+        bValue = b.lastActiveAt;
+    }
+
+    // Handle date comparisons
+    if (aValue instanceof Date && bValue instanceof Date) {
+      return sortOrder === 'asc' 
+        ? aValue.getTime() - bValue.getTime()
+        : bValue.getTime() - aValue.getTime();
+    }
+
+    // Handle numeric comparisons
+    if (typeof aValue === 'number' && typeof bValue === 'number') {
+      return sortOrder === 'asc' ? aValue - bValue : bValue - aValue;
+    }
+
+    // Handle string comparisons
+    const aStr = String(aValue).toLowerCase();
+    const bStr = String(bValue).toLowerCase();
+    return sortOrder === 'asc' 
+      ? aStr.localeCompare(bStr)
+      : bStr.localeCompare(aStr);
+  });
+
+  // Pagination logic
+  const totalPages = Math.ceil(sortedUsers.length / usersPerPage);
+  const startIndex = (currentPage - 1) * usersPerPage;
+  const endIndex = startIndex + usersPerPage;
+  const paginatedUsers = sortedUsers.slice(startIndex, endIndex);
+
+  // Reset to first page when search or sort changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, sortBy, sortOrder]);
 
   const getRelativeTime = (timestamp: Date) => {
     const now = new Date();
@@ -218,6 +278,7 @@ export function UserList() {
     }
   };
 
+
   const handleSort = (field: typeof sortBy) => {
     if (sortBy === field) {
       setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -227,38 +288,10 @@ export function UserList() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-600">
-              <AlertCircle className="h-6 w-6" />
-              Error
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-red-600 mb-4">{error}</p>
-            <Button onClick={loadUsers}>
-              <RefreshCw className="h-4 w-4 mr-2" />
-              Retry
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Loading and error states are now handled by Next.js App Router
+  // error.tsx and loading.tsx files in the route directory
 
   return (
-    <AdminLayout>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -280,6 +313,7 @@ export function UserList() {
               <Button 
                 onClick={async () => {
                   if (confirm('This will sync all user profiles with their progress data. Continue?')) {
+                    setBulkSyncing(true);
                     try {
                       const result = await bulkSyncAllUserProfiles();
                       toast.success(`Bulk sync completed! ✅ Success: ${result.success}, ❌ Failed: ${result.failed}`, {
@@ -290,14 +324,17 @@ export function UserList() {
                       toast.error('Bulk sync failed: ' + error, {
                         duration: 4000,
                       });
+                    } finally {
+                      setBulkSyncing(false);
                     }
                   }
                 }}
+                disabled={bulkSyncing}
                 variant="secondary" 
                 size="sm"
               >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Bulk Sync
+                <RefreshCw className={`h-4 w-4 mr-2 ${bulkSyncing ? 'animate-spin' : ''}`} />
+                {bulkSyncing ? 'Syncing...' : 'Bulk Sync'}
               </Button>
             </div>
           </div>
@@ -344,10 +381,20 @@ export function UserList() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {users.filter(user => (user.realLessonsCompleted || user.totalLessonsCompleted) > 10).length}
+                {users.filter(user => {
+                  const lessonsCompleted = user.realLessonsCompleted || user.totalLessonsCompleted || 0;
+                  const xp = user.realXP || user.xp || 0;
+                  const streak = user.realStreak || user.streak || 0;
+                  
+                  // Consider users as "top performers" if they have:
+                  // - 3+ lessons completed, OR
+                  // - 100+ XP, OR  
+                  // - 5+ day streak
+                  return lessonsCompleted >= 3 || xp >= 100 || streak >= 5;
+                }).length}
               </div>
               <p className="text-xs text-muted-foreground">
-                10+ lessons completed
+                3+ lessons, 100+ XP, or 5+ streak
               </p>
             </CardContent>
           </Card>
@@ -422,7 +469,7 @@ export function UserList() {
 
         {/* Users Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredUsers.map((user) => (
+          {paginatedUsers.map((user) => (
             <Card key={user.uid} className="hover:shadow-md transition-shadow">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
@@ -471,7 +518,10 @@ export function UserList() {
                 {/* Actions */}
                 <div className="pt-2 border-t">
                   <Link href={`/admin/users/${user.uid}`}>
-                    <Button className="w-full" size="sm">
+                    <Button 
+                      className="w-full transition-all duration-200 hover:scale-105 hover:shadow-lg hover:bg-primary/90" 
+                      size="sm"
+                    >
                       <Eye className="h-4 w-4 mr-2" />
                       View Details
                     </Button>
@@ -483,7 +533,7 @@ export function UserList() {
         </div>
 
         {/* Empty State */}
-        {filteredUsers.length === 0 && (
+        {paginatedUsers.length === 0 && (
           <Card>
             <CardContent className="text-center py-12">
               <Users className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
@@ -494,7 +544,63 @@ export function UserList() {
             </CardContent>
           </Card>
         )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center mt-8 space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </Button>
+            
+            <div className="flex items-center space-x-1">
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                let pageNum;
+                if (totalPages <= 5) {
+                  pageNum = i + 1;
+                } else if (currentPage <= 3) {
+                  pageNum = i + 1;
+                } else if (currentPage >= totalPages - 2) {
+                  pageNum = totalPages - 4 + i;
+                } else {
+                  pageNum = currentPage - 2 + i;
+                }
+                
+                return (
+                  <Button
+                    key={pageNum}
+                    variant={currentPage === pageNum ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(pageNum)}
+                    className="w-8 h-8 p-0"
+                  >
+                    {pageNum}
+                  </Button>
+                );
+              })}
+            </div>
+            
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </Button>
+          </div>
+        )}
+
+        {/* Pagination Info */}
+        {sortedUsers.length > 0 && (
+          <div className="text-center mt-4 text-sm text-muted-foreground">
+            Showing {startIndex + 1}-{Math.min(endIndex, sortedUsers.length)} of {sortedUsers.length} users
+          </div>
+        )}
       </div>
-    </AdminLayout>
   );
 }

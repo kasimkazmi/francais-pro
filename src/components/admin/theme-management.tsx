@@ -1,14 +1,12 @@
 'use client';
 
 import React from 'react';
-import { AdminLayout } from '@/components/layout/admin-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { SeasonalThemeAdmin } from './seasonal-theme-admin';
 import { Palette } from 'lucide-react';
 
 export function ThemeManagement() {
   return (
-    <AdminLayout>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -24,6 +22,5 @@ export function ThemeManagement() {
         {/* Theme Management Component */}
         <SeasonalThemeAdmin />
       </div>
-    </AdminLayout>
   );
 }

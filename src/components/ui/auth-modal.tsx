@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,6 +17,7 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalProps) {
+  const router = useRouter();
   const [mode, setMode] = useState<'login' | 'signup'>(defaultMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,6 +58,9 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
         setPassword('');
         setName('');
         toast.success(mode === 'login' ? 'Signed in. Welcome back!' : 'Account created. Welcome!');
+        
+        // Redirect to home page after successful authentication
+        router.push('/home');
       }
     } catch (e: unknown) {
       const err = e as { code?: string; message?: string };
@@ -281,7 +286,21 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
           <div className="mt-4">
             <Button
               type="button"
-              onClick={async () => { setIsLoading(true); setError(''); try { await loginWithGoogle(); onClose(); } catch { setError('Google login failed'); } finally { setIsLoading(false); } }}
+              onClick={async () => { 
+                setIsLoading(true); 
+                setError(''); 
+                try { 
+                  const success = await loginWithGoogle(); 
+                  if (success) {
+                    onClose(); 
+                    router.push('/home');
+                  }
+                } catch { 
+                  setError('Google login failed'); 
+                } finally { 
+                  setIsLoading(false); 
+                } 
+              }}
               className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"
               variant="outline"
             >

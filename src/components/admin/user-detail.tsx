@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { AdminLayout } from '@/components/layout/admin-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,28 +9,21 @@ import { useAdmin } from '@/contexts/AdminContext';
 import { 
   ArrowLeft,
   User,
-  Mail,
-  Calendar,
-  Clock,
-  BookOpen,
   TrendingUp,
-  Target,
   Activity,
-  Shield,
   AlertCircle,
-  CheckCircle,
-  XCircle,
   RefreshCw,
   BarChart3,
   Award,
-  Timer,
-  Globe,
   Smartphone,
-  Monitor
+  Monitor,
+  Clock
 } from 'lucide-react';
 import { doc, getDoc, collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase/config';
-import { manualSyncUserProfile, debugUserData } from '@/lib/firebase/progress';
+import { manualSyncUserProfile } from '@/lib/firebase/progress';
+import { getUserSessions, UserActivity as FirebaseUserActivity, UserSession } from '@/lib/firebase/user-storage';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import toast from 'react-hot-toast';
 
 interface UserProfile {
@@ -48,14 +40,6 @@ interface UserProfile {
   photoURL?: string;
 }
 
-interface UserActivity {
-  id: string;
-  activityType: string;
-  activityData: Record<string, any>;
-  timestamp: Date;
-  userAgent?: string;
-  ipAddress?: string;
-}
 
 interface UserProgress {
   uid: string;
@@ -73,29 +57,58 @@ export function UserDetail({ userId }: { userId: string }) {
   const { isAdmin, isModerator } = useAdmin();
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
-  const [userActivities, setUserActivities] = useState<UserActivity[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [userActivities, setUserActivities] = useState<FirebaseUserActivity[]>([]);
+  const [userSessions, setUserSessions] = useState<UserSession[]>([]);
+  const [syncing, setSyncing] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
 
-  useEffect(() => {
-    if (!isAdmin && !isModerator) {
-      router.push('/admin');
-      return;
+  const loadUserProgressOnly = async () => {
+    try {
+      // Load user progress
+      const progressDoc = await getDoc(doc(db, 'userProgress', userId));
+      if (progressDoc.exists()) {
+        const progressData = progressDoc.data();
+        setUserProgress({
+          uid: userId,
+          level: progressData.level || 0,
+          totalLessonsCompleted: progressData.totalLessonsCompleted || 0,
+          totalWordsLearned: progressData.wordsLearned || 0,
+          streak: progressData.currentStreak || 0,
+          xp: progressData.wordsLearned || 0,
+          lastLessonCompleted: progressData.lastLessonCompleted,
+          achievements: progressData.achievements || []
+        });
+      }
+
+      // Also reload user profile to get synced data
+      const profileDoc = await getDoc(doc(db, 'userProfiles', userId));
+      if (profileDoc.exists()) {
+        const profileData = profileDoc.data();
+        setUserProfile({
+          uid: userId,
+          email: profileData.email || 'No email',
+          displayName: profileData.displayName || 'Anonymous User',
+          level: profileData.level || 'beginner',
+          xp: profileData.xp || 0,
+          streak: profileData.streak || 0,
+          totalLessonsCompleted: profileData.totalLessonsCompleted || 0,
+          wordsLearned: profileData.wordsLearned || 0,
+          createdAt: profileData.createdAt?.toDate() || new Date(),
+          lastActiveAt: profileData.lastActiveAt?.toDate() || new Date(),
+          photoURL: profileData.photoURL
+        });
+      }
+    } catch (error) {
+      console.error('Error loading user progress:', error);
     }
-
-    loadUserData();
-  }, [userId, isAdmin, isModerator, router]);
+  };
 
   const loadUserData = async () => {
     try {
-      setLoading(true);
-      setError(null);
 
       // Load user profile
       const profileDoc = await getDoc(doc(db, 'userProfiles', userId));
       if (!profileDoc.exists()) {
-        setError('User not found');
-        setLoading(false);
         return;
       }
 
@@ -152,46 +165,53 @@ export function UserDetail({ userId }: { userId: string }) {
         activitiesSnapshot = await getDocs(simpleQuery);
       }
       
-      const activities: UserActivity[] = [];
+      const activities: FirebaseUserActivity[] = [];
       activitiesSnapshot.forEach((doc) => {
         const data = doc.data();
         activities.push({
-          id: doc.id,
+          uid: data.uid,
           activityType: data.activityType,
           activityData: data.activityData || {},
-          timestamp: data.timestamp?.toDate() || new Date(),
-          userAgent: data.userAgent,
-          ipAddress: data.ipAddress
+          timestamp: data.timestamp,
+          sessionId: data.sessionId || ''
         });
       });
 
       // Sort activities by timestamp (newest first) and limit to 50
-      activities.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+      activities.sort((a, b) => {
+        const aTime = a.timestamp instanceof Date ? a.timestamp : (a.timestamp as { toDate: () => Date }).toDate();
+        const bTime = b.timestamp instanceof Date ? b.timestamp : (b.timestamp as { toDate: () => Date }).toDate();
+        return bTime.getTime() - aTime.getTime();
+      });
       const limitedActivities = activities.slice(0, 50);
 
       setUserActivities(limitedActivities);
 
+      // Load user sessions
+      try {
+        const sessions = await getUserSessions(userId);
+        setUserSessions(sessions);
+      } catch (sessionError) {
+        console.error('Error loading user sessions:', sessionError);
+        // Continue without sessions data
+      }
+
     } catch (err) {
       console.error('Error loading user data:', err);
-      
-      // Provide more specific error messages
-      if (err instanceof Error) {
-        if (err.message.includes('index')) {
-          setError('Database index missing. Please create the required Firestore index or contact administrator.');
-        } else if (err.message.includes('permission')) {
-          setError('Permission denied. You may not have access to view this user\'s data.');
-        } else {
-          setError(`Failed to load user data: ${err.message}`);
-        }
-      } else {
-        setError('Failed to load user data');
-      }
-    } finally {
-      setLoading(false);
+      // Error handling is now done by the App Router error.tsx file
     }
   };
 
-  const getActivityDescription = (activity: UserActivity): string => {
+  useEffect(() => {
+    if (!isAdmin && !isModerator) {
+      router.push('/admin');
+      return;
+    }
+
+    loadUserData();
+  }, [userId, isAdmin, isModerator, router]);
+
+  const getActivityDescription = (activity: FirebaseUserActivity): string => {
     switch (activity.activityType) {
       case 'lesson_start':
         return `Started lesson: ${activity.activityData.lessonId || 'Unknown'}`;
@@ -206,34 +226,12 @@ export function UserDetail({ userId }: { userId: string }) {
       case 'logout':
         return 'Logged out';
       case 'profile_update':
-        return 'Updated profile';
-      case 'password_change':
-        return 'Changed password';
+        return 'Updated profile information';
       default:
         return `Activity: ${activity.activityType}`;
     }
   };
 
-  const getActivityIcon = (activityType: string) => {
-    switch (activityType) {
-      case 'lesson_start':
-        return <BookOpen className="h-4 w-4 text-blue-500" />;
-      case 'lesson_complete':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'quiz_attempt':
-        return <Target className="h-4 w-4 text-orange-500" />;
-      case 'practice_session':
-        return <Timer className="h-4 w-4 text-purple-500" />;
-      case 'login':
-        return <Shield className="h-4 w-4 text-green-600" />;
-      case 'logout':
-        return <XCircle className="h-4 w-4 text-red-500" />;
-      case 'profile_update':
-        return <User className="h-4 w-4 text-blue-600" />;
-      default:
-        return <Activity className="h-4 w-4 text-gray-500" />;
-    }
-  };
 
   const getRelativeTime = (timestamp: Date) => {
     const now = new Date();
@@ -267,178 +265,111 @@ export function UserDetail({ userId }: { userId: string }) {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
+  // Get activity icon
+  const getActivityIcon = (activityType: string) => {
+    switch (activityType) {
+      case 'login': return '🔐';
+      case 'logout': return '🚪';
+      case 'lesson_start': return '📚';
+      case 'lesson_complete': return '✅';
+      case 'quiz_attempt': return '🧠';
+      case 'practice_session': return '💪';
+      case 'profile_update': return '👤';
+      default: return '📝';
+    }
+  };
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-600">
-              <AlertCircle className="h-6 w-6" />
-              Error
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-red-600 mb-4">{error}</p>
-            {error.includes('index') && (
-              <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
-                <p className="text-sm text-blue-800 dark:text-blue-200 mb-2">
-                  <strong>Solution:</strong> Create the required Firestore composite index:
-                </p>
-                <p className="text-xs text-blue-600 dark:text-blue-300 break-all">
-                  Collection: userActivities<br/>
-                  Fields: uid (Ascending), timestamp (Descending)
-                </p>
-                <a 
-                  href="https://console.firebase.google.com/v1/r/project/francais-pro/firestore/indexes?create_composite=ClNwcm9qZWN0cy9mcmFuY2Fpcy1wcm8vZGF0YWJhc2VzLyhkZWZhdWx0KS9jb2xsZWN0aW9uR3JvdXBzL3VzZXJBY3Rpdml0aWVzL2luZGV4ZXMvXxABGgcKA3VpZBABGg0KCXRpbWVzdGFtcBACGgwKCF9fbmFtZV9fEAI"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-2 px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700"
-                >
-                  Create Index →
-                </a>
-              </div>
-            )}
-            <div className="flex gap-2">
-              <Button onClick={() => router.push('/admin/users')} variant="outline">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Users
-              </Button>
-              <Button onClick={loadUserData}>
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Retry
-              </Button>
-              <Button 
-                onClick={async () => {
-                  try {
-                    await manualSyncUserProfile(userId);
-                    toast.success('Profile synced successfully!', {
-                      duration: 3000,
-                    });
-                    loadUserData(); // Reload data
-                  } catch (error) {
-                    toast.error('Failed to sync profile: ' + error, {
-                      duration: 4000,
-                    });
-                  }
-                }}
-                variant="secondary"
-              >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Sync Profile
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Loading and error states are now handled by Next.js App Router
+  // error.tsx and loading.tsx files in the route directory
 
   if (!userProfile) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-600">
-              <AlertCircle className="h-6 w-6" />
-              User Not Found
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground mb-4">
-              The requested user could not be found.
-            </p>
-            <Button onClick={() => router.push('/admin/users')} variant="outline">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Users
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-red-600">
+                <AlertCircle className="h-6 w-6" />
+                User Not Found
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                The requested user could not be found.
+              </p>
+              
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
 
   return (
-    <AdminLayout>
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button 
-                onClick={() => router.push('/admin/users')} 
-                variant="outline" 
-                size="sm"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Users
-              </Button>
+            
               <div>
                 <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
                   <User className="h-8 w-8 text-blue-600" />
                   User Profile
                 </h1>
                 <p className="text-muted-foreground">
-                  Detailed view of {userProfile.displayName}'s activity and progress
+                  Detailed view of {userProfile.displayName}&apos;s activity and progress
                 </p>
               </div>
             </div>
             <div className="flex gap-2">
+            <Button onClick={() => router.push('/admin/users')} variant="outline">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Users
+              </Button>
               <Button onClick={loadUserData} variant="outline" size="sm">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh
               </Button>
               <Button 
                 onClick={async () => {
+                  setSyncing(true);
                   try {
                     await manualSyncUserProfile(userId);
                     toast.success('Profile synced successfully!', {
                       duration: 3000,
                     });
-                    loadUserData(); // Reload data
+                    // Reload only progress data, not full page
+                    await loadUserProgressOnly();
                   } catch (error) {
                     toast.error('Failed to sync profile: ' + error, {
                       duration: 4000,
                     });
+                  } finally {
+                    setSyncing(false);
                   }
                 }}
+                disabled={syncing}
                 variant="secondary" 
                 size="sm"
               >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Sync Profile
-              </Button>
-              <Button 
-                onClick={async () => {
-                  try {
-                    await debugUserData(userId);
-                    toast.success('Debug completed! Check console for information', {
-                      duration: 3000,
-                    });
-                  } catch (error) {
-                    toast.error('Debug failed: ' + error, {
-                      duration: 4000,
-                    });
-                  }
-                }}
-                variant="outline" 
-                size="sm"
-              >
-                <Monitor className="h-4 w-4 mr-2" />
-                Debug Data
+                <RefreshCw className={`h-4 w-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
+                {syncing ? 'Syncing...' : 'Sync Profile'}
               </Button>
             </div>
           </div>
         </div>
 
-        {/* User Info Cards */}
+        {/* Main Content with Tabs */}
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="activities">Activities ({userActivities.length})</TabsTrigger>
+            <TabsTrigger value="sessions">Sessions ({userSessions.length})</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview" className="space-y-6">
+            {/* User Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -463,7 +394,7 @@ export function UserDetail({ userId }: { userId: string }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-1">
-                <p className="text-2xl font-bold">{userProgress.totalLessonsCompleted || userProfile.totalLessonsCompleted}</p>
+                <p className="text-2xl font-bold">{userProgress?.totalLessonsCompleted || userProfile.totalLessonsCompleted}</p>
                 <p className="text-xs text-muted-foreground">Lessons completed</p>
               </div>
             </CardContent>
@@ -476,7 +407,7 @@ export function UserDetail({ userId }: { userId: string }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-1">
-                <p className="text-2xl font-bold">{userProgress.streak || userProfile.streak}</p>
+                <p className="text-2xl font-bold">{userProgress?.streak || userProfile.streak}</p>
                 <p className="text-xs text-muted-foreground">Days</p>
               </div>
             </CardContent>
@@ -489,7 +420,7 @@ export function UserDetail({ userId }: { userId: string }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-1">
-                <p className="text-2xl font-bold">{userProgress.xp || userProfile.xp}</p>
+                <p className="text-2xl font-bold">{userProgress?.xp || userProfile.xp}</p>
                 <p className="text-xs text-muted-foreground">Total XP</p>
               </div>
             </CardContent>
@@ -560,22 +491,22 @@ export function UserDetail({ userId }: { userId: string }) {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Lessons Completed</span>
-                    <span className="font-medium">{userProgress.totalLessonsCompleted || userProfile.totalLessonsCompleted}</span>
+                    <span className="font-medium">{userProgress?.totalLessonsCompleted || userProfile.totalLessonsCompleted}</span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Words Learned</span>
-                    <span className="font-medium">{userProgress.totalWordsLearned || userProfile.wordsLearned}</span>
+                    <span className="font-medium">{userProgress?.totalWordsLearned || userProfile.wordsLearned}</span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Current Streak</span>
-                    <span className="font-medium">{userProgress.streak || userProfile.streak} days</span>
+                    <span className="font-medium">{userProgress?.streak || userProfile.streak} days</span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Total XP</span>
-                    <span className="font-medium">{userProgress.xp || userProfile.xp}</span>
+                    <span className="font-medium">{userProgress?.xp || userProfile.xp}</span>
                   </div>
                 </div>
               </CardContent>
@@ -597,8 +528,8 @@ export function UserDetail({ userId }: { userId: string }) {
               <CardContent>
                 <div className="space-y-4 max-h-96 overflow-y-auto">
                   {userActivities.length > 0 ? (
-                    userActivities.map((activity) => (
-                      <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                    userActivities.map((activity, index) => (
+                      <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
                         <div className="flex-shrink-0 mt-1">
                           {getActivityIcon(activity.activityType)}
                         </div>
@@ -608,17 +539,17 @@ export function UserDetail({ userId }: { userId: string }) {
                           </p>
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-xs text-muted-foreground">
-                              {activity.timestamp.toLocaleString()}
+                              {activity.timestamp instanceof Date ? activity.timestamp.toLocaleString() : (activity.timestamp as { toDate: () => Date }).toDate().toLocaleString()}
                             </span>
                             <span className="text-xs text-muted-foreground">
-                              ({getRelativeTime(activity.timestamp)})
+                              ({getRelativeTime(activity.timestamp instanceof Date ? activity.timestamp : (activity.timestamp as { toDate: () => Date }).toDate())})
                             </span>
-                            {activity.userAgent && (
+                            {activity.activityData?.userAgent && (
                               <div className="flex items-center gap-1">
-                                {getDeviceIcon(activity.userAgent)}
+                                {getDeviceIcon(activity.activityData.userAgent)}
                                 <span className="text-xs text-muted-foreground">
-                                  {activity.userAgent.includes('Mobile') ? 'Mobile' : 
-                                   activity.userAgent.includes('Tablet') ? 'Tablet' : 'Desktop'}
+                                  {activity.activityData.userAgent.includes('Mobile') ? 'Mobile' : 
+                                   activity.activityData.userAgent.includes('Tablet') ? 'Tablet' : 'Desktop'}
                                 </span>
                               </div>
                             )}
@@ -637,7 +568,109 @@ export function UserDetail({ userId }: { userId: string }) {
             </Card>
           </div>
         </div>
+          </TabsContent>
+
+          <TabsContent value="activities" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Activity className="h-5 w-5" />
+                  User Activities
+                </CardTitle>
+                <CardDescription>
+                  Complete activity history for {userProfile.displayName}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {userActivities.length > 0 ? (
+                    userActivities.map((activity, index) => (
+                      <div key={index} className="flex items-center space-x-4 p-4 border rounded-lg">
+                        <div className="text-2xl">{getActivityIcon(activity.activityType)}</div>
+                        <div className="flex-1">
+                          <p className="font-medium capitalize">
+                            {activity.activityType.replace('_', ' ')}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {activity.activityData?.lessonId && `Lesson: ${activity.activityData.lessonId}`}
+                            {activity.activityData?.score && ` | Score: ${activity.activityData.score}`}
+                            {activity.activityData?.timeSpent && ` | Time: ${activity.activityData.timeSpent}min`}
+                          </p>
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {getRelativeTime(activity.timestamp instanceof Date ? activity.timestamp : (activity.timestamp as { toDate: () => Date }).toDate())}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-12">
+                      <Activity className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                      <h3 className="text-lg font-semibold mb-2">No Activities</h3>
+                      <p className="text-muted-foreground">
+                        This user hasn&apos;t performed any activities yet.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="sessions" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Clock className="h-5 w-5" />
+                  User Sessions
+                </CardTitle>
+                <CardDescription>
+                  Login sessions and device information for {userProfile.displayName}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {userSessions.length > 0 ? (
+                    userSessions.map((session, index) => (
+                      <div key={index} className="flex items-center space-x-4 p-4 border rounded-lg">
+                        <div className="text-2xl">
+                          {getDeviceIcon(session.userAgent)}
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-medium">
+                            {session.userAgent?.includes('Mobile') ? 'Mobile' : 
+                             session.userAgent?.includes('Tablet') ? 'Tablet' : 'Desktop'} Session
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {session.ipAddress} • {session.deviceInfo || 'Unknown device'}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {session.pagesVisited?.length || 0} pages visited • {session.totalTimeSpent || 0} minutes
+                          </p>
+                        </div>
+                        <div className="text-sm text-muted-foreground text-right">
+                          <div>{getRelativeTime(session.startTime instanceof Date ? session.startTime : (session.startTime as { toDate: () => Date }).toDate())}</div>
+                          {session.endTime && (
+                            <div className="text-xs">
+                              Duration: {Math.round(((session.endTime as { toDate: () => Date }).toDate().getTime() - (session.startTime instanceof Date ? session.startTime : (session.startTime as { toDate: () => Date }).toDate()).getTime()) / 60000)}m
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-12">
+                      <Clock className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                      <h3 className="text-lg font-semibold mb-2">No Sessions</h3>
+                      <p className="text-muted-foreground">
+                        No session data available for this user.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
-    </AdminLayout>
   );
 }
