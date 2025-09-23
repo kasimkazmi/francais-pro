@@ -347,7 +347,7 @@ export async function syncProgressToProfile(uid: string, progressData: Partial<U
     
     if (profileSnap.exists()) {
       // Update existing profile with summary data
-      const updateData: Record<string, any> = {
+      const updateData: Record<string, unknown> = {
         updatedAt: Timestamp.now(),
         lastActiveAt: progressData.lastActiveDate || Timestamp.now()
       };
@@ -474,7 +474,7 @@ export async function debugUserData(uid: string): Promise<void> {
     const activitiesSnap = await getDocs(activitiesQuery);
     console.log('📝 UserActivities count:', activitiesSnap.size);
     if (activitiesSnap.size > 0) {
-      console.log('📝 Recent activities:', activitiesSnap.docs.map((doc: any) => doc.data()));
+        console.log('📝 Recent activities:', activitiesSnap.docs.map((doc) => doc.data()));
     }
     
   } catch (error) {
@@ -500,7 +500,7 @@ export async function bulkSyncAllUserProfiles(): Promise<{ success: number; fail
         const progressData = doc.data() as UserProgress;
         await syncProgressToProfile(doc.id, progressData);
         success++;
-        console.log(`✅ Synced user: ${(doc as any).id}`);
+        console.log(`✅ Synced user: ${doc.id}`);
       } catch (error) {
         failed++;
         const errorMsg = `Failed to sync user ${doc.id}: ${error}`;

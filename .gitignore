@@ -20,6 +20,10 @@
 .DS_Store
 *.pem
 
+# firebase
+# service account key
+# this is the key for the firebase project
+francais-pro-fadd62e9165c.json
 # debug
 npm-debug.log*
 yarn-debug.log*

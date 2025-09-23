@@ -64,6 +64,16 @@ export function DataStorageManagement() {
   const [databaseStats, setDatabaseStats] = useState<DatabaseStats | null>(null);
   const [healthChecks, setHealthChecks] = useState<DataHealthCheck[]>([]);
   const [systemMetrics, setSystemMetrics] = useState<SystemMetric[]>([]);
+  const [quota, setQuota] = useState<{
+    configured: boolean;
+    message?: string;
+    readsToday: number | null;
+    writesToday: number | null;
+    deletesToday: number | null;
+    storageBytes: number | null;
+    egressBytesMonth: number | null;
+    window: { start: string; end: string } | null;
+  } | null>(null);
 
   // Load system data
   const loadSystemData = async () => {
@@ -163,6 +173,15 @@ export function DataStorageManagement() {
 
       setSystemMetrics(metrics);
 
+      // Fetch quotas
+      try {
+        const res = await fetch('/api/admin/quotas', { cache: 'no-store' });
+        const data = await res.json();
+        setQuota(data);
+      } catch (e) {
+        setQuota(null);
+      }
+
     } catch (error) {
       console.error('Error loading system data:', error);
       toast.error('Failed to load system data');
@@ -256,6 +275,86 @@ export function DataStorageManagement() {
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
+              {/* System Usage (Firestore Quotas) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>System Usage (Firestore Free Tier)</CardTitle>
+                  <CardDescription>
+                    Daily operation counts and storage. Connect Cloud Monitoring for live data.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {quota ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm">Reads Today</span>
+                          <span className="text-xs text-muted-foreground">50,000 free/day</span>
+                        </div>
+                        <div className="text-2xl font-bold">{quota.readsToday ?? '—'}</div>
+                      </div>
+                      <div className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm">Writes Today</span>
+                          <span className="text-xs text-muted-foreground">20,000 free/day</span>
+                        </div>
+                        <div className="text-2xl font-bold">{quota.writesToday ?? '—'}</div>
+                      </div>
+                      <div className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm">Deletes Today</span>
+                          <span className="text-xs text-muted-foreground">20,000 free/day</span>
+                        </div>
+                        <div className="text-2xl font-bold">{quota.deletesToday ?? '—'}</div>
+                      </div>
+                      <div className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm">Storage</span>
+                          <span className="text-xs text-muted-foreground">1 GiB free</span>
+                        </div>
+                        <div className="text-2xl font-bold">{quota.storageBytes != null ? `${(quota.storageBytes / (1024**3)).toFixed(2)} GiB` : '—'}</div>
+                      </div>
+                      <div className="p-4 border rounded-lg">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm">Egress (This Month)</span>
+                          <span className="text-xs text-muted-foreground">10 GiB free/month</span>
+                        </div>
+                        <div className="text-2xl font-bold">{quota.egressBytesMonth != null ? `${(quota.egressBytesMonth / (1024**3)).toFixed(2)} GiB` : '—'}</div>
+                      </div>
+                      {!quota.configured && (
+                        <div className="md:col-span-2 lg:col-span-3 p-3 border rounded-lg bg-muted/40 text-sm">
+                          {quota.message}
+                        </div>
+                      )}
+                      {quota.configured && (quota as any).billingRequired && (
+                        <div className="md:col-span-2 lg:col-span-3 p-4 border rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800">
+                          <div className="flex items-start space-x-3">
+                            <div className="text-yellow-600 dark:text-yellow-400">⚠️</div>
+                            <div>
+                              <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                                Billing Required for Live Metrics
+                              </p>
+                              <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
+                                Cloud Monitoring API requires billing to be enabled on your Google Cloud project.
+                              </p>
+                              <a 
+                                href={(quota as any).billingUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-block mt-2 text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                              >
+                                Enable Billing →
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-sm text-muted-foreground">Loading usage…</div>
+                  )}
+                </CardContent>
+              </Card>
               {/* Database Stats */}
               {databaseStats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
