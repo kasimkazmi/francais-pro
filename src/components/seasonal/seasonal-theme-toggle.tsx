@@ -14,7 +14,7 @@ export function SeasonalThemeToggle({
   onToggle,
   className = ''
 }: SeasonalThemeToggleProps) {
-  const { currentTheme, toggleTheme, isActive, isEnabled } = useSeasonalTheme();
+  const { currentTheme, toggleTheme, isActive } = useSeasonalTheme();
 
   // Don't render if no seasonal theme is active
   if (currentTheme === 'default') {
@@ -25,7 +25,7 @@ export function SeasonalThemeToggle({
     toggleTheme();
     
     if (onToggle) {
-      onToggle(!isEnabled);
+      onToggle(!isActive);
     }
   };
 

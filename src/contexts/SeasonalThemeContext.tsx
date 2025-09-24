@@ -239,6 +239,26 @@ export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
   const applyTheme = (theme: SeasonalThemeType) => {
     const root = document.documentElement;
     
+    // If theme is default, remove all seasonal styling and return
+    if (theme === 'default') {
+      // Remove all seasonal theme classes
+      Object.keys(SEASONAL_THEMES).forEach(themeName => {
+        if (themeName !== 'default') {
+          root.classList.remove(`${themeName}-mode`);
+        }
+      });
+      // Remove all seasonal CSS variables
+      root.style.removeProperty('--seasonal-primary');
+      root.style.removeProperty('--seasonal-secondary');
+      root.style.removeProperty('--seasonal-accent');
+      root.style.removeProperty('--seasonal-background');
+      root.style.removeProperty('--seasonal-text');
+      root.style.removeProperty('--seasonal-font-primary');
+      root.style.removeProperty('--seasonal-font-secondary');
+      root.style.removeProperty('--seasonal-font-accent');
+      return;
+    }
+    
     // Remove all seasonal theme classes
     Object.keys(SEASONAL_THEMES).forEach(themeName => {
       if (themeName !== 'default') {
@@ -247,9 +267,7 @@ export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
     });
     
     // Apply new theme class
-    if (theme !== 'default') {
-      root.classList.add(`${theme}-mode`);
-    }
+    root.classList.add(`${theme}-mode`);
     
     // Update CSS variables
     const themeConfig = SEASONAL_THEMES[theme];

@@ -13,7 +13,7 @@ interface StatsData {
 }
 
 export function DynamicStats() {
-  const { isEnabled, themeConfig } = useSeasonalTheme();
+  const { isActive, themeConfig } = useSeasonalTheme();
   const [stats, setStats] = useState<StatsData>({
     activeUsers: 0,
     totalUsers: 0,
@@ -131,14 +131,14 @@ export function DynamicStats() {
   const statsDisplay = getDisplayStats();
 
   const getStatsColor = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return "text-blue-600";
     }
     return themeConfig.colors.primary;
   };
 
   const getStatsStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {};
     }
     return {
@@ -149,7 +149,7 @@ export function DynamicStats() {
   return (
     <>
       {/* SVG Filter for Gooey Blood Effect - only when theme enabled */}
-      {isEnabled && (
+      {isActive && (
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style={{width: 0, height: 0, position: 'absolute'}}>
           <defs>
             <filter id="goo">
@@ -165,7 +165,7 @@ export function DynamicStats() {
         {statsDisplay.map((stat, index) => (
           <div key={index} className="relative group overflow-hidden rounded-md text-center transition-transform duration-300 group-hover:scale-[1.03]">
             {/* Blurred red shape glow under splatter - only when theme enabled */}
-            {isEnabled && (
+            {isActive && (
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-55"
                 style={{
@@ -182,7 +182,7 @@ export function DynamicStats() {
               />
             )}
             {/* Blood splatter GIF on hover - only when theme enabled */}
-            {isEnabled && (
+            {isActive && (
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 scale-95 transition-all duration-300 group-hover:opacity-90 group-hover:scale-100"
                 style={{
@@ -204,7 +204,7 @@ export function DynamicStats() {
             `}</style>
             <div
               className={`text-2xl font-bold ${
-                !isEnabled ? getStatsColor() : ""
+                !isActive ? getStatsColor() : ""
               } mb-2 stat-number`}
               style={getStatsStyle()}
             >
@@ -212,12 +212,12 @@ export function DynamicStats() {
             </div>
             <div
               className={`${
-                isEnabled
+                isActive
                   ? " tracking-widest text-lg font-bold"
                   : "text-sm text-muted-foreground "
               } stat-label dripping-label`}
               style={
-                isEnabled
+                isActive
                   ? {
                       fontFamily:
                         themeConfig.fonts?.paragraph ||
@@ -230,7 +230,7 @@ export function DynamicStats() {
               }
             >
               {stat.label}
-              {isEnabled && (
+              {isActive && (
                 <>
                   <span className="blood-drop"></span>
                   <span className="blood-drop"></span>

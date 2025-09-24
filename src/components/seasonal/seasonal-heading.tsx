@@ -21,10 +21,10 @@ export function SeasonalHeading({
   descriptionClassName,
   centered = true
 }: SeasonalHeadingProps) {
-  const { themeConfig, isEnabled } = useSeasonalTheme();
+  const { themeConfig, isActive } = useSeasonalTheme();
 
   const getTitleStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {};
     }
     return {
@@ -34,7 +34,7 @@ export function SeasonalHeading({
   };
 
   const getDescriptionStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {
         color: 'rgb(107 114 128)', // gray-500 - secondary text color for dark mode
       };
@@ -70,7 +70,7 @@ export function SeasonalHeading({
       {description && (
         <p 
           className={cn(
-            isEnabled ? 'text-3xl tracking-widest' : 'text-lg',
+            isActive ? 'text-3xl tracking-widest' : 'text-lg',
             descriptionClassName
           )}
           style={getDescriptionStyle()}

@@ -24,10 +24,10 @@ export function ThemeAwareLearningCard({
   glow = true,
   animated = true
 }: ThemeAwareLearningCardProps) {
-  const { currentTheme, isEnabled } = useSeasonalTheme();
+  const { currentTheme, isActive } = useSeasonalTheme();
 
   // Use HalloweenCard when Halloween theme is active
-  if (currentTheme === 'halloween' && isEnabled) {
+  if (currentTheme === 'halloween' && isActive) {
     return (
       <HalloweenCard
         title={title}

@@ -1,99 +1,21 @@
 /* Seasonal Theme Styles - Integrates with existing Halloween system */
 
-/* CSS Variables for seasonal themes */
-:root {
-  --seasonal-primary: #2563eb;
-  --seasonal-secondary: #64748b;
-  --seasonal-accent: #f59e0b;
-  --seasonal-background: #ffffff;
-  --seasonal-text: #1f2937;
-  --seasonal-font-primary: 'Inter', sans-serif;
-  --seasonal-font-secondary: 'Inter', sans-serif;
-  --seasonal-font-accent: 'Inter', sans-serif;
-}
-
-/* Seasonal theme button styles */
+/* Default gradient styles - applied when no seasonal theme is active */
 .seasonal-button {
-  background: linear-gradient(45deg, var(--seasonal-primary), var(--seasonal-secondary));
+  background: linear-gradient(45deg, #2563eb, #64748b);
   color: white;
   border: none;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .seasonal-button:hover {
-  background: linear-gradient(45deg, var(--seasonal-secondary), var(--seasonal-primary));
+  background: linear-gradient(45deg, #64748b, #2563eb);
   transform: scale(1.05);
 }
 
-/* Seasonal text styles */
-.seasonal-text-primary {
-  color: var(--seasonal-primary);
-  font-family: var(--seasonal-font-primary);
-}
-
-.seasonal-text-secondary {
-  color: var(--seasonal-secondary);
-  font-family: var(--seasonal-font-secondary);
-}
-
-.seasonal-text-accent {
-  color: var(--seasonal-accent);
-  font-family: var(--seasonal-font-accent);
-}
-
-/* Seasonal background */
-.seasonal-bg {
-  background-color: var(--seasonal-background);
-}
-
-.seasonal-text {
-  color: var(--seasonal-text);
-}
-
-/* Seasonal heading styles */
-.seasonal-heading-1,
-.seasonal-heading-2,
-.seasonal-heading-3,
-.seasonal-heading-4,
-.seasonal-heading-5,
-.seasonal-heading-6 {
-  font-family: var(--seasonal-font-primary) !important;
-  color: var(--seasonal-primary);
-  font-weight: bold;
-  letter-spacing: 0.05em;
-}
-
-.seasonal-heading-1 { font-size: 2.5em; line-height: 1.1; }
-.seasonal-heading-2 { font-size: 2em; line-height: 1.2; }
-.seasonal-heading-3 { font-size: 1.75em; line-height: 1.3; }
-.seasonal-heading-4 { font-size: 1.5em; line-height: 1.4; }
-.seasonal-heading-5 { font-size: 1.25em; line-height: 1.4; }
-.seasonal-heading-6 { font-size: 1.125em; line-height: 1.5; }
-
-/* Card content headings for seasonal themes */
-.seasonal-card-content h1,
-.seasonal-card-content h2,
-.seasonal-card-content h3,
-.seasonal-card-content h4,
-.seasonal-card-content h5,
-.seasonal-card-content h6 {
-  font-family: var(--seasonal-font-primary) !important;
-  color: var(--seasonal-primary);
-  font-weight: bold;
-  letter-spacing: 0.05em;
-}
-
-.seasonal-card-content h1 { font-size: 2em; line-height: 1.1; }
-.seasonal-card-content h2 { font-size: 1.75em; line-height: 1.2; }
-.seasonal-card-content h3 { font-size: 1.5em; line-height: 1.3; }
-.seasonal-card-content h4 { font-size: 1.25em; line-height: 1.4; }
-.seasonal-card-content h5 { font-size: 1.125em; line-height: 1.4; }
-.seasonal-card-content h6 { font-size: 1em; line-height: 1.5; }
-
-/* Seasonal card styles */
 .seasonal-card {
-  border: 2px solid var(--seasonal-primary);
-  background: linear-gradient(135deg, var(--seasonal-background) 0%, rgba(var(--seasonal-primary), 0.05) 100%);
+  border: 2px solid #2563eb;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(37, 99, 235, 0.05) 100%);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
@@ -102,6 +24,247 @@
 }
 
 .seasonal-glow {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+/* CSS Variables for seasonal themes - only applied when theme mode classes are present */
+
+/* Seasonal theme button styles - only apply when theme mode classes are present */
+.halloween-mode .seasonal-button,
+.christmas-mode .seasonal-button,
+.spring-mode .seasonal-button,
+.summer-mode .seasonal-button,
+.autumn-mode .seasonal-button {
+  background: linear-gradient(45deg, var(--seasonal-primary), var(--seasonal-secondary));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.halloween-mode .seasonal-button:hover,
+.christmas-mode .seasonal-button:hover,
+.spring-mode .seasonal-button:hover,
+.summer-mode .seasonal-button:hover,
+.autumn-mode .seasonal-button:hover {
+  background: linear-gradient(45deg, var(--seasonal-secondary), var(--seasonal-primary));
+  transform: scale(1.05);
+}
+
+/* Seasonal text styles - only apply when theme mode classes are present */
+.halloween-mode .seasonal-text-primary,
+.christmas-mode .seasonal-text-primary,
+.spring-mode .seasonal-text-primary,
+.summer-mode .seasonal-text-primary,
+.autumn-mode .seasonal-text-primary {
+  color: var(--seasonal-primary);
+  font-family: var(--seasonal-font-primary);
+}
+
+.halloween-mode .seasonal-text-secondary,
+.christmas-mode .seasonal-text-secondary,
+.spring-mode .seasonal-text-secondary,
+.summer-mode .seasonal-text-secondary,
+.autumn-mode .seasonal-text-secondary {
+  color: var(--seasonal-secondary);
+  font-family: var(--seasonal-font-secondary);
+}
+
+.halloween-mode .seasonal-text-accent,
+.christmas-mode .seasonal-text-accent,
+.spring-mode .seasonal-text-accent,
+.summer-mode .seasonal-text-accent,
+.autumn-mode .seasonal-text-accent {
+  color: var(--seasonal-accent);
+  font-family: var(--seasonal-font-accent);
+}
+
+/* Seasonal background */
+.halloween-mode .seasonal-bg,
+.christmas-mode .seasonal-bg,
+.spring-mode .seasonal-bg,
+.summer-mode .seasonal-bg,
+.autumn-mode .seasonal-bg {
+  background-color: var(--seasonal-background);
+}
+
+.halloween-mode .seasonal-text,
+.christmas-mode .seasonal-text,
+.spring-mode .seasonal-text,
+.summer-mode .seasonal-text,
+.autumn-mode .seasonal-text {
+  color: var(--seasonal-text);
+}
+
+/* Seasonal heading styles - only apply when theme mode classes are present */
+.halloween-mode .seasonal-heading-1,
+.halloween-mode .seasonal-heading-2,
+.halloween-mode .seasonal-heading-3,
+.halloween-mode .seasonal-heading-4,
+.halloween-mode .seasonal-heading-5,
+.halloween-mode .seasonal-heading-6,
+.christmas-mode .seasonal-heading-1,
+.christmas-mode .seasonal-heading-2,
+.christmas-mode .seasonal-heading-3,
+.christmas-mode .seasonal-heading-4,
+.christmas-mode .seasonal-heading-5,
+.christmas-mode .seasonal-heading-6,
+.spring-mode .seasonal-heading-1,
+.spring-mode .seasonal-heading-2,
+.spring-mode .seasonal-heading-3,
+.spring-mode .seasonal-heading-4,
+.spring-mode .seasonal-heading-5,
+.spring-mode .seasonal-heading-6,
+.summer-mode .seasonal-heading-1,
+.summer-mode .seasonal-heading-2,
+.summer-mode .seasonal-heading-3,
+.summer-mode .seasonal-heading-4,
+.summer-mode .seasonal-heading-5,
+.summer-mode .seasonal-heading-6,
+.autumn-mode .seasonal-heading-1,
+.autumn-mode .seasonal-heading-2,
+.autumn-mode .seasonal-heading-3,
+.autumn-mode .seasonal-heading-4,
+.autumn-mode .seasonal-heading-5,
+.autumn-mode .seasonal-heading-6 {
+  font-family: var(--seasonal-font-primary) !important;
+  color: var(--seasonal-primary);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.halloween-mode .seasonal-heading-1,
+.christmas-mode .seasonal-heading-1,
+.spring-mode .seasonal-heading-1,
+.summer-mode .seasonal-heading-1,
+.autumn-mode .seasonal-heading-1 { font-size: 2.5em; line-height: 1.1; }
+
+.halloween-mode .seasonal-heading-2,
+.christmas-mode .seasonal-heading-2,
+.spring-mode .seasonal-heading-2,
+.summer-mode .seasonal-heading-2,
+.autumn-mode .seasonal-heading-2 { font-size: 2em; line-height: 1.2; }
+
+.halloween-mode .seasonal-heading-3,
+.christmas-mode .seasonal-heading-3,
+.spring-mode .seasonal-heading-3,
+.summer-mode .seasonal-heading-3,
+.autumn-mode .seasonal-heading-3 { font-size: 1.75em; line-height: 1.3; }
+
+.halloween-mode .seasonal-heading-4,
+.christmas-mode .seasonal-heading-4,
+.spring-mode .seasonal-heading-4,
+.summer-mode .seasonal-heading-4,
+.autumn-mode .seasonal-heading-4 { font-size: 1.5em; line-height: 1.4; }
+
+.halloween-mode .seasonal-heading-5,
+.christmas-mode .seasonal-heading-5,
+.spring-mode .seasonal-heading-5,
+.summer-mode .seasonal-heading-5,
+.autumn-mode .seasonal-heading-5 { font-size: 1.25em; line-height: 1.4; }
+
+.halloween-mode .seasonal-heading-6,
+.christmas-mode .seasonal-heading-6,
+.spring-mode .seasonal-heading-6,
+.summer-mode .seasonal-heading-6,
+.autumn-mode .seasonal-heading-6 { font-size: 1.125em; line-height: 1.5; }
+
+/* Card content headings for seasonal themes - only apply when theme mode classes are present */
+.halloween-mode .seasonal-card-content h1,
+.halloween-mode .seasonal-card-content h2,
+.halloween-mode .seasonal-card-content h3,
+.halloween-mode .seasonal-card-content h4,
+.halloween-mode .seasonal-card-content h5,
+.halloween-mode .seasonal-card-content h6,
+.christmas-mode .seasonal-card-content h1,
+.christmas-mode .seasonal-card-content h2,
+.christmas-mode .seasonal-card-content h3,
+.christmas-mode .seasonal-card-content h4,
+.christmas-mode .seasonal-card-content h5,
+.christmas-mode .seasonal-card-content h6,
+.spring-mode .seasonal-card-content h1,
+.spring-mode .seasonal-card-content h2,
+.spring-mode .seasonal-card-content h3,
+.spring-mode .seasonal-card-content h4,
+.spring-mode .seasonal-card-content h5,
+.spring-mode .seasonal-card-content h6,
+.summer-mode .seasonal-card-content h1,
+.summer-mode .seasonal-card-content h2,
+.summer-mode .seasonal-card-content h3,
+.summer-mode .seasonal-card-content h4,
+.summer-mode .seasonal-card-content h5,
+.summer-mode .seasonal-card-content h6,
+.autumn-mode .seasonal-card-content h1,
+.autumn-mode .seasonal-card-content h2,
+.autumn-mode .seasonal-card-content h3,
+.autumn-mode .seasonal-card-content h4,
+.autumn-mode .seasonal-card-content h5,
+.autumn-mode .seasonal-card-content h6 {
+  font-family: var(--seasonal-font-primary) !important;
+  color: var(--seasonal-primary);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.halloween-mode .seasonal-card-content h1,
+.christmas-mode .seasonal-card-content h1,
+.spring-mode .seasonal-card-content h1,
+.summer-mode .seasonal-card-content h1,
+.autumn-mode .seasonal-card-content h1 { font-size: 2em; line-height: 1.1; }
+
+.halloween-mode .seasonal-card-content h2,
+.christmas-mode .seasonal-card-content h2,
+.spring-mode .seasonal-card-content h2,
+.summer-mode .seasonal-card-content h2,
+.autumn-mode .seasonal-card-content h2 { font-size: 1.75em; line-height: 1.2; }
+
+.halloween-mode .seasonal-card-content h3,
+.christmas-mode .seasonal-card-content h3,
+.spring-mode .seasonal-card-content h3,
+.summer-mode .seasonal-card-content h3,
+.autumn-mode .seasonal-card-content h3 { font-size: 1.5em; line-height: 1.3; }
+
+.halloween-mode .seasonal-card-content h4,
+.christmas-mode .seasonal-card-content h4,
+.spring-mode .seasonal-card-content h4,
+.summer-mode .seasonal-card-content h4,
+.autumn-mode .seasonal-card-content h4 { font-size: 1.25em; line-height: 1.4; }
+
+.halloween-mode .seasonal-card-content h5,
+.christmas-mode .seasonal-card-content h5,
+.spring-mode .seasonal-card-content h5,
+.summer-mode .seasonal-card-content h5,
+.autumn-mode .seasonal-card-content h5 { font-size: 1.125em; line-height: 1.4; }
+
+.halloween-mode .seasonal-card-content h6,
+.christmas-mode .seasonal-card-content h6,
+.spring-mode .seasonal-card-content h6,
+.summer-mode .seasonal-card-content h6,
+.autumn-mode .seasonal-card-content h6 { font-size: 1em; line-height: 1.5; }
+
+/* Seasonal card styles - only apply when theme mode classes are present */
+.halloween-mode .seasonal-card,
+.christmas-mode .seasonal-card,
+.spring-mode .seasonal-card,
+.summer-mode .seasonal-card,
+.autumn-mode .seasonal-card {
+  border: 2px solid var(--seasonal-primary);
+  background: linear-gradient(135deg, var(--seasonal-background) 0%, rgba(var(--seasonal-primary), 0.05) 100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.halloween-mode .seasonal-float,
+.christmas-mode .seasonal-float,
+.spring-mode .seasonal-float,
+.summer-mode .seasonal-float,
+.autumn-mode .seasonal-float {
+  animation: seasonalFloat 3s ease-in-out infinite;
+}
+
+.halloween-mode .seasonal-glow,
+.christmas-mode .seasonal-glow,
+.spring-mode .seasonal-glow,
+.summer-mode .seasonal-glow,
+.autumn-mode .seasonal-glow {
   box-shadow: 0 0 20px rgba(var(--seasonal-primary), 0.3);
 }
 

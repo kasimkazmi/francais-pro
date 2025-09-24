@@ -22,10 +22,10 @@ export function ThemeAwareButton({
   className,
   onClick 
 }: ThemeAwareButtonProps) {
-  const { isEnabled, themeConfig } = useSeasonalTheme();
+  const { isActive, themeConfig } = useSeasonalTheme();
 
   const getThemeStyles = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {};
     }
 
@@ -37,7 +37,7 @@ export function ThemeAwareButton({
   };
 
   const getThemeClasses = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {
         primary: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800',
         secondary: 'text-blue-600',

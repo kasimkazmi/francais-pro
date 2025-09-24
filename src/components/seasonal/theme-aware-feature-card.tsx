@@ -19,10 +19,10 @@ export function ThemeAwareFeatureCard({
   className,
   iconType
 }: ThemeAwareFeatureCardProps) {
-  const { isEnabled, themeConfig } = useSeasonalTheme();
+  const { isActive, themeConfig } = useSeasonalTheme();
 
   const getIconColors = (iconType?: string) => {
-    if (!isEnabled) {
+    if (!isActive) {
       // Original hardcoded colors for each icon type
       switch (iconType) {
         case 'CheckCircle':
@@ -67,7 +67,7 @@ export function ThemeAwareFeatureCard({
   };
 
   const getTitleStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {
         color: 'rgb(37 99 235)', // blue-600 - original hardcoded color
       };
@@ -86,7 +86,7 @@ export function ThemeAwareFeatureCard({
   };
 
   const getDescriptionStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {
         color: 'rgb(107 114 128)', // gray-500 - original hardcoded color
       };
@@ -119,7 +119,7 @@ export function ThemeAwareFeatureCard({
       </div>
       <h3 
         className={cn(
-          isEnabled ? 'text-4xl tracking-widest' : 'text-lg',
+          isActive ? 'text-4xl tracking-widest' : 'text-lg',
           'font-family-secondary font-semibold mb-2'
         )}
         style={getTitleStyle()}
@@ -128,8 +128,8 @@ export function ThemeAwareFeatureCard({
       </h3>
       <p 
         className={cn(
-          isEnabled ? 'text-xl tracking-widest' : 'text-sm',
-          !isEnabled && 'text-muted-foreground'
+          isActive ? 'text-xl tracking-widest' : 'text-sm',
+          !isActive && 'text-muted-foreground'
         )}
         style={getDescriptionStyle()}
       >

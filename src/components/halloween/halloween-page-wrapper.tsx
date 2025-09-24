@@ -20,13 +20,13 @@ export function HalloweenPageWrapper({
   decorationIntensity = 'medium',
   className = ''
 }: HalloweenPageWrapperProps) {
-  const { currentTheme, isEnabled } = useSeasonalTheme();
+  const { currentTheme, isActive } = useSeasonalTheme();
   const [isLoading, setIsLoading] = useState(showLoader);
   const [mounted, setMounted] = useState(false);
   const [showContent, setShowContent] = useState(!showLoader);
   
   // Check if Halloween theme is active
-  const isHalloweenMode = isEnabled && currentTheme === 'halloween';
+  const isHalloweenMode = isActive && currentTheme === 'halloween';
 
   // Show loading overlay immediately if loader should be shown
   useEffect(() => {

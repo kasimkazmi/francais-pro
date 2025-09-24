@@ -15,7 +15,7 @@ export function ThemeAwareIcon({
   className,
   size = 'md'
 }: ThemeAwareIconProps) {
-  const { isEnabled, themeConfig } = useSeasonalTheme();
+  const { isActive, themeConfig } = useSeasonalTheme();
 
   const getSizeClasses = () => {
     switch (size) {
@@ -27,14 +27,14 @@ export function ThemeAwareIcon({
   };
 
   const getThemeColor = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return 'text-blue-600';
     }
     return themeConfig.colors.secondary;
   };
 
   const getThemeStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {};
     }
     return {
@@ -46,7 +46,7 @@ export function ThemeAwareIcon({
     <div 
       className={cn(
         getSizeClasses(),
-        !isEnabled ? getThemeColor() : '',
+        !isActive ? getThemeColor() : '',
         className
       )}
       style={getThemeStyle()}

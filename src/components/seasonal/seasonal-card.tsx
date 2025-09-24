@@ -39,7 +39,7 @@ export function SeasonalCard({
   titleClassName,
   descriptionClassName,
 }: SeasonalCardProps) {
-  const { currentTheme, themeConfig, isActive, isEnabled } = useSeasonalTheme();
+  const { currentTheme, themeConfig, isActive } = useSeasonalTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -110,11 +110,11 @@ export function SeasonalCard({
         <CardTitle
           className={cn(
             !isActive && "text-2xl    ",
-            isEnabled && "text-2xl font-bold tracking-wide",
+            isActive && "text-2xl font-bold tracking-wide",
             titleClassName
           )}
           style={
-            isEnabled
+            isActive
               ? {
                   color: themeConfig.colors.primary,
                   fontFamily: themeConfig.fonts.primary,
@@ -132,7 +132,7 @@ export function SeasonalCard({
               descriptionClassName
             )}
             style={
-              isEnabled
+              isActive
                 ? {
                     color: themeConfig.colors.tertiary,
                     fontFamily: themeConfig.fonts.paragraph,

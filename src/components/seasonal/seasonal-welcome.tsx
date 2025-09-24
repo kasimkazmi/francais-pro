@@ -8,7 +8,7 @@ interface SeasonalWelcomeProps {
 }
 
 export function SeasonalWelcome({ className }: SeasonalWelcomeProps) {
-  const { currentTheme, isEnabled, themeConfig } = useSeasonalTheme();
+  const { currentTheme, isActive, themeConfig } = useSeasonalTheme();
 
   const getFrancaisProText = () => {
     switch (currentTheme) {
@@ -28,7 +28,7 @@ export function SeasonalWelcome({ className }: SeasonalWelcomeProps) {
   };
 
   const getSpanStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return { color: 'rgb(37 99 235)' }; // blue-600
     }
     return { 
@@ -38,7 +38,7 @@ export function SeasonalWelcome({ className }: SeasonalWelcomeProps) {
   };
 
   const getParagraphStyle = () => {
-    if (!isEnabled) {
+    if (!isActive) {
       return {};
     }
     // For Halloween theme, use Witch font for paragraph text
@@ -62,7 +62,7 @@ export function SeasonalWelcome({ className }: SeasonalWelcomeProps) {
         Bienvenue à <span style={getSpanStyle()}>{getFrancaisProText()}</span>
       </h1>
       <p 
-        className={isEnabled ? "text-3xl mb-6 tracking-widest" : "text-lg text-muted-foreground mb-6"}
+        className={isActive ? "text-3xl mb-6 tracking-widest" : "text-lg text-muted-foreground mb-6"}
         style={getParagraphStyle()}
       >
         {defaultSubtitle}

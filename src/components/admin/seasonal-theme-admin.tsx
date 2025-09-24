@@ -9,7 +9,7 @@ import { HalloweenPumpkin } from '@/components/halloween/halloween-pumpkin';
 import toast from 'react-hot-toast';
 
 export function SeasonalThemeAdmin() {
-  const { currentTheme, setCurrentTheme, availableThemes, isEnabled } = useSeasonalTheme();
+  const { currentTheme, setCurrentTheme, availableThemes, isActive } = useSeasonalTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export function SeasonalThemeAdmin() {
         <div className="space-y-4">
           <div className="text-sm text-gray-600 mb-4">
             <strong>Current Active Theme:</strong> {currentTheme === 'default' ? 'None' : currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)}
-            {isEnabled && currentTheme !== 'default' && (
+            {isActive && currentTheme !== 'default' && (
               <span className="ml-2 text-green-600">(Users can enable/disable this theme)</span>
             )}
           </div>

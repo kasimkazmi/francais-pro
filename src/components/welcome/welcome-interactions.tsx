@@ -30,7 +30,7 @@ interface WelcomeInteractionsProps {
 export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
   const { isAuthenticated } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { isEnabled } = useSeasonalTheme();
+  const { isActive } = useSeasonalTheme();
 
   const gate = () => (e: React.MouseEvent) => {
     if (!isAuthenticated) {
@@ -71,32 +71,32 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
             <SeasonalCard
               title={
                 <div className="flex items-center space-x-2">
-                  {!isEnabled && feature.icon === "BookOpen" && (
+                  {!isActive && feature.icon === "BookOpen" && (
                     <ThemeAwareIcon size="lg">
                       <BookOpen />
                     </ThemeAwareIcon>
                   )}
-                  {!isEnabled && feature.icon === "Users" && (
+                  {!isActive && feature.icon === "Users" && (
                     <ThemeAwareIcon size="lg">
                       <Users />
                     </ThemeAwareIcon>
                   )}
-                  {!isEnabled && feature.icon === "Trophy" && (
+                  {!isActive && feature.icon === "Trophy" && (
                     <ThemeAwareIcon size="lg">
                       <Trophy />
                     </ThemeAwareIcon>
                   )}
-                  {!isEnabled && feature.icon === "Play" && (
+                  {!isActive && feature.icon === "Play" && (
                     <ThemeAwareIcon size="lg">
                       <Play />
                     </ThemeAwareIcon>
                   )}
-                  {!isEnabled && feature.icon === "Target" && (
+                  {!isActive && feature.icon === "Target" && (
                     <ThemeAwareIcon size="lg">
                       <Target />
                     </ThemeAwareIcon>
                   )}
-                  {!isEnabled && feature.icon === "Globe" && (
+                  {!isActive && feature.icon === "Globe" && (
                     <ThemeAwareIcon size="lg">
                       <Globe />
                     </ThemeAwareIcon>
@@ -109,12 +109,12 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
               glow={true}
               animated={true}
               titleClassName={` ${
-                isEnabled
+                isActive
                   ? "leading-widest tracking-widest text-md"
                   : "text-lg font-bold tracking-wide "
               }`}
               descriptionClassName={` ${
-                isEnabled
+                isActive
                   ? "text-lg leading-widest tracking-widest"
                   : "text-sm mt-2 leading-widest text-muted-foreground  "
               }`}
