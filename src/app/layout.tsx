@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { AdminProvider } from "@/contexts/AdminContext";
 import { UserStorageProvider } from "@/contexts/UserStorageContext";
+import { LearningProgressProvider } from "@/contexts/LearningProgressContext";
 import { SeasonalThemeProvider } from "@/contexts/SeasonalThemeContext";
 import { DarkLightThemeContext } from "@/contexts/DarkLightThemeContext";
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -240,15 +241,17 @@ export default function RootLayout({
           <SeasonalThemeProvider>
             <AuthProvider>
               <UserStorageProvider>
-                <AdminProvider>
-                  <FavoritesProvider>
-                    <SearchProvider>
-                      <div id="app-content" suppressHydrationWarning>
-                        {children}
-                      </div>
-                    </SearchProvider>
-                  </FavoritesProvider>
-                </AdminProvider>
+                <LearningProgressProvider>
+                  <AdminProvider>
+                    <FavoritesProvider>
+                      <SearchProvider>
+                        <div id="app-content" suppressHydrationWarning>
+                          {children}
+                        </div>
+                      </SearchProvider>
+                    </FavoritesProvider>
+                  </AdminProvider>
+                </LearningProgressProvider>
               </UserStorageProvider>
             </AuthProvider>
           </SeasonalThemeProvider>
