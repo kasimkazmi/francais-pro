@@ -52,7 +52,7 @@ export function WelcomeInteractions({ features }: WelcomeInteractionsProps) {
             <ArrowRight className="ml-2 h-4 w-4" />
           </ThemeAwareButton>
         </Link>
-        <Link href="/home" onClick={gate()}>
+        <Link href="/home" >
           <ThemeAwareButton
             variant="outline"
             size="lg"
