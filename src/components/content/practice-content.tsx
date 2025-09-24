@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { AudioButton } from '@/components/ui/audio-button';
+import { AuthModal } from '@/components/ui/auth-modal';
+import { useAuth } from '@/contexts/AuthContext';
 import { 
   Play, 
   RotateCcw, 
@@ -18,7 +20,8 @@ import {
   Book,
   FileText,
   ArrowRight,
-  Volume2
+  Volume2,
+  Lock
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -32,8 +35,10 @@ export function PracticeContent() {
   const [completedQuestions, setCompletedQuestions] = useState<number[]>([]);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'general';
+  const { isAuthenticated } = useAuth();
 
   // Expressions-specific practice questions
   const expressionsQuestions = [
@@ -256,6 +261,12 @@ export function PracticeContent() {
   };
 
   const startQuiz = () => {
+    // Check if user is authenticated before starting quiz
+    if (!isAuthenticated) {
+      setShowLoginModal(true);
+      return;
+    }
+    
     setQuizStarted(true);
     setIsActive(true);
     setTimeLeft(30);
@@ -312,7 +323,20 @@ export function PracticeContent() {
   // Category selection screen
   if (showCategorySelection) {
     return (
-      <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
+      <>
+        <AuthModal 
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          context="practice"
+          onSuccess={() => {
+            setShowLoginModal(false);
+            setQuizStarted(true);
+            setIsActive(true);
+            setTimeLeft(30);
+          }}
+        />
+        
+        <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
           <h1 className="text-2xl sm:text-3xl font-bold">Practice Categories</h1>
         </div>
@@ -333,6 +357,20 @@ export function PracticeContent() {
               </div>
             </div>
           </div>
+
+          {!isAuthenticated && (
+            <div className="my-6 rounded-lg border bg-amber-50 dark:bg-amber-900/20 p-4">
+              <div className="flex items-start space-x-2">
+                <Lock className="mt-0.5 h-4 w-4 text-amber-600 dark:text-amber-400" />
+                <div>
+                  <p className="text-sm font-medium text-amber-800 dark:text-amber-200">Login Required for Progress Tracking</p>
+                  <p className="text-sm text-amber-700 dark:text-amber-300">
+                    Sign in to save your practice scores, track your improvement, and access personalized learning recommendations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <h2 className="text-2xl font-bold mt-8 mb-4">Choose Your Practice Category</h2>
           <p className="text-muted-foreground mb-6">
@@ -474,7 +512,8 @@ export function PracticeContent() {
             </Link>
           </div>
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 
@@ -485,7 +524,20 @@ export function PracticeContent() {
     const isGood = percentage >= 70;
 
     return (
-      <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
+      <>
+        <AuthModal 
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          context="practice"
+          onSuccess={() => {
+            setShowLoginModal(false);
+            setQuizStarted(true);
+            setIsActive(true);
+            setTimeLeft(30);
+          }}
+        />
+        
+        <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
         <div className="text-center mb-8">
           <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-4 ${
             isExcellent ? 'bg-green-100 text-green-600' : 
@@ -548,14 +600,28 @@ export function PracticeContent() {
             </div>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </>
     );
   }
 
   // Show instructions modal when category is selected but quiz hasn't started
   if (!showCategorySelection && !quizStarted) {
     return (
-      <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
+      <>
+        <AuthModal 
+          isOpen={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+          context="practice"
+          onSuccess={() => {
+            setShowLoginModal(false);
+            setQuizStarted(true);
+            setIsActive(true);
+            setTimeLeft(30);
+          }}
+        />
+        
+        <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
         <div className="max-w-2xl mx-auto">
           <Card className="universal-card">
             <CardHeader>
@@ -644,14 +710,28 @@ export function PracticeContent() {
             </CardContent>
           </Card>
         </div>
-      </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
+    <>
+      <AuthModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        context="practice"
+        onSuccess={() => {
+          setShowLoginModal(false);
+          setQuizStarted(true);
+          setIsActive(true);
+          setTimeLeft(30);
+        }}
+      />
+      
+      <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
 
-      <div className="prose prose-slate dark:prose-invert max-w-none">
+        <div className="prose prose-slate dark:prose-invert max-w-none">
         <p className="text-muted-foreground">
           {getCategoryDescription(category)}
         </p>
@@ -856,7 +936,8 @@ export function PracticeContent() {
           </Card>
         )}
 
+        </div>
       </div>
-    </div>
+    </>
   );
 }
