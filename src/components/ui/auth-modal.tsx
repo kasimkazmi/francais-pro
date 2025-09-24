@@ -6,9 +6,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { X, Mail, Lock, User, Loader2, Shield, LogIn, Target, Trophy, GraduationCap } from 'lucide-react';
+import { X, Mail, Lock, User, Loader2, LogIn, Target, Trophy, GraduationCap } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import toast from 'react-hot-toast';
+import { 
+  validateLogin, 
+  validateSignup, 
+  validateForgotPassword, 
+  getFirstValidationError,
+  type LoginFormData,
+  type SignupFormData,
+  type ForgotPasswordFormData
+} from '@/lib/validation';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -106,23 +115,54 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
     setError('');
 
     try {
-      const normalizedEmail = email.trim();
-      const normalizedPassword = password;
-      const normalizedName = name.trim();
+      // Validate form data based on mode
+      let validationResult;
+      let formData: LoginFormData | SignupFormData | ForgotPasswordFormData;
+
       if (mode === 'forgot') {
-        if (!email) {
-          setError('Please enter your email address.');
-          return;
-        }
-        await sendReset(email);
+        formData = { email: email.trim() };
+        validationResult = validateForgotPassword(formData);
+      } else if (mode === 'login') {
+        formData = { 
+          email: email.trim(), 
+          password: password 
+        };
+        validationResult = validateLogin(formData);
+      } else {
+        formData = { 
+          name: name.trim(), 
+          email: email.trim(), 
+          password: password 
+        };
+        validationResult = validateSignup(formData);
+      }
+
+      // Handle validation errors
+      if (!validationResult.success) {
+        const errorMessage = getFirstValidationError(validationResult.error);
+        setError(errorMessage);
+        toast.error(errorMessage);
+        return;
+      }
+
+      // Handle forgot password
+      if (mode === 'forgot') {
+        const forgotData = formData as ForgotPasswordFormData;
+        await sendReset(forgotData.email);
         toast.success('Password reset email sent. Check your inbox.');
         setMode('login');
         return;
       }
 
+      // Handle login/signup
       let success = false;
-      if (mode === 'login') success = await login(normalizedEmail, normalizedPassword);
-      else success = await signup(normalizedName, normalizedEmail, normalizedPassword);
+      if (mode === 'login') {
+        const loginData = formData as LoginFormData;
+        success = await login(loginData.email, loginData.password);
+      } else {
+        const signupData = formData as SignupFormData;
+        success = await signup(signupData.name, signupData.email, signupData.password);
+      }
 
       if (success) {
         onClose();
@@ -143,6 +183,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
       const err = e as { code?: string; message?: string };
       const code = err?.code || '';
       const message = err?.message || '';
+      
       if (mode === 'forgot') {
         setError(message || 'Could not send reset email. Please try again.');
         toast.error(message || 'Could not send reset email.');
