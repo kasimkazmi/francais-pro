@@ -13,7 +13,6 @@ import {
   Star, 
   Clock, 
   Target, 
-  Flame,
   Award,
   Lock,
   CheckCircle,
@@ -22,8 +21,9 @@ import {
 import { useAuth } from '@/contexts/AuthContext';
 import { useLearningProgress } from '@/contexts/LearningProgressContext';
 import { enhancedLearningModules } from '@/data/enhanced-learning-content';
-import { InteractiveLessonComponent } from '@/components/learning/interactive-lesson';
-import { GamificationSystem } from '@/components/learning/gamification-system';
+import { CompactProgressIndicator } from '@/components/learning/minimalist-gamification';
+import { DetailedLessonViewer } from '@/components/learning/detailed-lesson-viewer';
+import { allDetailedLessons } from '@/data/detailed-lesson-content';
 
 export default function EnhancedLearnPage() {
   const { isAuthenticated } = useAuth();
@@ -31,10 +31,7 @@ export default function EnhancedLearnPage() {
     progress, 
     loading, 
     completeLesson, 
-    startLesson, 
-    unlockLesson,
-    getCurrentLevel,
-    getXPForNextLevel
+    startLesson
   } = useLearningProgress();
   
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -52,10 +49,9 @@ export default function EnhancedLearnPage() {
     );
   }
 
-  // If a lesson is selected, show the interactive lesson
+  // If a lesson is selected, show the detailed lesson
   if (selectedLesson) {
-    const module = enhancedLearningModules.find(m => m.id === selectedModule);
-    const lesson = module?.lessons.find(l => l.id === selectedLesson);
+    const lesson = allDetailedLessons.find(l => l.id === selectedLesson);
     
     if (lesson) {
       return (
@@ -75,15 +71,12 @@ export default function EnhancedLearnPage() {
               </Button>
             </div>
             
-            <InteractiveLessonComponent
+            <DetailedLessonViewer
               lesson={lesson}
               onComplete={async (xpEarned) => {
                 await completeLesson(lesson.id, xpEarned);
                 setSelectedLesson(null);
                 setSelectedModule(null);
-              }}
-              onStepComplete={(stepId) => {
-                console.log('Step completed:', stepId);
               }}
             />
           </div>
@@ -94,9 +87,9 @@ export default function EnhancedLearnPage() {
 
   // If a module is selected, show the lessons
   if (selectedModule) {
-    const module = enhancedLearningModules.find(m => m.id === selectedModule);
+    const selectedModuleData = enhancedLearningModules.find(m => m.id === selectedModule);
     
-    if (module) {
+    if (selectedModuleData) {
       return (
         <div className="min-h-screen bg-background">
           <Header />
@@ -118,20 +111,20 @@ export default function EnhancedLearnPage() {
                   <div>
                     <CardTitle className="text-3xl flex items-center space-x-3">
                       <BookOpen className="h-8 w-8 text-blue-500" />
-                      <span>{module.title}</span>
+                      <span>{selectedModuleData.title}</span>
                     </CardTitle>
                     <CardDescription className="mt-2 text-lg">
-                      {module.description}
+                      {selectedModuleData.description}
                     </CardDescription>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Badge variant="outline" className="flex items-center space-x-1">
                       <Star className="h-4 w-4" />
-                      <span>{module.totalXP} XP</span>
+                      <span>{selectedModuleData.totalXP} XP</span>
                     </Badge>
                     <Badge variant="outline" className="flex items-center space-x-1">
                       <Clock className="h-4 w-4" />
-                      <span>{module.estimatedTime} min</span>
+                      <span>{selectedModuleData.estimatedTime} min</span>
                     </Badge>
                   </div>
                 </div>
@@ -140,16 +133,16 @@ export default function EnhancedLearnPage() {
                 <div className="mt-4">
                   <div className="flex justify-between text-sm text-gray-600 mb-2">
                     <span>Module Progress</span>
-                    <span>{module.progress}%</span>
+                    <span>{selectedModuleData.progress}%</span>
                   </div>
-                  <Progress value={module.progress} className="h-3" />
+                  <Progress value={selectedModuleData.progress} className="h-3" />
                 </div>
               </CardHeader>
             </Card>
 
             {/* Lessons Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {module.lessons.map((lesson, index) => (
+              {selectedModuleData.lessons.map((lesson, index) => (
                 <Card 
                   key={lesson.id} 
                   className={`transition-all hover:shadow-lg ${
@@ -205,7 +198,15 @@ export default function EnhancedLearnPage() {
                       </div>
 
                       {lesson.unlocked && (
-                        <Button className="w-full" size="sm">
+                        <Button 
+                          className="w-full" 
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedLesson(lesson.id);
+                            startLesson(lesson.id);
+                          }}
+                        >
                           {lesson.completed ? 'Review Lesson' : 'Start Lesson'}
                           <ArrowRight className="h-4 w-4 ml-2" />
                         </Button>
@@ -236,15 +237,14 @@ export default function EnhancedLearnPage() {
           </p>
         </div>
 
-        {/* Gamification Dashboard */}
+        {/* Minimalist Progress Indicator */}
         {isAuthenticated && progress && (
           <div className="mb-8">
-            <GamificationSystem
-              progress={progress}
-              onXPUpdate={(xp) => console.log('XP updated:', xp)}
-              onStreakUpdate={(streak) => console.log('Streak updated:', streak)}
-              onAchievementUnlock={(achievement) => console.log('Achievement unlocked:', achievement)}
-            />
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-4">
+                <CompactProgressIndicator progress={progress} />
+              </CardContent>
+            </Card>
           </div>
         )}
 
