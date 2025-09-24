@@ -240,7 +240,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
 
   return (
     <div 
-      className="modal-overlay z-[9999] p-2 sm:p-4 animate-in fade-in duration-300"
+      className="modal-overlay z-[9999] p-2 sm:p-3 md:p-4 lg:p-6 animate-in fade-in duration-300 auth-modal-nest-hub auth-modal-nest-hub-max smart-display-optimized touch-optimized landscape-smart-display"
       data-backdrop="true"
       style={{ 
         position: 'fixed',
@@ -269,44 +269,44 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: '100vh',
-          padding: '1rem 0'
+          padding: '0.5rem 0'
         }}
       >
         <Card 
-          className="w-full max-w-sm sm:max-w-md mx-auto bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 shadow-2xl relative animate-in zoom-in-95 duration-300 pointer-events-auto my-4"
+          className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-md mx-auto bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 shadow-2xl relative animate-in zoom-in-95 duration-300 pointer-events-auto my-2 sm:my-3 md:my-4 modal-card"
           onClick={(e) => e.stopPropagation()}
         >
-        <CardHeader className="relative text-center px-4 sm:px-6 pt-6 pb-4">
+        <CardHeader className="relative text-center px-3 sm:px-4 md:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4 modal-header">
           <Button
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="absolute right-3 top-3 sm:right-4 sm:top-4 h-8 w-8 p-0 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-700 dark:text-gray-300"
+            className="absolute right-2 top-2 sm:right-3 sm:top-3 md:right-4 md:top-4 h-7 w-7 sm:h-8 sm:w-8 p-0 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-700 dark:text-gray-300 close-button"
             aria-label="Close"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
           
-          <div className={`mx-auto mb-3 sm:mb-4 w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${contextConfig.gradient} rounded-full flex items-center justify-center`}>
-            <contextConfig.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+          <div className={`mx-auto mb-2 sm:mb-3 md:mb-4 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-gradient-to-br ${contextConfig.gradient} rounded-full flex items-center justify-center`}>
+            <contextConfig.icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-white" />
           </div>
           
-          <CardTitle className="text-xl sm:text-2xl text-gray-900 dark:text-gray-100 leading-tight">
+          <CardTitle className="text-lg sm:text-xl md:text-2xl text-gray-900 dark:text-gray-100 leading-tight px-2 modal-title">
             {contextConfig.title}
           </CardTitle>
-          <CardDescription className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+          <CardDescription className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 mt-1 sm:mt-2 leading-relaxed px-2 modal-description">
             {contextConfig.description}
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 sm:space-y-6 px-4 sm:px-6 pb-6">
+        <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 px-3 sm:px-4 md:px-6 pb-4 sm:pb-6 modal-content">
           {/* Benefits section - only show for login and signup, hidden on small screens */}
           {(mode === 'login' || mode === 'signup') && (
-            <div className={`bg-${contextConfig.primaryColor}-50 dark:bg-${contextConfig.primaryColor}-900/20 p-3 sm:p-4 rounded-lg hidden sm:block`}>
-              <h3 className={`font-semibold text-sm sm:text-base text-${contextConfig.primaryColor}-900 dark:text-${contextConfig.primaryColor}-100 mb-2 sm:mb-3 flex items-center`}>
-                <Target className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+            <div className={`bg-${contextConfig.primaryColor}-50 dark:bg-${contextConfig.primaryColor}-900/20 p-2 sm:p-3 md:p-4 rounded-lg hidden md:block benefits-section`}>
+              <h3 className={`font-semibold text-xs sm:text-sm md:text-base text-${contextConfig.primaryColor}-900 dark:text-${contextConfig.primaryColor}-100 mb-1 sm:mb-2 md:mb-3 flex items-center`}>
+                <Target className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                 Why sign in?
               </h3>
-              <ul className={`text-xs sm:text-sm text-${contextConfig.primaryColor}-800 dark:text-${contextConfig.primaryColor}-200 space-y-1 sm:space-y-2`}>
+              <ul className={`text-xs sm:text-sm md:text-base text-${contextConfig.primaryColor}-800 dark:text-${contextConfig.primaryColor}-200 space-y-1 sm:space-y-2`}>
                 {contextConfig.benefits.map((benefit, index) => (
                   <li key={index}>• {benefit}</li>
                 ))}
@@ -314,53 +314,53 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3 md:space-y-4 form-spacing">
             {mode === 'signup' && (
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm sm:text-base font-medium text-gray-900 dark:text-gray-100">Full Name</Label>
+              <div className="space-y-1 sm:space-y-2">
+                <Label htmlFor="name" className="text-xs sm:text-sm md:text-base font-medium text-gray-900 dark:text-gray-100">Full Name</Label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
+                  <User className="absolute left-2 sm:left-3 top-2.5 sm:top-3 h-3 w-3 sm:h-4 sm:w-4 text-gray-500 dark:text-gray-400 form-icon" />
                   <Input
                     id="name"
                     type="text"
                     placeholder="Enter your full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="pl-10 h-10 sm:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-sm sm:text-base"
+                    className="pl-7 sm:pl-10 h-8 sm:h-10 md:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-xs sm:text-sm md:text-base form-input"
                     required
                   />
                 </div>
               </div>
             )}
             
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm sm:text-base font-medium text-gray-900 dark:text-gray-100">Email</Label>
+            <div className="space-y-1 sm:space-y-2">
+              <Label htmlFor="email" className="text-xs sm:text-sm md:text-base font-medium text-gray-900 dark:text-gray-100">Email</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <Mail className="absolute left-2 sm:left-3 top-2.5 sm:top-3 h-3 w-3 sm:h-4 sm:w-4 text-gray-500 dark:text-gray-400 form-icon" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 h-10 sm:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-sm sm:text-base"
+                  className="pl-7 sm:pl-10 h-8 sm:h-10 md:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-xs sm:text-sm md:text-base form-input"
                   required
                 />
               </div>
             </div>
             
             {mode !== 'forgot' && (
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm sm:text-base font-medium text-gray-900 dark:text-gray-100">Password</Label>
+              <div className="space-y-1 sm:space-y-2">
+                <Label htmlFor="password" className="text-xs sm:text-sm md:text-base font-medium text-gray-900 dark:text-gray-100">Password</Label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500 dark:text-gray-400" />
+                  <Lock className="absolute left-2 sm:left-3 top-2.5 sm:top-3 h-3 w-3 sm:h-4 sm:w-4 text-gray-500 dark:text-gray-400 form-icon" />
                   <Input
                     id="password"
                     type="password"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 h-10 sm:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-sm sm:text-base"
+                    className="pl-7 sm:pl-10 h-8 sm:h-10 md:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600 text-xs sm:text-sm md:text-base form-input"
                     required
                     minLength={6}
                   />
@@ -369,14 +369,14 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
             )}
 
             {error && (
-              <div className="text-xs sm:text-sm text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400 p-3 rounded-md">
+              <div className="text-xs sm:text-sm md:text-base text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400 p-2 sm:p-3 rounded-md">
                 {error}
               </div>
             )}
 
             <Button 
               type="submit" 
-              className={`w-full h-10 sm:h-11 bg-${contextConfig.primaryColor}-600 text-white hover:bg-${contextConfig.primaryColor}-700 hover:shadow-lg active:bg-${contextConfig.primaryColor}-800 active:scale-95 transition-all duration-200 text-sm sm:text-base font-medium`}
+              className={`w-full h-8 sm:h-10 md:h-11 bg-${contextConfig.primaryColor}-600 text-white hover:bg-${contextConfig.primaryColor}-700 hover:shadow-lg active:bg-${contextConfig.primaryColor}-800 active:scale-95 transition-all duration-200 text-xs sm:text-sm md:text-base font-medium form-button`}
               disabled={isLoading}
             >
               {isLoading ? (
@@ -395,25 +395,25 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
             </Button>
           </form>
 
-          <div className="mt-4 sm:mt-6 text-center">
+          <div className="mt-3 sm:mt-4 md:mt-6 text-center">
             {mode !== 'forgot' ? (
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400">
                 {mode === 'login' ? "Don't have an account?" : "Already have an account?"}
                 <Button
                   variant="link"
                   onClick={switchMode}
-                  className={`p-0 h-auto ml-1 text-${contextConfig.primaryColor}-600 hover:text-${contextConfig.primaryColor}-700 dark:text-${contextConfig.primaryColor}-400 dark:hover:text-${contextConfig.primaryColor}-300 text-xs sm:text-sm`}
+                  className={`p-0 h-auto ml-1 text-${contextConfig.primaryColor}-600 hover:text-${contextConfig.primaryColor}-700 dark:text-${contextConfig.primaryColor}-400 dark:hover:text-${contextConfig.primaryColor}-300 text-xs sm:text-sm md:text-base`}
                 >
                   {mode === 'login' ? 'Sign up' : 'Sign in'}
                 </Button>
               </p>
             ) : (
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400">
                 Remembered your password?
                 <Button
                   variant="link"
                   onClick={() => { setMode('login'); setError(''); }}
-                  className={`p-0 h-auto ml-1 text-${contextConfig.primaryColor}-600 hover:text-${contextConfig.primaryColor}-700 dark:text-${contextConfig.primaryColor}-400 dark:hover:text-${contextConfig.primaryColor}-300 text-xs sm:text-sm`}
+                  className={`p-0 h-auto ml-1 text-${contextConfig.primaryColor}-600 hover:text-${contextConfig.primaryColor}-700 dark:text-${contextConfig.primaryColor}-400 dark:hover:text-${contextConfig.primaryColor}-300 text-xs sm:text-sm md:text-base`}
                 >
                   Back to Sign in
                 </Button>
@@ -422,10 +422,10 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
           </div>
 
           {mode === 'login' && (
-            <div className="mt-3 sm:mt-4 text-center">
+            <div className="mt-2 sm:mt-3 md:mt-4 text-center">
               <Button
                 variant="link"
-                className={`text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-${contextConfig.primaryColor}-600 dark:hover:text-${contextConfig.primaryColor}-400`}
+                className={`text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400 hover:text-${contextConfig.primaryColor}-600 dark:hover:text-${contextConfig.primaryColor}-400`}
                 onClick={() => { setMode('forgot'); setError(''); }}
               >
                 Forgot your password?
@@ -434,7 +434,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
           )}
 
           {/* Google Login */}
-          <div className="relative mt-4 sm:mt-6">
+          <div className="relative mt-3 sm:mt-4 md:mt-6">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-gray-300 dark:border-gray-600" />
             </div>
@@ -465,7 +465,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login', context = 'g
               } 
             }}
             disabled={isLoading}
-            className="w-full h-10 sm:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm sm:text-base font-medium"
+            className="w-full h-8 sm:h-10 md:h-11 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs sm:text-sm md:text-base font-medium form-button"
             variant="outline"
           >
             {isLoading ? (

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { StyledTabs, TabsContent } from "@/components/ui/styled-tabs";
 import { Progress } from "@/components/ui/progress";
 import { 
   Database, 
@@ -266,13 +266,48 @@ export function DataStorageManagement() {
             </Button>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="health">Data Health</TabsTrigger>
-              <TabsTrigger value="analytics">Analytics</TabsTrigger>
-              <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
-            </TabsList>
+          <StyledTabs 
+            value={activeTab} 
+            onValueChange={setActiveTab}
+            tabs={[
+              {
+                value: 'overview',
+                label: 'Overview',
+                shortLabel: 'Overview',
+                icon: <BarChart3 className="h-4 w-4" />,
+                color: 'text-blue-600',
+                hoverColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500'
+              },
+              {
+                value: 'health',
+                label: 'Data Health',
+                shortLabel: 'Health',
+                icon: <Shield className="h-4 w-4" />,
+                color: 'text-green-600',
+                hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500'
+              },
+              {
+                value: 'analytics',
+                label: 'Analytics',
+                shortLabel: 'Analytics',
+                icon: <TrendingUp className="h-4 w-4" />,
+                color: 'text-purple-600',
+                hoverColor: 'hover:bg-purple-50 dark:hover:bg-purple-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-violet-500'
+              },
+              {
+                value: 'maintenance',
+                label: 'Maintenance',
+                shortLabel: 'Maintenance',
+                icon: <Settings className="h-4 w-4" />,
+                color: 'text-orange-600',
+                hoverColor: 'hover:bg-orange-50 dark:hover:bg-orange-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-amber-500'
+              }
+            ]}
+          >
 
             <TabsContent value="overview" className="space-y-6">
               {/* System Usage (Firestore Quotas) */}
@@ -568,7 +603,7 @@ export function DataStorageManagement() {
                 </Card>
               </div>
             </TabsContent>
-          </Tabs>
+          </StyledTabs>
         </CardContent>
       </Card>
     </div>

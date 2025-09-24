@@ -3,6 +3,7 @@ import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import "../styles/halloween.css";
 import "../styles/seasonal-themes.css";
+import "../styles/nest-hub.css";
 import { SearchProvider } from "@/contexts/search-context";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";

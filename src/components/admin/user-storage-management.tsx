@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { StyledTabs, TabsContent } from "@/components/ui/styled-tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { 
   Users, 
@@ -494,12 +494,39 @@ export function UserStorageManagement() {
             </div>
           )}
 
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="users">Users ({filteredUsers.length})</TabsTrigger>
-              <TabsTrigger value="activities">Activities</TabsTrigger>
-              <TabsTrigger value="sessions">Sessions</TabsTrigger>
-            </TabsList>
+          <StyledTabs 
+            value={activeTab} 
+            onValueChange={setActiveTab}
+            tabs={[
+              {
+                value: 'users',
+                label: `Users (${filteredUsers.length})`,
+                shortLabel: 'Users',
+                icon: <Users className="h-4 w-4" />,
+                color: 'text-blue-600',
+                hoverColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500'
+              },
+              {
+                value: 'activities',
+                label: 'Activities',
+                shortLabel: 'Activities',
+                icon: <Activity className="h-4 w-4" />,
+                color: 'text-green-600',
+                hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500'
+              },
+              {
+                value: 'sessions',
+                label: 'Sessions',
+                shortLabel: 'Sessions',
+                icon: <Clock className="h-4 w-4" />,
+                color: 'text-purple-600',
+                hoverColor: 'hover:bg-purple-50 dark:hover:bg-purple-900/30',
+                activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-violet-500'
+              }
+            ]}
+          >
 
             <TabsContent value="users" className="space-y-4">
               <div className="flex items-center justify-between mb-4">
@@ -755,7 +782,7 @@ export function UserStorageManagement() {
                 </div>
               )}
             </TabsContent>
-          </Tabs>
+          </StyledTabs>
         </CardContent>
       </Card>
     </div>

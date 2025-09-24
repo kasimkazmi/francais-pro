@@ -23,7 +23,7 @@ import { doc, getDoc, collection, query, where, orderBy, limit, getDocs } from '
 import { db } from '@/lib/firebase/config';
 import { manualSyncUserProfile } from '@/lib/firebase/progress';
 import { getUserSessions, UserActivity as FirebaseUserActivity, UserSession } from '@/lib/firebase/user-storage';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { StyledTabs, TabsContent } from '@/components/ui/styled-tabs';
 import toast from 'react-hot-toast';
 
 interface UserProfile {
@@ -361,12 +361,39 @@ export function UserDetail({ userId }: { userId: string }) {
         </div>
 
         {/* Main Content with Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="activities">Activities ({userActivities.length})</TabsTrigger>
-            <TabsTrigger value="sessions">Sessions ({userSessions.length})</TabsTrigger>
-          </TabsList>
+        <StyledTabs 
+          value={activeTab} 
+          onValueChange={setActiveTab}
+          tabs={[
+            {
+              value: 'overview',
+              label: 'Overview',
+              shortLabel: 'Overview',
+              icon: <BarChart3 className="h-4 w-4" />,
+              color: 'text-blue-600',
+              hoverColor: 'hover:bg-blue-50 dark:hover:bg-blue-900/30',
+              activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500'
+            },
+            {
+              value: 'activities',
+              label: `Activities (${userActivities.length})`,
+              shortLabel: 'Activities',
+              icon: <Activity className="h-4 w-4" />,
+              color: 'text-green-600',
+              hoverColor: 'hover:bg-green-50 dark:hover:bg-green-900/30',
+              activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500'
+            },
+            {
+              value: 'sessions',
+              label: `Sessions (${userSessions.length})`,
+              shortLabel: 'Sessions',
+              icon: <Clock className="h-4 w-4" />,
+              color: 'text-purple-600',
+              hoverColor: 'hover:bg-purple-50 dark:hover:bg-purple-900/30',
+              activeColor: 'data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-violet-500'
+            }
+          ]}
+        >
 
           <TabsContent value="overview" className="space-y-6">
             {/* User Info Cards */}
@@ -670,7 +697,7 @@ export function UserDetail({ userId }: { userId: string }) {
               </CardContent>
             </Card>
           </TabsContent>
-        </Tabs>
+        </StyledTabs>
       </div>
   );
 }
