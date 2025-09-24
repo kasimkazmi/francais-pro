@@ -50,11 +50,11 @@ export function useProgress() {
     }
 
     try {
-      console.log('⏳ useProgress: Loading progress for user:', user.uid);
+      // console.log('⏳ useProgress: Loading progress for user:', user.uid);
       setLoading(true);
       setError(null);
       const userProgress = await getUserProgress(user.uid);
-      console.log('✅ useProgress: Progress loaded successfully:', userProgress);
+      // console.log('✅ useProgress: Progress loaded successfully:', userProgress);
       setProgress(userProgress);
     } catch (err) {
       console.error('❌ useProgress: Error loading progress:', err);

@@ -114,11 +114,11 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         progressMap.set(doc.id, data);
       });
       
-      console.log('📊 Admin Stats Debug:');
-      console.log('👥 Total users:', totalUsers);
-      console.log('📈 Progress documents found:', progressSnapshot.size);
-      console.log('📚 Sample progress data:', Array.from(progressMap.entries()).slice(0, 3));
-      console.log('📊 Sample user profile levels:', usersSnapshot.docs.slice(0, 3).map(doc => ({ uid: doc.id, level: doc.data().level, type: typeof doc.data().level })));
+      // console.log('📊 Admin Stats Debug:');
+      // console.log('👥 Total users:', totalUsers);
+      // console.log('📈 Progress documents found:', progressSnapshot.size);
+      // console.log('📚 Sample progress data:', Array.from(progressMap.entries()).slice(0, 3));
+      // console.log('📊 Sample user profile levels:', usersSnapshot.docs.slice(0, 3).map(doc => ({ uid: doc.id, level: doc.data().level, type: typeof doc.data().level })));
 
       // Get active users (users with recent activity)
       const recentDate = new Date();
@@ -200,13 +200,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           userProfilesMap.set(doc.id, data);
         });
         
-        console.log('👥 User profiles map sample:', Array.from(userProfilesMap.entries()).slice(0, 3).map(([uid, data]) => ({ uid, displayName: data.displayName, email: data.email })));
-        console.log('📱 Total activities found:', activitiesSnapshot.size);
-        console.log('📱 Sample activities:', activitiesSnapshot.docs.slice(0, 5).map(doc => ({ 
-          uid: doc.data().uid, 
-          activityType: doc.data().activityType, 
-          timestamp: doc.data().timestamp?.toDate()?.toLocaleString() 
-        })));
+        // console.log('👥 User profiles map sample:', Array.from(userProfilesMap.entries()).slice(0, 3).map(([uid, data]) => ({ uid, displayName: data.displayName, email: data.email })));
+        // console.log('📱 Total activities found:', activitiesSnapshot.size);
+        // console.log('📱 Sample activities:', activitiesSnapshot.docs.slice(0, 5).map(doc => ({ 
+        //   uid: doc.data().uid, 
+        //   activityType: doc.data().activityType, 
+        //   timestamp: doc.data().timestamp?.toDate()?.toLocaleString() 
+        // })));
         
         let activitiesInLast7Days = 0;
         const activitiesByType: Record<string, number> = {};
@@ -231,13 +231,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
               const userProfile = userProfilesMap.get(activityData.uid);
               const displayName = userProfile?.displayName || userProfile?.email || `User ${activityData.uid.slice(0, 8)}`;
               
-              console.log('📱 Lesson activity debug:', {
-                uid: activityData.uid,
-                activityType: activityData.activityType,
-                userProfile: userProfile ? { displayName: userProfile.displayName, email: userProfile.email } : 'Not found',
-                finalDisplayName: displayName,
-                timestamp: activityDate.toLocaleString()
-              });
+              // console.log('📱 Lesson activity debug:', {
+              //   uid: activityData.uid,
+              //   activityType: activityData.activityType,
+              //   userProfile: userProfile ? { displayName: userProfile.displayName, email: userProfile.email } : 'Not found',
+              //   finalDisplayName: displayName,
+              //   timestamp: activityDate.toLocaleString()
+              // });
               
               recentActivity.push({
                 uid: activityData.uid,

@@ -11,6 +11,24 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com'],
   },
+  // Remove console logs in production builds
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      // Remove console logs in production client builds
+      config.optimization.minimizer = config.optimization.minimizer || [];
+      config.optimization.minimizer.push(
+        new (require('terser-webpack-plugin'))({
+          terserOptions: {
+            compress: {
+              drop_console: true,
+              drop_debugger: true,
+            },
+          },
+        })
+      );
+    }
+    return config;
+  },
 }
 
 module.exports = nextConfig

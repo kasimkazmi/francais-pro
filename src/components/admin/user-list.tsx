@@ -105,13 +105,13 @@ export function UserList() {
         const data = doc.data();
         
         // Debug log to see what we're getting from Firebase
-        console.log('User data from Firebase:', {
-          uid: doc.id,
-          level: data.level,
-          levelType: typeof data.level,
-          displayName: data.displayName,
-          email: data.email
-        });
+        // console.log('User data from Firebase:', {
+        //   uid: doc.id,
+        //   level: data.level,
+        //   levelType: typeof data.level,
+        //   displayName: data.displayName,
+        //   email: data.email
+        // });
         
         usersList.push({
           uid: doc.id,
@@ -133,7 +133,7 @@ export function UserList() {
         usersList.map(async (user) => {
           try {
             const progress = await getUserProgress(user.uid);
-            console.log('Progress data for user', user.uid, ':', progress);
+            // console.log('Progress data for user', user.uid, ':', progress);
             return {
               ...user,
               realXP: progress?.wordsLearned || 0,
@@ -159,15 +159,15 @@ export function UserList() {
       setUsers(usersWithProgress);
 
       // Debug: Log all users and their lesson completion counts
-      console.log('=== USER LESSON COMPLETION DEBUG ===');
-      usersWithProgress.forEach(user => {
-        console.log(`${user.displayName}:`, {
-          realLessonsCompleted: user.realLessonsCompleted,
-          totalLessonsCompleted: user.totalLessonsCompleted,
-          final: user.realLessonsCompleted || user.totalLessonsCompleted || 0
-        });
-      });
-      console.log('=== END DEBUG ===');
+      // console.log('=== USER LESSON COMPLETION DEBUG ===');
+      // usersWithProgress.forEach(user => {
+      //   console.log(`${user.displayName}:`, {
+      //     realLessonsCompleted: user.realLessonsCompleted,
+      //     totalLessonsCompleted: user.totalLessonsCompleted,
+      //     final: user.realLessonsCompleted || user.totalLessonsCompleted || 0
+      //   });
+      // });
+      // console.log('=== END DEBUG ===');
 
     } catch (err) {
       console.error('Error loading users:', err);

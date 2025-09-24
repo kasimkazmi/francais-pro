@@ -145,7 +145,7 @@ export async function createOrUpdateUserProfile(
       };
       
       await setDoc(userRef, newProfile);
-      console.log('User profile created:', uid);
+      // console.log('User profile created:', uid);
       
       // Sync to leaderboard
       try {
@@ -169,7 +169,7 @@ export async function createOrUpdateUserProfile(
         Object.entries(profileData).filter(([, value]) => value !== undefined)
       );
       await updateDoc(userRef, cleanProfileData);
-      console.log('User profile updated:', uid);
+      // console.log('User profile updated:', uid);
       
       // Sync to leaderboard
       try {
@@ -228,7 +228,7 @@ export async function logUserActivity(
     };
     
     await setDoc(activityRef, activity);
-    console.log('User activity logged:', activityType, uid);
+    // console.log('User activity logged:', activityType, uid);
   } catch (error) {
     console.error('Error logging user activity:', error);
     throw error;
@@ -308,11 +308,11 @@ export async function createOrUpdateUserPreferences(
       };
       
       await setDoc(prefsRef, defaultPreferences);
-      console.log('User preferences created:', uid);
+      // console.log('User preferences created:', uid);
     } else {
       // Update existing preferences
       await updateDoc(prefsRef, prefsData);
-      console.log('User preferences updated:', uid);
+      // console.log('User preferences updated:', uid);
     }
   } catch (error) {
     console.error('Error creating/updating user preferences:', error);
@@ -360,7 +360,7 @@ export async function createUserSession(
     };
     
     await setDoc(sessionRef, session);
-    console.log('User session created:', sessionId);
+    // console.log('User session created:', sessionId);
   } catch (error) {
     console.error('Error creating user session:', error);
     throw error;
@@ -378,7 +378,7 @@ export async function updateUserSession(
       ...updates,
       updatedAt: serverTimestamp(),
     });
-    console.log('User session updated:', sessionId);
+    // console.log('User session updated:', sessionId);
   } catch (error) {
     console.error('Error updating user session:', error);
     throw error;
@@ -394,7 +394,7 @@ export async function endUserSession(sessionId: string): Promise<void> {
       isActive: false,
       updatedAt: serverTimestamp(),
     });
-    console.log('User session ended:', sessionId);
+    // console.log('User session ended:', sessionId);
   } catch (error) {
     console.error('Error ending user session:', error);
     throw error;

@@ -13,9 +13,9 @@ export async function createAdminUser(uid: string, email: string, displayName: s
       lastActive: new Date()
     };
 
-    console.log('Attempting to create admin user:', { uid, email, displayName });
+    // console.log('Attempting to create admin user:', { uid, email, displayName });
     await setDoc(doc(db, 'adminUsers', uid), adminData);
-    console.log('Admin user created successfully:', uid);
+    // console.log('Admin user created successfully:', uid);
     return true;
   } catch (error) {
     console.error('Error creating admin user:', error);
@@ -41,9 +41,9 @@ export async function createModeratorUser(uid: string, email: string, displayNam
       lastActive: new Date()
     };
 
-    console.log('Attempting to create moderator user:', { uid, email, displayName });
+    // console.log('Attempting to create moderator user:', { uid, email, displayName });
     await setDoc(doc(db, 'adminUsers', uid), moderatorData);
-    console.log('Moderator user created successfully:', uid);
+    // console.log('Moderator user created successfully:', uid);
     return true;
   } catch (error) {
     console.error('Error creating moderator user:', error);
