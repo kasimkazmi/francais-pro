@@ -11,6 +11,7 @@ import { AuthModal } from "@/components/ui/auth-modal";
 import { SearchModal } from "@/components/ui/search-modal";
 import { UsernameModal } from "@/components/ui/username-modal";
 import { useAuth } from "@/contexts/AuthContext";
+import { HalloweenPageWrapper } from "@/components/halloween/halloween-page-wrapper";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -45,7 +46,10 @@ export function MainLayout({ children }: MainLayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <HalloweenPageWrapper 
+      decorationIntensity="low"
+      className="min-h-screen bg-background w-full"
+    >
       <Header />
 
       <div className="flex flex-col lg:flex-row h-screen">
@@ -501,6 +505,6 @@ export function MainLayout({ children }: MainLayoutProps) {
         suggestedUsername={user?.email ? user.email.split("@")[0] : undefined}
         userEmail={user?.email || undefined}
       />
-    </div>
+    </HalloweenPageWrapper>
   );
 }

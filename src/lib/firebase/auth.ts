@@ -7,6 +7,8 @@ import {
   signOut,
   User,
   updateProfile,
+  verifyPasswordResetCode,
+  confirmPasswordReset,
 } from 'firebase/auth';
 import { auth, googleProvider } from './config';
 
@@ -30,9 +32,14 @@ export async function emailSignIn(email: string, password: string) {
   return res.user;
 }
 
-export async function resetPassword(email: string) {
-  await sendPasswordResetEmail(auth, email);
+export async function resetPassword(email: string, continueUrl?: string) {
+  const actionCodeSettings = continueUrl
+    ? { url: continueUrl, handleCodeInApp: true }
+    : undefined;
+  await sendPasswordResetEmail(auth, email, actionCodeSettings);
 }
+
+export { verifyPasswordResetCode, confirmPasswordReset };
 
 export async function googleSignIn() {
   const res = await signInWithPopup(auth, googleProvider);

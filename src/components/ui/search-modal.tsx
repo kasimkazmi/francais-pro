@@ -140,7 +140,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start justify-center pt-[15vh]">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh]" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, minHeight: '100vh', minWidth: '100vw', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', isolation: 'isolate' }}>
       <div className="bg-white dark:bg-gray-900 border border-border rounded-lg shadow-lg w-full max-w-2xl mx-4 max-h-[70vh] flex flex-col">
         {/* Search Input */}
         <div className="flex items-center border-b border-gray-300 dark:border-gray-600 p-4">

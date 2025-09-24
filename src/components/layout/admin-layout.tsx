@@ -17,9 +17,10 @@ import {
   Home,
   ArrowLeft,
   Menu,
-  X
+  X,
+  Palette
 } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { DarkModeToggle } from '@/components/themed/dark-light-toggle';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ children }: AdminLayoutProps) {
   const { isAuthenticated, user, logout } = useAuth();
-  const { isAdmin, isModerator, adminUser } = useAdmin();
+  const { isAdmin, isModerator, adminUser, loading } = useAdmin();
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -36,11 +37,34 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     return pathname === route;
   };
 
+  // Show loading state while checking admin access
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center animate-in fade-in duration-300">
+        <Card className="w-full max-w-md animate-in slide-in-from-bottom-4 duration-500">
+          <CardContent className="p-8">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+              <div className="text-center">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  Checking Admin Access
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Verifying your permissions...
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   // Redirect if not authenticated or not admin/moderator
   if (!isAuthenticated || (!isAdmin && !isModerator)) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="w-full max-w-md">
+      <div className="min-h-screen bg-background flex items-center justify-center animate-in fade-in duration-300">
+        <Card className="w-full max-w-md animate-in slide-in-from-bottom-4 duration-500">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-red-600">
               <Shield className="h-6 w-6" />
@@ -86,7 +110,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background animate-in fade-in duration-500">
       <div className="flex">
         {/* Admin Sidebar */}
         <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:left-0 lg:h-[calc(100vh-4rem)] lg:overflow-y-auto lg:bg-background lg:border-r lg:border-border scrollbar-hide">
@@ -101,7 +125,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                     <h2 className="text-sm font-semibold text-red-600">Admin Panel</h2>
                   </div>
                 </div>
-                <ThemeToggle />
+                <DarkModeToggle />
               </div>
               <div className="text-xs text-muted-foreground">
                 <p>Welcome, {user?.displayName || user?.email}</p>
@@ -145,6 +169,15 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               }`}>
                 <BookOpen className="h-4 w-4" />
                 Content Management
+              </Link>
+
+              <Link href="/admin/theme" className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all duration-200 hover:shadow-sm active:scale-95 ${
+                isActiveRoute('/admin/theme') 
+                  ? 'bg-red-100 text-red-900 dark:bg-red-900 dark:text-red-100' 
+                  : 'hover:bg-red-50 hover:text-red-700 dark:hover:bg-red-900/20 dark:hover:text-red-300 active:bg-red-100 dark:active:bg-red-900/30'
+              }`}>
+                <Palette className="h-4 w-4" />
+                Theme Management
               </Link>
 
             </div>
@@ -201,7 +234,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 <h3 className="text-sm font-semibold text-red-600">Admin Menu</h3>
               </div>
               <div className="flex items-center gap-2">
-                <ThemeToggle />
+                <DarkModeToggle />
                 <Button
                   variant="ghost"
                   size="sm"

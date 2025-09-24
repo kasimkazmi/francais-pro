@@ -628,10 +628,12 @@ export default function LessonPage() {
           </div>
         )}
 
-        {/* Auth Modal */}
+        {/* Learn Login Modal */}
         <AuthModal 
           isOpen={showAuthModal} 
-          onClose={() => setShowAuthModal(false)} 
+          onClose={() => setShowAuthModal(false)}
+          context="learn"
+          onSuccess={() => setShowAuthModal(false)}
         />
       </div>
     </div>

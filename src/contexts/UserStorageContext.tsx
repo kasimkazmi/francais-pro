@@ -19,6 +19,7 @@ import {
   getUserSessions,
   updateUserLastActive,
 } from '@/lib/firebase/user-storage';
+import { updateUserDisplayName } from '@/lib/firebase/progress';
 import { Timestamp } from 'firebase/firestore';
 
 interface UserStorageContextType {
@@ -257,7 +258,6 @@ export function UserStorageProvider({ children }: { children: React.ReactNode })
           // Update display name in user progress if available
           if (user.displayName) {
             try {
-              const { updateUserDisplayName } = await import('@/lib/firebase/progress');
               await updateUserDisplayName(user.uid, user.displayName);
             } catch (error) {
               console.error('Error updating display name in progress:', error);

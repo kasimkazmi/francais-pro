@@ -1,13 +1,5 @@
-'use client';
+import { UserList } from '@/components/admin/user-list';
 
-import { AdminLayout } from '@/components/layout/admin-layout';
-import { UserManagement } from '@/components/admin/user-management';
-
-export default function AdminUsersPage() {
-  return (
-    <AdminLayout>
-      <UserManagement />
-    </AdminLayout>
-  );
+export default function UsersPage() {
+  return <UserList />;
 }
-

@@ -22,7 +22,7 @@ export interface UserProfile {
   phoneNumber?: string | null;
   dateOfBirth?: string | null;
   country?: string | null;
-  nativeLanguage?: string;
+  nativeLanguage?: string | null;
   learningGoals?: string[];
   preferredLearningStyle?: 'visual' | 'auditory' | 'kinesthetic' | 'reading';
   timezone?: string | null;
@@ -125,7 +125,7 @@ export async function createOrUpdateUserProfile(
         phoneNumber: userData.phoneNumber || null,
         dateOfBirth: userData.dateOfBirth || null,
         country: userData.country || null,
-        nativeLanguage: userData.nativeLanguage || 'en',
+        nativeLanguage: userData.nativeLanguage ?? 'en',
         learningGoals: userData.learningGoals || [],
         preferredLearningStyle: userData.preferredLearningStyle || 'visual',
         timezone: userData.timezone || null,

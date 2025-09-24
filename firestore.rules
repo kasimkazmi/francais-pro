@@ -1,110 +1,84 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // User progress - private to each user, admins can read for stats
-    match /userProgress/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
-      allow read: if request.auth != null && 
-        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin', 'moderator'];
+
+    // Helpers
+    function isSignedIn() {
+      return request.auth != null;
     }
-    
-    // User favorites - users can only access their own favorites
-    match /userFavorites/{favoriteId} {
-      allow read, write, delete: if request.auth != null && 
-        resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null && 
-        request.resource.data.userId == request.auth.uid;
-    }
-    
-    // Leaderboard - public read, authenticated write
-    match /leaderboard/{document} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-    
-    // Platform stats - public read only
-    match /platformStats/{document} {
-      allow read: if true;
-      allow write: if request.auth != null;
-    }
-    
-    // User profiles collection - public read for stats, authenticated write
-    match /userProfiles/{uid} {
-      allow read: if true; // Allow public read for stats calculation
-      allow write: if request.auth != null && request.auth.uid == uid;
-    }
-    
-    // User progress - public read for stats, authenticated write for own data
-    match /userProgress/{uid} {
-      allow read: if true; // Allow public read for stats calculation
-      allow write: if request.auth != null && request.auth.uid == uid;
-    }
-    
-    // Public leaderboard - anyone can read, only authenticated users can write
-    match /leaderboard/{uid} {
-      allow read: if true;
-      allow write: if request.auth != null && request.auth.uid == uid;
-    }
-    
-    // Admin users - allow initial setup, then only admins can manage
-    match /adminUsers/{uid} {
-      allow read: if request.auth != null;
-      // Allow creating admin users if:
-      // 1. User is creating their own admin record (initial setup), OR
-      // 2. User is already an admin
-      allow write: if request.auth != null && (
-        // Initial setup: allow if user is creating their own admin record
-        request.auth.uid == uid ||
-        // Normal operation: only admins can manage others
-        (exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-         get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin'])
-      );
-    }
-    
-    // Banned users - only admins can manage
-    match /bannedUsers/{uid} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && 
+    function isAdmin() {
+      return isSignedIn() &&
         exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
         get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin'];
     }
-    
-    // User profiles - users can manage their own, admins can read all
+
+    // Global seasonal theme
+    match /systemSettings/seasonalTheme {
+      allow read: if true; // public read to avoid permission errors before auth initializes
+      allow write: if isAdmin();
+    }
+
+    // User progress - public read for stats; user can write own; admins can read all
+    match /userProgress/{uid} {
+      allow read: if true; // public read for stats calculation
+      allow write: if isSignedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
+    }
+
+    // User favorites - own
+    match /userFavorites/{favoriteId} {
+      allow read, write, delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
+    // Leaderboard - public read, authenticated write
+    match /leaderboard/{document} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // Platform stats - public read, authenticated write
+    match /platformStats/{document} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // User profiles - public read; user can write own; admins can read all
     match /userProfiles/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
-      allow read: if request.auth != null && 
-        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin', 'moderator'];
+      allow read: if true; // public read for stats calculation
+      allow write: if isSignedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
     }
-    
-    // User activities - users can create their own, admins can read all
+
+    // User activities - user create own; admins can read all
     match /userActivities/{activityId} {
-      allow create: if request.auth != null && 
-        request.resource.data.uid == request.auth.uid;
-      allow read: if request.auth != null && 
-        (resource.data.uid == request.auth.uid ||
-         (exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-          get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin', 'moderator']));
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow read: if isSignedIn() && (resource.data.uid == request.auth.uid || isAdmin());
     }
-    
-    // User preferences - users can manage their own, admins can read all
+
+    // User preferences - own; admins can read all
     match /userPreferences/{uid} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
-      allow read: if request.auth != null && 
-        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin', 'moderator'];
+      allow read, write: if isSignedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
     }
-    
-    // User sessions - users can manage their own, admins can read all
+
+    // User sessions - own; admins can read all
     match /userSessions/{sessionId} {
-      allow create: if request.auth != null && 
-        request.resource.data.uid == request.auth.uid;
-      allow read, write: if request.auth != null && 
-        resource.data.uid == request.auth.uid;
-      allow read: if request.auth != null && 
-        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['admin', 'moderator'];
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow read, write: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow read: if isAdmin();
+    }
+
+    // Admin users
+    match /adminUsers/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+    }
+
+    // Banned users - admins only
+    match /bannedUsers/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
     }
   }
 }

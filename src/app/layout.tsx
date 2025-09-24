@@ -1,17 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Raleway } from "next/font/google";
 import "./globals.css";
+import "../styles/halloween.css";
+import "../styles/seasonal-themes.css";
 import { SearchProvider } from "@/contexts/search-context";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { AdminProvider } from "@/contexts/AdminContext";
 import { UserStorageProvider } from "@/contexts/UserStorageContext";
+import { SeasonalThemeProvider } from "@/contexts/SeasonalThemeContext";
+import { DarkLightThemeContext } from "@/contexts/DarkLightThemeContext";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from 'react-hot-toast'
+import { HalloweenMusicManager } from "@/components/halloween/halloween-music-manager"
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
+});
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["300", "500", "700", "900"],
+  variable: "--font-raleway",
 });
 
 export const metadata: Metadata = {
@@ -204,19 +214,45 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = savedTheme && (savedTheme === 'light' || savedTheme === 'dark') 
+                    ? savedTheme 
+                    : (prefersDark ? 'dark' : 'light');
+                  document.documentElement.classList.add(theme);
+                } catch (e) {
+                  // Fallback to light theme if localStorage fails
+                  document.documentElement.classList.add('light');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
-        <AuthProvider>
-          <UserStorageProvider>
-            <AdminProvider>
-              <FavoritesProvider>
-                <SearchProvider>
-                  {children}
-                </SearchProvider>
-              </FavoritesProvider>
-            </AdminProvider>
-          </UserStorageProvider>
-        </AuthProvider>
+      <body className={`${inter.variable} ${raleway.variable} font-sans antialiased`} suppressHydrationWarning>
+        <div id="loading-overlay" className="fixed inset-0 bg-black z-[9998] hidden"></div>
+        <DarkLightThemeContext>
+          <SeasonalThemeProvider>
+            <AuthProvider>
+              <UserStorageProvider>
+                <AdminProvider>
+                  <FavoritesProvider>
+                    <SearchProvider>
+                      <div id="app-content" suppressHydrationWarning>
+                        {children}
+                      </div>
+                    </SearchProvider>
+                  </FavoritesProvider>
+                </AdminProvider>
+              </UserStorageProvider>
+            </AuthProvider>
+          </SeasonalThemeProvider>
+        </DarkLightThemeContext>
         <Toaster
           position="bottom-right"
           toastOptions={{
@@ -245,6 +281,7 @@ export default function RootLayout({
         />
         <SpeedInsights />
         <Analytics />
+        <HalloweenMusicManager volume={0.3} loop={true} />
       </body>
     </html>
   );
