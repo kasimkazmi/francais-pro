@@ -74,7 +74,7 @@ export const favoritesService = {
         querySnapshot = await getDocs(q);
       } catch {
         // If composite index is not available, use simple query without ordering
-        console.log('Composite index not available, using simple query');
+        // console.log('Composite index not available, using simple query');
         q = query(
           favoritesRef,
           where('userId', '==', userId)

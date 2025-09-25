@@ -61,7 +61,7 @@ export function HalloweenMusicManager({
 
     // Only pause music when Halloween mode is disabled
     if (!isHalloweenMode) {
-      console.log('Halloween mode disabled - pausing music');
+      // console.log('Halloween mode disabled - pausing music');
       audio.pause();
       setIsPlaying(false);
       localStorage.setItem('halloween-music-playing', 'false');
@@ -76,14 +76,14 @@ export function HalloweenMusicManager({
     // Check if music should be playing based on saved state
     const shouldPlay = localStorage.getItem('halloween-music-playing') === 'true';
     if (shouldPlay) {
-      console.log('Restoring music state - should play:', shouldPlay);
+      // console.log('Restoring music state - should play:', shouldPlay);
       audio.play()
         .then(() => {
-          console.log('Music restored successfully');
+          // console.log('Music restored successfully');
           setIsPlaying(true);
         })
         .catch((error) => {
-          console.log('Audio play failed on restore:', error);
+          // console.log('Audio play failed on restore:', error);
           setIsPlaying(false);
         });
     }
@@ -115,7 +115,7 @@ export function HalloweenMusicManager({
     const audio = audioRef.current;
     if (!audio) return;
 
-    console.log('Toggle clicked - Current state:', { isPlaying, hasUserInteracted });
+    // console.log('Toggle clicked - Current state:', { isPlaying, hasUserInteracted });
 
     // Ensure user has interacted for autoplay
     if (!hasUserInteracted) {
@@ -125,20 +125,20 @@ export function HalloweenMusicManager({
 
     if (isPlaying) {
       // Currently playing - pause it
-      console.log('Pausing music...');
+      // console.log('Pausing music...');
       audio.pause();
       setIsPlaying(false);
       localStorage.setItem('halloween-music-playing', 'false');
     } else {
       // Not playing - start it
-      console.log('Starting music...');
+      // console.log('Starting music...');
       try {
         await audio.play();
         setIsPlaying(true);
         localStorage.setItem('halloween-music-playing', 'true');
-        console.log('Music started successfully');
+        // console.log('Music started successfully');
       } catch (error) {
-        console.log('Audio play failed:', error);
+        // console.log('Audio play failed:', error);
         setIsPlaying(false);
         localStorage.setItem('halloween-music-playing', 'false');
       }

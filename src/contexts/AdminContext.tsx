@@ -249,9 +249,9 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           }
         });
         
-        console.log('📊 Activity Statistics:');
-        console.log('📱 Activities in last 7 days:', activitiesInLast7Days);
-        console.log('📱 Activities by type:', activitiesByType);
+        // console.log('📊 Activity Statistics:');
+        // console.log('📱 Activities in last 7 days:', activitiesInLast7Days);
+        // console.log('📱 Activities by type:', activitiesByType);
 
         // Sort recent activity by timestamp (newest first)
         recentActivity.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
@@ -263,13 +263,13 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
       // Sort top performers by total lessons completed
       topPerformers.sort((a, b) => b.totalLessonsCompleted - a.totalLessonsCompleted);
 
-      console.log('📊 Final Admin Stats:');
-      console.log('📚 Total lessons completed:', totalLessonsCompleted);
-      console.log('🏆 Top performers count:', topPerformers.length);
-      console.log('🏆 Top performers sample:', topPerformers.slice(0, 3));
-      console.log('📱 Recent activity count:', recentActivity.length);
-      console.log('📊 Total progress sum:', totalProgress);
-      console.log('📊 Average progress calculation:', totalUsers > 0 ? totalProgress / totalUsers : 0);
+      // console.log('📊 Final Admin Stats:');
+      // console.log('📚 Total lessons completed:', totalLessonsCompleted);
+      // console.log('🏆 Top performers count:', topPerformers.length);
+      // console.log('🏆 Top performers sample:', topPerformers.slice(0, 3));
+      // console.log('📱 Recent activity count:', recentActivity.length);
+      // console.log('📊 Total progress sum:', totalProgress);
+      // console.log('📊 Average progress calculation:', totalUsers > 0 ? totalProgress / totalUsers : 0);
 
       // Ensure no NaN values
       const safeTotalProgress = isNaN(totalProgress) ? 0 : totalProgress;
