@@ -37,7 +37,7 @@ export function SearchBar({
       onSearch(searchQuery);
     }
     // You can add more search logic here
-    console.log('Searching for:', searchQuery);
+    // console.log('Searching for:', searchQuery);
   };
 
   const handleSubmit = (e: React.FormEvent) => {

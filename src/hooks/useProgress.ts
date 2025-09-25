@@ -36,14 +36,14 @@ export function useProgress() {
 
   // Load user progress
   const loadProgress = useCallback(async () => {
-    console.log('🔄 useProgress: loadProgress called', {
-      isAuthenticated,
-      userId: user?.uid,
-      userEmail: user?.email
-    });
+    // console.log('🔄 useProgress: loadProgress called', {
+    //   isAuthenticated,
+    //   userId: user?.uid,
+    //   userEmail: user?.email
+    // });
 
     if (!isAuthenticated || !user) {
-      console.log('⚠️ useProgress: User not authenticated, skipping progress load');
+      // console.log('⚠️ useProgress: User not authenticated, skipping progress load');
       setProgress(null);
       setLoading(false);
       return;

@@ -53,12 +53,12 @@ export function AppAnalytics() {
       const totalLessons = userProgress.size;
       const totalSessions = userSessions.size;
       
-      console.log('📊 Analytics Debug - Collection sizes:', {
-        userProfiles: totalUsers,
-        userProgress: totalLessons,
-        userActivities: userActivities.size,
-        userSessions: totalSessions
-      });
+      // console.log('📊 Analytics Debug - Collection sizes:', {
+      //   userProfiles: totalUsers,
+      //   userProgress: totalLessons,
+      //   userActivities: userActivities.size,
+      //   userSessions: totalSessions
+      // });
       
       // Calculate completed lessons
       let completedLessons = 0;
@@ -66,12 +66,12 @@ export function AppAnalytics() {
       
       userProgress.forEach(doc => {
         const data = doc.data();
-        console.log('📚 User Progress Debug:', {
-          uid: doc.id,
-          totalLessonsCompleted: data.totalLessonsCompleted,
-          completedModules: data.completedModules,
-          level: data.level
-        });
+        // console.log('📚 User Progress Debug:', {
+        //   uid: doc.id,
+        //   totalLessonsCompleted: data.totalLessonsCompleted,
+        //   completedModules: data.completedModules,
+        //   level: data.level
+        // });
         
         if (data.totalLessonsCompleted) {
           completedLessons += data.totalLessonsCompleted;
@@ -87,10 +87,10 @@ export function AppAnalytics() {
         }
       });
       
-      console.log('📈 Completed Lessons Debug:', {
-        completedLessons,
-        moduleCompletions
-      });
+      // console.log('📈 Completed Lessons Debug:', {
+      //   completedLessons,
+      //   moduleCompletions
+      // });
 
       // Calculate active users (unique users with sessions in last 24 hours)
       const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -103,14 +103,14 @@ export function AppAnalytics() {
         const sessionTime = data.startTime ? new Date(data.startTime.seconds * 1000) : null;
         const isActive = sessionTime && sessionTime > oneDayAgo;
         
-        console.log('⏰ Session Debug:', {
-          uid: doc.id,
-          startTime: data.startTime,
-          sessionTime: sessionTime?.toLocaleString(),
-          duration: data.duration,
-          isActive,
-          oneDayAgo: oneDayAgo.toLocaleString()
-        });
+        // console.log('⏰ Session Debug:', {
+        //   uid: doc.id,
+        //   startTime: data.startTime,
+        //   sessionTime: sessionTime?.toLocaleString(),
+        //   duration: data.duration,
+        //   isActive,
+        //   oneDayAgo: oneDayAgo.toLocaleString()
+        // });
         
         if (isActive) {
           activeUserIds.add(doc.id); // Add unique user ID to set
@@ -123,13 +123,13 @@ export function AppAnalytics() {
       
       const activeUsers = activeUserIds.size; // Count unique users
       
-      console.log('👥 Active Users Debug:', {
-        activeUsers,
-        uniqueActiveUserIds: Array.from(activeUserIds),
-        totalSessionDuration,
-        sessionCount,
-        averageSessionDuration: sessionCount > 0 ? Math.round(totalSessionDuration / sessionCount) : 0
-      });
+      // console.log('👥 Active Users Debug:', {
+      //   activeUsers,
+      //   uniqueActiveUserIds: Array.from(activeUserIds),
+      //   totalSessionDuration,
+      //   sessionCount,
+      //   averageSessionDuration: sessionCount > 0 ? Math.round(totalSessionDuration / sessionCount) : 0
+      // });
 
       // Get popular modules
       const popularModules = Object.entries(moduleCompletions)
@@ -188,7 +188,7 @@ export function AppAnalytics() {
         lastUpdated: new Date()
       };
 
-      console.log('🎯 Final Analytics Data:', analyticsData);
+      // console.log('🎯 Final Analytics Data:', analyticsData);
       setAnalytics(analyticsData);
     } catch (error) {
       console.error('Error loading analytics:', error);

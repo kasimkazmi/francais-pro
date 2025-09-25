@@ -85,10 +85,10 @@ export async function getUserProgress(uid: string): Promise<UserProgress | null>
     // console.log('🔐 Current auth state:', auth.currentUser?.uid);
     
     const docRef = doc(db, 'userProgress', uid);
-    console.log('📄 Document reference:', docRef.path);
+    // console.log('📄 Document reference:', docRef.path);
     
     const docSnap = await getDoc(docRef);
-    console.log('📋 Document exists:', docSnap.exists());
+    // console.log('📋 Document exists:', docSnap.exists());
     
     if (docSnap.exists()) {
       const data = docSnap.data() as UserProgress;
@@ -428,7 +428,7 @@ export async function manualSyncUserProfile(uid: string): Promise<void> {
       // }
       
       await syncProgressToProfile(uid, progress);
-      console.log('✅ Manual sync completed');
+      // console.log('✅ Manual sync completed');
       
       // Verify sync worked
       const profileSnapAfter = await getDoc(userProfileRef);
@@ -452,7 +452,7 @@ export async function debugUserData(uid: string): Promise<void> {
     // Check UserProgress
     const progressRef = doc(db, 'userProgress', uid);
     const progressSnap = await getDoc(progressRef);
-    console.log('📊 UserProgress exists:', progressSnap.exists());
+    // console.log('📊 UserProgress exists:', progressSnap.exists());
     if (progressSnap.exists()) {
       // console.log('📊 UserProgress data:', progressSnap.data());
     }
@@ -460,7 +460,7 @@ export async function debugUserData(uid: string): Promise<void> {
     // Check UserProfile
     const profileRef = doc(db, 'userProfiles', uid);
     const profileSnap = await getDoc(profileRef);
-    console.log('👤 UserProfile exists:', profileSnap.exists());
+    // console.log('👤 UserProfile exists:', profileSnap.exists());
     if (profileSnap.exists()) {
       // console.log('👤 UserProfile data:', profileSnap.data());
     }
@@ -472,7 +472,7 @@ export async function debugUserData(uid: string): Promise<void> {
       limit(5)
     );
     const activitiesSnap = await getDocs(activitiesQuery);
-    console.log('📝 UserActivities count:', activitiesSnap.size);
+    // console.log('📝 UserActivities count:', activitiesSnap.size);
     if (activitiesSnap.size > 0) {
         // console.log('📝 Recent activities:', activitiesSnap.docs.map((doc) => doc.data()));
     }

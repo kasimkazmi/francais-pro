@@ -78,7 +78,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="flex gap-2">
               <Button 
                 onClick={() => {
-                  console.log('Go Home button clicked');
+                  // console.log('Go Home button clicked');
                   window.location.href = '/';
                 }}
                 className="flex items-center"
@@ -89,10 +89,10 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <Button 
                 variant="outline" 
                 onClick={async () => {
-                  console.log('Logout button clicked');
+                  // console.log('Logout button clicked');
                   try {
                     await logout();
-                    console.log('Logout function called successfully');
+                    // console.log('Logout function called successfully');
                   } catch (error) {
                     console.error('Error calling logout:', error);
                   }

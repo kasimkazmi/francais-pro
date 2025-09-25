@@ -58,11 +58,11 @@ export function UserManagement() {
         const profilesQuery = query(collection(db, 'userProfiles'), orderBy('lastActiveAt', 'desc'));
         profilesSnapshot = await getDocs(profilesQuery);
       } catch (orderByError) {
-        console.log('OrderBy failed, using simple query:', orderByError);
+        // console.log('OrderBy failed, using simple query:', orderByError);
         profilesSnapshot = await getDocs(collection(db, 'userProfiles'));
       }
       
-      console.log('Total users found:', profilesSnapshot.size);
+      // console.log('Total users found:', profilesSnapshot.size);
       
       const usersData: UserData[] = [];
       
@@ -78,13 +78,13 @@ export function UserManagement() {
         const isBanned = bannedDoc.exists() && bannedDoc.data()?.status === 'banned';
         
         // Debug: Log the user data to see what's available
-        console.log('User data for', docSnapshot.id, ':', {
-          email: data.email,
-          displayName: data.displayName,
-          hasEmail: !!data.email,
-          emailType: typeof data.email,
-          allKeys: Object.keys(data)
-        });
+        // console.log('User data for', docSnapshot.id, ':', {
+        //   email: data.email,
+        //   displayName: data.displayName,
+        //   hasEmail: !!data.email,
+        //   emailType: typeof data.email,
+        //   allKeys: Object.keys(data)
+        // });
         
         usersData.push({
           uid: docSnapshot.id,

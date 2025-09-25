@@ -155,7 +155,7 @@ export function UserDetail({ userId }: { userId: string }) {
         activitiesSnapshot = await getDocs(activitiesQuery);
       } catch (indexError) {
         console.warn('Composite index not found, using simple query:', indexError);
-        console.log('📋 Using fallback query - activities will be sorted in memory');
+        // console.log('📋 Using fallback query - activities will be sorted in memory');
         // Fallback: get all activities for user and sort in memory
         const simpleQuery = query(
           collection(db, 'userActivities'),

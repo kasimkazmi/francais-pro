@@ -60,7 +60,7 @@ export function AudioButton({
         speechSynthesis.speak(utterance);
       } else {
         // Fallback for browsers without speech synthesis
-        console.log('Speech synthesis not supported');
+        // console.log('Speech synthesis not supported');
         setIsPlaying(false);
         setIsLoading(false);
         setHasError(true);

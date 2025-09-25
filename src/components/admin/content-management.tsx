@@ -63,15 +63,15 @@ export function ContentManagement() {
       const activitiesSnapshot = await getDocs(collection(db, 'userActivities'));
       const activities = activitiesSnapshot.docs.map(doc => doc.data());
       
-      console.log('🔍 All Activities Debug:', {
-        totalActivities: activities.length,
-        activities: activities.map(activity => ({
-          activityType: activity.activityType,
-          moduleId: activity.activityData?.moduleId,
-          lessonId: activity.activityData?.lessonId,
-          timestamp: activity.timestamp
-        }))
-      });
+      // console.log('🔍 All Activities Debug:', {
+      //   totalActivities: activities.length,
+      //   activities: activities.map(activity => ({
+      //     activityType: activity.activityType,
+      //     moduleId: activity.activityData?.moduleId,
+      //     lessonId: activity.activityData?.lessonId,
+      //     timestamp: activity.timestamp
+      //   }))
+      // });
       
       // Count activities by content type/module
       const usageByType: { [key: string]: number } = {};
@@ -82,7 +82,7 @@ export function ContentManagement() {
         const type = activity.activityType || 'unknown';
         activityTypeCounts[type] = (activityTypeCounts[type] || 0) + 1;
       });
-      console.log('📈 Activity Type Counts:', activityTypeCounts);
+      // console.log('📈 Activity Type Counts:', activityTypeCounts);
       
       activities.forEach(activity => {
         if (activity.activityType === 'lesson_complete' || activity.activityType === 'lesson_start') {
@@ -95,11 +95,11 @@ export function ContentManagement() {
         }
       });
       
-      console.log('📊 Usage by Type Debug:', usageByType);
+      // console.log('📊 Usage by Type Debug:', usageByType);
 
       // If no lesson activities found, try to count all activities as a fallback
       if (Object.keys(usageByType).length === 0 && activities.length > 0) {
-        console.log('⚠️ No lesson activities found, counting all activities as fallback');
+        // console.log('⚠️ No lesson activities found, counting all activities as fallback');
         activities.forEach(activity => {
           const type = activity.activityType || 'general';
           usageByType[type] = (usageByType[type] || 0) + 1;
