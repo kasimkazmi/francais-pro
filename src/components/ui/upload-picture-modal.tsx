@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { X, Upload, Image as ImageIcon } from 'lucide-react';
+import { X, Upload, Image as ImageIcon, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { AvatarGenerator } from '@/components/ui/avatar-generator';
@@ -24,7 +24,7 @@ export function UploadPictureModal({
   const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedAvatarStyle, setSelectedAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas' | null>(null);
-  const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [randomSeed, setRandomSeed] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -50,6 +50,7 @@ export function UploadPictureModal({
 
   // Generate unique seed based on user info, gender, and random number
   const getAvatarSeed = (includeRandom = true) => {
+    if (!gender) return '';
     const baseSeed = user?.email || user?.displayName || user?.uid || 'user';
     return includeRandom ? `${baseSeed}-${gender}-${randomSeed}` : `${baseSeed}-${gender}`;
   };
@@ -89,7 +90,10 @@ export function UploadPictureModal({
   };
 
   const handleSaveAvatar = async () => {
-    if (!selectedAvatarStyle) return;
+    if (!selectedAvatarStyle || !gender) {
+      toast.error('Please select both gender and avatar style');
+      return;
+    }
     
     setIsUploading(true);
     try {
@@ -199,7 +203,7 @@ export function UploadPictureModal({
                     height={160}
                     className="h-full w-full object-cover"
                   />
-                ) : selectedAvatarStyle ? (
+                ) : selectedAvatarStyle && gender ? (
                   <AvatarGenerator 
                     seed={getAvatarSeed()}
                     size={160}
@@ -208,13 +212,11 @@ export function UploadPictureModal({
                     className="h-full w-full"
                   />
                 ) : (
-                  <AvatarGenerator 
-                    seed={getAvatarSeed()}
-                    size={160}
-                    style="lorelei"
-                    gender={gender}
-                    className="h-full w-full"
-                  />
+                  <div className="h-full w-full flex items-center justify-center">
+                    <div className="text-center space-y-2">
+                      <User className="h-16 w-16 text-muted-foreground mx-auto" />
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
@@ -229,6 +231,8 @@ export function UploadPictureModal({
                   className={`flex-1 py-2 px-4 rounded-md font-medium transition-all duration-200 border-2 ${
                     gender === 'male' 
                       ? 'border-blue-500 bg-blue-500 text-white shadow-lg scale-105 ring-2 ring-blue-500 ring-offset-2' 
+                      : gender === null
+                      ? 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-400 hover:shadow-sm hover:scale-102'
                       : 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-400 hover:shadow-sm hover:scale-102'
                   } active:scale-95 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
                 >
@@ -240,6 +244,8 @@ export function UploadPictureModal({
                   className={`flex-1 py-2 px-4 rounded-md font-medium transition-all duration-200 border-2 ${
                     gender === 'female' 
                       ? 'border-pink-500 bg-pink-500 text-white shadow-lg scale-105 ring-2 ring-pink-500 ring-offset-2' 
+                      : gender === null
+                      ? 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:border-pink-400 hover:shadow-sm hover:scale-102'
                       : 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:border-pink-400 hover:shadow-sm hover:scale-102'
                   } active:scale-95 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2`}
                 >
@@ -275,14 +281,18 @@ export function UploadPictureModal({
                         : 'border-gray-300 dark:border-gray-600 hover:border-primary/50 hover:bg-primary/5 hover:shadow-sm hover:scale-102'
                     } active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
                   >
-                    <div className="h-12 w-12 rounded-full overflow-hidden">
-                      <AvatarGenerator 
-                        seed={getAvatarSeed(false)}
-                        size={48}
-                        style={style.name}
-                        gender={gender}
-                        className="h-full w-full"
-                      />
+                    <div className="h-12 w-12 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                      {gender ? (
+                        <AvatarGenerator 
+                          seed={getAvatarSeed(false)}
+                          size={48}
+                          style={style.name}
+                          gender={gender}
+                          className="h-full w-full"
+                        />
+                      ) : (
+                        <User className="h-6 w-6 text-muted-foreground" />
+                      )}
                     </div>
                     <span className="text-xs font-medium">{style.label}</span>
                   </button>

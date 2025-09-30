@@ -21,7 +21,7 @@ export default function ProfilePage() {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [customPhoto, setCustomPhoto] = useState<string | null>(null);
   const [avatarStyle, setAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas' | null>(null);
-  const [avatarGender, setAvatarGender] = useState<'male' | 'female'>('male');
+  const [avatarGender, setAvatarGender] = useState<'male' | 'female' | null>(null);
   const [avatarSeed, setAvatarSeed] = useState(0);
   const [hasAvatarStyle, setHasAvatarStyle] = useState(false);
 
@@ -56,8 +56,9 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-  // Generate avatar seed
+  // Generate avatar seed (only if gender is set)
   const getProfileAvatarSeed = () => {
+    if (!avatarGender) return '';
     const baseSeed = user?.email || user?.displayName || user?.uid || 'user';
     return `${baseSeed}-${avatarGender}-${avatarSeed}`;
   };
@@ -145,7 +146,8 @@ export default function ProfilePage() {
                   className="relative h-20 w-20 rounded-full bg-primary/10 overflow-hidden cursor-pointer group"
                   onClick={() => setShowUploadModal(true)}
                 >
-                  {hasAvatarStyle && avatarStyle ? (
+                  {hasAvatarStyle && avatarStyle && avatarGender ? (
+                    console.log('Showing avatar:', { hasAvatarStyle, avatarStyle, avatarGender, seed: getProfileAvatarSeed() }),
                     <AvatarGenerator 
                       seed={getProfileAvatarSeed()}
                       size={80}
@@ -170,13 +172,9 @@ export default function ProfilePage() {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <AvatarGenerator 
-                      seed={getProfileAvatarSeed()}
-                      size={80}
-                      style="lorelei"
-                      gender={avatarGender}
-                      className="h-full w-full"
-                    />
+                    <div className="h-full w-full flex items-center justify-center">
+                      <User className="h-10 w-10 text-primary" />
+                    </div>
                   )}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-full">
                     <Upload className="h-6 w-6 text-white" />
