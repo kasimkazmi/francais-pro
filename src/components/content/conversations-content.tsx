@@ -18,14 +18,14 @@ export function ConversationsContent() {
     <div className="container mx-auto max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">French Conversations</h1>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <EnhancedButton variant="outline" size="sm" tooltip="Practice role-playing conversations">
             Role Play Mode
           </EnhancedButton>
           <EnhancedButton variant="ghost" size="sm">
             <ArrowRight className="h-4 w-4" />
           </EnhancedButton>
-        </div>
+        </div> */}
       </div>
 
       <div className="prose prose-slate dark:prose-invert max-w-none">

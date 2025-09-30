@@ -92,12 +92,14 @@ export function LiteratureContent() {
               (period.poets || []).map(poet => (
                 <Card key={`${period.period}-${poet.name}`}>
                   <CardHeader>
-                    <CardTitle className="text-lg">{poet.name}</CardTitle>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      {poet.name}
+                      <AudioButton text={poet.name} size="sm" />
+                    </CardTitle>
                     <CardDescription>{period.period} - {poet.dates}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center gap-2 mb-3">
-                      <AudioButton text={poet.name} size="sm" />
+                    <div className="mb-3">
                       <span className="text-sm text-muted-foreground">
                         {poet.style}
                       </span>
@@ -153,12 +155,14 @@ export function LiteratureContent() {
               (period.novels || []).map(novel => (
                 <Card key={`${period.period}-${novel.title}`}>
                   <CardHeader>
-                    <CardTitle className="text-lg">{novel.title}</CardTitle>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      {novel.title}
+                      <AudioButton text={novel.title} size="sm" />
+                    </CardTitle>
                     <CardDescription>by {novel.author} ({novel.year})</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center gap-2 mb-3">
-                      <AudioButton text={novel.title} size="sm" />
+                    <div className="mb-3">
                       <span className="text-sm text-muted-foreground">
                         {period.period}
                       </span>
@@ -198,12 +202,14 @@ export function LiteratureContent() {
               (period.plays || []).map(play => (
                 <Card key={`${period.period}-${play.title}`}>
                   <CardHeader>
-                    <CardTitle className="text-lg">{play.title}</CardTitle>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      {play.title}
+                      <AudioButton text={play.title} size="sm" />
+                    </CardTitle>
                     <CardDescription>by {play.author} ({play.year})</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center gap-2 mb-3">
-                      <AudioButton text={play.title} size="sm" />
+                    <div className="mb-3">
                       <span className="text-sm text-muted-foreground">
                         {period.period}
                       </span>
@@ -272,7 +278,10 @@ export function LiteratureContent() {
                 onClick={() => setSelectedMovement(index)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{movement.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {movement.name}
+                    <AudioButton text={movement.name} size="sm" />
+                  </CardTitle>
                   <CardDescription>{movement.period}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -322,6 +331,7 @@ export function LiteratureContent() {
                 <CardTitle className="flex items-center gap-2">
                   <PenTool className="h-5 w-5" />
                   {literatureData.literaryMovements[selectedMovement].name}
+                  <AudioButton text={literatureData.literaryMovements[selectedMovement].name} size="sm" />
                 </CardTitle>
                 <CardDescription>{literatureData.literaryMovements[selectedMovement].period}</CardDescription>
               </CardHeader>

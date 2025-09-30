@@ -62,7 +62,10 @@ export function HistoryContent() {
                 onClick={() => setSelectedPeriod(index)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{period.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {period.name}
+                    <AudioButton text={period.name} size="sm" />
+                  </CardTitle>
                   <CardDescription>{period.dates}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -90,6 +93,7 @@ export function HistoryContent() {
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
                   {historyData.periods[selectedPeriod].name}
+                  <AudioButton text={historyData.periods[selectedPeriod].name} size="sm" />
                 </CardTitle>
                 <CardDescription>{historyData.periods[selectedPeriod].dates}</CardDescription>
               </CardHeader>
@@ -141,16 +145,15 @@ export function HistoryContent() {
                   <CardTitle className="text-lg flex items-center gap-2">
                     <Users className="h-5 w-5" />
                     {figure.name}
+                    <AudioButton text={figure.name} size="sm" />
                   </CardTitle>
-                  <CardDescription>{figure.title}</CardDescription>
+                  <CardDescription className="flex items-center gap-2">
+                    {figure.title}
+                    <span className="text-sm">•</span>
+                    {figure.dates}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center gap-2 mb-3">
-                    <AudioButton text={figure.name} size="sm" />
-                    <span className="text-sm text-muted-foreground">
-                      {figure.dates}
-                    </span>
-                  </div>
                   <div className="mt-3">
                     <h4 className="font-semibold mb-2">Achievements:</h4>
                     <div className="flex flex-wrap gap-1">

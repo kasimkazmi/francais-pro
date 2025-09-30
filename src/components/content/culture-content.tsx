@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
-import { Calendar, Utensils, Palette, BookOpen, MapPin, Star, Heart } from 'lucide-react';
+import { Calendar, Utensils, Palette, BookOpen, MapPin, Star } from 'lucide-react';
 import cultureData from '@/data/culture.json';
 import { TipSection } from '../ui/tip-section';
 
@@ -41,7 +41,7 @@ export function CultureContent() {
         </h2>
         <div className="space-y-6 mb-12">
           {traditions.map((tradition, index) => (
-            <Card key={index} className="universal-card">
+            <Card key={index} className="">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
@@ -89,7 +89,7 @@ export function CultureContent() {
         </h2>
         <div className="space-y-6 mb-12">
           {cuisine.map((category, index) => (
-            <Card key={index} className="universal-card">
+            <Card key={index} className="">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Utensils className="h-5 w-5 text-primary" />
@@ -127,7 +127,7 @@ export function CultureContent() {
         </h2>
         <div className="space-y-6 mb-12">
           {art.map((movement, index) => (
-            <Card key={index} className="universal-card">
+            <Card key={index} className="">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Palette className="h-5 w-5 text-primary" />
@@ -140,7 +140,10 @@ export function CultureContent() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {movement.artists.map((artist, artistIndex) => (
                       <div key={artistIndex} className="p-3 border rounded-lg universal-card">
-                        <h5 className="font-semibold text-sm">{artist.name}</h5>
+                        <h5 className="font-semibold text-sm flex items-center gap-2">
+                          {artist.name}
+                          <AudioButton text={artist.name} size="sm" />
+                        </h5>
                         <p className="text-xs text-muted-foreground">{artist.famous_work}</p>
                         <p className="text-xs text-muted-foreground italic">{artist.period}</p>
                       </div>
@@ -181,7 +184,7 @@ export function CultureContent() {
         </h2>
         <div className="space-y-6 mb-12">
           {literature.map((period, index) => (
-            <Card key={index} className="universal-card">
+            <Card key={index} className="xs">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-primary" />
@@ -194,7 +197,10 @@ export function CultureContent() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {period.authors.map((author, authorIndex) => (
                       <div key={authorIndex} className="p-3 border rounded-lg universal-card">
-                        <h5 className="font-semibold text-sm">{author.name}</h5>
+                        <h5 className="font-semibold text-sm flex items-center gap-2">
+                          {author.name}
+                          <AudioButton text={author.name} size="sm" />
+                        </h5>
                         <p className="text-xs text-muted-foreground">{author.work}</p>
                         <p className="text-xs text-muted-foreground italic">{author.century} century</p>
                       </div>
@@ -235,7 +241,7 @@ export function CultureContent() {
         </h2>
         <div className="space-y-6 mb-12">
           {geography.map((region, index) => (
-            <Card key={index} className="universal-card">
+            <Card key={index} className="">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-primary" />

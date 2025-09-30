@@ -79,7 +79,10 @@ export function ArtsContent() {
                 onClick={() => setSelectedMovement(index)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{movement.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {movement.name}
+                    <AudioButton text={movement.name} size="sm" />
+                  </CardTitle>
                   <CardDescription>{movement.period}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -107,6 +110,7 @@ export function ArtsContent() {
                 <CardTitle className="flex items-center gap-2">
                   <Palette className="h-5 w-5" />
                   {artsData.artMovements[selectedMovement].name}
+                  <AudioButton text={artsData.artMovements[selectedMovement].name} size="sm" />
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -163,7 +167,10 @@ export function ArtsContent() {
                 onClick={() => setSelectedAuthor(index)}
               >
                 <CardHeader>
-                  <CardTitle className="text-lg">{artist.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {artist.name}
+                    <AudioButton text={artist.name} size="sm" />
+                  </CardTitle>
                   <CardDescription>{artist.dates}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -189,6 +196,7 @@ export function ArtsContent() {
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5" />
                   {artsData.famousArtists[selectedAuthor].name}
+                  <AudioButton text={artsData.famousArtists[selectedAuthor].name} size="sm" />
                 </CardTitle>
                 <CardDescription>{artsData.famousArtists[selectedAuthor].dates}</CardDescription>
               </CardHeader>
@@ -248,7 +256,10 @@ export function ArtsContent() {
             {artsData.museums.map((museum) => (
               <Card key={museum.name}>
                 <CardHeader>
-                  <CardTitle className="text-lg">{museum.name}</CardTitle>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {museum.name}
+                    <AudioButton text={museum.name} size="sm" />
+                  </CardTitle>
                   <CardDescription>{museum.location}</CardDescription>
                 </CardHeader>
                 <CardContent>
