@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { X, Upload, Image as ImageIcon } from 'lucide-react';
@@ -13,22 +13,33 @@ interface UploadPictureModalProps {
   isOpen: boolean;
   onClose: () => void;
   onUpload: (imageUrl: string) => void;
-  currentPhotoURL?: string | null;
 }
 
 export function UploadPictureModal({ 
   isOpen, 
   onClose, 
-  onUpload,
-  currentPhotoURL 
+  onUpload
 }: UploadPictureModalProps) {
   const { user } = useAuth();
-  const [preview, setPreview] = useState<string | null>(currentPhotoURL || null);
+  const [preview, setPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedAvatarStyle, setSelectedAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas' | null>(null);
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [randomSeed, setRandomSeed] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load saved avatar settings when modal opens
+  useEffect(() => {
+    if (isOpen && user?.uid) {
+      const savedStyle = localStorage.getItem(`profile-avatar-style-${user.uid}`) as 'avataaars' | 'lorelei' | 'initials' | 'personas' | null;
+      const savedGender = localStorage.getItem(`profile-avatar-gender-${user.uid}`) as 'male' | 'female' | null;
+      const savedSeed = localStorage.getItem(`profile-avatar-seed-${user.uid}`);
+      
+      if (savedStyle) setSelectedAvatarStyle(savedStyle);
+      if (savedGender) setGender(savedGender);
+      if (savedSeed) setRandomSeed(parseInt(savedSeed));
+    }
+  }, [isOpen, user]);
 
   const avatarStyles = [
     { name: 'lorelei', label: 'Lorelei' },
@@ -91,7 +102,8 @@ export function UploadPictureModal({
       }
       toast.success('Avatar updated!');
       onClose();
-      window.location.reload();
+      // Trigger a custom event to refresh the profile page
+      window.dispatchEvent(new Event('avatar-updated'));
     } catch (error) {
       console.error('Error saving avatar:', error);
       toast.error('Failed to save avatar. Please try again.');
@@ -109,10 +121,11 @@ export function UploadPictureModal({
     setIsUploading(true);
     try {
       // Pass the preview (base64) to parent component
-      // In a full implementation, you would upload to Firebase Storage here
       await onUpload(preview);
       toast.success('Profile picture updated!');
       onClose();
+      // Trigger a custom event to refresh the profile page
+      window.dispatchEvent(new Event('avatar-updated'));
     } catch (error) {
       console.error('Error uploading image:', error);
       toast.error('Failed to upload image. Please try again.');
@@ -323,20 +336,20 @@ export function UploadPictureModal({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-2">
+            <div className="flex gap-3 pt-2">
               <Button
                 variant="outline"
                 onClick={onClose}
-                className="flex-1"
+                className="flex-1 transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 Cancel
               </Button>
               <Button
                 onClick={selectedAvatarStyle ? handleSaveAvatar : handleUpload}
                 disabled={(!preview && !selectedAvatarStyle) || isUploading}
-                className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                {isUploading ? 'Saving...' : selectedAvatarStyle ? 'Save Avatar' : 'Save Picture'}
+                {isUploading ? '⏳ Saving...' : selectedAvatarStyle ? '✨ Save Avatar' : '📸 Save Picture'}
               </Button>
             </div>
           </CardContent>

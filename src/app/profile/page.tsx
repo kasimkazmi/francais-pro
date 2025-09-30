@@ -20,9 +20,10 @@ export default function ProfilePage() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [customPhoto, setCustomPhoto] = useState<string | null>(null);
-  const [avatarStyle, setAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas'>('lorelei');
+  const [avatarStyle, setAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas' | null>(null);
   const [avatarGender, setAvatarGender] = useState<'male' | 'female'>('male');
   const [avatarSeed, setAvatarSeed] = useState(0);
+  const [hasAvatarStyle, setHasAvatarStyle] = useState(false);
 
   // Load custom photo and avatar settings from localStorage
   useEffect(() => {
@@ -32,12 +33,20 @@ export default function ProfilePage() {
       const savedGender = localStorage.getItem(`profile-avatar-gender-${user.uid}`) as 'male' | 'female' | null;
       const savedSeed = localStorage.getItem(`profile-avatar-seed-${user.uid}`);
       
-      if (savedPhoto) {
-        setCustomPhoto(savedPhoto);
-      }
+      console.log('Loading profile settings:', { savedPhoto: !!savedPhoto, savedStyle, savedGender, savedSeed });
+      
+      // Avatar style takes priority over custom photo
       if (savedStyle) {
         setAvatarStyle(savedStyle);
+        setHasAvatarStyle(true);
+        setCustomPhoto(null); // Clear custom photo when avatar is set
+        console.log('Using avatar style:', savedStyle);
+      } else if (savedPhoto) {
+        setCustomPhoto(savedPhoto);
+        setHasAvatarStyle(false);
+        console.log('Using custom photo');
       }
+      
       if (savedGender) {
         setAvatarGender(savedGender);
       }
@@ -55,38 +64,54 @@ export default function ProfilePage() {
 
   const handlePhotoUpload = async (imageUrl: string) => {
     try {
+      if (!user?.uid) return;
+      
       // For now, store the base64 image in localStorage as a simple solution
       // This avoids Firebase Storage costs on free tier
-      localStorage.setItem(`profile-photo-${user?.uid}`, imageUrl);
+      localStorage.setItem(`profile-photo-${user.uid}`, imageUrl);
       
-      // Trigger a page refresh to show the new image
-      window.location.reload();
+      // Clear avatar settings when uploading custom photo
+      localStorage.removeItem(`profile-avatar-style-${user.uid}`);
+      localStorage.removeItem(`profile-avatar-gender-${user.uid}`);
+      localStorage.removeItem(`profile-avatar-seed-${user.uid}`);
     } catch (error) {
       console.error('Error saving profile picture:', error);
       throw error;
     }
   };
 
+  // Listen for avatar updates
+  useEffect(() => {
+    const handleAvatarUpdate = () => {
+      if (user?.uid) {
+        const savedPhoto = localStorage.getItem(`profile-photo-${user.uid}`);
+        const savedStyle = localStorage.getItem(`profile-avatar-style-${user.uid}`) as 'avataaars' | 'lorelei' | 'initials' | 'personas' | null;
+        const savedGender = localStorage.getItem(`profile-avatar-gender-${user.uid}`) as 'male' | 'female' | null;
+        const savedSeed = localStorage.getItem(`profile-avatar-seed-${user.uid}`);
+        
+        if (savedStyle) {
+          setAvatarStyle(savedStyle);
+          setHasAvatarStyle(true);
+          setCustomPhoto(null);
+        } else if (savedPhoto) {
+          setCustomPhoto(savedPhoto);
+          setHasAvatarStyle(false);
+        }
+        
+        if (savedGender) setAvatarGender(savedGender);
+        if (savedSeed) setAvatarSeed(parseInt(savedSeed));
+      }
+    };
+
+    window.addEventListener('avatar-updated', handleAvatarUpdate);
+    return () => window.removeEventListener('avatar-updated', handleAvatarUpdate);
+  }, [user]);
+
   useEffect(() => {
     if (!loading && !isAuthenticated) {
       router.push('/auth/action');
     }
   }, [isAuthenticated, loading, router]);
-
-  if (loading) {
-    return (
-      <MainLayout>
-        <div className="container mx-auto max-w-4xl px-4 py-8">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-              <p className="mt-4 text-muted-foreground">Loading profile...</p>
-            </div>
-          </div>
-        </div>
-      </MainLayout>
-    );
-  }
 
   if (!isAuthenticated || !user) {
     return null;
@@ -120,7 +145,15 @@ export default function ProfilePage() {
                   className="relative h-20 w-20 rounded-full bg-primary/10 overflow-hidden cursor-pointer group"
                   onClick={() => setShowUploadModal(true)}
                 >
-                  {customPhoto ? (
+                  {hasAvatarStyle && avatarStyle ? (
+                    <AvatarGenerator 
+                      seed={getProfileAvatarSeed()}
+                      size={80}
+                      style={avatarStyle}
+                      gender={avatarGender}
+                      className="h-full w-full"
+                    />
+                  ) : customPhoto ? (
                     <Image 
                       src={customPhoto} 
                       alt={user.displayName || 'User'} 
@@ -140,7 +173,7 @@ export default function ProfilePage() {
                     <AvatarGenerator 
                       seed={getProfileAvatarSeed()}
                       size={80}
-                      style={avatarStyle}
+                      style="lorelei"
                       gender={avatarGender}
                       className="h-full w-full"
                     />
@@ -304,7 +337,6 @@ export default function ProfilePage() {
         isOpen={showUploadModal}
         onClose={() => setShowUploadModal(false)}
         onUpload={handlePhotoUpload}
-        currentPhotoURL={customPhoto || user.photoURL}
       />
     </MainLayout>
   );
