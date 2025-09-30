@@ -24,9 +24,12 @@
 
 ### **🏆 Express Entry Integration**
 - **CLB-Aligned Content**: Lessons structured for Canadian Language Benchmarks
-- **CRS Score Calculator**: Estimate your potential Express Entry points
-- **Immigration-Focused Vocabulary**: Learn terms relevant to Canadian life
+- **TEF Canada CLB Score Calculator**: Convert TEF scores to CLB levels with dropdown score ranges
+- **Express Entry Points Calculator**: Calculate your CRS score with validated inputs and accurate calculations
+- **Immigration Tools**: Dedicated route (`/immigration/test-modules`) for all immigration-related calculators
+- **Immigration-Focused Vocabulary**: Learn terms relevant to Canadian life (CLB, CRA definitions included)
 - **Test Preparation**: Practice for TEF, TCF, and other official tests
+- **Francophone Community Immigration**: Direct link to official IRCC resources
 
 ### **🎯 Targeted Learning Paths**
 - **PR Preparation**: Specific content for Permanent Residency applicants
@@ -38,6 +41,11 @@
 
 ### **👥 Social Learning**
 - **Leaderboards**: Compete with other learners globally
+- **User Profiles**: Comprehensive profile page at `/profile` route with personal information display
+- **Avatar System**: DiceBear-powered avatar generation with 4 styles (Lorelei, Avataaars, Initials, Personas)
+- **Gender-Based Avatars**: Male and female avatar variations with distinct characteristics
+- **Avatar Customization**: Generate unlimited variations with accessories, hairstyles, and clothing options
+- **Custom Profile Pictures**: Upload your own photos or choose from generated avatars
 - **Study Groups**: Join or create learning communities
 - **Peer Support**: Connect with fellow immigrants
 - **Mentorship Program**: Learn from experienced French speakers
@@ -55,10 +63,14 @@
 - **Server-Side Rendering**: 95+ SEO scores for better discoverability
 - **Progressive Web App**: Works offline and on mobile devices
 - **Real-time Updates**: Instant progress synchronization
+- **Skeleton Loading States**: Smooth loading experience with dedicated `loading.tsx` components
+- **Event-Based Updates**: Avatar changes update instantly without page reloads
+- **Console Log Removal**: Production builds automatically strip console logs for cleaner output
 
 ### **📱 Multi-Platform Support**
 - **Web Application**: Full-featured browser experience
-- **Mobile Responsive**: Optimized for all screen sizes
+- **Mobile Responsive**: Optimized for all screen sizes with responsive grids
+- **Next.js Image Optimization**: Configured for Google profile images and external sources
 - **Offline Mode**: Learn without internet connection
 - **Cross-Platform Sync**: Access progress from any device
 
@@ -66,15 +78,45 @@
 - **Secure Authentication**: Firebase-based user management
 - **Data Protection**: GDPR-compliant data handling
 - **Privacy Controls**: Manage your data and preferences
+- **Local Storage Optimization**: Profile pictures and avatar preferences stored locally to minimize Firebase costs
 - **Secure Payments**: Safe donation and premium features
+
+## 👤 **User Profile & Avatars**
+
+### **🎨 Profile Management**
+- **Dedicated Profile Route**: Access your profile at `/profile` with comprehensive information display
+- **Profile Editing**: Modal-based profile editing without leaving the page
+- **User Information**: Display name, email, phone number, country, native language, timezone, date of birth
+- **Learning Preferences**: Track preferred learning style (visual, auditory, kinesthetic, reading)
+- **Learning Goals**: Set and display multiple learning goals with badge UI
+- **Quick Actions**: Easy access to edit profile, view progress, favorites, and leaderboard
+
+### **🖼️ Avatar System**
+- **DiceBear Integration**: Powered by [@dicebear/core](https://www.dicebear.com/) for beautiful, unique avatars
+- **4 Avatar Styles**: 
+  - Lorelei (cute illustrated characters)
+  - Avataaars (sketch-style avatars with accessories)
+  - Initials (simple letter-based)
+  - Personas (professional Draftbit-style)
+- **Gender Selection**: Male and female options with distinct visual characteristics
+- **Infinite Variations**: "Generate New" feature creates unlimited unique avatars
+- **Smart Customization**: Gender-based hairstyles, facial hair probability, and clothing
+- **Avatar Features**: Accessories (glasses, eyepatch), clothing styles, facial expressions, eyebrows, eyes, mouth variations
+- **Upload Custom Image**: Alternative option to upload personal photos (max 5MB, JPG/PNG/GIF)
+- **Local Storage**: Avatar preferences and custom images stored locally (no Firebase costs)
+- **Instant Updates**: Avatar changes reflect immediately without page reload
+- **Visual Feedback**: Clear selected states with blue (male) and pink (female) indicators
 
 ## 🎨 **User Experience**
 
 ### **🎯 Intuitive Design**
 - **Clean Interface**: Minimalist, distraction-free learning environment
 - **Accessibility**: WCAG-compliant design for all users
-- **Dark/Light Mode**: Choose your preferred theme
+- **Dark/Light Mode**: Choose your preferred theme with theme-aware components
 - **Keyboard Navigation**: Full keyboard accessibility support
+- **Reusable Components**: Consistent UI with `TipSection` component across all pages
+- **Dynamic Icons**: Context-aware icons for transport, accommodation, destinations, and phrases
+- **Audio Pronunciation**: Audio buttons positioned next to names/titles across History, Culture, Arts, Literature, and Travel sections
 
 ### **🔄 Adaptive Learning**
 - **Personalized Recommendations**: Content based on your goals and progress
@@ -160,4 +202,33 @@
 
 **Ready to start your French learning journey?** [Get Started Now](../README.md#-getting-started)
 
-*Last updated: January 2025*
+## 🎯 **Recent Updates (September 2025)**
+
+### **Immigration Tools Enhancements**
+- TEF Canada CLB Calculator with dropdown score ranges (skill-specific ranges for Reading, Listening, Writing, Speaking)
+- Express Entry Points Calculator with comprehensive validation
+- Accurate CLB to TEF score conversions based on official IRCC standards
+- Theme-aware dropdown styling with hover (blue) and focus (green) effects
+
+### **UI/UX Improvements**
+- Standardized TipSection component across all content pages
+- Dynamic context-aware icons for Transport, Accommodation, Destinations sections
+- Audio buttons repositioned next to names/titles (Historical Periods, Famous Figures, Artists, Authors, Museums)
+- Enhanced dropdown interactions with proper background colors for light/dark themes
+
+### **Profile & Avatar System**
+- New `/profile` route with comprehensive user information
+- DiceBear avatar integration (4 styles, gender-based generation)
+- Upload picture modal with avatar style selection
+- Gender selection (male/female) with visual feedback
+- Infinite avatar variations with "Generate New" feature
+- Local storage for avatars (Firebase-free solution)
+- Event-based updates (no page reloads)
+
+### **Performance & Optimization**
+- Simplified username modal (reduced Firebase operations)
+- Profile skeleton loader for smooth transitions
+- Next.js Image optimization for Google profile pictures
+- Console log removal in production builds
+
+*Last updated: September 2025*
