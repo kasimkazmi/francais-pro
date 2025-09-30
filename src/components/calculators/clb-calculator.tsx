@@ -1,82 +1,179 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Calculator, CheckCircle, AlertCircle, Info } from 'lucide-react';
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Calculator, CheckCircle, AlertCircle, Info } from "lucide-react";
 
 interface CLBScore {
   module: string;
+  moduleKey: string;
   score: number;
   clb: number;
   level: string;
   color: string;
 }
 
+// TEF Canada score ranges for dropdown options by skill
+const SCORE_RANGES = {
+  reading: [
+    { label: "Select...", value: "select"},
+    { label: "263-300", value: "263-300"},
+    { label: "248-262", value: "248-262"},
+    { label: "233-247", value: "233-247"},
+    { label: "207-232", value: "207-232"},
+    { label: "181-206", value: "181-206"},
+    { label: "151-180", value: "151-180"},
+    { label: "121-150", value: "121-150"},
+    { label: "0-120", value: "0-120"},
+  ],
+  listening: [
+  { label: "Select...", value: "select"},
+    { label: "316-360", value: "316-360" },
+    { label: "298-315", value: "298-315" },
+    { label: "280-297", value: "280-297" },
+    { label: "249-279", value: "249-279" },
+    { label: "217-248", value: "217-248" },
+    { label: "181-216", value: "181-216" },
+    { label: "145-180", value: "145-180" },
+    { label: "0-144", value: "0-144" },
+  ],
+  writing: [
+    { label: "Select...", value: "select"},
+    { label: "393-450", value: "393-450" },
+    { label: "371-392", value: "371-392" },
+    { label: "349-370", value: "349-370" },
+    { label: "310-348", value: "310-348" },
+    { label: "271-309", value: "271-309" },
+    { label: "226-270", value: "226-270" },
+    { label: "181-225", value: "181-225" },
+    { label: "0-180", value: "0" },
+  ],
+  speaking: [
+    { label: "Select...", value: "select"},
+    { label: "393-450", value: "393-450" },
+    { label: "371-392", value: "371-392" },
+    { label: "349-370", value: "349-370" },
+    { label: "310-348", value: "310-348" },
+    { label: "271-309", value: "271-309" },
+    { label: "226-270", value: "226-270" },
+    { label: "181-225", value: "181-225" },
+    { label: "0-180", value: "0-180" },
+  ],
+};
+
 // Accurate TEF Canada to CLB conversion tables (2024)
 const CLB_CONVERSION = {
-  'Reading': {
-    0: { clb: 0, level: 'No proficiency', color: 'bg-red-500' },
-    121: { clb: 4, level: 'Basic', color: 'bg-orange-500' },
-    151: { clb: 5, level: 'Intermediate', color: 'bg-yellow-500' },
-    181: { clb: 6, level: 'Intermediate+', color: 'bg-lime-500' },
-    207: { clb: 7, level: 'Advanced', color: 'bg-green-500' },
-    233: { clb: 8, level: 'Advanced+', color: 'bg-emerald-500' },
-    248: { clb: 9, level: 'Expert', color: 'bg-teal-500' },
-    263: { clb: 10, level: 'Expert+', color: 'bg-blue-500' }
+  Reading: {
+    0: { clb: 0, level: "No proficiency", color: "bg-red-500" },
+    121: { clb: 4, level: "Basic", color: "bg-orange-500" },
+    151: { clb: 5, level: "Intermediate", color: "bg-yellow-500" },
+    181: { clb: 6, level: "Intermediate+", color: "bg-lime-500" },
+    207: { clb: 7, level: "Advanced", color: "bg-green-500" },
+    233: { clb: 8, level: "Advanced+", color: "bg-emerald-500" },
+    248: { clb: 9, level: "Expert", color: "bg-teal-500" },
+    263: { clb: 10, level: "Expert+", color: "bg-blue-500" },
   },
-  'Listening': {
-    0: { clb: 0, level: 'No proficiency', color: 'bg-red-500' },
-    145: { clb: 4, level: 'Basic', color: 'bg-orange-500' },
-    181: { clb: 5, level: 'Intermediate', color: 'bg-yellow-500' },
-    217: { clb: 6, level: 'Intermediate+', color: 'bg-lime-500' },
-    249: { clb: 7, level: 'Advanced', color: 'bg-green-500' },
-    280: { clb: 8, level: 'Advanced+', color: 'bg-emerald-500' },
-    298: { clb: 9, level: 'Expert', color: 'bg-teal-500' },
-    316: { clb: 10, level: 'Expert+', color: 'bg-blue-500' }
+  Listening: {
+    0: { clb: 0, level: "No proficiency", color: "bg-red-500" },
+    145: { clb: 4, level: "Basic", color: "bg-orange-500" },
+    181: { clb: 5, level: "Intermediate", color: "bg-yellow-500" },
+    217: { clb: 6, level: "Intermediate+", color: "bg-lime-500" },
+    249: { clb: 7, level: "Advanced", color: "bg-green-500" },
+    280: { clb: 8, level: "Advanced+", color: "bg-emerald-500" },
+    298: { clb: 9, level: "Expert", color: "bg-teal-500" },
+    316: { clb: 10, level: "Expert+", color: "bg-blue-500" },
   },
-  'Writing': {
-    0: { clb: 0, level: 'No proficiency', color: 'bg-red-500' },
-    181: { clb: 4, level: 'Basic', color: 'bg-orange-500' },
-    226: { clb: 5, level: 'Intermediate', color: 'bg-yellow-500' },
-    271: { clb: 6, level: 'Intermediate+', color: 'bg-lime-500' },
-    310: { clb: 7, level: 'Advanced', color: 'bg-green-500' },
-    349: { clb: 8, level: 'Advanced+', color: 'bg-emerald-500' },
-    371: { clb: 9, level: 'Expert', color: 'bg-teal-500' },
-    393: { clb: 10, level: 'Expert+', color: 'bg-blue-500' }
+  Writing: {
+    0: { clb: 0, level: "No proficiency", color: "bg-red-500" },
+    181: { clb: 4, level: "Basic", color: "bg-orange-500" },
+    226: { clb: 5, level: "Intermediate", color: "bg-yellow-500" },
+    271: { clb: 6, level: "Intermediate+", color: "bg-lime-500" },
+    310: { clb: 7, level: "Advanced", color: "bg-green-500" },
+    349: { clb: 8, level: "Advanced+", color: "bg-emerald-500" },
+    371: { clb: 9, level: "Expert", color: "bg-teal-500" },
+    393: { clb: 10, level: "Expert+", color: "bg-blue-500" },
   },
-  'Speaking': {
-    0: { clb: 0, level: 'No proficiency', color: 'bg-red-500' },
-    181: { clb: 4, level: 'Basic', color: 'bg-orange-500' },
-    226: { clb: 5, level: 'Intermediate', color: 'bg-yellow-500' },
-    271: { clb: 6, level: 'Intermediate+', color: 'bg-lime-500' },
-    310: { clb: 7, level: 'Advanced', color: 'bg-green-500' },
-    349: { clb: 8, level: 'Advanced+', color: 'bg-emerald-500' },
-    371: { clb: 9, level: 'Expert', color: 'bg-teal-500' },
-    393: { clb: 10, level: 'Expert+', color: 'bg-blue-500' }
-  }
+  Speaking: {
+    0: { clb: 0, level: "No proficiency", color: "bg-red-500" },
+    181: { clb: 4, level: "Basic", color: "bg-orange-500" },
+    226: { clb: 5, level: "Intermediate", color: "bg-yellow-500" },
+    271: { clb: 6, level: "Intermediate+", color: "bg-lime-500" },
+    310: { clb: 7, level: "Advanced", color: "bg-green-500" },
+    349: { clb: 8, level: "Advanced+", color: "bg-emerald-500" },
+    371: { clb: 9, level: "Expert", color: "bg-teal-500" },
+    393: { clb: 10, level: "Expert+", color: "bg-blue-500" },
+  },
 };
 
 export function CLBCalculator() {
+  // Maximum scores for each TEF Canada module
+  const MAX_SCORES = {
+    reading: 300,
+    listening: 360,
+    writing: 450,
+    speaking: 450
+  };
+
   const [scores, setScores] = useState({
-    reading: '',
-    listening: '',
-    writing: '',
-    speaking: ''
+    reading: "select",
+    listening: "select",
+    writing: "select",
+    speaking: "select",
   });
 
   const [results, setResults] = useState<CLBScore[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      setIsDark(isDarkMode);
+    };
+
+    checkTheme();
+
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const calculateCLB = (module: string, score: number) => {
-    const conversion = CLB_CONVERSION[module as keyof typeof CLB_CONVERSION];
-    const thresholds = Object.keys(conversion).map(Number).sort((a, b) => b - a);
+    // Capitalize the module name to match CLB_CONVERSION keys
+    const capitalizedModule = module.charAt(0).toUpperCase() + module.slice(1);
+    const conversion = CLB_CONVERSION[capitalizedModule as keyof typeof CLB_CONVERSION];
     
+    if (!conversion) {
+      return { clb: 0, level: "No proficiency", color: "bg-red-500" };
+    }
+    
+    const thresholds = Object.keys(conversion)
+      .map(Number)
+      .sort((a, b) => b - a);
+
     for (const threshold of thresholds) {
       if (score >= threshold) {
         return conversion[threshold as keyof typeof conversion];
@@ -87,19 +184,15 @@ export function CLBCalculator() {
 
   const validateScores = () => {
     const newErrors: Record<string, string> = {};
-    
+
     Object.entries(scores).forEach(([module, score]) => {
-      const scoreNum = parseInt(score);
-      
-      if (score === '') {
-        newErrors[module] = `${module.charAt(0).toUpperCase() + module.slice(1)} score is required`;
-      } else if (isNaN(scoreNum)) {
-        newErrors[module] = 'Please enter a valid number';
-      } else if (scoreNum < 0 || scoreNum > 699) {
-        newErrors[module] = 'Score must be between 0 and 699';
+      if (score === "" || score === "select") {
+        newErrors[module] = `${
+          module.charAt(0).toUpperCase() + module.slice(1)
+        } score is required`;
       }
     });
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -110,16 +203,18 @@ export function CLBCalculator() {
     }
 
     const newResults: CLBScore[] = [];
-    
+
     Object.entries(scores).forEach(([module, scoreStr]) => {
-      const score = parseInt(scoreStr);
+      // Extract the lower bound from the range (e.g., "263-300" -> 263)
+      const score = parseInt(scoreStr.split('-')[0]);
       const clbData = calculateCLB(module, score);
       newResults.push({
         module: module.charAt(0).toUpperCase() + module.slice(1),
+        moduleKey: module,
         score,
         clb: clbData.clb,
         level: clbData.level,
-        color: clbData.color
+        color: clbData.color,
       });
     });
 
@@ -129,7 +224,7 @@ export function CLBCalculator() {
 
   const getOverallCLB = () => {
     if (results.length === 0) return 0;
-    return Math.min(...results.map(r => r.clb));
+    return Math.min(...results.map((r) => r.clb));
   };
 
   const getExpressEntryPoints = () => {
@@ -141,7 +236,12 @@ export function CLBCalculator() {
   };
 
   const resetCalculator = () => {
-    setScores({ reading: '', listening: '', writing: '', speaking: '' });
+    setScores({
+      reading: "select",
+      listening: "select",
+      writing: "select",
+      speaking: "select",
+    });
     setResults([]);
     setShowResults(false);
     setErrors({});
@@ -149,14 +249,17 @@ export function CLBCalculator() {
 
   return (
     <div className="space-y-6">
-      <Card className="universal-card">
+      <Card className="">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calculator className="h-5 w-5 text-primary" />
             TEF Canada CLB Score Calculator
           </CardTitle>
           <CardDescription>
-            Enter your TEF Canada scores to calculate your Canadian Language Benchmark (CLB) levels. CLB is the national standard for measuring French and English language proficiency for Canadian immigration.
+            Select your TEF Canada score ranges to calculate your Canadian
+            Language Benchmark (CLB) levels. CLB is the national standard for
+            measuring French and English language proficiency for Canadian
+            immigration.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -166,22 +269,40 @@ export function CLBCalculator() {
                 <Label htmlFor={module} className="text-sm font-medium">
                   {module.charAt(0).toUpperCase() + module.slice(1)} Score
                 </Label>
-                <Input
-                  id={module}
-                  type="number"
-                  min="0"
-                  max="699"
+                <Select
                   value={value}
-                  onChange={(e) => {
-                    setScores(prev => ({ ...prev, [module]: e.target.value }));
-                    // Clear error when user starts typing
+                  onValueChange={(selectedValue) => {
+                    setScores((prev) => ({ ...prev, [module]: selectedValue }));
+                    // Clear error when user selects a value
                     if (errors[module]) {
-                      setErrors(prev => ({ ...prev, [module]: '' }));
+                      setErrors((prev) => ({ ...prev, [module]: "" }));
                     }
                   }}
-                  placeholder="Enter score (0-699)"
-                  className={`universal-card ${errors[module] ? 'border-red-500' : ''}`}
-                />
+                >
+                  <SelectTrigger
+                    className={`universal-card ${
+                      errors[module] ? "border-red-500" : ""
+                    }`}
+                  >
+                    <SelectValue placeholder="Select score range" />
+                  </SelectTrigger>
+                   <SelectContent
+                     className="!border-border"
+                     style={{
+                       backgroundColor: isDark ? "#111827" : "#f3f4f6",
+                     }}
+                   >
+                     {SCORE_RANGES[module as keyof typeof SCORE_RANGES].map((range) => (
+                       <SelectItem
+                         key={range.value}
+                         value={range.value}
+                         className="bg-background hover:bg-blue-100 hover:text-blue-900 dark:hover:bg-blue-900 dark:hover:text-blue-100 focus:bg-green-100 focus:text-green-900 dark:focus:bg-green-900 dark:focus:text-green-100 transition-colors duration-200"
+                       >
+                         {range.label}
+                       </SelectItem>
+                     ))}
+                   </SelectContent>
+                </Select>
                 {errors[module] && (
                   <p className="text-sm text-red-500">{errors[module]}</p>
                 )}
@@ -190,16 +311,13 @@ export function CLBCalculator() {
           </div>
 
           <div className="flex gap-2">
-            <Button 
+            <Button
               onClick={handleCalculate}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Calculate CLB Scores
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={resetCalculator}
-            >
+            <Button variant="outline" onClick={resetCalculator}>
               Reset
             </Button>
           </div>
@@ -209,7 +327,8 @@ export function CLBCalculator() {
               <Alert>
                 <Info className="h-4 w-4" />
                 <AlertDescription>
-                  Your CLB scores have been calculated. The overall CLB level is the lowest score across all modules.
+                  Your CLB scores have been calculated. The overall CLB level is
+                  the lowest score across all modules.
                 </AlertDescription>
               </Alert>
 
@@ -224,7 +343,7 @@ export function CLBCalculator() {
                         </Badge>
                       </div>
                       <p className="text-sm text-muted-foreground mb-2">
-                        Score: {result.score}/699
+                        Score: {result.score}/{MAX_SCORES[result.moduleKey as keyof typeof MAX_SCORES]}
                       </p>
                       <p className="text-sm font-medium">
                         Level: {result.level}
@@ -238,7 +357,9 @@ export function CLBCalculator() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold text-lg">Overall CLB Level</h3>
+                      <h3 className="font-semibold text-lg">
+                        Overall CLB Level
+                      </h3>
                       <p className="text-muted-foreground">
                         Your lowest CLB score across all modules
                       </p>
@@ -247,7 +368,7 @@ export function CLBCalculator() {
                       CLB {getOverallCLB()}
                     </Badge>
                   </div>
-                  
+
                   {getOverallCLB() >= 7 && (
                     <div className="mt-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
                       <div className="flex items-center gap-2">
@@ -257,7 +378,8 @@ export function CLBCalculator() {
                         </span>
                       </div>
                       <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                        You can earn {getExpressEntryPoints()} additional points for French language proficiency
+                        You can earn {getExpressEntryPoints()} additional points
+                        for French language proficiency
                       </p>
                     </div>
                   )}
@@ -271,7 +393,8 @@ export function CLBCalculator() {
                         </span>
                       </div>
                       <p className="text-sm text-yellow-600 dark:text-yellow-400 mt-1">
-                        Focus on your weakest module to reach CLB 7 and earn bonus points
+                        Focus on your weakest module to reach CLB 7 and earn
+                        bonus points
                       </p>
                     </div>
                   )}

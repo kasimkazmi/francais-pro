@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -68,6 +68,8 @@ const POINTS_TABLES = {
 };
 
 export function ExpressEntryCalculator() {
+  const selectItemClass = "hover:bg-blue-100 dark:hover:bg-blue-900 focus:bg-green-100 dark:focus:bg-green-900 transition-colors";
+  
   const [form, setForm] = useState<ExpressEntryForm>({
     age: '',
     education: '',
@@ -87,6 +89,25 @@ export function ExpressEntryCalculator() {
   const [breakdown, setBreakdown] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      setIsDark(isDarkMode);
+    };
+    
+    checkTheme();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -211,7 +232,7 @@ export function ExpressEntryCalculator() {
 
   return (
     <div className="space-y-6">
-      <Card className="universal-card">
+      <Card className="">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calculator className="h-5 w-5 text-primary" />
@@ -237,9 +258,20 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.age ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select your age" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
                     {Object.keys(POINTS_TABLES.age).map(age => (
-                      <SelectItem key={age} value={age}>{age} years old</SelectItem>
+                      <SelectItem 
+                        key={age} 
+                        value={age}
+                        className={selectItemClass}
+                      >
+                        {age} years old
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -259,16 +291,21 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.education ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select education level" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no-education">No formal education</SelectItem>
-                    <SelectItem value="high-school">High school diploma</SelectItem>
-                    <SelectItem value="one-year">One-year program</SelectItem>
-                    <SelectItem value="two-year">Two-year program</SelectItem>
-                    <SelectItem value="three-year">Three-year program</SelectItem>
-                    <SelectItem value="bachelor">Bachelor&apos;s degree</SelectItem>
-                    <SelectItem value="two-bachelor">Two or more bachelor&apos;s degrees</SelectItem>
-                    <SelectItem value="master">Master&apos;s degree</SelectItem>
-                    <SelectItem value="phd">PhD</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="no-education" className={selectItemClass}>No formal education</SelectItem>
+                    <SelectItem value="high-school" className={selectItemClass}>High school diploma</SelectItem>
+                    <SelectItem value="one-year" className={selectItemClass}>One-year program</SelectItem>
+                    <SelectItem value="two-year" className={selectItemClass}>Two-year program</SelectItem>
+                    <SelectItem value="three-year" className={selectItemClass}>Three-year program</SelectItem>
+                    <SelectItem value="bachelor" className={selectItemClass}>Bachelor&apos;s degree</SelectItem>
+                    <SelectItem value="two-bachelor" className={selectItemClass}>Two or more bachelor&apos;s degrees</SelectItem>
+                    <SelectItem value="master" className={selectItemClass}>Master&apos;s degree</SelectItem>
+                    <SelectItem value="phd" className={selectItemClass}>PhD</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.education && (
@@ -287,13 +324,18 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.workExperience ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select work experience" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">None</SelectItem>
-                    <SelectItem value="1-year">1 year</SelectItem>
-                    <SelectItem value="2-year">2 years</SelectItem>
-                    <SelectItem value="3-year">3 years</SelectItem>
-                    <SelectItem value="4-year">4 years</SelectItem>
-                    <SelectItem value="5-year">5+ years</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="none" className={selectItemClass}>None</SelectItem>
+                    <SelectItem value="1-year" className={selectItemClass}>1 year</SelectItem>
+                    <SelectItem value="2-year" className={selectItemClass}>2 years</SelectItem>
+                    <SelectItem value="3-year" className={selectItemClass}>3 years</SelectItem>
+                    <SelectItem value="4-year" className={selectItemClass}>4 years</SelectItem>
+                    <SelectItem value="5-year" className={selectItemClass}>5+ years</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.workExperience && (
@@ -307,13 +349,18 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select Canadian work experience" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">None</SelectItem>
-                    <SelectItem value="1-year">1 year</SelectItem>
-                    <SelectItem value="2-year">2 years</SelectItem>
-                    <SelectItem value="3-year">3 years</SelectItem>
-                    <SelectItem value="4-year">4 years</SelectItem>
-                    <SelectItem value="5-year">5+ years</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="none" className={selectItemClass}>None</SelectItem>
+                    <SelectItem value="1-year" className={selectItemClass}>1 year</SelectItem>
+                    <SelectItem value="2-year" className={selectItemClass}>2 years</SelectItem>
+                    <SelectItem value="3-year" className={selectItemClass}>3 years</SelectItem>
+                    <SelectItem value="4-year" className={selectItemClass}>4 years</SelectItem>
+                    <SelectItem value="5-year" className={selectItemClass}>5+ years</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -335,14 +382,19 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.frenchCLB ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select French CLB level" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="clb4">CLB 4</SelectItem>
-                    <SelectItem value="clb5">CLB 5</SelectItem>
-                    <SelectItem value="clb6">CLB 6</SelectItem>
-                    <SelectItem value="clb7">CLB 7</SelectItem>
-                    <SelectItem value="clb8">CLB 8</SelectItem>
-                    <SelectItem value="clb9">CLB 9</SelectItem>
-                    <SelectItem value="clb10">CLB 10</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="clb4" className={selectItemClass}>CLB 4</SelectItem>
+                    <SelectItem value="clb5" className={selectItemClass}>CLB 5</SelectItem>
+                    <SelectItem value="clb6" className={selectItemClass}>CLB 6</SelectItem>
+                    <SelectItem value="clb7" className={selectItemClass}>CLB 7</SelectItem>
+                    <SelectItem value="clb8" className={selectItemClass}>CLB 8</SelectItem>
+                    <SelectItem value="clb9" className={selectItemClass}>CLB 9</SelectItem>
+                    <SelectItem value="clb10" className={selectItemClass}>CLB 10</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors.frenchCLB && (
@@ -356,14 +408,19 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Select English CLB level" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="clb4">CLB 4</SelectItem>
-                    <SelectItem value="clb5">CLB 5</SelectItem>
-                    <SelectItem value="clb6">CLB 6</SelectItem>
-                    <SelectItem value="clb7">CLB 7</SelectItem>
-                    <SelectItem value="clb8">CLB 8</SelectItem>
-                    <SelectItem value="clb9">CLB 9</SelectItem>
-                    <SelectItem value="clb10">CLB 10</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="clb4" className={selectItemClass}>CLB 4</SelectItem>
+                    <SelectItem value="clb5" className={selectItemClass}>CLB 5</SelectItem>
+                    <SelectItem value="clb6" className={selectItemClass}>CLB 6</SelectItem>
+                    <SelectItem value="clb7" className={selectItemClass}>CLB 7</SelectItem>
+                    <SelectItem value="clb8" className={selectItemClass}>CLB 8</SelectItem>
+                    <SelectItem value="clb9" className={selectItemClass}>CLB 9</SelectItem>
+                    <SelectItem value="clb10" className={selectItemClass}>CLB 10</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -380,9 +437,14 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Canadian education" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="yes">Yes (+15 points)</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="no" className={selectItemClass}>No</SelectItem>
+                    <SelectItem value="yes" className={selectItemClass}>Yes (+15 points)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -393,9 +455,14 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Job offer" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="yes">Yes (+50 points)</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="no" className={selectItemClass}>No</SelectItem>
+                    <SelectItem value="yes" className={selectItemClass}>Yes (+50 points)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -406,9 +473,14 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Provincial nomination" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="yes">Yes (+600 points)</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="no" className={selectItemClass}>No</SelectItem>
+                    <SelectItem value="yes" className={selectItemClass}>Yes (+600 points)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -419,9 +491,14 @@ export function ExpressEntryCalculator() {
                   <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
                     <SelectValue placeholder="Sibling in Canada" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="no">No</SelectItem>
-                    <SelectItem value="yes">Yes (+15 points)</SelectItem>
+                  <SelectContent 
+                    className="!border-border"
+                    style={{
+                      backgroundColor: isDark ? '#111827' : '#f3f4f6'
+                    }}
+                  >
+                    <SelectItem value="no" className={selectItemClass}>No</SelectItem>
+                    <SelectItem value="yes" className={selectItemClass}>Yes (+15 points)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

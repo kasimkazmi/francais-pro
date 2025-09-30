@@ -46,10 +46,10 @@ export function ImmigrationTools() {
           Use these powerful tools to calculate your CLB scores, Express Entry points, and prepare for your French language tests.
         </p>
 
-        <TipSection 
-          title="About CLB (Canadian Language Benchmarks)"
-          content="CLB stands for Canadian Language Benchmarks, which is the national standard for describing and measuring the English and French language proficiency of adult immigrants and prospective immigrants for living and working in Canada. These benchmarks are used in various immigration programs, such as Express Entry, to assess language ability and are also used for evaluating language skills for citizenship applications."
-        />
+          <TipSection
+            title="About CLB (Canadian Language Benchmarks)"
+            content="CLB is the national standard for measuring English and French language proficiency for Canadian immigration. Used in programs like Express Entry and citizenship applications to assess your language skills."
+          />
 
         {/* CLB Calculator */}
         <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
