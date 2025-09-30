@@ -372,6 +372,12 @@ export function MainLayout({ children }: MainLayoutProps) {
                   Immigration
                 </Link>
                 <Link
+                  href="/immigration/test-modules"
+                  className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700"
+                >
+                  Immigration Tools
+                </Link>
+                <Link
                   href="/arts"
                   className="flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-100 hover:shadow-sm active:bg-gray-200 active:scale-95 dark:active:bg-gray-700"
                 >

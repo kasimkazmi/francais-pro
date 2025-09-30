@@ -86,8 +86,36 @@ export function ExpressEntryCalculator() {
   const [totalPoints, setTotalPoints] = useState(0);
   const [breakdown, setBreakdown] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    // Required fields validation
+    const requiredFields = ['age', 'education', 'workExperience', 'frenchCLB'];
+    requiredFields.forEach(field => {
+      if (!form[field as keyof ExpressEntryForm]) {
+        newErrors[field] = `${field.charAt(0).toUpperCase() + field.slice(1)} is required`;
+      }
+    });
+    
+    // Age validation
+    if (form.age) {
+      const age = parseInt(form.age);
+      if (age < 18 || age > 45) {
+        newErrors.age = 'Age must be between 18 and 45';
+      }
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const calculatePoints = () => {
+    if (!validateForm()) {
+      return;
+    }
+
     let points = 0;
     const breakdown: Record<string, number> = {};
 
@@ -121,13 +149,16 @@ export function ExpressEntryCalculator() {
     points += englishPoints;
     breakdown.englishLanguage = englishPoints;
 
-    // French bonus points
+    // French bonus points (accurate CRS calculation)
     let frenchBonus = 0;
-    if (form.frenchCLB === 'clb7' || form.frenchCLB === 'clb8' || form.frenchCLB === 'clb9' || form.frenchCLB === 'clb10') {
-      if (form.englishCLB === 'clb4' || form.englishCLB === 'clb5' || form.englishCLB === 'clb6') {
-        frenchBonus = 25;
-      } else if (form.englishCLB === 'clb7' || form.englishCLB === 'clb8' || form.englishCLB === 'clb9' || form.englishCLB === 'clb10') {
-        frenchBonus = 50;
+    const frenchCLB = parseInt(form.frenchCLB.replace('clb', ''));
+    const englishCLB = form.englishCLB ? parseInt(form.englishCLB.replace('clb', '')) : 0;
+    
+    if (frenchCLB >= 7) {
+      if (englishCLB >= 4 && englishCLB <= 6) {
+        frenchBonus = 25; // French CLB 7+ with English CLB 4-6
+      } else if (englishCLB >= 7) {
+        frenchBonus = 50; // French CLB 7+ with English CLB 7+
       }
     }
     points += frenchBonus;
@@ -166,6 +197,7 @@ export function ExpressEntryCalculator() {
     setTotalPoints(0);
     setBreakdown({});
     setShowResults(false);
+    setErrors({});
   };
 
   const getScoreStatus = (points: number) => {
@@ -186,7 +218,7 @@ export function ExpressEntryCalculator() {
             Express Entry Points Calculator
           </CardTitle>
           <CardDescription>
-            Calculate your Comprehensive Ranking System (CRS) score for Express Entry
+            Calculate your Comprehensive Ranking System (CRS) score for Express Entry. CLB levels are used to assess your French and English language proficiency for Canadian immigration.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -196,8 +228,13 @@ export function ExpressEntryCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="age">Age</Label>
-                <Select value={form.age} onValueChange={(value) => setForm(prev => ({ ...prev, age: value }))}>
-                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
+                <Select value={form.age} onValueChange={(value) => {
+                  setForm(prev => ({ ...prev, age: value }));
+                  if (errors.age) {
+                    setErrors(prev => ({ ...prev, age: '' }));
+                  }
+                }}>
+                  <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.age ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select your age" />
                   </SelectTrigger>
                   <SelectContent>
@@ -206,12 +243,20 @@ export function ExpressEntryCalculator() {
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.age && (
+                  <p className="text-sm text-red-500">{errors.age}</p>
+                )}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="education">Education</Label>
-                <Select value={form.education} onValueChange={(value) => setForm(prev => ({ ...prev, education: value }))}>
-                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
+                <Select value={form.education} onValueChange={(value) => {
+                  setForm(prev => ({ ...prev, education: value }));
+                  if (errors.education) {
+                    setErrors(prev => ({ ...prev, education: '' }));
+                  }
+                }}>
+                  <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.education ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select education level" />
                   </SelectTrigger>
                   <SelectContent>
@@ -226,12 +271,20 @@ export function ExpressEntryCalculator() {
                     <SelectItem value="phd">PhD</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.education && (
+                  <p className="text-sm text-red-500">{errors.education}</p>
+                )}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="workExperience">Foreign Work Experience</Label>
-                <Select value={form.workExperience} onValueChange={(value) => setForm(prev => ({ ...prev, workExperience: value }))}>
-                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
+                <Select value={form.workExperience} onValueChange={(value) => {
+                  setForm(prev => ({ ...prev, workExperience: value }));
+                  if (errors.workExperience) {
+                    setErrors(prev => ({ ...prev, workExperience: '' }));
+                  }
+                }}>
+                  <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.workExperience ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select work experience" />
                   </SelectTrigger>
                   <SelectContent>
@@ -243,6 +296,9 @@ export function ExpressEntryCalculator() {
                     <SelectItem value="5-year">5+ years</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.workExperience && (
+                  <p className="text-sm text-red-500">{errors.workExperience}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -270,8 +326,13 @@ export function ExpressEntryCalculator() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="frenchCLB">French CLB Level</Label>
-                <Select value={form.frenchCLB} onValueChange={(value) => setForm(prev => ({ ...prev, frenchCLB: value }))}>
-                  <SelectTrigger className="universal-card hover:bg-muted/50 transition-colors">
+                <Select value={form.frenchCLB} onValueChange={(value) => {
+                  setForm(prev => ({ ...prev, frenchCLB: value }));
+                  if (errors.frenchCLB) {
+                    setErrors(prev => ({ ...prev, frenchCLB: '' }));
+                  }
+                }}>
+                  <SelectTrigger className={`universal-card hover:bg-muted/50 transition-colors ${errors.frenchCLB ? 'border-red-500' : ''}`}>
                     <SelectValue placeholder="Select French CLB level" />
                   </SelectTrigger>
                   <SelectContent>
@@ -284,6 +345,9 @@ export function ExpressEntryCalculator() {
                     <SelectItem value="clb10">CLB 10</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.frenchCLB && (
+                  <p className="text-sm text-red-500">{errors.frenchCLB}</p>
+                )}
               </div>
 
               <div className="space-y-2">

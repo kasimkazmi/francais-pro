@@ -249,20 +249,6 @@ export function ImmigrationContent() {
           </CardContent>
         </Card>
 
-        {/* CLB Calculator */}
-        <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
-          <Calculator className="h-6 w-6 text-primary" />
-          CLB Score Calculator
-        </h2>
-        <CLBCalculator />
-
-        {/* Express Entry Calculator */}
-        <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
-          <Calculator className="h-6 w-6 text-primary" />
-          Express Entry Points Calculator
-        </h2>
-        <ExpressEntryCalculator />
-
         {/* Francophone Communities */}
         <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
           <MapPin className="h-6 w-6 text-primary" />
@@ -366,27 +352,181 @@ export function ImmigrationContent() {
           </Card>
         </div>
 
+        {/* Post-Immigration Information */}
+        <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
+          <BookOpen className="h-6 w-6 text-primary" />
+          Post-Immigration Information
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card className="universal-card">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Briefcase className="h-5 w-5 text-primary" />
+                Canada Revenue Agency (CRA)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                The CRA (Canada Revenue Agency) is the federal agency responsible for administering tax laws and social and economic benefit programs for the Government of Canada.
+              </p>
+              <ul className="space-y-2">
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  File your annual tax returns
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Apply for benefits like GST/HST credit
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Register for a Social Insurance Number (SIN)
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Access My Account for online services
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <Card className="universal-card">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                Settlement Services
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Various services are available to help newcomers settle in Canada successfully.
+              </p>
+              <ul className="space-y-2">
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Language training programs
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Employment assistance
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Housing and community connections
+                </li>
+                <li className="text-sm text-muted-foreground flex items-start gap-2">
+                  <CheckCircle className="h-3 w-3 text-green-500 mt-1 flex-shrink-0" />
+                  Healthcare system orientation
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Immigration Tools */}
+        <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">
+          <Calculator className="h-6 w-6 text-primary" />
+          Immigration Tools
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="universal-card hover:shadow-lg transition-all duration-300 group">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calculator className="h-5 w-5 text-primary" />
+                CLB Score Calculator
+              </CardTitle>
+              <CardDescription>
+                Calculate your Canadian Language Benchmark scores
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <EnhancedButton
+                className="w-full"
+                tooltip="Calculate your CLB scores"
+                onClick={() =>
+                  (window.location.href = "/immigration/test-modules")
+                }
+              >
+                Calculate CLB Scores
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </EnhancedButton>
+            </CardContent>
+          </Card>
+
+          <Card className="universal-card hover:shadow-lg transition-all duration-300 group">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Calculator className="h-5 w-5 text-primary" />
+                Express Entry Calculator
+              </CardTitle>
+              <CardDescription>
+                Calculate your Express Entry points for immigration
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <EnhancedButton
+                variant="outline"
+                className="w-full"
+                tooltip="Calculate your Express Entry points"
+                onClick={() =>
+                  (window.location.href = "/immigration/test-modules")
+                }
+              >
+                Calculate Points
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </EnhancedButton>
+            </CardContent>
+          </Card>
+
+          <Card className="universal-card hover:shadow-lg transition-all duration-300 group">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Test Preparation
+              </CardTitle>
+              <CardDescription>
+                Study tips and resources for French language tests
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <EnhancedButton
+                variant="secondary"
+                className="w-full"
+                tooltip="Access test preparation resources"
+                onClick={() =>
+                  (window.location.href = "/immigration/test-modules")
+                }
+              >
+                Prepare for Tests
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </EnhancedButton>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* <div className="my-8 p-6 bg-primary/10 rounded-lg border border-primary/20">
           <h3 className="text-lg font-semibold mb-3 text-primary">
             Start Your Immigration Journey
           </h3>
           <p className="text-muted-foreground mb-4">
-            Use the calculators above to assess your chances and start preparing
-            for your French language tests.
+            Use our calculators and resources to plan your French language learning journey for Canadian immigration.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <EnhancedButton
+            <EnhancedButton 
               className="bg-primary text-primary-foreground hover:bg-primary/90"
-              tooltip="Calculate your immigration score"
+              tooltip="Start comprehensive immigration assessment"
+              onClick={() => window.location.href = '/immigration/test-modules'}
             >
-              Calculate My Score
+              Start Immigration Assessment
               <ArrowRight className="ml-2 h-4 w-4" />
             </EnhancedButton>
-            <EnhancedButton
+            <EnhancedButton 
               variant="outline"
-              tooltip="Find TEF Canada test centers"
+              tooltip="Learn more about French immigration programs"
             >
-              Find Test Centers
+              Learn More
             </EnhancedButton>
           </div>
         </div> */}

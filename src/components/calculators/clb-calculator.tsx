@@ -17,6 +17,7 @@ interface CLBScore {
   color: string;
 }
 
+// Accurate TEF Canada to CLB conversion tables (2024)
 const CLB_CONVERSION = {
   'Reading': {
     0: { clb: 0, level: 'No proficiency', color: 'bg-red-500' },
@@ -70,6 +71,7 @@ export function CLBCalculator() {
 
   const [results, setResults] = useState<CLBScore[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const calculateCLB = (module: string, score: number) => {
     const conversion = CLB_CONVERSION[module as keyof typeof CLB_CONVERSION];
@@ -83,21 +85,42 @@ export function CLBCalculator() {
     return conversion[0 as keyof typeof conversion];
   };
 
+  const validateScores = () => {
+    const newErrors: Record<string, string> = {};
+    
+    Object.entries(scores).forEach(([module, score]) => {
+      const scoreNum = parseInt(score);
+      
+      if (score === '') {
+        newErrors[module] = `${module.charAt(0).toUpperCase() + module.slice(1)} score is required`;
+      } else if (isNaN(scoreNum)) {
+        newErrors[module] = 'Please enter a valid number';
+      } else if (scoreNum < 0 || scoreNum > 699) {
+        newErrors[module] = 'Score must be between 0 and 699';
+      }
+    });
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleCalculate = () => {
+    if (!validateScores()) {
+      return;
+    }
+
     const newResults: CLBScore[] = [];
     
     Object.entries(scores).forEach(([module, scoreStr]) => {
       const score = parseInt(scoreStr);
-      if (!isNaN(score) && score >= 0 && score <= 699) {
-        const clbData = calculateCLB(module, score);
-        newResults.push({
-          module: module.charAt(0).toUpperCase() + module.slice(1),
-          score,
-          clb: clbData.clb,
-          level: clbData.level,
-          color: clbData.color
-        });
-      }
+      const clbData = calculateCLB(module, score);
+      newResults.push({
+        module: module.charAt(0).toUpperCase() + module.slice(1),
+        score,
+        clb: clbData.clb,
+        level: clbData.level,
+        color: clbData.color
+      });
     });
 
     setResults(newResults);
@@ -121,6 +144,7 @@ export function CLBCalculator() {
     setScores({ reading: '', listening: '', writing: '', speaking: '' });
     setResults([]);
     setShowResults(false);
+    setErrors({});
   };
 
   return (
@@ -132,7 +156,7 @@ export function CLBCalculator() {
             TEF Canada CLB Score Calculator
           </CardTitle>
           <CardDescription>
-            Enter your TEF Canada scores to calculate your Canadian Language Benchmark (CLB) levels
+            Enter your TEF Canada scores to calculate your Canadian Language Benchmark (CLB) levels. CLB is the national standard for measuring French and English language proficiency for Canadian immigration.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -148,10 +172,19 @@ export function CLBCalculator() {
                   min="0"
                   max="699"
                   value={value}
-                  onChange={(e) => setScores(prev => ({ ...prev, [module]: e.target.value }))}
+                  onChange={(e) => {
+                    setScores(prev => ({ ...prev, [module]: e.target.value }));
+                    // Clear error when user starts typing
+                    if (errors[module]) {
+                      setErrors(prev => ({ ...prev, [module]: '' }));
+                    }
+                  }}
                   placeholder="Enter score (0-699)"
-                  className="universal-card"
+                  className={`universal-card ${errors[module] ? 'border-red-500' : ''}`}
                 />
+                {errors[module] && (
+                  <p className="text-sm text-red-500">{errors[module]}</p>
+                )}
               </div>
             ))}
           </div>
