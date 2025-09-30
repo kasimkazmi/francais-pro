@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { AudioButton } from '@/components/ui/audio-button';
 import { AuthModal } from '@/components/ui/auth-modal';
+import { TipSection } from '@/components/ui/tip-section';
 import { useAuth } from '@/contexts/AuthContext';
 import { 
   Play, 
@@ -346,17 +347,10 @@ export function PracticeContent() {
             Choose a category to start practicing. Each category has specific questions tailored to that topic.
           </p>
 
-          <div className="my-6 rounded-lg border bg-muted/50 p-4">
-            <div className="flex items-start space-x-2">
-              <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-500"></div>
-              <div>
-                <p className="text-sm font-medium">Practice Tip</p>
-                <p className="text-sm text-muted-foreground">
-                  Select a category that matches what you&apos;ve been learning to get the most relevant practice questions.
-                </p>
-              </div>
-            </div>
-          </div>
+          <TipSection 
+            title="Practice Tip"
+            content="Select a category that matches what you've been learning to get the most relevant practice questions."
+          />
 
           {!isAuthenticated && (
             <div className="my-6 rounded-lg border bg-amber-50 dark:bg-amber-900/20 p-4">
@@ -736,17 +730,10 @@ export function PracticeContent() {
           {getCategoryDescription(category)}
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-500"></div>
-            <div>
-              <p className="text-sm font-medium">Practice Tip</p>
-              <p className="text-sm text-muted-foreground">
-                Take your time to read each question carefully. Use the audio button to hear pronunciations when available.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Practice Tip"
+          content="Take your time to read each question carefully. Use the audio button to hear pronunciations when available."
+        />
 
         {/* Progress Bar */}
         <div className="mb-8">

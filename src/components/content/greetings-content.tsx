@@ -4,6 +4,7 @@ import { InteractiveGreetingList } from '@/components/greetings/interactive-gree
 import { InteractiveIntroductionList } from '@/components/greetings/interactive-introduction-card';
 import { ArrowRight } from 'lucide-react';
 import { AudioButton } from '@/components/ui/audio-button';
+import { TipSection } from '@/components/ui/tip-section';
 import greetingsData from '@/data/greetings.json';
 
 export function GreetingsContent() {
@@ -14,16 +15,7 @@ export function GreetingsContent() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold">French Greetings</h1>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
-            Practice Mode
-          </Button>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="hover:bg-accent hover:text-accent-foreground transition-colors duration-200 hover:scale-105 active:scale-95"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+        
         </div>
       </div>
 
@@ -33,23 +25,10 @@ export function GreetingsContent() {
           Master essential French greetings and polite expressions for everyday conversations.
         </p>
 
-        {/* Interactive Tip */}
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <AudioButton 
-              text="French greetings vary by time of day and formality level. Choose the appropriate greeting for each situation."
-              size="sm"
-              variant="ghost"
-              className="mt-0.5"
-            />
-            <div>
-              <p className="text-sm font-medium">Greeting Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French greetings vary by time of day and formality level. Choose the appropriate greeting for each situation.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Greeting Tip"
+          content="French greetings vary by time of day and formality level. Choose the appropriate greeting for each situation."
+        />
 
         {/* Basic Greetings Section */}
         <h2 className="text-2xl font-bold mt-8 mb-4">Basic Greetings</h2>

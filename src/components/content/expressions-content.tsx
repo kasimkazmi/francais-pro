@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { SimpleTooltip } from '@/components/ui/simple-tooltip';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, MessageCircle, Lightbulb, Briefcase, Laptop, Plane, Trophy, Star } from 'lucide-react';
 import expressionsData from '@/data/expressions.json';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -29,7 +30,7 @@ export function ExpressionsContent() {
     <div className="container mx-auto max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">French Expressions & Idioms</h1>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <Link href="/practice?category=expressions">
             <EnhancedButton variant="outline" size="sm" tooltip="Practice using expressions in context">
               Expression Practice
@@ -40,7 +41,7 @@ export function ExpressionsContent() {
               <ArrowRight className="h-4 w-4" />
             </EnhancedButton>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="prose prose-slate dark:prose-invert max-w-none">
@@ -48,17 +49,10 @@ export function ExpressionsContent() {
           Master French expressions, idioms, and colloquial language to sound like a native speaker and understand cultural nuances.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <MessageCircle className="mt-0.5 h-4 w-4 text-blue-500" />
-            <div>
-              <p className="text-sm font-medium">Expression Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French expressions often have literal meanings that differ from their actual usage. Understanding context is key to using them correctly.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Expression Tip"
+          content="French expressions often have literal meanings that differ from their actual usage. Understanding context is key to using them correctly."
+        />
 
         {/* Expression Categories */}
         {categories.map((category, categoryIndex) => {

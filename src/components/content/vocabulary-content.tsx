@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { SimpleTooltip } from '@/components/ui/simple-tooltip';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, Users, Heart, Palette, Briefcase, Smile, BookOpen } from 'lucide-react';
 import vocabularyData from '@/data/vocabulary.json';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -25,14 +26,14 @@ export function VocabularyContent() {
     <div className="container mx-auto max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">French Vocabulary</h1>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <EnhancedButton variant="outline" size="sm" tooltip="Practice vocabulary with flashcards">
             Flashcard Mode
           </EnhancedButton>
           <EnhancedButton variant="ghost" size="sm">
             <ArrowRight className="h-4 w-4" />
           </EnhancedButton>
-        </div>
+        </div> */}
       </div>
 
       <div className="prose prose-slate dark:prose-invert max-w-none">
@@ -40,17 +41,10 @@ export function VocabularyContent() {
           Expand your French vocabulary with essential words organized by category. Each word includes pronunciation and example sentences.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <BookOpen className="mt-0.5 h-4 w-4 text-blue-500" />
-            <div>
-              <p className="text-sm font-medium">Vocabulary Tip</p>
-              <p className="text-sm text-muted-foreground">
-                Practice new words daily. Use them in sentences to remember them better. Listen to pronunciations to improve your accent.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Vocabulary Tip"
+          content="Practice new words daily. Use them in sentences to remember them better. Listen to pronunciations to improve your accent."
+        />
 
         {/* Vocabulary Categories */}
         {categories.map((category, categoryIndex) => {

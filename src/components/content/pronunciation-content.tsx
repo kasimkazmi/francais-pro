@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AudioButton } from '@/components/ui/audio-button';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight } from 'lucide-react';
 
 export function PronunciationContent() {
@@ -9,14 +10,14 @@ export function PronunciationContent() {
     <div className="container mx-auto max-w-4xl px-4 py-4 md:py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold">French Pronunciation</h1>
-        <div className="flex items-center space-x-2">
+        {/* <div className="flex items-center space-x-2">
           <Link href="/practice">
             <Button className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200">
               Start Pronunciation Practice
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="prose prose-slate dark:prose-invert max-w-none">
@@ -24,17 +25,10 @@ export function PronunciationContent() {
           Master French pronunciation with our comprehensive guide. Learn the sounds, rules, and techniques to speak French like a native.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-500"></div>
-            <div>
-              <p className="text-sm font-medium">Pronunciation Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French pronunciation is different from English. Focus on the rhythm, nasal sounds, and silent letters.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Pronunciation Tip"
+          content="French pronunciation is different from English. Focus on the rhythm, nasal sounds, and silent letters."
+        />
 
         <h2 className="text-2xl font-bold mt-8 mb-4">French Vowel Sounds</h2>
         <p className="text-muted-foreground mb-6">

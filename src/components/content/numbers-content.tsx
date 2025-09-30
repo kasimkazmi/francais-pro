@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { InteractiveAudioGrid } from '@/components/shared/interactive-audio-grid';
 import { InteractivePracticeSection } from '@/components/shared/interactive-practice-section';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, Calculator } from 'lucide-react';
 import numbersData from '@/data/numbers.json';
 
@@ -30,17 +31,8 @@ export function NumbersContent() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold">French Numbers</h1>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="sm">
-            <Calculator className="h-4 w-4 mr-2" />
-            Number Quiz
-          </Button>
-          <Button 
-            variant="ghost" 
-            size="sm"
-            className="hover:bg-accent hover:text-accent-foreground transition-colors duration-200 hover:scale-105 active:scale-95"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+         
+        
         </div>
       </div>
 
@@ -50,18 +42,10 @@ export function NumbersContent() {
           Master French numbers from zero to millions. Learn pronunciation, counting patterns, and practical usage.
         </p>
 
-        {/* Static Tip */}
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <Calculator className="mt-0.5 h-4 w-4 text-blue-500" />
-            <div>
-              <p className="text-sm font-medium">Number Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French numbers follow specific patterns. Once you learn 1-20, the rest become easier to master.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Number Tip"
+          content="French numbers follow specific patterns. Once you learn 1-20, the rest become easier to master."
+        />
 
         {/* Basic Numbers Section */}
         <h2 className="text-2xl font-bold mt-8 mb-4">Numbers 1-10</h2>

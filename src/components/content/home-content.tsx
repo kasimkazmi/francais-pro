@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { AudioButton } from '@/components/ui/audio-button';
 import { LazyCardGrid } from '@/components/ui/lazy-card';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
@@ -169,17 +170,10 @@ export function HomeContent() {
               Master the fundamental grammar rules that form the backbone of French language structure.
             </p>
 
-            <div className="my-6 rounded-lg border bg-muted/50 p-4">
-              <div className="flex items-start space-x-2">
-                <div className="mt-0.5 h-4 w-4 rounded-full bg-green-500"></div>
-                <div>
-                  <p className="text-sm font-medium">Grammar Tip</p>
-                  <p className="text-sm text-muted-foreground">
-                    French grammar follows specific patterns. Understanding these rules will make learning much easier.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <TipSection 
+              title="Grammar Tip"
+              content="French grammar follows specific patterns. Understanding these rules will make learning much easier."
+            />
 
             <h2 className="text-2xl font-bold mt-8 mb-4">Articles (le, la, les)</h2>
             <p className="text-muted-foreground mb-4">
@@ -327,17 +321,10 @@ export function HomeContent() {
               Apply what you&apos;ve learned with interactive exercises and real-world practice scenarios.
             </p>
 
-            <div className="my-6 rounded-lg border bg-muted/50 p-4">
-              <div className="flex items-start space-x-2">
-                <div className="mt-0.5 h-4 w-4 rounded-full bg-orange-500"></div>
-                <div>
-                  <p className="text-sm font-medium">Practice Tip</p>
-                  <p className="text-sm text-muted-foreground">
-                    Regular practice is key to mastering French. Try to use what you learn in real conversations.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <TipSection 
+              title="Practice Tip"
+              content="Regular practice is key to mastering French. Try to use what you learn in real conversations."
+            />
 
             <h2 className="text-2xl font-bold mt-8 mb-4">Practice Exercises</h2>
             <p className="text-muted-foreground mb-4">

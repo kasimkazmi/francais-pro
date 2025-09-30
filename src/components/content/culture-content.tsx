@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { Calendar, Utensils, Palette, BookOpen, MapPin, Star, Heart } from 'lucide-react';
 import cultureData from '@/data/culture.json';
+import { TipSection } from '../ui/tip-section';
 
 export function CultureContent() {
   const { traditions, cuisine, art, literature, geography } = cultureData;
@@ -28,17 +29,10 @@ export function CultureContent() {
           Immerse yourself in the rich tapestry of French culture, from traditional celebrations to world-renowned cuisine and art.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <Heart className="mt-0.5 h-4 w-4 text-blue-500" />
-            <div>
-              <p className="text-sm font-medium">Cultural Insight</p>
-              <p className="text-sm text-muted-foreground">
-                Understanding French culture is essential for mastering the language. Culture and language are deeply intertwined.
-              </p>
-            </div>
-          </div>
-        </div>
+       <TipSection 
+          title="Cultural Insight"
+          content="Understanding French culture is essential for mastering the language. Culture and language are deeply intertwined."
+        />
 
         {/* Traditions Section */}
         <h2 className="text-2xl font-bold mt-8 mb-6 flex items-center gap-2">

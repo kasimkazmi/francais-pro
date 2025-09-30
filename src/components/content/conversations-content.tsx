@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { EnhancedButton } from '@/components/ui/enhanced-button';
 import { Tooltip } from '@/components/ui/tooltip';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, MessageCircle, Users, Star, Play, RotateCcw } from 'lucide-react';
 import conversationsData from '@/data/conversations.json';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -32,17 +33,10 @@ export function ConversationsContent() {
           Practice real-world French conversations with interactive dialogues and common phrases for everyday situations.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <MessageCircle className="mt-0.5 h-4 w-4 text-blue-500" />
-            <div>
-              <p className="text-sm font-medium">Conversation Tip</p>
-              <p className="text-sm text-muted-foreground">
-                Practice these dialogues out loud. Try to understand the context and use appropriate gestures and expressions.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Conversation Tip"
+          content="Practice these dialogues out loud. Try to understand the context and use appropriate gestures and expressions."
+        />
 
         {/* Conversation Scenarios */}
         <h2 className="text-2xl font-bold mt-8 mb-6">Conversation Scenarios</h2>

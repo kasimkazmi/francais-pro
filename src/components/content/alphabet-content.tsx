@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
 import { LazyCardGrid } from '@/components/ui/lazy-card';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight } from 'lucide-react';
 import alphabetData from '@/data/alphabet.json';
 import { AlphabetData } from '@/types/data-types';
@@ -15,12 +16,12 @@ export function AlphabetContent() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold">French Alphabet</h1>
         <div className="flex items-center space-x-2">
-          <Link href="/practice">
+          {/* <Link href="/practice">
             <Button className="bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200">
               Start Alphabet Practice
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -29,17 +30,10 @@ export function AlphabetContent() {
           Master the French alphabet and its unique pronunciation. The French alphabet has 26 letters, just like English, but with different sounds and special characters.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-500"></div>
-            <div>
-              <p className="text-sm font-medium">Alphabet Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French letters are pronounced differently than English. Practice each letter sound carefully.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Alphabet Tip"
+          content="French letters are pronounced differently than English. Practice each letter sound carefully."
+        />
 
         <h2 className="text-2xl font-bold mt-8 mb-4">The French Alphabet</h2>
         <p className="text-muted-foreground mb-6">

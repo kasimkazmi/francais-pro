@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { AudioButton } from '@/components/ui/audio-button';
+import { TipSection } from '@/components/ui/tip-section';
 import { ArrowRight, BookOpen, Lightbulb, Target } from 'lucide-react';
 import grammarData from '@/data/grammar.json';
 import { GrammarData, Verb } from '@/types/data-types';
@@ -35,17 +36,10 @@ export function GrammarContent() {
           Master the essential French grammar rules. Understanding grammar is crucial for building proper sentences and communicating effectively in French.
         </p>
 
-        <div className="my-6 rounded-lg border bg-muted/50 p-4">
-          <div className="flex items-start space-x-2">
-            <div className="mt-0.5 h-4 w-4 rounded-full bg-blue-500"></div>
-            <div>
-              <p className="text-sm font-medium">Grammar Tip</p>
-              <p className="text-sm text-muted-foreground">
-                French grammar has specific rules for gender, number, and word order. Practice regularly to internalize these patterns.
-              </p>
-            </div>
-          </div>
-        </div>
+        <TipSection 
+          title="Grammar Tip"
+          content="French grammar has specific rules for gender, number, and word order. Practice regularly to internalize these patterns."
+        />
 
         <h2 className="text-2xl font-bold mt-8 mb-4">Articles</h2>
         <p className="text-muted-foreground mb-6">
