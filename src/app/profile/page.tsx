@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ProfileModal } from '@/components/ui/profile-modal';
 import { UploadPictureModal } from '@/components/ui/upload-picture-modal';
+import { AvatarGenerator } from '@/components/ui/avatar-generator';
 
 export default function ProfilePage() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -19,16 +20,38 @@ export default function ProfilePage() {
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [customPhoto, setCustomPhoto] = useState<string | null>(null);
+  const [avatarStyle, setAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas'>('lorelei');
+  const [avatarGender, setAvatarGender] = useState<'male' | 'female'>('male');
+  const [avatarSeed, setAvatarSeed] = useState(0);
 
-  // Load custom photo from localStorage
+  // Load custom photo and avatar settings from localStorage
   useEffect(() => {
     if (user?.uid) {
       const savedPhoto = localStorage.getItem(`profile-photo-${user.uid}`);
+      const savedStyle = localStorage.getItem(`profile-avatar-style-${user.uid}`) as 'avataaars' | 'lorelei' | 'initials' | 'personas' | null;
+      const savedGender = localStorage.getItem(`profile-avatar-gender-${user.uid}`) as 'male' | 'female' | null;
+      const savedSeed = localStorage.getItem(`profile-avatar-seed-${user.uid}`);
+      
       if (savedPhoto) {
         setCustomPhoto(savedPhoto);
       }
+      if (savedStyle) {
+        setAvatarStyle(savedStyle);
+      }
+      if (savedGender) {
+        setAvatarGender(savedGender);
+      }
+      if (savedSeed) {
+        setAvatarSeed(parseInt(savedSeed));
+      }
     }
   }, [user]);
+
+  // Generate avatar seed
+  const getProfileAvatarSeed = () => {
+    const baseSeed = user?.email || user?.displayName || user?.uid || 'user';
+    return `${baseSeed}-${avatarGender}-${avatarSeed}`;
+  };
 
   const handlePhotoUpload = async (imageUrl: string) => {
     try {
@@ -97,18 +120,30 @@ export default function ProfilePage() {
                   className="relative h-20 w-20 rounded-full bg-primary/10 overflow-hidden cursor-pointer group"
                   onClick={() => setShowUploadModal(true)}
                 >
-                  {customPhoto || user.photoURL ? (
+                  {customPhoto ? (
                     <Image 
-                      src={customPhoto || user.photoURL || ''} 
+                      src={customPhoto} 
+                      alt={user.displayName || 'User'} 
+                      width={80}
+                      height={80}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : user.photoURL ? (
+                    <Image 
+                      src={user.photoURL} 
                       alt={user.displayName || 'User'} 
                       width={80}
                       height={80}
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <div className="h-full w-full flex items-center justify-center">
-                      <User className="h-10 w-10 text-primary" />
-                    </div>
+                    <AvatarGenerator 
+                      seed={getProfileAvatarSeed()}
+                      size={80}
+                      style={avatarStyle}
+                      gender={avatarGender}
+                      className="h-full w-full"
+                    />
                   )}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-full">
                     <Upload className="h-6 w-6 text-white" />

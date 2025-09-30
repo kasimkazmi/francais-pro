@@ -3,9 +3,11 @@
 import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { X, Upload, User, Image as ImageIcon } from 'lucide-react';
+import { X, Upload, Image as ImageIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { AvatarGenerator } from '@/components/ui/avatar-generator';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface UploadPictureModalProps {
   isOpen: boolean;
@@ -20,9 +22,26 @@ export function UploadPictureModal({
   onUpload,
   currentPhotoURL 
 }: UploadPictureModalProps) {
+  const { user } = useAuth();
   const [preview, setPreview] = useState<string | null>(currentPhotoURL || null);
   const [isUploading, setIsUploading] = useState(false);
+  const [selectedAvatarStyle, setSelectedAvatarStyle] = useState<'avataaars' | 'lorelei' | 'initials' | 'personas' | null>(null);
+  const [gender, setGender] = useState<'male' | 'female'>('male');
+  const [randomSeed, setRandomSeed] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const avatarStyles = [
+    { name: 'lorelei', label: 'Lorelei' },
+    { name: 'avataaars', label: 'Avataaars' },
+    { name: 'initials', label: 'Initials' },
+    { name: 'personas', label: 'Personas' }
+  ] as const;
+
+  // Generate unique seed based on user info, gender, and random number
+  const getAvatarSeed = (includeRandom = true) => {
+    const baseSeed = user?.email || user?.displayName || user?.uid || 'user';
+    return includeRandom ? `${baseSeed}-${gender}-${randomSeed}` : `${baseSeed}-${gender}`;
+  };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -44,8 +63,41 @@ export function UploadPictureModal({
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result as string);
+      setSelectedAvatarStyle(null);
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleAvatarSelect = (style: 'avataaars' | 'lorelei' | 'initials' | 'personas') => {
+    setSelectedAvatarStyle(style);
+    setPreview(null);
+    setRandomSeed(0); // Reset seed when changing style
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleSaveAvatar = async () => {
+    if (!selectedAvatarStyle) return;
+    
+    setIsUploading(true);
+    try {
+      // Save the avatar style preference to localStorage
+      if (user?.uid) {
+        localStorage.setItem(`profile-avatar-style-${user.uid}`, selectedAvatarStyle);
+        localStorage.setItem(`profile-avatar-gender-${user.uid}`, gender);
+        localStorage.setItem(`profile-avatar-seed-${user.uid}`, randomSeed.toString());
+        localStorage.removeItem(`profile-photo-${user.uid}`);
+      }
+      toast.success('Avatar updated!');
+      onClose();
+      window.location.reload();
+    } catch (error) {
+      console.error('Error saving avatar:', error);
+      toast.error('Failed to save avatar. Please try again.');
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleUpload = async () => {
@@ -125,18 +177,110 @@ export function UploadPictureModal({
           <CardContent className="space-y-6">
             {/* Preview */}
             <div className="flex justify-center">
-              <div className="relative h-40 w-40 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border-4 border-gray-200 dark:border-gray-700">
+              <div className="relative h-40 w-40 rounded-full bg-primary/10 overflow-hidden border-4 border-gray-200 dark:border-gray-700">
                 {preview ? (
                   <Image 
                     src={preview} 
                     alt="Profile preview" 
-                    fill
-                    className="object-cover"
+                    width={160}
+                    height={160}
+                    className="h-full w-full object-cover"
+                  />
+                ) : selectedAvatarStyle ? (
+                  <AvatarGenerator 
+                    seed={getAvatarSeed()}
+                    size={160}
+                    style={selectedAvatarStyle}
+                    gender={gender}
+                    className="h-full w-full"
                   />
                 ) : (
-                  <User className="h-20 w-20 text-primary" />
+                  <AvatarGenerator 
+                    seed={getAvatarSeed()}
+                    size={160}
+                    style="lorelei"
+                    gender={gender}
+                    className="h-full w-full"
+                  />
                 )}
               </div>
+            </div>
+
+            {/* Gender Selection */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-center">Avatar Gender</h3>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setGender('male')}
+                  className={`flex-1 py-2 px-4 rounded-md font-medium transition-all duration-200 border-2 ${
+                    gender === 'male' 
+                      ? 'border-blue-500 bg-blue-500 text-white shadow-lg scale-105 ring-2 ring-blue-500 ring-offset-2' 
+                      : 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:border-blue-400 hover:shadow-sm hover:scale-102'
+                  } active:scale-95 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                >
+                  👨 Male
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGender('female')}
+                  className={`flex-1 py-2 px-4 rounded-md font-medium transition-all duration-200 border-2 ${
+                    gender === 'female' 
+                      ? 'border-pink-500 bg-pink-500 text-white shadow-lg scale-105 ring-2 ring-pink-500 ring-offset-2' 
+                      : 'border-gray-300 dark:border-gray-600 bg-transparent text-gray-700 dark:text-gray-300 hover:bg-pink-50 dark:hover:bg-pink-900/20 hover:border-pink-400 hover:shadow-sm hover:scale-102'
+                  } active:scale-95 focus:ring-2 focus:ring-pink-500 focus:ring-offset-2`}
+                >
+                  👩 Female
+                </button>
+              </div>
+            </div>
+
+            {/* Avatar Style Selection */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-medium">Choose Avatar Style</h3>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setRandomSeed(prev => prev + 1)}
+                  disabled={!selectedAvatarStyle}
+                  className="text-xs transition-all duration-200 hover:bg-primary/10 hover:text-primary hover:shadow-sm hover:scale-105 active:scale-95 focus:ring-2 focus:ring-primary focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  🎲 Generate New
+                </Button>
+              </div>
+              <div className="grid grid-cols-4 gap-2">
+                {avatarStyles.map((style) => (
+                  <button
+                    key={style.name}
+                    type="button"
+                    onClick={() => handleAvatarSelect(style.name)}
+                    className={`flex flex-col items-center gap-2 p-3 rounded-lg border-2 transition-all duration-200 ${
+                      selectedAvatarStyle === style.name 
+                        ? 'border-primary border-4 bg-primary/20 shadow-lg scale-110 ring-2 ring-primary ring-offset-2' 
+                        : 'border-gray-300 dark:border-gray-600 hover:border-primary/50 hover:bg-primary/5 hover:shadow-sm hover:scale-102'
+                    } active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                  >
+                    <div className="h-12 w-12 rounded-full overflow-hidden">
+                      <AvatarGenerator 
+                        seed={getAvatarSeed(false)}
+                        size={48}
+                        style={style.name}
+                        gender={gender}
+                        className="h-full w-full"
+                      />
+                    </div>
+                    <span className="text-xs font-medium">{style.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative flex items-center gap-2">
+              <div className="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
+              <span className="text-xs text-muted-foreground">OR</span>
+              <div className="flex-1 border-t border-gray-300 dark:border-gray-600"></div>
             </div>
 
             {/* Upload Section */}
@@ -158,7 +302,7 @@ export function UploadPictureModal({
                   className="w-full"
                 >
                   <Upload className="mr-2 h-4 w-4" />
-                  Choose Image
+                  Upload Custom Image
                 </Button>
 
                 {preview && (
@@ -188,11 +332,11 @@ export function UploadPictureModal({
                 Cancel
               </Button>
               <Button
-                onClick={handleUpload}
-                disabled={!preview || isUploading}
+                onClick={selectedAvatarStyle ? handleSaveAvatar : handleUpload}
+                disabled={(!preview && !selectedAvatarStyle) || isUploading}
                 className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                {isUploading ? 'Uploading...' : 'Save Picture'}
+                {isUploading ? 'Saving...' : selectedAvatarStyle ? 'Save Avatar' : 'Save Picture'}
               </Button>
             </div>
           </CardContent>
