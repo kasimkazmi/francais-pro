@@ -236,11 +236,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="nativeLanguage" className='text-gray-900 dark:text-gray-100'>Native Language</Label>
-                  <Input id="nativeLanguage" value={nativeLanguage} onChange={(e) => setNativeLanguage(e.target.value)} className='border-2 placeholder:text-muted-foreground dark:placeholder:text-muted-foreground' placeholder='e.g., English' />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="timezone" className='text-gray-900 dark:text-gray-100'>Timezone</Label>
+                <Label htmlFor="timezone" className='text-gray-900 dark:text-gray-100'>Timezone</Label>
                   <Select
                     inputId="timezone"
                     options={timezoneOptions.map(z => ({ label: z, value: z }))}
@@ -251,7 +247,11 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                     placeholder="Select timezone"
                   />
                 </div>
-              </div>
+                <div className="space-y-2">
+                <Label htmlFor="nativeLanguage" className='text-gray-900 dark:text-gray-100'>Native Language</Label>
+                  <Input id="nativeLanguage" value={nativeLanguage} onChange={(e) => setNativeLanguage(e.target.value)} className='border-2 placeholder:text-muted-foreground dark:placeholder:text-muted-foreground' placeholder='e.g., English' />
+                </div>
+                </div>
 
               <div className="space-y-2">
                 <Label htmlFor="goals" className='text-gray-900 dark:text-gray-100' >Learning Goals (comma separated)</Label>

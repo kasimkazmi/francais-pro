@@ -10,6 +10,7 @@ interface AppUser {
   uid: string;
   email: string | null;
   displayName: string | null;
+  photoURL?: string | null;
   level: 'beginner' | 'intermediate' | 'advanced';
   streak: number;
   totalLessons: number;
@@ -19,6 +20,7 @@ interface AppUser {
 interface AuthContextType {
   user: AppUser | null;
   isLoading: boolean;
+  loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   signup: (name: string, email: string, password: string) => Promise<boolean>;
   loginWithGoogle: () => Promise<boolean>;
@@ -36,6 +38,7 @@ function mapUser(u: User): AppUser {
     uid: u.uid,
     email: u.email,
     displayName: u.displayName,
+    photoURL: u.photoURL,
     level: 'beginner',
     streak: 0,
     totalLessons: 0,
@@ -139,7 +142,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<AuthContextType>(
     () => ({ 
       user, 
-      isLoading, 
+      isLoading,
+      loading: isLoading,
       login, 
       signup, 
       loginWithGoogle, 

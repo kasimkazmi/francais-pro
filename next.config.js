@@ -9,7 +9,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'lh3.googleusercontent.com'],
   },
   // Remove console logs in production builds
   webpack: (config, { dev, isServer }) => {

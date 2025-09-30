@@ -7,9 +7,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { X, User, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { collection, doc, getDoc, getDocs, limit, query, runTransaction, setDoc, where, deleteDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase/config';
-import { useAuth } from '@/contexts/AuthContext';
 
 interface UsernameModalProps {
   isOpen: boolean;
@@ -26,18 +23,9 @@ export function UsernameModal({
   suggestedUsername,
   userEmail 
 }: UsernameModalProps) {
-  const { user } = useAuth();
   const [username, setUsername] = useState(suggestedUsername || '');
   const [isValid, setIsValid] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
-  const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const checkedCache = useState<Record<string, boolean>>({})[0];
-
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-  const withOneRetry = async <T,>(fn: () => Promise<T>): Promise<T> => {
-    try { return await fn(); } catch (e) { await sleep(500); return await fn(); }
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Validate username
   const validateUsername = (value: string) => {
@@ -50,99 +38,23 @@ export function UsernameModal({
     const value = e.target.value;
     setUsername(value);
     validateUsername(value);
-    setIsAvailable(null);
-    setSuggestions([]);
-  };
-
-  // Normalize username for consistent uniqueness
-  const normalize = (value: string) => value.trim().toLowerCase();
-
-  // Check if username is reserved in the usernames collection
-  const checkUsernameExists = async (name: string): Promise<boolean> => {
-    const key = normalize(name);
-    if (key in checkedCache) return checkedCache[key];
-    const ref = doc(db, 'usernames', key);
-    const snap = await withOneRetry(() => getDoc(ref));
-    const exists = snap.exists();
-    checkedCache[key] = exists;
-    return exists;
-  };
-
-  const baseify = (value: string) => value.replace(/[^a-zA-Z0-9._-]/g, '').toLowerCase().slice(0, 18);
-
-  const generateSuggestionCandidates = (base: string): string[] => {
-    const root = baseify(base) || 'user';
-    const nums = Array.from({ length: 8 }, () => Math.floor(100 + Math.random() * 900));
-    const suffixes = ['_fr', '_pro', '_xp'];
-    const candidates: string[] = [];
-    for (let i = 0; i < nums.length && candidates.length < 6; i++) {
-      candidates.push(`${root}${nums[i]}`);
-    }
-    for (let i = 0; i < suffixes.length && candidates.length < 9; i++) {
-      candidates.push(`${root}${suffixes[i]}`);
-    }
-    return candidates;
-  };
-
-  const getUniqueSuggestions = async (base: string, take = 3): Promise<string[]> => {
-    const cands = generateSuggestionCandidates(base).slice(0, 6);
-    const checks = await Promise.allSettled(cands.map((c) => checkUsernameExists(c)));
-    const out: string[] = [];
-    checks.forEach((res, idx) => {
-      if (out.length >= take) return;
-      if (res.status === 'fulfilled' && res.value === false) out.push(cands[idx]);
-    });
-    return out.slice(0, take);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValid || isChecking) return;
+    if (!isValid || isSubmitting) return;
     
-    setIsChecking(true);
+    setIsSubmitting(true);
     try {
-      const desired = normalize(username);
-      if (!user?.uid) {
-        toast('Please sign in first.', { icon: 'ℹ️' });
-        return;
-      }
-
-      // Reserve username atomically if not exists
-      await runTransaction(db, async (tx) => {
-        const ref = doc(db, 'usernames', desired);
-        const snap = await tx.get(ref);
-        if (snap.exists()) {
-          throw new Error('taken');
-        }
-        tx.set(ref, { uid: user?.uid || null, createdAt: Date.now() });
-      });
-
-      // Proceed to apply username (Auth/parent handler)
-      try {
-        await onSubmit(desired);
-        // Also mirror on userProfiles for convenience (best-effort)
-        const profileRef = doc(db, 'userProfiles', user.uid);
-        await setDoc(profileRef, { displayName: desired }, { merge: true });
-      } catch (applyErr) {
-        // Rollback reservation on failure
-        await deleteDoc(doc(db, 'usernames', desired));
-        throw applyErr;
-      }
-
+      const cleanUsername = username.trim().toLowerCase();
+      await onSubmit(cleanUsername);
       toast.success('Username set successfully!');
       onClose();
     } catch (error) {
-      if ((error as Error)?.message === 'taken') {
-        setIsAvailable(false);
-        const opts = await getUniqueSuggestions(username, 3);
-        setSuggestions(opts);
-        toast('Username already taken. Pick a suggestion or try another.', { icon: '⚠️' });
-      } else {
-        console.error('Error setting username:', error);
-        toast.error('Failed to set username. Please try again.');
-      }
+      console.error('Error setting username:', error);
+      toast.error('Failed to set username. Please try again.');
     } finally {
-      setIsChecking(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -150,7 +62,8 @@ export function UsernameModal({
     if (!userEmail) return;
     const emailPrefix = userEmail.split('@')[0];
     const cleanUsername = emailPrefix.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-    const finalUsername = cleanUsername + Math.floor(Math.random() * 1000);
+    const randomNum = Math.floor(Math.random() * 1000);
+    const finalUsername = (cleanUsername + randomNum).slice(0, 20);
     setUsername(finalUsername);
     validateUsername(finalUsername);
   };
@@ -199,47 +112,6 @@ export function UsernameModal({
               <User className="h-6 w-6 text-blue-600" />
               <CardTitle className="text-2xl">Choose Your Username</CardTitle>
             </div>
-
-            {isAvailable === false && (
-              <div className="space-y-2">
-                <div className="text-sm text-red-600 dark:text-red-400">This username is already taken.</div>
-                {suggestions.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {suggestions.map((s) => (
-                      <Button
-                        key={s}
-                        type="button"
-                        variant="outline"
-                        className="h-8 px-3"
-                        onClick={async () => {
-                          setUsername(s);
-                          setIsChecking(true);
-                          try {
-                            const exists = await checkUsernameExists(s);
-                            if (!exists) {
-                              await onSubmit(s);
-                              toast.success('Username set successfully!');
-                              onClose();
-                            } else {
-                              toast('That suggestion was just taken. Try another.', { icon: '⚠️' });
-                              // refresh suggestions
-                              const opts = await getUniqueSuggestions(username, 3);
-                              setSuggestions(opts);
-                            }
-                          } catch {
-                            toast.error('Failed to set username. Please try again.');
-                          } finally {
-                            setIsChecking(false);
-                          }
-                        }}
-                      >
-                        {s}
-                      </Button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
             <Button
               variant="ghost"
               size="sm"
@@ -266,6 +138,7 @@ export function UsernameModal({
                   onChange={handleUsernameChange}
                   placeholder="Enter your username"
                   className="pr-8 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border-gray-300 dark:border-gray-600"
+                  maxLength={20}
                 />
                 {isValid && (
                   <Check className="absolute right-2 top-2.5 h-4 w-4 text-green-600" />
@@ -289,10 +162,10 @@ export function UsernameModal({
               </Button>
               <Button
                 type="submit"
-                disabled={!isValid || isChecking}
+                disabled={!isValid || isSubmitting}
                 className="flex-1 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg active:bg-blue-800 active:scale-95 transition-all duration-200"
               >
-                {isChecking ? 'Setting...' : 'Continue'}
+                {isSubmitting ? 'Setting...' : 'Continue'}
               </Button>
             </div>
 
