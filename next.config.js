@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const TerserPlugin = require('terser-webpack-plugin');
+
 const nextConfig = {
   turbopack: {
     rules: {
@@ -14,10 +17,9 @@ const nextConfig = {
   // Remove console logs in production builds
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
-      // Remove console logs in production client builds
       config.optimization.minimizer = config.optimization.minimizer || [];
       config.optimization.minimizer.push(
-        new (require('terser-webpack-plugin'))({
+        new TerserPlugin({
           terserOptions: {
             compress: {
               drop_console: true,
