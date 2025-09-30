@@ -33,18 +33,15 @@ export default function ProfilePage() {
       const savedGender = localStorage.getItem(`profile-avatar-gender-${user.uid}`) as 'male' | 'female' | null;
       const savedSeed = localStorage.getItem(`profile-avatar-seed-${user.uid}`);
       
-      console.log('Loading profile settings:', { savedPhoto: !!savedPhoto, savedStyle, savedGender, savedSeed });
       
       // Avatar style takes priority over custom photo
       if (savedStyle) {
         setAvatarStyle(savedStyle);
         setHasAvatarStyle(true);
         setCustomPhoto(null); // Clear custom photo when avatar is set
-        console.log('Using avatar style:', savedStyle);
       } else if (savedPhoto) {
         setCustomPhoto(savedPhoto);
         setHasAvatarStyle(false);
-        console.log('Using custom photo');
       }
       
       if (savedGender) {
@@ -147,7 +144,6 @@ export default function ProfilePage() {
                   onClick={() => setShowUploadModal(true)}
                 >
                   {hasAvatarStyle && avatarStyle && avatarGender ? (
-                    console.log('Showing avatar:', { hasAvatarStyle, avatarStyle, avatarGender, seed: getProfileAvatarSeed() }),
                     <AvatarGenerator 
                       seed={getProfileAvatarSeed()}
                       size={80}
