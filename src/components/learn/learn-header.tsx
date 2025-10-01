@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { 
@@ -9,25 +9,18 @@ import {
   X, 
   ChevronLeft, 
   ChevronRight,
-  GraduationCap
+  GraduationCap,
+  User,
+  LogOut
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Module, Lesson } from '@/types';
 import { SeasonalThemeToggle } from '@/components/seasonal/seasonal-theme-toggle';
 import { DarkModeToggle } from '@/components/themed/dark-light-toggle';
 import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
-
-interface LearnHeaderProps {
-  sidebarOpen: boolean;
-  onToggleSidebar: () => void;
-  isLearnHome: boolean;
-  currentModule?: Module | null;
-  currentLesson?: Lesson | null;
-  currentModuleId: string | null;
-  currentLessonId: string | null;
-  previousLesson?: Lesson | null;
-  nextLesson?: Lesson | null;
-}
+import { useAuth } from '@/contexts/AuthContext';
+import { ConfirmModal } from '@/components/ui/confirm-modal';
+import { Portal } from '@/components/ui/portal';
+import { LearnHeaderProps } from '@/types/component-props';
 
 export default function LearnHeader({
   sidebarOpen,
@@ -42,6 +35,17 @@ export default function LearnHeader({
 }: LearnHeaderProps) {
   const router = useRouter();
   const { currentTheme, isActive, themeConfig } = useSeasonalTheme();
+  const { user, logout } = useAuth();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  const handleLogout = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    logout();
+    router.push('/welcome');
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -100,6 +104,28 @@ export default function LearnHeader({
           >
             <Home className="w-4 h-4 mr-2" />
             Home
+          </Button>
+          
+          {/* User Profile & Logout */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="hidden sm:flex items-center gap-2 text-sm"
+            onClick={() => router.push('/profile')}
+            title="View Profile"
+          >
+            <User className="h-4 w-4" />
+            <span className="text-muted-foreground">{user?.displayName || user?.email || 'User'}</span>
+          </Button>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={handleLogout}
+            className={`text-muted-foreground ${isActive ? 'hover:text-[var(--nav-hover)]' : 'hover:text-foreground'}`}
+            style={isActive ? ({ '--nav-hover': themeConfig.colors.primary } as React.CSSProperties) : undefined}
+            title="Logout"
+          >
+            <LogOut className="h-4 w-4" />
           </Button>
         </div>
       </div>
@@ -181,6 +207,20 @@ export default function LearnHeader({
           )}
         </div>
       )}
+
+      {/* Logout Confirmation Modal */}
+      <Portal>
+        <ConfirmModal
+          isOpen={showLogoutConfirm}
+          onClose={() => setShowLogoutConfirm(false)}
+          onConfirm={handleLogoutConfirm}
+          title="Confirm Logout"
+          message="Are you sure you want to logout? You'll need to sign in again to access your progress and personalized content."
+          confirmText="Logout"
+          cancelText="Cancel"
+          variant="destructive"
+        />
+      </Portal>
     </header>
   );
 }

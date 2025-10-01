@@ -2,19 +2,16 @@
 
 import React, { useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { learningModules } from '@/data/learning-content';
+import { learningModules } from '@/data/lessons/learning-content';
 import { useProgress } from '@/hooks/useProgress';
 import LearnHeader from '@/components/learn/learn-header';
 import LearnSidebar from '@/components/learn/learn-sidebar';
-
-interface LearnLayoutProps {
-  children: React.ReactNode;
-}
+import { LearnLayoutProps } from '@/types/layout-props';
 
 export default function LearnLayout({ children }: LearnLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const pathname = usePathname();
-  const { progress } = useProgress();
+  const { progress, refreshProgress } = useProgress();
 
   // Parse current route
   const pathParts = pathname.split('/').filter(Boolean);
@@ -37,25 +34,32 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   const overallProgress = useMemo(() => {
     if (!progress) return 0;
     const totalLessons = learningModules.reduce((acc, m) => acc + m.lessons.length, 0);
+    const progressData = progress as unknown as { lessons: Record<string, { completed: boolean }> };
     const completedLessons = learningModules.reduce((acc, m) => 
-      acc + m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100).length, 0
+      acc + m.lessons.filter(l => {
+        const lessonKey = `${m.id}_${l.id}`;
+        return progressData.lessons?.[lessonKey]?.completed === true;
+      }).length, 0
     );
     return totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   }, [progress]);
 
   const totalTime = useMemo(() => {
-    if (!progress) return '0.0';
-    const completed = learningModules.flatMap(m => 
-      m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100)
-    );
-    return (completed.reduce((acc, l) => acc + (l.duration || 0), 0) / 60).toFixed(1);
+    if (!progress) return { value: '0', unit: 'min' };
+    const progressData = progress as unknown as { totalTimeSpent: number };
+    const totalMinutes = progressData.totalTimeSpent || 0;
+    
+    if (totalMinutes < 60) {
+      return { value: totalMinutes.toString(), unit: 'min' };
+    } else {
+      return { value: (totalMinutes / 60).toFixed(1), unit: 'h' };
+    }
   }, [progress]);
 
   const completedCount = useMemo(() => {
     if (!progress) return 0;
-    return learningModules.reduce((acc, m) => 
-      acc + m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100).length, 0
-    );
+    const progressData = progress as unknown as { totalLessonsCompleted: number };
+    return progressData.totalLessonsCompleted || 0;
   }, [progress]);
 
   // Navigation helpers
@@ -81,6 +85,17 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   const nextLesson = getNextLesson();
   const previousLesson = getPreviousLesson();
 
+  // Listen for lesson completion to refresh progress
+  React.useEffect(() => {
+    const handleLessonCompleted = () => {
+      console.log('🎉 Lesson completed event received, refreshing progress...');
+      refreshProgress();
+    };
+
+    window.addEventListener('lesson-completed', handleLessonCompleted);
+    return () => window.removeEventListener('lesson-completed', handleLessonCompleted);
+  }, [refreshProgress]);
+
   return (
     <div className="min-h-screen bg-background">
       <LearnHeader
@@ -95,25 +110,25 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
         nextLesson={nextLesson}
       />
 
-      <div className="flex">
-        <LearnSidebar
-          sidebarOpen={sidebarOpen}
-          overallProgress={overallProgress}
-          completedCount={completedCount}
-          totalTime={totalTime}
-          currentModule={currentModule}
-          currentModuleId={currentModuleId}
-          currentLessonId={currentLessonId}
-          progress={progress as Record<string, number> | null}
-        />
+        <div className="flex">
+          <LearnSidebar
+            sidebarOpen={sidebarOpen}
+            overallProgress={overallProgress}
+            completedCount={completedCount}
+            totalTime={totalTime}
+            currentModule={currentModule}
+            currentModuleId={currentModuleId}
+            currentLessonId={currentLessonId}
+            progress={progress as Record<string, number> | null}
+          />
 
-        {/* Main Content */}
-        <main className="flex-1 transition-all duration-300">
-          <div className="container mx-auto p-4 lg:p-6 max-w-7xl">
-            {children}
-          </div>
-        </main>
-      </div>
+          {/* Main Content */}
+          <main className="flex-1 transition-all duration-300">
+            <div className="container mx-auto p-4 lg:p-6 max-w-7xl">
+              {children}
+            </div>
+          </main>
+        </div>
 
       {/* Mobile Overlay */}
       {sidebarOpen && (

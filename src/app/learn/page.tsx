@@ -23,7 +23,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { learningModules } from "@/data/learning-content";
+import { learningModules } from "@/data/lessons/learning-content";
 
 // Helper function to get icon component from string
 const getIconComponent = (iconName: string) => {
@@ -154,9 +154,21 @@ export default function LearnPage() {
                           )}
                           <div>
                             <div className="font-medium">{lesson.title}</div>
-                            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
                               <Clock className="h-3 w-3" />
                               {lesson.duration} min
+                              <Badge 
+                                variant="outline"
+                                className={`text-xs border-0 bg-transparent ${
+                                  lesson.difficulty === 'easy' 
+                                    ? 'text-green-600 dark:text-green-400' 
+                                    : lesson.difficulty === 'medium'
+                                    ? 'text-yellow-600 dark:text-yellow-400'
+                                    : 'text-red-600 dark:text-red-400'
+                                }`}
+                              >
+                                {lesson.difficulty}
+                              </Badge>
                             </div>
                           </div>
                         </div>

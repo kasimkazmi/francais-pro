@@ -11,7 +11,7 @@ import {
   type ModuleProgress,
   type LessonProgress
 } from '@/lib/firebase/progress';
-import { learningModules } from '@/data/learning-content';
+import { learningModules } from '@/data/lessons/learning-content';
 
 // Helper function to get actual lesson ID from numeric or string ID
 const getActualLessonId = (moduleId: string, lessonId: string): string => {
