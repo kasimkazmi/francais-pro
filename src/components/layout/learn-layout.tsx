@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { learningModules } from '@/data/learning-content';
+import { learningModules } from '@/data/lessons/learning-content';
 import { useProgress } from '@/hooks/useProgress';
 import LearnHeader from '@/components/learn/learn-header';
 import LearnSidebar from '@/components/learn/learn-sidebar';
@@ -37,25 +37,27 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   const overallProgress = useMemo(() => {
     if (!progress) return 0;
     const totalLessons = learningModules.reduce((acc, m) => acc + m.lessons.length, 0);
+    const progressData = progress as unknown as { lessons: Record<string, { completed: boolean }> };
     const completedLessons = learningModules.reduce((acc, m) => 
-      acc + m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100).length, 0
+      acc + m.lessons.filter(l => {
+        const lessonKey = `${m.id}_${l.id}`;
+        return progressData.lessons?.[lessonKey]?.completed === true;
+      }).length, 0
     );
     return totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   }, [progress]);
 
   const totalTime = useMemo(() => {
     if (!progress) return '0.0';
-    const completed = learningModules.flatMap(m => 
-      m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100)
-    );
-    return (completed.reduce((acc, l) => acc + (l.duration || 0), 0) / 60).toFixed(1);
+    const progressData = progress as unknown as { totalTimeSpent: number };
+    const totalMinutes = progressData.totalTimeSpent || 0;
+    return (totalMinutes / 60).toFixed(1);
   }, [progress]);
 
   const completedCount = useMemo(() => {
     if (!progress) return 0;
-    return learningModules.reduce((acc, m) => 
-      acc + m.lessons.filter(l => progress[`${m.id}-${l.id}` as keyof typeof progress] === 100).length, 0
-    );
+    const progressData = progress as unknown as { totalLessonsCompleted: number };
+    return progressData.totalLessonsCompleted || 0;
   }, [progress]);
 
   // Navigation helpers

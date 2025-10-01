@@ -23,7 +23,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { learningModules } from "@/data/learning-content";
+import { learningModules } from "@/data/lessons/learning-content";
 
 // Helper function to get icon component from string
 const getIconComponent = (iconName: string) => {

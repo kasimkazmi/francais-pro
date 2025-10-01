@@ -1,4 +1,46 @@
 import { Module } from '@/types';
+import { alphabetLessons } from './alphabet-lessons';
+import { greetingsLessons } from './greetings-lessons';
+import { numbersLessons } from './numbers-lessons';
+
+// Type for detailed lesson
+type DetailedLesson = {
+  id: string;
+  uniqueId: string;
+  title: string;
+  description: string;
+  duration: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  xpReward: number;
+  sections?: Array<{
+    title: string;
+    type: string;
+    duration: number;
+    content: string;
+    examples?: unknown[];
+    exercises?: unknown[];
+  }>;
+};
+
+// Export detailed lessons for direct access
+export const detailedLessons = {
+  ...alphabetLessons,
+  ...greetingsLessons,
+  ...numbersLessons
+};
+
+// Generate lesson metadata from detailed lessons
+const generateLessonMetadata = (detailedLesson: DetailedLesson, type: 'vocabulary' | 'grammar' | 'pronunciation' | 'writing' | 'listening') => ({
+  id: detailedLesson.id,
+  title: detailedLesson.title,
+  description: detailedLesson.description,
+  content: detailedLesson.sections?.[1]?.content || detailedLesson.description,
+  duration: detailedLesson.duration,
+  difficulty: detailedLesson.difficulty,
+  type,
+  completed: false,
+  xpReward: detailedLesson.xpReward
+});
 
 export const learningModules: Module[] = [
   {
@@ -7,41 +49,11 @@ export const learningModules: Module[] = [
     description: 'Start your French journey with the basics',
     color: 'bg-blue-500',
     icon: 'BookOpen',
-    progress: 50,
+    progress: 0,
     lessons: [
-      {
-        id: 'french-alphabet',
-        title: 'French Alphabet & Pronunciation',
-        description: 'Learn the French alphabet and basic pronunciation rules',
-        content: 'The French alphabet has 26 letters, just like English, but with different pronunciations...',
-        duration: 15,
-        difficulty: 'easy',
-        type: 'pronunciation',
-        completed: true,
-        xpReward: 50
-      },
-      {
-        id: 'basic-greetings',
-        title: 'Basic Greetings',
-        description: 'Essential French greetings and polite expressions',
-        content: 'Learn how to say hello, goodbye, and other common greetings in French...',
-        duration: 20,
-        difficulty: 'easy',
-        type: 'vocabulary',
-        completed: true,
-        xpReward: 75
-      },
-      {
-        id: 'numbers-1-20',
-        title: 'Numbers 1-20',
-        description: 'Master French numbers from 1 to 20',
-        content: 'French numbers have some unique patterns. Let\'s learn them step by step...',
-        duration: 25,
-        difficulty: 'medium',
-        type: 'vocabulary',
-        completed: false,
-        xpReward: 100
-      },
+      generateLessonMetadata(alphabetLessons['french-alphabet'], 'pronunciation'),
+      generateLessonMetadata(greetingsLessons['basic-greetings'], 'vocabulary'),
+      generateLessonMetadata(numbersLessons['numbers-1-20'], 'vocabulary'),
       {
         id: 'colors-family',
         title: 'Colors & Family',
@@ -186,40 +198,4 @@ export const learningModules: Module[] = [
   }
 ];
 
-export const vocabularyWords = [
-  {
-    french: 'bonjour',
-    english: 'hello',
-    pronunciation: '/bɔ̃.ʒuʁ/',
-    category: 'greetings',
-    difficulty: 'easy'
-  },
-  {
-    french: 'merci',
-    english: 'thank you',
-    pronunciation: '/mɛʁ.si/',
-    category: 'greetings',
-    difficulty: 'easy'
-  },
-  {
-    french: 'pomme',
-    english: 'apple',
-    pronunciation: '/pɔm/',
-    category: 'food',
-    difficulty: 'easy'
-  },
-  {
-    french: 'maison',
-    english: 'house',
-    pronunciation: '/mɛ.zɔ̃/',
-    category: 'home',
-    difficulty: 'medium'
-  },
-  {
-    french: 'voyage',
-    english: 'trip',
-    pronunciation: '/vwa.jaʒ/',
-    category: 'travel',
-    difficulty: 'medium'
-  }
-];
+

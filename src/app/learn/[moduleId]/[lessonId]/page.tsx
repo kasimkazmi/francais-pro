@@ -25,65 +25,9 @@ import {
 import { useProgress } from "@/hooks/useProgress";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/ui/auth-modal";
-import { learningModules } from "@/data/learning-content";
-
-// Helper function to get lesson data from learning modules
-const getLessonData = (moduleId: string, lessonId: string) => {
-  const moduleData = learningModules.find((m) => m.id === moduleId);
-  if (!moduleData) return null;
-
-  // Try to find lesson by ID first, then by index if lessonId is numeric
-  let lesson = moduleData.lessons.find((l) => l.id === lessonId);
-
-  // If not found by ID and lessonId is numeric, try to find by index
-  if (!lesson && !isNaN(Number(lessonId))) {
-    const lessonIndex = Number(lessonId) - 1; // Convert to 0-based index
-    lesson = moduleData.lessons[lessonIndex];
-  }
-
-  if (!lesson) return null;
-
-  // Convert the lesson data to the expected format with sections
-  return {
-    title: lesson.title,
-    duration: lesson.duration,
-    sections: [
-      {
-        title: "Introduction",
-        duration: Math.floor(lesson.duration * 0.2),
-        content: lesson.description,
-        type: "introduction",
-      },
-      {
-        title: "Learning Content",
-        duration: Math.floor(lesson.duration * 0.5),
-        content: lesson.content,
-        type: "learning",
-      },
-      {
-        title: "Practice Session",
-        duration: Math.floor(lesson.duration * 0.2),
-        content: "Practice what you've learned with interactive exercises.",
-        exercises: [
-          {
-            type: "translation",
-            question: `What is the main topic of this lesson?`,
-            options: [lesson.title, "Grammar", "Pronunciation", "Vocabulary"],
-            correct: 0,
-            explanation: `This lesson focuses on ${lesson.title.toLowerCase()}.`,
-          },
-        ],
-        type: "practice",
-      },
-      {
-        title: "Review & Summary",
-        duration: Math.floor(lesson.duration * 0.1),
-        content: `Great job! You've completed the lesson on ${lesson.title.toLowerCase()}. Keep practicing to master this topic.`,
-        type: "review",
-      },
-    ],
-  };
-};
+import { learningModules } from "@/data/lessons/learning-content";
+import LessonCompletionModal from "@/components/learn/lesson-completion-modal";
+import { getLessonByModule } from "@/lib/services/lesson-service";
 
 export default function LessonPage() {
   const params = useParams();
@@ -118,6 +62,9 @@ export default function LessonPage() {
     question: string;
     options?: string[];
     correct?: number | number[];
+    correctAnswer?: number | string;
+    sentence?: string;
+    alternatives?: string[];
     pairs?: ExercisePair[];
     explanation?: string;
   }
@@ -125,8 +72,9 @@ export default function LessonPage() {
   interface Example {
     french: string;
     english: string;
-    audio: string;
-    description: string;
+    pronunciation?: string;
+    audio?: string;
+    description?: string;
   }
 
   interface LessonSection {
@@ -138,10 +86,32 @@ export default function LessonPage() {
     exercises?: Exercise[];
   }
 
-  const lesson = useMemo(
-    () => getLessonData(moduleId, lessonId),
-    [moduleId, lessonId]
-  );
+  const [lesson, setLesson] = useState<{
+    id: string;
+    title: string;
+    description: string;
+    duration: number;
+    difficulty: string;
+    xpReward: number;
+    sections: LessonSection[];
+  } | null>(null);
+  const [lessonLoading, setLessonLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadLesson() {
+      setLessonLoading(true);
+      try {
+        const data = await getLessonByModule(moduleId, lessonId);
+        setLesson(data);
+      } catch (error) {
+        console.error('Error loading lesson:', error);
+        setLesson(null);
+      } finally {
+        setLessonLoading(false);
+      }
+    }
+    loadLesson();
+  }, [moduleId, lessonId]);
   const isLessonDone = isLessonCompleted(moduleId, lessonId);
   const currentSectionData = useMemo(
     () => lesson?.sections?.[currentSection],
@@ -279,6 +249,21 @@ export default function LessonPage() {
     return total > 0 ? Math.round((correct / total) * 100) : 0;
   };
 
+  // Get next lesson for auto-advance
+  const getNextLesson = () => {
+    const currentModule = learningModules.find(m => m.id === moduleId);
+    if (!currentModule) return null;
+    
+    const currentLessonIndex = currentModule.lessons.findIndex(l => l.id === lessonId);
+    if (currentLessonIndex < 0 || currentLessonIndex >= currentModule.lessons.length - 1) {
+      return null;
+    }
+    
+    return currentModule.lessons[currentLessonIndex + 1];
+  };
+
+  const nextLesson = getNextLesson();
+
   const handleCompleteLesson = async () => {
     if (!isAuthenticated) {
       setShowAuthModal(true);
@@ -295,8 +280,23 @@ export default function LessonPage() {
     }
   };
 
-  // Show loading state while authentication is being determined
-  if (isLoading) {
+  const handleNextLesson = () => {
+    if (nextLesson) {
+      router.push(`/learn/${moduleId}/${nextLesson.id}`);
+    } else {
+      router.push('/learn');
+    }
+  };
+
+  const handleReviewLesson = () => {
+    setShowResults(false);
+    setCurrentSection(0);
+    setExerciseAnswers({});
+    setSectionTimeSpent(0);
+  };
+
+  // Show loading state while authentication or lesson is being determined
+  if (isLoading || lessonLoading) {
     return (
       <div className="container mx-auto px-4 py-6">
         <Card>
@@ -668,58 +668,18 @@ export default function LessonPage() {
         </div>
       )}
 
-      {/* Results Modal/Card */}
-      {showResults && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <Card className="w-full max-w-md bg-green-50 border-green-200">
-            <CardHeader className="text-center">
-              <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
-                <CheckCircle className="h-8 w-8 text-green-600" />
-              </div>
-              <CardTitle className="text-green-800 text-xl sm:text-2xl">
-                Congratulations!
-              </CardTitle>
-              <CardDescription className="text-green-700 text-sm sm:text-base">
-                You&apos;ve successfully completed this lesson!
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center p-4 bg-white/50 rounded-lg">
-                  <div className="text-2xl sm:text-3xl font-bold text-green-600">
-                    {calculateScore()}%
-                  </div>
-                  <div className="text-xs sm:text-sm text-green-700">Score</div>
-                </div>
-                <div className="text-center p-4 bg-white/50 rounded-lg">
-                  <div className="text-2xl sm:text-3xl font-bold text-green-600">
-                    {timeSpent} min
-                  </div>
-                  <div className="text-xs sm:text-sm text-green-700">
-                    Time Spent
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowResults(false)}
-                  className="flex-1 hover:bg-gray-700 hover:text-white text-black text-sm sm:text-base"
-                >
-                  <RotateCcw className="h-4 w-4 mr-2" />
-                  Review
-                </Button>
-                <Button
-                  onClick={() => router.back()}
-                  className="flex-1 hover:bg-green-700 hover:text-white text-black text-sm sm:text-base"
-                >
-                  Continue Learning
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      {/* Completion Modal */}
+      <LessonCompletionModal
+        isOpen={showResults}
+        onClose={() => router.push('/learn')}
+        lessonTitle={lesson?.title || ''}
+        score={calculateScore()}
+        timeSpent={timeSpent}
+        xpEarned={lesson?.xpReward || 50}
+        onNextLesson={nextLesson ? handleNextLesson : undefined}
+        onReview={handleReviewLesson}
+        hasNextLesson={!!nextLesson}
+      />
 
       {/* Learn Login Modal */}
       <AuthModal
