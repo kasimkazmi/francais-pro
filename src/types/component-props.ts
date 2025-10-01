@@ -95,57 +95,5 @@ export interface ExampleListProps {
   onPlayAudio?: (text: string) => void;
 }
 
-export interface MultipleChoiceExerciseProps {
-  question: string;
-  options: string[];
-  userAnswer: number | null;
-  correctAnswer: number;
-  isSubmitted: boolean;
-  onAnswerSelect: (answer: number) => void;
-  explanation?: string;
-}
-
-export interface FillBlankExerciseProps {
-  question: string;
-  sentence: string;
-  alternatives: string[];
-  correctAnswer: string;
-  userAnswer: string | null;
-  isSubmitted: boolean;
-  onAnswerSelect: (answer: string) => void;
-  explanation?: string;
-}
-
-// ============================================
-// Exercise Renderer (if still needed)
-// ============================================
-
-export interface BaseExercise {
-  id: string;
-  type: string;
-  question: string;
-  explanation?: string;
-}
-
-export interface MultipleChoiceExerciseData extends BaseExercise {
-  type: 'multiple-choice' | 'translation' | 'pronunciation';
-  options: string[];
-  correctAnswer: number;
-}
-
-export interface FillBlankExerciseData extends BaseExercise {
-  type: 'fill-blank';
-  sentence: string;
-  correctAnswer: string;
-  alternatives: string[];
-}
-
-export type ExerciseData = MultipleChoiceExerciseData | FillBlankExerciseData;
-
-export interface ExerciseRendererProps {
-  exercise: ExerciseData;
-  userAnswer: number | string | null;
-  isSubmitted: boolean;
-  onAnswerSelect: (answer: number | string) => void;
-}
+// Old exercise component props removed - using ExerciseQuiz instead
 
