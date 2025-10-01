@@ -1,6 +1,6 @@
 'use client';
 
-import ErrorScreen from '@/components/ui/ErrorScreen';
+import ErrorScreen from '@/components/ui/ErrorScreens';
 import React from 'react';
 
 const UsersError = ({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) => {
