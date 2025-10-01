@@ -26,7 +26,7 @@ export interface LearnSidebarProps {
   sidebarOpen: boolean;
   overallProgress: number;
   completedCount: number;
-  totalTime: string;
+  totalTime: { value: string; unit: string };
   currentModule?: Module | null;
   currentModuleId: string | null;
   currentLessonId: string | null;

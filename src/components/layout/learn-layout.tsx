@@ -45,10 +45,15 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   }, [progress]);
 
   const totalTime = useMemo(() => {
-    if (!progress) return '0.0';
+    if (!progress) return { value: '0', unit: 'min' };
     const progressData = progress as unknown as { totalTimeSpent: number };
     const totalMinutes = progressData.totalTimeSpent || 0;
-    return (totalMinutes / 60).toFixed(1);
+    
+    if (totalMinutes < 60) {
+      return { value: totalMinutes.toString(), unit: 'min' };
+    } else {
+      return { value: (totalMinutes / 60).toFixed(1), unit: 'h' };
+    }
   }, [progress]);
 
   const completedCount = useMemo(() => {

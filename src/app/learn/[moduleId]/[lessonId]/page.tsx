@@ -305,12 +305,12 @@ export default function LessonPage() {
                 </div>
                 <Badge
                   variant="outline"
-                  className={`text-xs ${
+                  className={`text-xs border-0 bg-transparent ${
                     lesson.difficulty === "easy"
-                      ? "border-green-500 text-green-700 dark:text-green-400"
+                      ? "text-green-600 dark:text-green-400"
                       : lesson.difficulty === "medium"
-                      ? "border-yellow-500 text-yellow-700 dark:text-yellow-400"
-                      : "border-red-500 text-red-700 dark:text-red-400"
+                      ? "text-yellow-600 dark:text-yellow-400"
+                      : "text-red-600 dark:text-red-400"
                   }`}
                 >
                   {lesson.difficulty}

@@ -158,13 +158,13 @@ export default function LearnPage() {
                               <Clock className="h-3 w-3" />
                               {lesson.duration} min
                               <Badge 
-                                variant="outline" 
-                                className={`text-xs ${
+                                variant="outline"
+                                className={`text-xs border-0 bg-transparent ${
                                   lesson.difficulty === 'easy' 
-                                    ? 'border-green-500 text-green-700 dark:text-green-400' 
+                                    ? 'text-green-600 dark:text-green-400' 
                                     : lesson.difficulty === 'medium'
-                                    ? 'border-yellow-500 text-yellow-700 dark:text-yellow-400'
-                                    : 'border-red-500 text-red-700 dark:text-red-400'
+                                    ? 'text-yellow-600 dark:text-yellow-400'
+                                    : 'text-red-600 dark:text-red-400'
                                 }`}
                               >
                                 {lesson.difficulty}

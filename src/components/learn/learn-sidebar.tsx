@@ -87,7 +87,7 @@ export default function LearnSidebar({
                   <Clock className="w-3 h-3 text-primary" />
                   <span className="text-xs text-muted-foreground">Time</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">{totalTime}h</p>
+                <p className="text-lg font-bold text-foreground">{totalTime.value}{totalTime.unit}</p>
               </div>
             </div>
 
