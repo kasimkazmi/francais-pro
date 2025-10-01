@@ -6,10 +6,7 @@ import { learningModules } from '@/data/lessons/learning-content';
 import { useProgress } from '@/hooks/useProgress';
 import LearnHeader from '@/components/learn/learn-header';
 import LearnSidebar from '@/components/learn/learn-sidebar';
-
-interface LearnLayoutProps {
-  children: React.ReactNode;
-}
+import { LearnLayoutProps } from '@/types/layout-props';
 
 export default function LearnLayout({ children }: LearnLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);

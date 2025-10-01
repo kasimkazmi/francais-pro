@@ -4,25 +4,7 @@ import { greetingsLessons } from './greetings-lessons';
 import { numbersLessons } from './numbers-lessons';
 import { vocabularyLessons } from './vocabulary-lessons';
 import { grammarLessons } from './grammar-lessons';
-
-// Type for detailed lesson
-type DetailedLesson = {
-  id: string;
-  uniqueId: string;
-  title: string;
-  description: string;
-  duration: number;
-  difficulty: 'easy' | 'medium' | 'hard';
-  xpReward: number;
-  sections?: Array<{
-    title: string;
-    type: string;
-    duration: number;
-    content: string;
-    examples?: unknown[];
-    exercises?: unknown[];
-  }>;
-};
+import { DetailedLesson } from '@/types/lesson-types';
 
 // Export detailed lessons for direct access
 export const detailedLessons = {

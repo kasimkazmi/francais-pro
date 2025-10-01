@@ -2,15 +2,7 @@
  * Difficulty utility functions for lessons
  */
 
-export type DifficultyLevel = 'easy' | 'medium' | 'hard';
-
-export interface DifficultyConfig {
-  label: string;
-  color: string;
-  badgeClass: string;
-  dotClass: string;
-  icon: string;
-}
+import { DifficultyLevel, DifficultyConfig } from '@/types/lesson-types';
 
 export const difficultyConfig: Record<DifficultyLevel, DifficultyConfig> = {
   easy: {
