@@ -97,25 +97,25 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
         nextLesson={nextLesson}
       />
 
-      <div className="flex">
-        <LearnSidebar
-          sidebarOpen={sidebarOpen}
-          overallProgress={overallProgress}
-          completedCount={completedCount}
-          totalTime={totalTime}
-          currentModule={currentModule}
-          currentModuleId={currentModuleId}
-          currentLessonId={currentLessonId}
-          progress={progress as Record<string, number> | null}
-        />
+        <div className="flex">
+          <LearnSidebar
+            sidebarOpen={sidebarOpen}
+            overallProgress={overallProgress}
+            completedCount={completedCount}
+            totalTime={totalTime}
+            currentModule={currentModule}
+            currentModuleId={currentModuleId}
+            currentLessonId={currentLessonId}
+            progress={progress as Record<string, number> | null}
+          />
 
-        {/* Main Content */}
-        <main className="flex-1 transition-all duration-300">
-          <div className="container mx-auto p-4 lg:p-6 max-w-7xl">
-            {children}
-          </div>
-        </main>
-      </div>
+          {/* Main Content */}
+          <main className="flex-1 transition-all duration-300">
+            <div className="container mx-auto p-4 lg:p-6 max-w-7xl">
+              {children}
+            </div>
+          </main>
+        </div>
 
       {/* Mobile Overlay */}
       {sidebarOpen && (

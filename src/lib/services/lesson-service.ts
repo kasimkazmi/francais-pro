@@ -70,10 +70,10 @@ export async function getLessonByModule(moduleId: string, lessonId: string) {
     return await getLesson(lessonId);
   } catch (error) {
     // Fallback: Generate from module metadata
-    const module = learningModules.find(m => m.id === moduleId);
-    if (!module) return null;
+    const foundModule = learningModules.find(m => m.id === moduleId);
+    if (!foundModule) return null;
     
-    const lessonMeta = module.lessons.find(l => l.id === lessonId);
+    const lessonMeta = foundModule.lessons.find(l => l.id === lessonId);
     if (!lessonMeta) return null;
     
     // Return basic lesson structure
