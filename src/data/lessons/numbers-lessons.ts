@@ -1,5 +1,10 @@
-export const numbersLessons = {
-  'numbers-1-20': {
+import numbersData from '@/data/numbers.json';
+
+// Generate numbers lesson from JSON
+function createNumbersLesson() {
+  const numbers = numbersData.numbers1to20;
+
+  return {
     id: 'numbers-1-20',
     uniqueId: `lesson_${Date.now()}_003`,
     title: 'Numbers 1-20',
@@ -12,152 +17,32 @@ export const numbersLessons = {
         title: 'Introduction to French Numbers',
         type: 'introduction' as const,
         duration: 3,
-        content: `Numbers are essential for everyday conversations! You'll use them for shopping, telling time, giving phone numbers, and much more.
-
-In this lesson, you'll learn:
-• Numbers from 1 to 20 in French
-• Correct pronunciation for each number
-• How to use numbers in sentences
-• Practice counting and number recognition
-
-French numbers follow specific patterns that make them logical once you understand the system!`,
+        content: 'Numbers are fundamental for everyday communication. French numbers have some unique patterns, especially after 10. Let\'s master them!',
         examples: []
       },
       {
         title: 'Numbers 1-10',
         type: 'learning' as const,
         duration: 8,
-        content: `Let's start with the first ten numbers. These are fundamental and you'll use them constantly:`,
-        examples: [
-          {
-            french: 'un',
-            english: '1 (one)',
-            pronunciation: 'uhn',
-            audio: 'un'
-          },
-          {
-            french: 'deux',
-            english: '2 (two)',
-            pronunciation: 'duh',
-            audio: 'deux'
-          },
-          {
-            french: 'trois',
-            english: '3 (three)',
-            pronunciation: 'twah',
-            audio: 'trois'
-          },
-          {
-            french: 'quatre',
-            english: '4 (four)',
-            pronunciation: 'katr',
-            audio: 'quatre'
-          },
-          {
-            french: 'cinq',
-            english: '5 (five)',
-            pronunciation: 'sank',
-            audio: 'cinq'
-          },
-          {
-            french: 'six',
-            english: '6 (six)',
-            pronunciation: 'seess',
-            audio: 'six'
-          },
-          {
-            french: 'sept',
-            english: '7 (seven)',
-            pronunciation: 'set',
-            audio: 'sept'
-          },
-          {
-            french: 'huit',
-            english: '8 (eight)',
-            pronunciation: 'wheet',
-            audio: 'huit'
-          },
-          {
-            french: 'neuf',
-            english: '9 (nine)',
-            pronunciation: 'nuhf',
-            audio: 'neuf'
-          },
-          {
-            french: 'dix',
-            english: '10 (ten)',
-            pronunciation: 'deess',
-            audio: 'dix'
-          }
-        ]
+        content: 'These are the foundation. Memorize these first!',
+        examples: numbers.slice(0, 10).map(item => ({
+          french: `${item.num} - ${item.french}`,
+          english: `${item.num}`,
+          pronunciation: item.pronunciation,
+          description: `Number ${item.num} in French`
+        }))
       },
       {
         title: 'Numbers 11-20',
         type: 'learning' as const,
         duration: 8,
-        content: `Now let's learn numbers 11 through 20. Notice the patterns - especially 17, 18, 19!`,
-        examples: [
-          {
-            french: 'onze',
-            english: '11 (eleven)',
-            pronunciation: 'onz',
-            audio: 'onze'
-          },
-          {
-            french: 'douze',
-            english: '12 (twelve)',
-            pronunciation: 'dooz',
-            audio: 'douze'
-          },
-          {
-            french: 'treize',
-            english: '13 (thirteen)',
-            pronunciation: 'trez',
-            audio: 'treize'
-          },
-          {
-            french: 'quatorze',
-            english: '14 (fourteen)',
-            pronunciation: 'kah-torz',
-            audio: 'quatorze'
-          },
-          {
-            french: 'quinze',
-            english: '15 (fifteen)',
-            pronunciation: 'kanz',
-            audio: 'quinze'
-          },
-          {
-            french: 'seize',
-            english: '16 (sixteen)',
-            pronunciation: 'sez',
-            audio: 'seize'
-          },
-          {
-            french: 'dix-sept',
-            english: '17 (seventeen) - literally "ten-seven"',
-            pronunciation: 'dee-set',
-            audio: 'dix-sept'
-          },
-          {
-            french: 'dix-huit',
-            english: '18 (eighteen) - literally "ten-eight"',
-            pronunciation: 'dee-zwheet',
-            audio: 'dix-huit'
-          },
-          {
-            french: 'dix-neuf',
-            english: '19 (nineteen) - literally "ten-nine"',
-            pronunciation: 'deez-nuhf',
-            audio: 'dix-neuf'
-          },
-          {
-            french: 'vingt',
-            english: '20 (twenty)',
-            pronunciation: 'van',
-            audio: 'vingt'
-          }
-        ]
+        content: 'Numbers 11-16 are unique words. Notice the pattern for 17-19: dix + number.',
+        examples: numbers.slice(10).map(item => ({
+          french: `${item.num} - ${item.french}`,
+          english: `${item.num}`,
+          pronunciation: item.pronunciation,
+          description: item.num >= 17 ? 'Literally "ten-seven", "ten-eight", "ten-nine"' : 'Unique word to memorize'
+        }))
       },
       {
         title: 'Practice: Numbers Quiz',
@@ -166,29 +51,36 @@ French numbers follow specific patterns that make them logical once you understa
         content: 'Test your knowledge of French numbers!',
         exercises: [
           {
-            type: 'multiple-choice',
+            type: 'multiple-choice' as const,
             question: 'What is "5" in French?',
-            options: ['cinq', 'six', 'sept', 'huit'],
-            correctAnswer: 0,
-            explanation: 'Five in French is "cinq", pronounced like "sank".'
+            options: ['quatre', 'cinq', 'six', 'sept'],
+            correctAnswer: 1,
+            explanation: 'Five is "cinq" (pronounced "sank") in French.'
           },
           {
-            type: 'multiple-choice',
+            type: 'multiple-choice' as const,
+            question: 'How do you say "12" in French?',
+            options: ['onze', 'douze', 'treize', 'quatorze'],
+            correctAnswer: 1,
+            explanation: 'Twelve is "douze" (pronounced "dooz") in French.'
+          },
+          {
+            type: 'multiple-choice' as const,
             question: 'How do you say "18" in French?',
             options: ['dix-sept', 'dix-huit', 'dix-neuf', 'vingt'],
             correctAnswer: 1,
             explanation: 'Eighteen is "dix-huit" (ten-eight) in French.'
           },
           {
-            type: 'fill-blank',
+            type: 'fill-blank' as const,
             question: 'Fill in: trois, quatre, ___, six',
             sentence: 'trois, quatre, ___, six',
             correctAnswer: 'cinq',
-            alternatives: ['5'],
+            alternatives: ['cinq', 'quatre', 'sept', 'trois'],
             explanation: 'The number between 4 and 6 is "cinq" (5).'
           },
           {
-            type: 'multiple-choice',
+            type: 'multiple-choice' as const,
             question: 'What does "vingt" mean?',
             options: ['10', '15', '20', '25'],
             correctAnswer: 2,
@@ -222,6 +114,9 @@ Practice counting every day! Try counting objects around you in French to reinfo
         examples: []
       }
     ]
-  }
-};
+  };
+}
 
+export const numbersLessons = {
+  'numbers-1-20': createNumbersLesson()
+};

@@ -14,25 +14,13 @@ import {
   LogOut
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Module, Lesson } from '@/types';
 import { SeasonalThemeToggle } from '@/components/seasonal/seasonal-theme-toggle';
 import { DarkModeToggle } from '@/components/themed/dark-light-toggle';
 import { useSeasonalTheme } from '@/contexts/SeasonalThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { ConfirmModal } from '@/components/ui/confirm-modal';
 import { Portal } from '@/components/ui/portal';
-
-interface LearnHeaderProps {
-  sidebarOpen: boolean;
-  onToggleSidebar: () => void;
-  isLearnHome: boolean;
-  currentModule?: Module | null;
-  currentLesson?: Lesson | null;
-  currentModuleId: string | null;
-  currentLessonId: string | null;
-  previousLesson?: Lesson | null;
-  nextLesson?: Lesson | null;
-}
+import { LearnHeaderProps } from '@/types/component-props';
 
 export default function LearnHeader({
   sidebarOpen,

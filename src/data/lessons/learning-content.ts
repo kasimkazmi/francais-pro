@@ -2,6 +2,8 @@ import { Module } from '@/types';
 import { alphabetLessons } from './alphabet-lessons';
 import { greetingsLessons } from './greetings-lessons';
 import { numbersLessons } from './numbers-lessons';
+import { vocabularyLessons } from './vocabulary-lessons';
+import { grammarLessons } from './grammar-lessons';
 
 // Type for detailed lesson
 type DetailedLesson = {
@@ -26,7 +28,9 @@ type DetailedLesson = {
 export const detailedLessons = {
   ...alphabetLessons,
   ...greetingsLessons,
-  ...numbersLessons
+  ...numbersLessons,
+  ...vocabularyLessons,
+  ...grammarLessons
 };
 
 // Generate lesson metadata from detailed lessons
@@ -54,17 +58,7 @@ export const learningModules: Module[] = [
       generateLessonMetadata(alphabetLessons['french-alphabet'], 'pronunciation'),
       generateLessonMetadata(greetingsLessons['basic-greetings'], 'vocabulary'),
       generateLessonMetadata(numbersLessons['numbers-1-20'], 'vocabulary'),
-      {
-        id: 'colors-family',
-        title: 'Colors & Family',
-        description: 'Learn colors and family member vocabulary',
-        content: 'Expand your vocabulary with colors and family relationships...',
-        duration: 30,
-        difficulty: 'medium',
-        type: 'vocabulary',
-        completed: false,
-        xpReward: 125
-      }
+      generateLessonMetadata(vocabularyLessons['colors-family'], 'vocabulary')
     ]
   },
   {
@@ -75,39 +69,9 @@ export const learningModules: Module[] = [
     icon: 'BookOpen',
     progress: 0,
     lessons: [
-      {
-        id: 'articles',
-        title: 'Articles (le, la, les)',
-        description: 'Learn about French definite and indefinite articles',
-        content: 'French articles are essential for proper sentence structure...',
-        duration: 20,
-        difficulty: 'medium',
-        type: 'grammar',
-        completed: false,
-        xpReward: 100
-      },
-      {
-        id: 'present-tense',
-        title: 'Present Tense Verbs',
-        description: 'Master regular and irregular present tense verbs',
-        content: 'French verbs have different conjugations based on the subject...',
-        duration: 35,
-        difficulty: 'hard',
-        type: 'grammar',
-        completed: false,
-        xpReward: 150
-      },
-      {
-        id: 'gender-agreement',
-        title: 'Gender Agreement',
-        description: 'Understand masculine and feminine noun agreement',
-        content: 'French nouns have gender, and adjectives must agree...',
-        duration: 25,
-        difficulty: 'medium',
-        type: 'grammar',
-        completed: false,
-        xpReward: 125
-      }
+      generateLessonMetadata(grammarLessons['articles'], 'grammar'),
+      generateLessonMetadata(grammarLessons['present-tense'], 'grammar'),
+      generateLessonMetadata(grammarLessons['gender-agreement'], 'grammar')
     ]
   },
   {
@@ -118,17 +82,8 @@ export const learningModules: Module[] = [
     icon: 'BookOpen',
     progress: 0,
     lessons: [
-      {
-        id: 'food-drinks',
-        title: 'Food & Drinks',
-        description: 'Learn vocabulary related to food and beverages',
-        content: 'French cuisine is world-famous. Let\'s learn the vocabulary...',
-        duration: 30,
-        difficulty: 'medium',
-        type: 'vocabulary',
-        completed: false,
-        xpReward: 125
-      },
+      generateLessonMetadata(vocabularyLessons['food-drinks'], 'vocabulary'),
+      generateLessonMetadata(vocabularyLessons['work-professions'], 'vocabulary'),
       {
         id: 'travel-transport',
         title: 'Travel & Transportation',
@@ -139,20 +94,11 @@ export const learningModules: Module[] = [
         type: 'vocabulary',
         completed: false,
         xpReward: 100
-      },
-      {
-        id: 'work-professions',
-        title: 'Work & Professions',
-        description: 'Learn job-related vocabulary and professional terms',
-        content: 'Expand your professional French vocabulary...',
-        duration: 35,
-        difficulty: 'hard',
-        type: 'vocabulary',
-        completed: false,
-        xpReward: 150
       }
     ]
   },
+
+  
   {
     id: 'practice',
     title: 'Practice',

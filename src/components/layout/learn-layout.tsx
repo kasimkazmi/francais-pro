@@ -14,7 +14,7 @@ interface LearnLayoutProps {
 export default function LearnLayout({ children }: LearnLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const pathname = usePathname();
-  const { progress } = useProgress();
+  const { progress, refreshProgress } = useProgress();
 
   // Parse current route
   const pathParts = pathname.split('/').filter(Boolean);
@@ -82,6 +82,17 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
 
   const nextLesson = getNextLesson();
   const previousLesson = getPreviousLesson();
+
+  // Listen for lesson completion to refresh progress
+  React.useEffect(() => {
+    const handleLessonCompleted = () => {
+      console.log('🎉 Lesson completed event received, refreshing progress...');
+      refreshProgress();
+    };
+
+    window.addEventListener('lesson-completed', handleLessonCompleted);
+    return () => window.removeEventListener('lesson-completed', handleLessonCompleted);
+  }, [refreshProgress]);
 
   return (
     <div className="min-h-screen bg-background">

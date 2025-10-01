@@ -154,9 +154,21 @@ export default function LearnPage() {
                           )}
                           <div>
                             <div className="font-medium">{lesson.title}</div>
-                            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
                               <Clock className="h-3 w-3" />
                               {lesson.duration} min
+                              <Badge 
+                                variant="outline" 
+                                className={`text-xs ${
+                                  lesson.difficulty === 'easy' 
+                                    ? 'border-green-500 text-green-700 dark:text-green-400' 
+                                    : lesson.difficulty === 'medium'
+                                    ? 'border-yellow-500 text-yellow-700 dark:text-yellow-400'
+                                    : 'border-red-500 text-red-700 dark:text-red-400'
+                                }`}
+                              >
+                                {lesson.difficulty}
+                              </Badge>
                             </div>
                           </div>
                         </div>

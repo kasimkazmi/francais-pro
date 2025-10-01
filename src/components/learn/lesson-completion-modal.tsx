@@ -5,19 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Star, Trophy, ArrowRight, RotateCcw, Home } from 'lucide-react';
-
-interface LessonCompletionModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  lessonTitle: string;
-  score: number;
-  timeSpent: number;
-  xpEarned: number;
-  onNextLesson?: () => void;
-  onReview: () => void;
-  hasNextLesson: boolean;
-}
+import { Star, Trophy, ArrowRight, RotateCcw, Home } from 'lucide-react';
+import { LessonCompletionModalProps } from '@/types/component-props';
 
 export default function LessonCompletionModal({
   isOpen,

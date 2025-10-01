@@ -13,19 +13,8 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Module } from '@/types';
 import { learningModules } from '@/data/lessons/learning-content';
-
-interface LearnSidebarProps {
-  sidebarOpen: boolean;
-  overallProgress: number;
-  completedCount: number;
-  totalTime: string;
-  currentModule?: Module | null;
-  currentModuleId: string | null;
-  currentLessonId: string | null;
-  progress: Record<string, number> | null;
-}
+import { LearnSidebarProps } from '@/types/component-props';
 
 export default function LearnSidebar({
   sidebarOpen,
@@ -195,11 +184,20 @@ export default function LearnSidebar({
                                   )}
                                   <span className="truncate font-medium">{lesson.title}</span>
                                 </div>
-                                {lesson.duration && (
-                                  <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">
-                                    {lesson.duration}m
-                                  </span>
-                                )}
+                                <div className="flex items-center gap-1 flex-shrink-0 ml-2">
+                                  {lesson.duration && (
+                                    <span className="text-xs text-muted-foreground">
+                                      {lesson.duration}m
+                                    </span>
+                                  )}
+                                  <div className={`w-1.5 h-1.5 rounded-full ${
+                                    lesson.difficulty === 'easy' 
+                                      ? 'bg-green-500' 
+                                      : lesson.difficulty === 'medium'
+                                      ? 'bg-yellow-500'
+                                      : 'bg-red-500'
+                                  }`} title={lesson.difficulty} />
+                                </div>
                               </div>
                             </button>
                           );
