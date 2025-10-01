@@ -143,7 +143,8 @@ export function Header() {
               </div>
             ) : (
               <Button 
-              className="mr-4"
+                className={`mr-4 transition-all duration-200 active:scale-95 ${isActive ? 'hover:text-[var(--nav-hover)]' : 'hover:text-blue-600'}`}
+                style={isActive ? ({ '--nav-hover': themeConfig.colors.primary } as React.CSSProperties) : undefined}
                 variant="ghost" 
                 size="sm" 
                 onClick={() => setShowAuthModal(true)}

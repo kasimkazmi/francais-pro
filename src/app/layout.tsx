@@ -280,8 +280,8 @@ export default function RootLayout({
             },
           }}
         />
-        <SpeedInsights />
-        <Analytics />
+        <SpeedInsights debug={false} />
+        <Analytics debug={false} />
         <HalloweenMusicManager volume={0.3} loop={true} />
       </body>
     </html>

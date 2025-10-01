@@ -25,6 +25,37 @@ export default function ProfilePage() {
   const [avatarSeed, setAvatarSeed] = useState(0);
   const [hasAvatarStyle, setHasAvatarStyle] = useState(false);
 
+  // Format timezone with UTC offset
+  const formatTimezone = (timezone: string) => {
+    try {
+      const date = new Date();
+      
+      // Get short timezone abbreviation (EST, PST, IST, etc.)
+      const shortFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: timezone,
+        timeZoneName: 'short'
+      });
+      const shortParts = shortFormatter.formatToParts(date);
+      const shortTZ = shortParts.find(part => part.type === 'timeZoneName')?.value || '';
+      
+      // Get UTC offset
+      const offsetFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: timezone,
+        timeZoneName: 'shortOffset'
+      });
+      const offsetParts = offsetFormatter.formatToParts(date);
+      const offset = offsetParts.find(part => part.type === 'timeZoneName')?.value || '';
+      
+      // Extract city/region name (everything after the last /)
+      const parts2 = timezone.split('/');
+      const cityName = parts2[parts2.length - 1].replace(/_/g, ' ');
+      
+      return `${cityName} (${shortTZ}, ${offset})`;
+    } catch {
+      return timezone;
+    }
+  };
+
   // Load custom photo and avatar settings from localStorage
   useEffect(() => {
     if (user?.uid) {
@@ -117,12 +148,12 @@ export default function ProfilePage() {
 
   return (
     <MainLayout>
-      <div className="container mx-auto max-w-4xl px-4 py-8">
-        <div className="space-y-6">
+      <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <div className="space-y-4 sm:space-y-6">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">My Profile</h1>
-            <Button variant="outline" size="sm" onClick={() => setShowProfileModal(true)}>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+            <h1 className="text-2xl sm:text-3xl font-bold">My Profile</h1>
+            <Button variant="outline" size="sm" onClick={() => setShowProfileModal(true)} className="w-full sm:w-auto">
               <Settings className="mr-2 h-4 w-4" />
               Edit Profile
             </Button>
@@ -136,11 +167,11 @@ export default function ProfilePage() {
                 Account Information
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="space-y-4 sm:space-y-6">
               {/* Profile Picture */}
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
                 <div 
-                  className="relative h-20 w-20 rounded-full bg-primary/10 overflow-hidden cursor-pointer group"
+                  className="relative h-24 w-24 sm:h-20 sm:w-20 rounded-full bg-primary/10 overflow-hidden cursor-pointer group flex-shrink-0"
                   onClick={() => setShowUploadModal(true)}
                 >
                   {hasAvatarStyle && avatarStyle && avatarGender ? (
@@ -176,11 +207,11 @@ export default function ProfilePage() {
                     <Upload className="h-6 w-6 text-white" />
                   </div>
                 </div>
-                <div>
-                  <h2 className="text-2xl font-semibold">
+                <div className="text-center sm:text-left">
+                  <h2 className="text-xl sm:text-2xl font-semibold">
                     {user.displayName || 'User'}
                   </h2>
-                  <p className="text-muted-foreground">French Learner</p>
+                  <p className="text-sm sm:text-base text-muted-foreground">French Learner</p>
                   <button 
                     onClick={() => setShowUploadModal(true)}
                     className="text-xs text-primary hover:underline mt-1"
@@ -191,86 +222,88 @@ export default function ProfilePage() {
               </div>
 
               {/* User Details */}
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                     <Mail className="h-4 w-4" />
-                    <span className="font-medium">Email</span>
+                    Email
+                  </label>
+                  <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background break-all">
+                    {user.email}
                   </div>
-                  <p className="pl-6">{user.email}</p>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                     <User className="h-4 w-4" />
-                    <span className="font-medium">Display Name</span>
+                    Display Name
+                  </label>
+                  <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
+                    {userProfile?.displayName || user.displayName || 'Not set'}
                   </div>
-                  <p className="pl-6">{userProfile?.displayName || user.displayName || 'Not set'}</p>
                 </div>
 
                 {userProfile?.phoneNumber && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Phone className="h-4 w-4" />
-                      <span className="font-medium">Phone Number</span>
+                      Phone Number
+                    </label>
+                    <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
+                      {userProfile.phoneNumber}
                     </div>
-                    <p className="pl-6">{userProfile.phoneNumber}</p>
                   </div>
                 )}
 
                 {userProfile?.country && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Globe className="h-4 w-4" />
-                      <span className="font-medium">Country</span>
+                      Country
+                    </label>
+                    <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
+                      {userProfile.country}
                     </div>
-                    <p className="pl-6">{userProfile.country}</p>
                   </div>
                 )}
 
                 {userProfile?.nativeLanguage && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Languages className="h-4 w-4" />
-                      <span className="font-medium">Native Language</span>
+                      Native Language
+                    </label>
+                    <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
+                      {userProfile.nativeLanguage}
                     </div>
-                    <p className="pl-6">{userProfile.nativeLanguage}</p>
                   </div>
                 )}
 
                 {userProfile?.timezone && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Clock className="h-4 w-4" />
-                      <span className="font-medium">Timezone</span>
+                      Timezone
+                    </label>
+                    <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
+                      {formatTimezone(userProfile.timezone)}
                     </div>
-                    <p className="pl-6">{userProfile.timezone}</p>
                   </div>
                 )}
 
                 {userProfile?.dateOfBirth && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <label className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                       <Calendar className="h-4 w-4" />
-                      <span className="font-medium">Date of Birth</span>
-                    </div>
-                    <p className="pl-6">
+                      Date of Birth
+                    </label>
+                    <div className="px-3 py-2 text-sm sm:text-base border border-input rounded-md bg-background">
                       {new Date(userProfile.dateOfBirth).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
                       })}
-                    </p>
-                  </div>
-                )}
-
-                {userProfile?.preferredLearningStyle && (
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Target className="h-4 w-4" />
-                      <span className="font-medium">Learning Style</span>
                     </div>
-                    <p className="pl-6 capitalize">{userProfile.preferredLearningStyle}</p>
                   </div>
                 )}
               </div>
@@ -297,21 +330,21 @@ export default function ProfilePage() {
           {/* Quick Stats Card */}
           <Card>
             <CardHeader>
-              <CardTitle>Learning Progress</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">Learning Progress</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
-                <div className="text-center p-4 bg-primary/5 rounded-lg">
-                  <p className="text-3xl font-bold text-primary">0</p>
-                  <p className="text-sm text-muted-foreground mt-1">Lessons Completed</p>
+              <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
+                <div className="text-center p-3 sm:p-4 bg-primary/5 rounded-lg">
+                  <p className="text-2xl sm:text-3xl font-bold text-primary">0</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Lessons Completed</p>
                 </div>
-                <div className="text-center p-4 bg-green-500/5 rounded-lg">
-                  <p className="text-3xl font-bold text-green-600 dark:text-green-400">0</p>
-                  <p className="text-sm text-muted-foreground mt-1">Words Learned</p>
+                <div className="text-center p-3 sm:p-4 bg-green-500/5 rounded-lg">
+                  <p className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400">0</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Words Learned</p>
                 </div>
-                <div className="text-center p-4 bg-blue-500/5 rounded-lg">
-                  <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">0</p>
-                  <p className="text-sm text-muted-foreground mt-1">Study Streak</p>
+                <div className="text-center p-3 sm:p-4 bg-blue-500/5 rounded-lg">
+                  <p className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">0</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">Study Streak</p>
                 </div>
               </div>
             </CardContent>

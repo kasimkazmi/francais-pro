@@ -52,9 +52,9 @@ export function MainLayout({ children }: MainLayoutProps) {
     >
       <Header />
 
-      <div className="flex flex-col lg:flex-row h-screen">
+      <div className="flex flex-col lg:flex-row">
         {/* Left Sidebar */}
-        <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:left-0 lg:top-16 lg:h-[calc(100vh-4rem)] lg:overflow-y-auto lg:bg-background lg:border-r lg:border-border scrollbar-hide">
+        <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:left-0 lg:top-14 lg:h-[calc(100vh-3.5rem)] lg:overflow-y-auto lg:bg-background lg:border-r lg:border-border scrollbar-hide">
           <div className="flex flex-col gap-2 p-4">
             {/* LEARNING PATH - AUTHENTICATED CONTENT */}
             <div className="px-3 py-2">
@@ -338,7 +338,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         <main className="flex-1 lg:ml-64 lg:mr-64">{children}</main>
 
         {/* Right Sidebar */}
-        <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:right-0 lg:top-16 lg:h-[calc(100vh-4rem)] lg:overflow-y-auto lg:bg-background lg:border-l lg:border-border scrollbar-hide">
+        <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:right-0 lg:top-14 lg:h-[calc(100vh-3.5rem)] lg:overflow-y-auto lg:bg-background lg:border-l lg:border-border scrollbar-hide">
           <div className="flex flex-col gap-2 p-4">
             <div className="px-3 py-2">
               <h2 className="mb-2 px-4 py-2 text-sm font-semibold bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg">
