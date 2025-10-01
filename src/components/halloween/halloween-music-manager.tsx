@@ -62,34 +62,6 @@ export function HalloweenMusicManager({
     // Set audio properties
     audio.volume = volume;
     audio.loop = loop;
-
-    // Auto-play when Halloween mode is active (respects user's manual pause)
-    if (isHalloweenMode && !hasAutoPlayed) {
-      const wasManuallyStopped = localStorage.getItem('halloween-music-manually-stopped') === 'true';
-      
-      if (!wasManuallyStopped) {
-        // Wait for loader to finish (check for loader-finished event or delay)
-        const attemptPlay = () => {
-          audio.play()
-            .then(() => {
-              setIsPlaying(true);
-              setHasAutoPlayed(true);
-              localStorage.setItem('halloween-music-interacted', 'true');
-            })
-            .catch(err => {
-              // Browser autoplay policy might block this or audio not ready
-              setHasAutoPlayed(true);
-            });
-        };
-
-        // Try to play after a short delay to ensure audio is loaded
-        const playTimer = setTimeout(attemptPlay, 500);
-        
-        return () => clearTimeout(playTimer);
-      } else {
-        setHasAutoPlayed(true);
-      }
-    }
     
     // Pause music when Halloween mode is disabled
     if (!isHalloweenMode) {
@@ -103,11 +75,13 @@ export function HalloweenMusicManager({
   // Restore playing state when component mounts and Halloween mode is active
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !isHalloweenMode || !hasUserInteracted) return;
+    if (!audio || !isHalloweenMode) return;
 
-    // Only restore if user hasn't manually stopped the music
+    // Check if music was playing before (not manually stopped)
     const wasManuallyStopped = localStorage.getItem('halloween-music-manually-stopped') === 'true';
-    if (!wasManuallyStopped && !isPlaying) {
+    const wasPlaying = localStorage.getItem('halloween-music-playing') === 'true';
+    
+    if (wasPlaying && !wasManuallyStopped && !isPlaying) {
       audio.play()
         .then(() => {
           setIsPlaying(true);
@@ -116,7 +90,7 @@ export function HalloweenMusicManager({
           setIsPlaying(false);
         });
     }
-  }, [isHalloweenMode, hasUserInteracted, isPlaying]);
+  }, [isHalloweenMode, isPlaying]);
 
   // Handle user interaction to enable autoplay
   useEffect(() => {
@@ -155,14 +129,17 @@ export function HalloweenMusicManager({
       audio.pause();
       setIsPlaying(false);
       localStorage.setItem('halloween-music-manually-stopped', 'true');
+      localStorage.setItem('halloween-music-playing', 'false');
     } else {
       // Not playing - start it and remove manual stop flag
       try {
         await audio.play();
         setIsPlaying(true);
         localStorage.removeItem('halloween-music-manually-stopped');
+        localStorage.setItem('halloween-music-playing', 'true');
       } catch (error) {
         setIsPlaying(false);
+        localStorage.setItem('halloween-music-playing', 'false');
       }
     }
   };
