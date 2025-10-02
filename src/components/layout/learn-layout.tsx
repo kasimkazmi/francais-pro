@@ -88,7 +88,7 @@ export default function LearnLayout({ children }: LearnLayoutProps) {
   // Listen for lesson completion to refresh progress
   React.useEffect(() => {
     const handleLessonCompleted = () => {
-      console.log('🎉 Lesson completed event received, refreshing progress...');
+      // console.log('🎉 Lesson completed event received, refreshing progress...');
       refreshProgress();
     };
 
