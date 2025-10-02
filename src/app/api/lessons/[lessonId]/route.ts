@@ -3,10 +3,10 @@ import { detailedLessons } from '@/data/lessons/learning-content';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { lessonId: string } }
+  { params }: { params: Promise<{ lessonId: string }> }
 ) {
   try {
-    const { lessonId } = params;
+    const { lessonId } = await params;
     
     // Get lesson from local data (can be replaced with database call)
     const lesson = detailedLessons[lessonId as keyof typeof detailedLessons];

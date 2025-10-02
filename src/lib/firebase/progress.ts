@@ -421,7 +421,7 @@ export async function manualSyncUserProfile(uid: string): Promise<void> {
     if (progress) {
       // Check what profile data exists before sync
       const userProfileRef = doc(db, 'userProfiles', uid);
-      const profileSnap = await getDoc(userProfileRef);
+      await getDoc(userProfileRef);
       // console.log('👤 Profile exists before sync:', profileSnap.exists());
       // if (profileSnap.exists()) {
       //   console.log('📋 Current profile data:', profileSnap.data());

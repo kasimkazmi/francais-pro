@@ -23,7 +23,7 @@ const colorClasses = {
   green: 'text-green-800'
 };
 
-const WitchHatSVG = ({ className, color }: { className: string; color: string }) => (
+const WitchHatSVG = ({ className }: { className: string }) => (
   <svg
     version="1.1"
     id="Layer_1"
@@ -76,7 +76,7 @@ export function HalloweenWitchHat({
         className
       )}
     >
-      <WitchHatSVG className="w-full h-full" color={color} />
+      <WitchHatSVG className="w-full h-full" />
     </div>
   );
 }

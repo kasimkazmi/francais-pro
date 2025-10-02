@@ -23,7 +23,6 @@ interface HalloweenListCardProps {
   decoration?: 'pumpkin' | 'ghost' | 'bat' | 'spider' | 'witch-hat' | 'none';
   glow?: boolean;
   animated?: boolean;
-  showCheckmarks?: boolean; // reserved for future use
   listStyle?: 'bullets' | 'numbers' | 'icons' | 'spooky' | 'instructions';
 }
 
@@ -35,7 +34,6 @@ export function HalloweenListCard({
   decoration = 'pumpkin',
   glow = true,
   animated = true,
-  showCheckmarks = false,
   listStyle = 'spooky'
 }: HalloweenListCardProps) {
   const [isHalloweenMode, setIsHalloweenMode] = useState(false);

@@ -29,7 +29,7 @@ function ResetPasswordInner() {
       try {
         const mail = await verifyPasswordResetCode(auth, oobCode);
         setEmail(mail);
-      } catch (_err) {
+      } catch {
         setError('This reset link is invalid or expired.');
       } finally {
         setIsVerifying(false);
@@ -48,7 +48,7 @@ function ResetPasswordInner() {
       await confirmPasswordReset(auth, oobCode, password);
       toast.success('Password has been reset. Please sign in.');
       router.push('/');
-    } catch (_err) {
+    } catch {
       setError('Failed to reset password. Please try again.');
     } finally {
       setIsSubmitting(false);

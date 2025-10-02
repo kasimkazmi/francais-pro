@@ -209,7 +209,8 @@ export function UserDetail({ userId }: { userId: string }) {
     }
 
     loadUserData();
-  }, [userId, isAdmin, isModerator, router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, isAdmin, isModerator]);
 
   const getActivityDescription = (activity: FirebaseUserActivity): string => {
     switch (activity.activityType) {

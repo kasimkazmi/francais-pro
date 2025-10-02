@@ -1,9 +1,7 @@
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { InteractiveAudioGrid } from '@/components/shared/interactive-audio-grid';
 import { InteractivePracticeSection } from '@/components/shared/interactive-practice-section';
 import { TipSection } from '@/components/ui/tip-section';
-import { ArrowRight, Calculator } from 'lucide-react';
 import numbersData from '@/data/numbers.json';
 
 export function NumbersContent() {

@@ -12,7 +12,6 @@ import {
   Shield, 
   Settings, 
   BarChart3,
-  UserCheck,
   Crown,
   Activity,
   Clock,

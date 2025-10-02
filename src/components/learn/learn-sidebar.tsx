@@ -21,7 +21,6 @@ export default function LearnSidebar({
   overallProgress,
   completedCount,
   totalTime,
-  currentModule,
   currentModuleId,
   currentLessonId,
   progress

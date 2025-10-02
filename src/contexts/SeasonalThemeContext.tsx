@@ -201,8 +201,10 @@ const SeasonalThemeContext = createContext<SeasonalThemeContextType | undefined>
 export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
   const [currentTheme, setCurrentThemeState] = useState<SeasonalThemeType>('default');
   const [isEnabled, setIsEnabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
   // const [mounted, setMounted] = useState(false);
+
+  // applyTheme function defined below after useEffect
 
   useEffect(() => {
     let unsub: (() => void) | undefined;
@@ -234,6 +236,7 @@ export function SeasonalThemeProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
     })();
     return () => { if (unsub) unsub(); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const applyTheme = (theme: SeasonalThemeType) => {

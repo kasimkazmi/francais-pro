@@ -57,8 +57,8 @@ export function UserManagement() {
       try {
         const profilesQuery = query(collection(db, 'userProfiles'), orderBy('lastActiveAt', 'desc'));
         profilesSnapshot = await getDocs(profilesQuery);
-      } catch (orderByError) {
-        // console.log('OrderBy failed, using simple query:', orderByError);
+      } catch {
+        // console.log('OrderBy failed, using simple query');
         profilesSnapshot = await getDocs(collection(db, 'userProfiles'));
       }
       

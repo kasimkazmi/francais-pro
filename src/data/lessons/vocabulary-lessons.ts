@@ -51,7 +51,7 @@ function createVocabLesson(
         type: 'practice' as const,
         duration: Math.ceil(duration * 0.25),
         content: 'Test your knowledge with these translation exercises!',
-        exercises: items.slice(0, Math.min(10, items.length)).map((item, index) => {
+        exercises: items.slice(0, Math.min(10, items.length)).map((item) => {
           // Get 3 random wrong answers
           const wrongAnswers = items
             .filter(i => i.french !== item.french)

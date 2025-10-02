@@ -347,7 +347,7 @@ export default function ErrorScreen({
 }
 
 // Legacy exports for backward compatibility
-export const NetworkErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const NetworkErrorScreen = ({ reset }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (
@@ -385,7 +385,7 @@ export const NetworkErrorScreen = ({ error, reset }: ErrorScreenProps) => {
 };
 
 // Server Error Screen
-export const ServerErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const ServerErrorScreen = ({ reset }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (
@@ -423,7 +423,7 @@ export const ServerErrorScreen = ({ error, reset }: ErrorScreenProps) => {
 };
 
 // Not Found Error Screen
-export const NotFoundErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const NotFoundErrorScreen = ({  }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (
@@ -459,7 +459,7 @@ export const NotFoundErrorScreen = ({ error, reset }: ErrorScreenProps) => {
 };
 
 // Authentication Error Screen
-export const AuthErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const AuthErrorScreen = ({  }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (
@@ -495,7 +495,7 @@ export const AuthErrorScreen = ({ error, reset }: ErrorScreenProps) => {
 };
 
 // Loading Timeout Error Screen
-export const TimeoutErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const TimeoutErrorScreen = ({ reset }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (
@@ -533,7 +533,7 @@ export const TimeoutErrorScreen = ({ error, reset }: ErrorScreenProps) => {
 };
 
 // Permission Error Screen
-export const PermissionErrorScreen = ({ error, reset }: ErrorScreenProps) => {
+export const PermissionErrorScreen = ({  }: ErrorScreenProps) => {
     const router = useRouter();
 
     return (

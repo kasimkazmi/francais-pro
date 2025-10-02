@@ -86,7 +86,7 @@ export function HalloweenMusicManager({
         .then(() => {
           setIsPlaying(true);
         })
-        .catch((error) => {
+        .catch(() => {
           setIsPlaying(false);
         });
     }
@@ -137,7 +137,7 @@ export function HalloweenMusicManager({
         setIsPlaying(true);
         localStorage.removeItem('halloween-music-manually-stopped');
         localStorage.setItem('halloween-music-playing', 'true');
-      } catch (error) {
+      } catch {
         setIsPlaying(false);
         localStorage.setItem('halloween-music-playing', 'false');
       }

@@ -208,7 +208,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
         //   timestamp: doc.data().timestamp?.toDate()?.toLocaleString() 
         // })));
         
-        let activitiesInLast7Days = 0;
         const activitiesByType: Record<string, number> = {};
         
         activitiesSnapshot.forEach((doc) => {
@@ -221,8 +220,6 @@ export function AdminProvider({ children }: { children: React.ReactNode }) {
           
           // Only include lesson-related activities from the last 7 days
           if (activityDate && activityDate > recentDate) {
-            activitiesInLast7Days++;
-            
             // Filter out login/logout/profile activities - only show lesson activities
             const isLessonActivity = ['lesson_start', 'lesson_complete', 'quiz_attempt', 'practice_session'].includes(activityData.activityType);
             

@@ -3,11 +3,9 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { CLBCalculator } from "@/components/calculators/clb-calculator";
 import { ExpressEntryCalculator } from "@/components/calculators/express-entry-calculator";

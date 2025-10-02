@@ -349,7 +349,6 @@ export default function HalloweenDemoPage() {
               ]}
               decoration="pumpkin"
               listStyle="spooky"
-              showCheckmarks={true}
               glow={true}
               animated={true}
             />
@@ -365,7 +364,6 @@ export default function HalloweenDemoPage() {
               ]}
               decoration="ghost"
               listStyle="numbers"
-              showCheckmarks={true}
               glow={true}
               animated={true}
             />

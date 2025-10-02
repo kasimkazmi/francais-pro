@@ -71,7 +71,8 @@ export function UserList() {
     }
 
     loadUsers();
-  }, [isAdmin, isModerator, router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAdmin, isModerator]);
 
   const loadUsers = async () => {
     try {

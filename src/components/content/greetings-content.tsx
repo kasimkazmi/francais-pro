@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { InteractiveGreetingList } from '@/components/greetings/interactive-greeting-card';
 import { InteractiveIntroductionList } from '@/components/greetings/interactive-introduction-card';
 import { ArrowRight } from 'lucide-react';
-import { AudioButton } from '@/components/ui/audio-button';
 import { TipSection } from '@/components/ui/tip-section';
 import greetingsData from '@/data/greetings.json';
 

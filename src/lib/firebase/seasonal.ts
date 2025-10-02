@@ -30,8 +30,7 @@ export function subscribeAdminSelectedTheme(cb: (theme: AdminSeasonalTheme) => v
       }
     },
     // Gracefully handle permission errors (fallback to default)
-    (_err) => {
-      // eslint-disable-next-line no-console
+    () => {
       console.warn('[seasonal] Could not subscribe to global theme (permission). Falling back to default.');
       cb('default');
     }
